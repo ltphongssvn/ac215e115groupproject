@@ -1,19 +1,20 @@
 <!-- 
   File: /index.html
   Project Root: /home/lenovo/code/ltphongssvn/ac215e115groupproject/
-  Description: Enhanced ERP AI Architecture Implementation Checklist with API Flow Visualization
-  Features: Multi-page navigation, dynamic time tracking, interactive API flow diagrams
+  Description: Complete ERP AI Architecture Implementation with full course checklist and API flow visualization
+  Purpose: Maintains all original milestone tasks while adding API flow as separate navigable section
 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="ERP AI Architecture Implementation - Interactive Checklist and API Flow Visualization">
+    <meta name="description" content="ERP AI Architecture Implementation Checklist for AC215 Course">
+    <meta name="author" content="AC215 E115 Group">
     <title>ERP AI Architecture Implementation | AC215 E115 Group Project</title>
     
     <style>
-        /* Core reset and typography setup for consistent rendering */
+        /* Global reset and base typography for consistent rendering across browsers */
         * {
             margin: 0;
             padding: 0;
@@ -29,7 +30,7 @@
             padding: 20px;
         }
         
-        /* Main container with glassmorphism effect */
+        /* Main container with shadow and rounded corners for modern appearance */
         .container {
             max-width: 1600px;
             margin: 0 auto;
@@ -39,7 +40,7 @@
             overflow: hidden;
         }
         
-        /* Header with gradient and proper spacing */
+        /* Header section with gradient background and navigation */
         header {
             background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
             color: white;
@@ -59,7 +60,7 @@
             margin-bottom: 1rem;
         }
         
-        /* Navigation tabs for switching between views */
+        /* Navigation tabs for switching between checklist and API flow views */
         .nav-tabs {
             display: flex;
             background: rgba(0, 0, 0, 0.2);
@@ -92,7 +93,7 @@
             color: rgba(255, 255, 255, 0.9);
         }
         
-        /* Page content containers */
+        /* Page content containers with fade animation */
         .page-content {
             display: none;
             padding: 2rem;
@@ -108,7 +109,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
-        /* Dynamic statistics dashboard with real-time updates */
+        /* Statistics dashboard for tracking progress */
         .stats-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -136,12 +137,6 @@
             right: 0;
             height: 4px;
             background: linear-gradient(90deg, #3498db, #2ecc71);
-            animation: shimmer 2s infinite;
-        }
-        
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
         }
         
         .stat-number {
@@ -160,13 +155,13 @@
             font-weight: 500;
         }
         
-        /* Time tracking specific styling for dynamic updates */
+        /* Time tracking with dynamic updates */
         .time-remaining {
             font-family: 'Courier New', monospace;
             letter-spacing: 1px;
         }
         
-        /* Action buttons with hover effects */
+        /* Action buttons for export and save functionality */
         .action-buttons {
             display: flex;
             gap: 1rem;
@@ -193,7 +188,7 @@
             box-shadow: 0 6px 12px rgba(52, 152, 219, 0.4);
         }
         
-        /* Checklist sections with proper spacing */
+        /* Checklist section styling */
         .checklist-section {
             margin-bottom: 2rem;
             background: white;
@@ -210,7 +205,7 @@
             font-weight: 600;
         }
         
-        /* Table styling for checklist */
+        /* Table styles for checklist items */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -223,14 +218,20 @@
             color: #2c3e50;
             background: #f8f9fa;
             border-bottom: 2px solid #dee2e6;
+            font-size: 0.95rem;
         }
         
         td {
             padding: 12px 14px;
             border-bottom: 1px solid #e9ecef;
+            font-size: 0.95rem;
         }
         
-        /* Priority indicators */
+        tbody tr:hover {
+            background: #f8f9fa;
+        }
+        
+        /* Priority color coding */
         .priority-high {
             background: linear-gradient(90deg, #fff5f5 0%, transparent 100%);
             border-left: 4px solid #e74c3c;
@@ -244,6 +245,31 @@
         .priority-low {
             background: linear-gradient(90deg, #f0f8ff 0%, transparent 100%);
             border-left: 4px solid #3498db;
+        }
+        
+        /* Task ID styling with monospace font */
+        .task-id {
+            font-weight: 700;
+            color: #2c3e50;
+            font-family: 'Courier New', monospace;
+        }
+        
+        /* Checkbox styling for task completion */
+        .checkbox {
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
+            accent-color: #27ae60;
+        }
+        
+        /* Completed task visual indicator */
+        .completed {
+            opacity: 0.6;
+        }
+        
+        .completed td {
+            text-decoration: line-through;
+            color: #7f8c8d;
         }
         
         /* API Flow Visualization Styles */
@@ -272,14 +298,8 @@
             position: relative;
         }
         
-        .flow-step:nth-child(1) { animation-delay: 0.1s; }
-        .flow-step:nth-child(2) { animation-delay: 0.2s; }
-        .flow-step:nth-child(3) { animation-delay: 0.3s; }
-        .flow-step:nth-child(4) { animation-delay: 0.4s; }
-        .flow-step:nth-child(5) { animation-delay: 0.5s; }
-        .flow-step:nth-child(6) { animation-delay: 0.6s; }
-        .flow-step:nth-child(7) { animation-delay: 0.7s; }
-        .flow-step:nth-child(8) { animation-delay: 0.8s; }
+        .flow-step:nth-child(odd) { animation-delay: 0.1s; }
+        .flow-step:nth-child(even) { animation-delay: 0.2s; }
         
         @keyframes slideIn {
             from {
@@ -370,60 +390,7 @@
             50% { transform: translateY(5px); }
         }
         
-        /* Sidebar for flow description */
-        .flow-sidebar {
-            background: #f0f9ff;
-            border: 2px solid #3498db;
-            border-radius: 10px;
-            padding: 1.5rem;
-            margin-top: 2rem;
-        }
-        
-        .flow-sidebar h3 {
-            color: #2c5282;
-            margin-bottom: 1rem;
-        }
-        
-        .flow-sidebar ul {
-            margin-left: 1.5rem;
-            color: #2c3e50;
-        }
-        
-        .flow-sidebar li {
-            margin-bottom: 0.5rem;
-        }
-        
-        /* Error handling box */
-        .error-handling {
-            background: #fef5e7;
-            border: 2px solid #f39c12;
-            border-radius: 10px;
-            padding: 1.25rem;
-            margin-top: 1.5rem;
-        }
-        
-        .error-title {
-            color: #7c2d12;
-            font-weight: bold;
-            margin-bottom: 0.75rem;
-        }
-        
-        /* Performance metrics */
-        .performance-note {
-            background: #e6f7ff;
-            border: 2px solid #1890ff;
-            border-radius: 10px;
-            padding: 1.25rem;
-            margin-top: 1.5rem;
-        }
-        
-        .performance-title {
-            color: #0050b3;
-            font-weight: bold;
-            margin-bottom: 0.75rem;
-        }
-        
-        /* Responsive design for mobile devices */
+        /* Responsive design adjustments */
         @media (max-width: 768px) {
             .container {
                 border-radius: 0;
@@ -445,6 +412,14 @@
             .hide-mobile {
                 display: none;
             }
+            
+            table {
+                font-size: 0.85rem;
+            }
+            
+            th, td {
+                padding: 8px;
+            }
         }
     </style>
 </head>
@@ -454,7 +429,7 @@
             <h1>ERP AI Architecture Implementation</h1>
             <p class="subtitle">Rice Market AI System - Natural Language SQL, RAG, and Time-Series Forecasting</p>
             
-            <!-- Navigation tabs for switching between checklist and API flow -->
+            <!-- Navigation tabs for switching between views -->
             <div class="nav-tabs">
                 <button class="nav-tab active" onclick="switchPage('checklist')">Implementation Checklist</button>
                 <button class="nav-tab" onclick="switchPage('apiflow')">API Flow Architecture</button>
@@ -463,10 +438,10 @@
         
         <!-- Page 1: Implementation Checklist -->
         <div id="checklist-page" class="page-content active">
-            <!-- Dynamic statistics dashboard -->
+            <!-- Dynamic statistics dashboard showing progress metrics -->
             <div class="stats-container">
                 <div class="stat-card">
-                    <div class="stat-number" id="total-tasks">40</div>
+                    <div class="stat-number" id="total-tasks">0</div>
                     <div class="stat-label">Total Tasks</div>
                 </div>
                 <div class="stat-card">
@@ -474,29 +449,30 @@
                     <div class="stat-label">Completed</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number time-remaining" id="hours-remaining">359h</div>
+                    <div class="stat-number time-remaining" id="hours-remaining">0h</div>
                     <div class="stat-label">Hours Remaining</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number time-remaining" id="days-remaining">92</div>
+                    <div class="stat-number time-remaining" id="days-remaining">0</div>
                     <div class="stat-label">Days to Deadline</div>
                 </div>
             </div>
             
-            <!-- Action buttons -->
+            <!-- Action buttons for managing checklist -->
             <div class="action-buttons">
                 <button class="btn" onclick="exportToExcel()">Export to Excel</button>
                 <button class="btn" onclick="saveProgress()">Save Progress</button>
                 <button class="btn" onclick="loadProgress()">Load Progress</button>
+                <button class="btn" onclick="resetProgress()">Reset All</button>
             </div>
             
-            <!-- Checklist will be dynamically generated here -->
+            <!-- Checklist container will be populated by JavaScript -->
             <div id="checklist-container"></div>
         </div>
         
         <!-- Page 2: API Flow Visualization -->
         <div id="apiflow-page" class="page-content">
-            <!-- Flow 1: Natural Language to SQL -->
+            <!-- Flow 1: Natural Language to SQL Query Processing -->
             <div class="flow-container">
                 <h2 class="flow-title">Flow 1: Natural Language to SQL Query</h2>
                 
@@ -505,7 +481,7 @@
                     <div class="step-content">
                         <div class="service-name">Client Application</div>
                         <div class="action-desc">User enters natural language query: "Show me rice inventory levels for last month"</div>
-                        <div class="technical-details">POST /api/v1/nl-query | Content-Type: application/json | Auth: Bearer token</div>
+                        <div class="technical-details">POST /api/v1/nl-query | Content-Type: application/json</div>
                     </div>
                 </div>
                 
@@ -515,8 +491,8 @@
                     <div class="step-number">2</div>
                     <div class="step-content">
                         <div class="service-name">API Gateway / BFF Layer</div>
-                        <div class="action-desc">Validates JWT token and checks RBAC permissions for inventory access</div>
-                        <div class="technical-details">Middleware chain: authenticate → authorize → rateLimit → route</div>
+                        <div class="action-desc">Authentication & Authorization Check</div>
+                        <div class="technical-details">Validates JWT token, checks RBAC permissions</div>
                         <span class="timing-badge">~50ms</span>
                     </div>
                 </div>
@@ -527,8 +503,8 @@
                     <div class="step-number">3</div>
                     <div class="step-content">
                         <div class="service-name">NL+SQL Agent Service</div>
-                        <div class="action-desc">LLM Engine processes natural language and identifies query intent</div>
-                        <div class="technical-details">Intent classification: inventory_query | Entities: {item: "rice", period: "last_month"}</div>
+                        <div class="action-desc">LLM Engine processes natural language</div>
+                        <div class="technical-details">Identifies intent and extracts entities</div>
                         <span class="timing-badge">~200ms</span>
                     </div>
                 </div>
@@ -538,9 +514,9 @@
                 <div class="flow-step">
                     <div class="step-number">4</div>
                     <div class="step-content">
-                        <div class="service-name">SQL Generator Component</div>
-                        <div class="action-desc">Generates parameterized SQL query from extracted intent and entities</div>
-                        <div class="technical-details">SELECT * FROM inventory_data WHERE item_type='rice' AND date >= DATE_SUB(NOW(), INTERVAL 1 MONTH)</div>
+                        <div class="service-name">SQL Generator</div>
+                        <div class="action-desc">Generates SQL query from intent</div>
+                        <div class="technical-details">Creates parameterized query with proper escaping</div>
                         <span class="timing-badge">~100ms</span>
                     </div>
                 </div>
@@ -551,8 +527,8 @@
                     <div class="step-number">5</div>
                     <div class="step-content">
                         <div class="service-name">SQL Proxy / Guard</div>
-                        <div class="action-desc">Validates query safety and applies security policies</div>
-                        <div class="technical-details">Checks: SQL injection prevention, row-level security, column masking, allowlist validation</div>
+                        <div class="action-desc">Query validation & security enforcement</div>
+                        <div class="technical-details">Applies row-level security, checks allowlist</div>
                         <span class="timing-badge">~30ms</span>
                     </div>
                 </div>
@@ -563,8 +539,8 @@
                     <div class="step-number">6</div>
                     <div class="step-content">
                         <div class="service-name">ERP Database Layer</div>
-                        <div class="action-desc">Executes query on read replica for load distribution</div>
-                        <div class="technical-details">Connection pool: 20 connections | Query optimization: index on (item_type, date)</div>
+                        <div class="action-desc">Query execution on read replica</div>
+                        <div class="technical-details">Retrieves data from optimized read replica</div>
                         <span class="timing-badge">~150ms</span>
                     </div>
                 </div>
@@ -575,8 +551,8 @@
                     <div class="step-number">7</div>
                     <div class="step-content">
                         <div class="service-name">Result Formatter</div>
-                        <div class="action-desc">Transforms raw data into user-friendly format with metadata</div>
-                        <div class="technical-details">JSON response with pagination, totals, and visualization hints</div>
+                        <div class="action-desc">Formats response for user consumption</div>
+                        <div class="technical-details">Converts to JSON with metadata</div>
                         <span class="timing-badge">~20ms</span>
                     </div>
                 </div>
@@ -587,34 +563,9 @@
                     <div class="step-number">8</div>
                     <div class="step-content">
                         <div class="service-name">API Gateway Response</div>
-                        <div class="action-desc">Caches result and returns formatted response to client</div>
-                        <div class="technical-details">Cache-Control: max-age=300 | Response compression: gzip</div>
+                        <div class="action-desc">Response caching & delivery</div>
+                        <div class="technical-details">Caches result for 5 minutes</div>
                         <span class="timing-badge">~10ms</span>
-                    </div>
-                </div>
-                
-                <div class="flow-sidebar">
-                    <h3>Architectural Decisions</h3>
-                    <ul>
-                        <li><strong>Security First:</strong> Every SQL query passes through the proxy guard to prevent injection attacks</li>
-                        <li><strong>Performance:</strong> Read replicas handle query load, keeping primary database free for transactions</li>
-                        <li><strong>Caching:</strong> Results cached at gateway level for frequently requested data</li>
-                        <li><strong>Scalability:</strong> Each service can scale independently based on load patterns</li>
-                    </ul>
-                    
-                    <div class="error-handling">
-                        <div class="error-title">Error Handling & Circuit Breakers</div>
-                        <ul>
-                            <li>LLM service failure → Fallback to keyword-based query</li>
-                            <li>Database timeout → Return cached results if available</li>
-                            <li>SQL validation failure → Return sanitized error message</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="performance-note">
-                        <div class="performance-title">Performance Metrics</div>
-                        <p>Total latency: ~760ms | Target SLA: < 1 second</p>
-                        <p>Throughput: 1000 requests/second with horizontal scaling</p>
                     </div>
                 </div>
             </div>
@@ -626,9 +577,9 @@
                 <div class="flow-step">
                     <div class="step-number">1</div>
                     <div class="step-content">
-                        <div class="service-name">Client Application</div>
+                        <div class="service-name">Client Request</div>
                         <div class="action-desc">User requests: "Summarize all purchase orders from Q3"</div>
-                        <div class="technical-details">POST /api/v1/rag-summary | Request includes filters and preferences</div>
+                        <div class="technical-details">POST /api/v1/rag-summary</div>
                     </div>
                 </div>
                 
@@ -637,10 +588,10 @@
                 <div class="flow-step">
                     <div class="step-number">2</div>
                     <div class="step-content">
-                        <div class="service-name">API Gateway</div>
-                        <div class="action-desc">Rate limiting check and authentication validation</div>
-                        <div class="technical-details">RAG queries limited to 10/minute to prevent abuse</div>
-                        <span class="timing-badge">~40ms</span>
+                        <div class="service-name">RAG Orchestrator</div>
+                        <div class="action-desc">Query embedding generation</div>
+                        <div class="technical-details">Converts text to 768-dimensional vector</div>
+                        <span class="timing-badge">~150ms</span>
                     </div>
                 </div>
                 
@@ -649,10 +600,10 @@
                 <div class="flow-step">
                     <div class="step-number">3</div>
                     <div class="step-content">
-                        <div class="service-name">RAG Orchestrator - Query Processor</div>
-                        <div class="action-desc">Generates embedding vector from query text</div>
-                        <div class="technical-details">Embedding model: sentence-transformers/all-MiniLM-L6-v2 | Dimension: 768</div>
-                        <span class="timing-badge">~150ms</span>
+                        <div class="service-name">Vector Store Cluster</div>
+                        <div class="action-desc">Similarity search across documents</div>
+                        <div class="technical-details">HNSW index search for top-k documents</div>
+                        <span class="timing-badge">~120ms</span>
                     </div>
                 </div>
                 
@@ -661,10 +612,10 @@
                 <div class="flow-step">
                     <div class="step-number">4</div>
                     <div class="step-content">
-                        <div class="service-name">Retriever Service</div>
-                        <div class="action-desc">Performs vector similarity search for relevant documents</div>
-                        <div class="technical-details">k-NN search with k=10 | Similarity threshold: 0.7</div>
-                        <span class="timing-badge">~80ms</span>
+                        <div class="service-name">Ranker Module</div>
+                        <div class="action-desc">Re-ranking retrieved documents</div>
+                        <div class="technical-details">Cross-encoder model for relevance scoring</div>
+                        <span class="timing-badge">~200ms</span>
                     </div>
                 </div>
                 
@@ -673,63 +624,10 @@
                 <div class="flow-step">
                     <div class="step-number">5</div>
                     <div class="step-content">
-                        <div class="service-name">Vector Store Cluster</div>
-                        <div class="action-desc">HNSW index search across sharded document embeddings</div>
-                        <div class="technical-details">Index type: HNSW | ef_search: 50 | M: 16 | Shards: 4</div>
-                        <span class="timing-badge">~120ms</span>
-                    </div>
-                </div>
-                
-                <div class="flow-arrow">↓</div>
-                
-                <div class="flow-step">
-                    <div class="step-number">6</div>
-                    <div class="step-content">
-                        <div class="service-name">Ranker Module</div>
-                        <div class="action-desc">Re-ranks retrieved documents using cross-encoder model</div>
-                        <div class="technical-details">Model: cross-encoder/ms-marco-MiniLM-L-6-v2 | Top-k: 5</div>
-                        <span class="timing-badge">~200ms</span>
-                    </div>
-                </div>
-                
-                <div class="flow-arrow">↓</div>
-                
-                <div class="flow-step">
-                    <div class="step-number">7</div>
-                    <div class="step-content">
                         <div class="service-name">Generator Service</div>
-                        <div class="action-desc">LLM generates coherent summary from top documents</div>
-                        <div class="technical-details">Context window: 4096 tokens | Temperature: 0.3 | Max tokens: 500</div>
+                        <div class="action-desc">LLM-based summary generation</div>
+                        <div class="technical-details">Creates coherent summary with citations</div>
                         <span class="timing-badge">~500ms</span>
-                    </div>
-                </div>
-                
-                <div class="flow-arrow">↓</div>
-                
-                <div class="flow-step">
-                    <div class="step-number">8</div>
-                    <div class="step-content">
-                        <div class="service-name">Citation Tracker</div>
-                        <div class="action-desc">Adds source references and confidence scores to response</div>
-                        <div class="technical-details">Citation format: [doc_id:page:confidence] | Deduplication applied</div>
-                        <span class="timing-badge">~20ms</span>
-                    </div>
-                </div>
-                
-                <div class="flow-sidebar">
-                    <h3>RAG Pipeline Optimization</h3>
-                    <ul>
-                        <li><strong>Chunking Strategy:</strong> Documents split into 512-token chunks with 50-token overlap</li>
-                        <li><strong>Embedding Cache:</strong> Frequently accessed embeddings cached in Redis</li>
-                        <li><strong>Hybrid Search:</strong> Combines vector similarity with keyword matching for better recall</li>
-                        <li><strong>Quality Control:</strong> Confidence thresholds ensure only relevant content is included</li>
-                    </ul>
-                    
-                    <div class="performance-note">
-                        <div class="performance-title">RAG Performance</div>
-                        <p>Average response time: 1.2 seconds</p>
-                        <p>Relevance score: 0.85 average on test queries</p>
-                        <p>Document coverage: 95% of knowledge base indexed</p>
                     </div>
                 </div>
             </div>
@@ -741,9 +639,9 @@
                 <div class="flow-step">
                     <div class="step-number">1</div>
                     <div class="step-content">
-                        <div class="service-name">Client Application</div>
-                        <div class="action-desc">Request for 6-month rice price forecast</div>
-                        <div class="technical-details">GET /api/v1/forecast/rice-price?horizon=6m&confidence=0.95</div>
+                        <div class="service-name">Forecast Request</div>
+                        <div class="action-desc">Request 6-month rice price forecast</div>
+                        <div class="technical-details">GET /api/v1/forecast/rice-price?horizon=6m</div>
                     </div>
                 </div>
                 
@@ -752,10 +650,10 @@
                 <div class="flow-step">
                     <div class="step-number">2</div>
                     <div class="step-content">
-                        <div class="service-name">API Gateway</div>
-                        <div class="action-desc">Checks cache for recent predictions to reduce compute load</div>
-                        <div class="technical-details">Cache key: forecast:rice:6m:{date} | TTL: 24 hours</div>
-                        <span class="timing-badge">~30ms</span>
+                        <div class="service-name">Feature Pipeline</div>
+                        <div class="action-desc">Extract features from Feature Store</div>
+                        <div class="technical-details">Price history, weather, FX rates</div>
+                        <span class="timing-badge">~100ms</span>
                     </div>
                 </div>
                 
@@ -764,10 +662,10 @@
                 <div class="flow-step">
                     <div class="step-number">3</div>
                     <div class="step-content">
-                        <div class="service-name">TS Forecasting Engine - Feature Pipeline</div>
-                        <div class="action-desc">Extracts time-series features from Feature Store</div>
-                        <div class="technical-details">Features: price_history, weather_data, fx_rates, market_indicators</div>
-                        <span class="timing-badge">~100ms</span>
+                        <div class="service-name">Model Inference Engine</div>
+                        <div class="action-desc">Load and run LSTM/Prophet ensemble</div>
+                        <div class="technical-details">Generate predictions with confidence intervals</div>
+                        <span class="timing-badge">~300ms</span>
                     </div>
                 </div>
                 
@@ -776,10 +674,10 @@
                 <div class="flow-step">
                     <div class="step-number">4</div>
                     <div class="step-content">
-                        <div class="service-name">Feature Store</div>
-                        <div class="action-desc">Serves pre-computed feature vectors with versioning</div>
-                        <div class="technical-details">Feature version: v2.3.1 | Update frequency: daily | Lag features: 30 days</div>
-                        <span class="timing-badge">~50ms</span>
+                        <div class="service-name">Explainability Module</div>
+                        <div class="action-desc">Generate SHAP values for interpretability</div>
+                        <div class="technical-details">Identify key price drivers</div>
+                        <span class="timing-badge">~150ms</span>
                     </div>
                 </div>
                 
@@ -788,72 +686,10 @@
                 <div class="flow-step">
                     <div class="step-number">5</div>
                     <div class="step-content">
-                        <div class="service-name">Model Inference Engine</div>
-                        <div class="action-desc">Loads champion model from registry and prepares for inference</div>
-                        <div class="technical-details">Model: LSTM-Prophet Ensemble v2.3.1 | Framework: TensorFlow 2.x</div>
-                        <span class="timing-badge">~200ms</span>
-                    </div>
-                </div>
-                
-                <div class="flow-arrow">↓</div>
-                
-                <div class="flow-step">
-                    <div class="step-number">6</div>
-                    <div class="step-content">
-                        <div class="service-name">Prediction Generation</div>
-                        <div class="action-desc">Runs inference for 180-day horizon with uncertainty quantification</div>
-                        <div class="technical-details">Monte Carlo simulations: 100 | Confidence intervals: 50%, 80%, 95%</div>
-                        <span class="timing-badge">~300ms</span>
-                    </div>
-                </div>
-                
-                <div class="flow-arrow">↓</div>
-                
-                <div class="flow-step">
-                    <div class="step-number">7</div>
-                    <div class="step-content">
-                        <div class="service-name">Post-processor & Explainability</div>
-                        <div class="action-desc">Generates SHAP values to explain prediction drivers</div>
-                        <div class="technical-details">Top factors: seasonal patterns (40%), FX rates (25%), weather (20%)</div>
-                        <span class="timing-badge">~150ms</span>
-                    </div>
-                </div>
-                
-                <div class="flow-arrow">↓</div>
-                
-                <div class="flow-step">
-                    <div class="step-number">8</div>
-                    <div class="step-content">
-                        <div class="service-name">Confidence Estimator</div>
-                        <div class="action-desc">Calculates prediction confidence based on historical accuracy</div>
-                        <div class="technical-details">MAPE on test set: 8.3% | Confidence score: 0.87</div>
+                        <div class="service-name">Response Formatting</div>
+                        <div class="action-desc">Package predictions with metadata</div>
+                        <div class="technical-details">Include confidence scores and explanations</div>
                         <span class="timing-badge">~50ms</span>
-                    </div>
-                </div>
-                
-                <div class="flow-sidebar">
-                    <h3>ML Pipeline Architecture</h3>
-                    <ul>
-                        <li><strong>Feature Engineering:</strong> 150+ features including lagged values, rolling statistics</li>
-                        <li><strong>Model Ensemble:</strong> Combines LSTM for trends with Prophet for seasonality</li>
-                        <li><strong>Online Learning:</strong> Model updates daily with new market data</li>
-                        <li><strong>A/B Testing:</strong> Champion/challenger framework for continuous improvement</li>
-                    </ul>
-                    
-                    <div class="error-handling">
-                        <div class="error-title">Fallback Strategies</div>
-                        <ul>
-                            <li>Primary model failure → Use simpler ARIMA baseline</li>
-                            <li>Feature unavailable → Use cached historical features</li>
-                            <li>Low confidence → Flag prediction with warning</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="performance-note">
-                        <div class="performance-title">Forecasting Accuracy</div>
-                        <p>Mean Absolute Error: $2.35 per 100kg</p>
-                        <p>Direction accuracy: 78% (up/down correct)</p>
-                        <p>Update latency: < 1 second for cached results</p>
                     </div>
                 </div>
             </div>
@@ -861,17 +697,18 @@
     </div>
     
     <script>
-        // Complete implementation checklist data
+        // Complete implementation checklist data matching the course requirements exactly
         const checklistData = {
             "milestone1": {
                 title: "Milestone 1: Project Proposal & Team Formation",
                 dueDate: "2025-09-25",
+                weight: "4%",
                 tasks: [
                     {
                         id: "1.1",
                         component: "Team Formation",
-                        description: "Form project team of 3-4 members",
-                        verification: "Team roster submitted",
+                        description: "Form project team of 3-4 members with complementary skills",
+                        verification: "Team roster submitted to shared spreadsheet",
                         dependencies: "None",
                         hours: 4,
                         priority: "high",
@@ -880,8 +717,8 @@
                     {
                         id: "1.2",
                         component: "Project Scope",
-                        description: "Define ERP AI system scope",
-                        verification: "Problem statement documented",
+                        description: "Define ERP AI system scope covering NL+SQL, RAG, and forecasting capabilities",
+                        verification: "Clear problem statement documented",
                         dependencies: "1.1",
                         hours: 8,
                         priority: "high",
@@ -890,8 +727,8 @@
                     {
                         id: "1.3",
                         component: "Data Strategy",
-                        description: "Identify rice market data sources",
-                        verification: "Data inventory complete",
+                        description: "Identify rice market data sources (prices, weather, FX)",
+                        verification: "Data source inventory with access verification",
                         dependencies: "1.2",
                         hours: 12,
                         priority: "high",
@@ -900,8 +737,8 @@
                     {
                         id: "1.4",
                         component: "Architecture Design",
-                        description: "Create microservices architecture",
-                        verification: "Architecture diagram ready",
+                        description: "Create preliminary microservices architecture diagram",
+                        verification: "Architecture diagram with service boundaries",
                         dependencies: "1.2",
                         hours: 10,
                         priority: "medium",
@@ -910,9 +747,9 @@
                     {
                         id: "1.5",
                         component: "Documentation",
-                        description: "Submit Statement of Work",
-                        verification: "PDF submitted",
-                        dependencies: "All",
+                        description: "Submit Statement of Work (1-2 pages) with all required sections via Canvas by deadline",
+                        verification: "PDF submitted via Canvas",
+                        dependencies: "1.1, 1.2, 1.3, 1.4",
                         hours: 6,
                         priority: "high",
                         completed: false
@@ -920,14 +757,15 @@
                 ]
             },
             "milestone2": {
-                title: "Milestone 2: MLOps Infrastructure",
+                title: "Milestone 2: MLOps Infrastructure & Containerization",
                 dueDate: "2025-10-16",
+                weight: "10%",
                 tasks: [
                     {
                         id: "2.1",
                         component: "Environment Setup",
-                        description: "Configure GCP project",
-                        verification: "GCP console active",
+                        description: "Configure GCP project with proper IAM roles and billing",
+                        verification: "GCP console screenshot showing active project",
                         dependencies: "1.5",
                         hours: 4,
                         priority: "high",
@@ -935,9 +773,9 @@
                     },
                     {
                         id: "2.2",
-                        component: "Repository",
-                        description: "Create monorepo structure",
-                        verification: "GitHub repo ready",
+                        component: "Repository Structure",
+                        description: "Create monorepo with directories for each microservice",
+                        verification: "GitHub repo with proper folder structure",
                         dependencies: "2.1",
                         hours: 3,
                         priority: "high",
@@ -945,9 +783,9 @@
                     },
                     {
                         id: "2.3",
-                        component: "API Gateway",
-                        description: "Containerize API Gateway",
-                        verification: "Docker build success",
+                        component: "API Gateway Container",
+                        description: "Containerize API Gateway with authentication middleware",
+                        verification: "Docker build successful, container runs locally",
                         dependencies: "2.2",
                         hours: 8,
                         priority: "high",
@@ -956,8 +794,8 @@
                     {
                         id: "2.4",
                         component: "NL+SQL Service",
-                        description: "Create NL+SQL container",
-                        verification: "Test query works",
+                        description: "Create Docker container for NL+SQL Agent Service with LLM integration",
+                        verification: "Container processes test NL query successfully",
                         dependencies: "2.3",
                         hours: 12,
                         priority: "high",
@@ -966,8 +804,8 @@
                     {
                         id: "2.5",
                         component: "RAG Orchestrator",
-                        description: "Containerize RAG service",
-                        verification: "Vector DB connected",
+                        description: "Containerize RAG Orchestrator with vector store connection",
+                        verification: "Container connects to vector DB, performs test query",
                         dependencies: "2.3",
                         hours: 12,
                         priority: "high",
@@ -976,8 +814,8 @@
                     {
                         id: "2.6",
                         component: "Data Pipeline",
-                        description: "Implement ingestion pipeline",
-                        verification: "PII scrubbing works",
+                        description: "Implement data ingestion pipeline with PII scrubbing",
+                        verification: "Pipeline processes sample data with PII removed",
                         dependencies: "2.2",
                         hours: 10,
                         priority: "medium",
@@ -985,9 +823,9 @@
                     },
                     {
                         id: "2.7",
-                        component: "Vector Store",
-                        description: "Deploy vector database",
-                        verification: "Embeddings retrievable",
+                        component: "Vector Store Setup",
+                        description: "Deploy vector database (Pinecone/Weaviate) with initial embeddings",
+                        verification: "Vector store accessible, test embeddings retrievable",
                         dependencies: "2.5",
                         hours: 8,
                         priority: "medium",
@@ -996,11 +834,21 @@
                     {
                         id: "2.8",
                         component: "Docker Compose",
-                        description: "Create docker-compose.yml",
-                        verification: "All services start",
-                        dependencies: "All MS2",
+                        description: "Create docker-compose.yml for local development environment",
+                        verification: "All services start with single command",
+                        dependencies: "2.3, 2.4, 2.5",
                         hours: 6,
                         priority: "low",
+                        completed: false
+                    },
+                    {
+                        id: "2.9",
+                        component: "Documentation",
+                        description: "Complete README with setup instructions and architecture overview",
+                        verification: "New team member can setup environment following docs",
+                        dependencies: "All MS2 tasks",
+                        hours: 6,
+                        priority: "high",
                         completed: false
                     }
                 ]
@@ -1008,12 +856,13 @@
             "milestone3": {
                 title: "Milestone 3: Midterm Presentation",
                 dueDate: "2025-10-28",
+                weight: "25%",
                 tasks: [
                     {
                         id: "3.1",
                         component: "Model Training",
-                        description: "Fine-tune LLM for rice market",
-                        verification: ">80% accuracy",
+                        description: "Fine-tune LLM for rice market domain using RAG",
+                        verification: "Model achieves >80% accuracy on test queries",
                         dependencies: "2.4, 2.5",
                         hours: 16,
                         priority: "high",
@@ -1021,9 +870,9 @@
                     },
                     {
                         id: "3.2",
-                        component: "Forecasting",
-                        description: "Implement LSTM/Prophet",
-                        verification: "6-month forecast ready",
+                        component: "Forecasting Model",
+                        description: "Implement time-series forecasting with LSTM/Prophet",
+                        verification: "6-month forecast generated with confidence intervals",
                         dependencies: "2.6",
                         hours: 14,
                         priority: "high",
@@ -1031,9 +880,9 @@
                     },
                     {
                         id: "3.3",
-                        component: "Integration",
-                        description: "Connect all services",
-                        verification: "End-to-end flow works",
+                        component: "API Integration",
+                        description: "Connect all services through API Gateway",
+                        verification: "End-to-end flow works for all three capabilities",
                         dependencies: "3.1, 3.2",
                         hours: 10,
                         priority: "medium",
@@ -1041,9 +890,9 @@
                     },
                     {
                         id: "3.4",
-                        component: "Presentation",
-                        description: "Create pitch deck",
-                        verification: "Slides complete",
+                        component: "Presentation Prep",
+                        description: "Create investor pitch deck (5-minute presentation)",
+                        verification: "Slides cover problem, value prop, scalability, future dev",
                         dependencies: "3.3",
                         hours: 8,
                         priority: "high",
@@ -1051,9 +900,9 @@
                     },
                     {
                         id: "3.5",
-                        component: "Demo",
-                        description: "Prepare live demo",
-                        verification: "Demo runs smoothly",
+                        component: "Demo Preparation",
+                        description: "Prepare live demo showing all three AI capabilities",
+                        verification: "Demo runs smoothly without errors",
                         dependencies: "3.3",
                         hours: 6,
                         priority: "high",
@@ -1064,12 +913,13 @@
             "milestone4": {
                 title: "Milestone 4: Full-Stack Development",
                 dueDate: "2025-11-25",
+                weight: "14%",
                 tasks: [
                     {
                         id: "4.1",
-                        component: "Frontend",
-                        description: "Build React/Vue UI",
-                        verification: "UI components work",
+                        component: "Frontend Design",
+                        description: "Design and implement React/Vue frontend with chat interface",
+                        verification: "UI mockups approved, basic components working",
                         dependencies: "3.5",
                         hours: 20,
                         priority: "high",
@@ -1078,8 +928,8 @@
                     {
                         id: "4.2",
                         component: "API Development",
-                        description: "Implement REST APIs",
-                        verification: "Swagger docs ready",
+                        description: "Implement RESTful APIs with OpenAPI specification",
+                        verification: "API documentation generated, Swagger UI accessible",
                         dependencies: "4.1",
                         hours: 16,
                         priority: "high",
@@ -1087,9 +937,9 @@
                     },
                     {
                         id: "4.3",
-                        component: "CI/CD",
-                        description: "Setup GitHub Actions",
-                        verification: "Pipeline runs on PR",
+                        component: "CI/CD Pipeline",
+                        description: "Setup GitHub Actions for automated testing and deployment",
+                        verification: "Pipeline triggers on PR, runs tests automatically",
                         dependencies: "4.2",
                         hours: 12,
                         priority: "high",
@@ -1098,8 +948,8 @@
                     {
                         id: "4.4",
                         component: "Unit Testing",
-                        description: "Write unit tests (>50%)",
-                        verification: "Coverage >50%",
+                        description: "Write unit tests for all services (>50% coverage)",
+                        verification: "Coverage report shows >50% code coverage",
                         dependencies: "4.2",
                         hours: 20,
                         priority: "high",
@@ -1107,9 +957,9 @@
                     },
                     {
                         id: "4.5",
-                        component: "Integration Tests",
-                        description: "Test service interactions",
-                        verification: "All calls tested",
+                        component: "Integration Testing",
+                        description: "Implement integration tests for service interactions",
+                        verification: "All service-to-service calls tested",
                         dependencies: "4.4",
                         hours: 16,
                         priority: "medium",
@@ -1117,9 +967,9 @@
                     },
                     {
                         id: "4.6",
-                        component: "Performance",
-                        description: "Load testing & optimization",
-                        verification: "100 concurrent users",
+                        component: "Performance Testing",
+                        description: "Load test APIs and optimize bottlenecks",
+                        verification: "APIs handle 100 concurrent users",
                         dependencies: "4.5",
                         hours: 12,
                         priority: "medium",
@@ -1127,12 +977,22 @@
                     },
                     {
                         id: "4.7",
-                        component: "Security",
-                        description: "Security audit & fixes",
-                        verification: "No critical issues",
+                        component: "Security Audit",
+                        description: "Implement security headers and OWASP best practices",
+                        verification: "Security scan shows no critical vulnerabilities",
                         dependencies: "4.3",
                         hours: 10,
                         priority: "low",
+                        completed: false
+                    },
+                    {
+                        id: "4.8",
+                        component: "Documentation",
+                        description: "Complete technical documentation and user guides",
+                        verification: "All APIs documented, setup guide complete",
+                        dependencies: "All MS4 tasks",
+                        hours: 10,
+                        priority: "high",
                         completed: false
                     }
                 ]
@@ -1140,22 +1000,23 @@
             "milestone5": {
                 title: "Milestone 5: Deployment & Scaling",
                 dueDate: "2025-12-11",
+                weight: "35%",
                 tasks: [
                     {
                         id: "5.1",
-                        component: "Kubernetes",
-                        description: "Deploy to GKE cluster",
-                        verification: "All pods running",
-                        dependencies: "4.7",
+                        component: "Kubernetes Setup",
+                        description: "Deploy application to GKE cluster",
+                        verification: "All pods running, services accessible",
+                        dependencies: "4.8",
                         hours: 16,
                         priority: "high",
                         completed: false
                     },
                     {
                         id: "5.2",
-                        component: "Ansible",
-                        description: "Create playbooks",
-                        verification: "One-command deploy",
+                        component: "Ansible Automation",
+                        description: "Create Ansible playbooks for infrastructure provisioning",
+                        verification: "Infrastructure deployed with single command",
                         dependencies: "5.1",
                         hours: 14,
                         priority: "high",
@@ -1164,8 +1025,8 @@
                     {
                         id: "5.3",
                         component: "Auto-scaling",
-                        description: "Configure HPA",
-                        verification: "Scales on CPU usage",
+                        description: "Configure HPA for automatic scaling based on load",
+                        verification: "Pods scale up/down based on CPU usage",
                         dependencies: "5.1",
                         hours: 10,
                         priority: "high",
@@ -1174,8 +1035,8 @@
                     {
                         id: "5.4",
                         component: "ML Pipeline",
-                        description: "Automated retraining",
-                        verification: "Daily model updates",
+                        description: "Implement automated model retraining pipeline",
+                        verification: "Model retrains on schedule, deploys if improved",
                         dependencies: "5.1",
                         hours: 12,
                         priority: "high",
@@ -1183,9 +1044,9 @@
                     },
                     {
                         id: "5.5",
-                        component: "Documentation",
-                        description: "Video & blog post",
-                        verification: "Published online",
+                        component: "Video & Blog",
+                        description: "Create 6-minute demo video and Medium blog post",
+                        verification: "Video uploaded, blog published",
                         dependencies: "5.3",
                         hours: 10,
                         priority: "high",
@@ -1193,30 +1054,30 @@
                     },
                     {
                         id: "5.6",
-                        component: "Testing",
-                        description: "70% test coverage",
-                        verification: "Coverage report",
-                        dependencies: "4.4",
+                        component: "Test Coverage",
+                        description: "Achieve 70% test coverage across all services",
+                        verification: "Coverage report shows >70%",
+                        dependencies: "4.4, 4.5",
                         hours: 8,
                         priority: "high",
                         completed: false
                     },
                     {
                         id: "5.7",
-                        component: "Showcase",
-                        description: "Prepare booth demo",
-                        verification: "Demo ready",
-                        dependencies: "All",
+                        component: "Showcase Prep",
+                        description: "Prepare booth materials and live demo for showcase",
+                        verification: "Demo runs smoothly, QR codes ready",
+                        dependencies: "All tasks",
                         hours: 8,
                         priority: "high",
                         completed: false
                     },
                     {
                         id: "5.8",
-                        component: "Submission",
-                        description: "Final deliverables",
-                        verification: "Uploaded by 11:59 PM",
-                        dependencies: "All",
+                        component: "Final Submission",
+                        description: "Submit all deliverables via course portal",
+                        verification: "All files uploaded before 11:59 PM",
+                        dependencies: "5.5, 5.6, 5.7",
                         hours: 2,
                         priority: "high",
                         completed: false
@@ -1225,18 +1086,16 @@
             }
         };
         
-        // Dynamic time tracking functions
+        // Function to update time tracking with real countdown
         function updateTimeTracking() {
-            // This function updates the time remaining dynamically
             const deadline = new Date('2025-12-11T23:59:59');
             const now = new Date();
             
             // Calculate days remaining
             const msRemaining = deadline - now;
             const daysRemaining = Math.floor(msRemaining / (1000 * 60 * 60 * 24));
-            const hoursRemainingTotal = Math.floor(msRemaining / (1000 * 60 * 60));
             
-            // Calculate hours based on completed tasks
+            // Calculate work hours based on tasks
             let totalHours = 0;
             let completedHours = 0;
             
@@ -1251,21 +1110,19 @@
             
             const workHoursRemaining = totalHours - completedHours;
             
-            // Update display with animation effect
+            // Update display
             const daysElement = document.getElementById('days-remaining');
             const hoursElement = document.getElementById('hours-remaining');
             
             if (daysElement) {
-                // Add blinking effect for urgency when less than 30 days
+                daysElement.textContent = daysRemaining > 0 ? daysRemaining : '0';
                 if (daysRemaining < 30) {
                     daysElement.style.color = '#e74c3c';
                 }
-                daysElement.textContent = daysRemaining > 0 ? daysRemaining : '0';
             }
             
             if (hoursElement) {
                 hoursElement.textContent = workHoursRemaining + 'h';
-                // Change color based on progress
                 if (workHoursRemaining > 300) {
                     hoursElement.style.color = '#e74c3c';
                 } else if (workHoursRemaining > 150) {
@@ -1276,9 +1133,8 @@
             }
         }
         
-        // Page switching functionality
+        // Function to switch between pages
         function switchPage(page) {
-            // Remove active class from all tabs and pages
             document.querySelectorAll('.nav-tab').forEach(tab => {
                 tab.classList.remove('active');
             });
@@ -1286,7 +1142,6 @@
                 content.classList.remove('active');
             });
             
-            // Add active class to selected tab and page
             if (page === 'checklist') {
                 document.querySelector('.nav-tab:nth-child(1)').classList.add('active');
                 document.getElementById('checklist-page').classList.add('active');
@@ -1296,14 +1151,14 @@
             }
         }
         
-        // Initialize checklist
+        // Function to initialize checklist
         function initializeChecklist() {
             const container = document.getElementById('checklist-container');
             if (!container) return;
             
             let html = '';
             
-            // Load saved progress
+            // Load saved progress if it exists
             const savedProgress = localStorage.getItem('erpChecklistProgress');
             if (savedProgress) {
                 const savedData = JSON.parse(savedProgress);
@@ -1318,18 +1173,25 @@
                 });
             }
             
-            // Generate HTML for checklist
+            // Generate HTML for each milestone
             Object.entries(checklistData).forEach(([milestoneKey, milestone]) => {
+                const completedCount = milestone.tasks.filter(t => t.completed).length;
+                const totalCount = milestone.tasks.length;
+                
                 html += `
                     <div class="checklist-section">
-                        <div class="section-header">${milestone.title} (Due: ${milestone.dueDate})</div>
+                        <div class="section-header">
+                            ${milestone.title} (Due: ${milestone.dueDate}) - ${milestone.weight} of grade
+                            <span style="float: right; font-size: 0.9em;">${completedCount}/${totalCount} completed</span>
+                        </div>
                         <table>
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    <th>Task ID</th>
                                     <th>Component</th>
                                     <th>Description</th>
-                                    <th>Verification</th>
+                                    <th class="hide-mobile">Verification</th>
+                                    <th class="hide-mobile">Dependencies</th>
                                     <th>Hours</th>
                                     <th>Priority</th>
                                     <th>Done</th>
@@ -1343,14 +1205,15 @@
                     const completedClass = task.completed ? 'completed' : '';
                     
                     html += `
-                        <tr class="${priorityClass} ${completedClass}">
-                            <td style="font-weight: bold;">${task.id}</td>
+                        <tr class="${priorityClass} ${completedClass}" data-task-id="${task.id}">
+                            <td class="task-id">${task.id}</td>
                             <td>${task.component}</td>
                             <td>${task.description}</td>
-                            <td>${task.verification}</td>
+                            <td class="hide-mobile">${task.verification}</td>
+                            <td class="hide-mobile">${task.dependencies}</td>
                             <td>${task.hours}h</td>
                             <td>${task.priority.toUpperCase()}</td>
-                            <td><input type="checkbox" data-task="${task.id}" data-milestone="${milestoneKey}" ${task.completed ? 'checked' : ''}></td>
+                            <td><input type="checkbox" class="checkbox" data-task="${task.id}" data-milestone="${milestoneKey}" ${task.completed ? 'checked' : ''}></td>
                         </tr>
                     `;
                 });
@@ -1367,7 +1230,7 @@
             attachCheckboxListeners();
         }
         
-        // Update statistics
+        // Function to update statistics including proper time tracking
         function updateStats() {
             let totalTasks = 0;
             let completedTasks = 0;
@@ -1377,21 +1240,31 @@
                 completedTasks += milestone.tasks.filter(t => t.completed).length;
             });
             
-            document.getElementById('total-tasks').textContent = totalTasks;
-            document.getElementById('completed-tasks').textContent = completedTasks;
+            // Update total tasks and completed tasks display
+            const totalElement = document.getElementById('total-tasks');
+            const completedElement = document.getElementById('completed-tasks');
             
+            if (totalElement) {
+                totalElement.textContent = totalTasks;
+            }
+            
+            if (completedElement) {
+                completedElement.textContent = completedTasks;
+            }
+            
+            // Call the time tracking update function
             updateTimeTracking();
         }
         
-        // Attach checkbox listeners
+        // Function to attach checkbox event listeners
         function attachCheckboxListeners() {
-            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            document.querySelectorAll('.checkbox').forEach(checkbox => {
                 checkbox.addEventListener('change', function() {
                     const taskId = this.dataset.task;
                     const milestoneKey = this.dataset.milestone;
                     const row = this.closest('tr');
                     
-                    // Update data
+                    // Update data structure
                     const task = checklistData[milestoneKey].tasks.find(t => t.id === taskId);
                     if (task) {
                         task.completed = this.checked;
@@ -1410,19 +1283,19 @@
             });
         }
         
-        // Auto-save progress
+        // Function to auto-save progress
         function autoSaveProgress() {
             localStorage.setItem('erpChecklistProgress', JSON.stringify(checklistData));
         }
         
-        // Export functions
+        // Export to Excel function
         function exportToExcel() {
             let csvContent = 'Task ID\tMilestone\tComponent\tDescription\tVerification\tDependencies\tHours\tPriority\tStatus\n';
             
             Object.entries(checklistData).forEach(([key, milestone]) => {
                 milestone.tasks.forEach(task => {
                     const status = task.completed ? 'Completed' : 'Pending';
-                    csvContent += `${task.id}\t${milestone.title}\t${task.component}\t${task.description}\t${task.verification}\t${task.dependencies}\t${task.hours}\t${task.priority}\t${status}\n`;
+                    csvContent += `${task.id}\t${milestone.title}\t${task.component}\t${task.description}\t${task.verification}\t${task.dependencies}\t${task.hours}\t${task.priority.toUpperCase()}\t${status}\n`;
                 });
             });
             
@@ -1430,15 +1303,18 @@
             const url = window.URL.createObjectURL(blob);
             const link = document.createElement('a');
             link.href = url;
-            link.download = `ERP_Checklist_${new Date().toISOString().split('T')[0]}.xls`;
+            link.download = `ERP_Implementation_Checklist_${new Date().toISOString().split('T')[0]}.xls`;
             link.click();
+            window.URL.revokeObjectURL(url);
         }
         
+        // Save progress function
         function saveProgress() {
             localStorage.setItem('erpChecklistProgress', JSON.stringify(checklistData));
             alert('Progress saved successfully!');
         }
         
+        // Load progress function
         function loadProgress() {
             const saved = localStorage.getItem('erpChecklistProgress');
             if (saved) {
@@ -1450,15 +1326,50 @@
             }
         }
         
-        // Initialize on page load
+        // Reset progress function
+        function resetProgress() {
+            if (confirm('Are you sure you want to reset all progress? This cannot be undone.')) {
+                Object.values(checklistData).forEach(milestone => {
+                    milestone.tasks.forEach(task => {
+                        task.completed = false;
+                    });
+                });
+                localStorage.removeItem('erpChecklistProgress');
+                initializeChecklist();
+                alert('All progress has been reset.');
+            }
+        }
+        
+        // Initialize when DOM is ready
         document.addEventListener('DOMContentLoaded', function() {
             initializeChecklist();
             
-            // Update time tracking every minute
-            setInterval(updateTimeTracking, 60000);
+            // Update time tracking immediately on load
+            updateTimeTracking();
+            
+            // Update time tracking every hour for accurate hour countdown
+            setInterval(updateTimeTracking, 3600000); // Every hour
+            
+            // Also update at midnight for accurate day transitions
+            const now = new Date();
+            const tomorrow = new Date(now);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            tomorrow.setHours(0, 0, 0, 0);
+            const msUntilMidnight = tomorrow - now;
+            
+            setTimeout(() => {
+                updateTimeTracking();
+                // Then update daily at midnight
+                setInterval(updateTimeTracking, 86400000); // Every 24 hours
+            }, msUntilMidnight);
             
             // Auto-save every 30 seconds
             setInterval(autoSaveProgress, 30000);
+        });
+        
+        // Save progress before leaving page
+        window.addEventListener('beforeunload', function() {
+            autoSaveProgress();
         });
     </script>
 </body>
