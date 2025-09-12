@@ -1,0 +1,1085 @@
+<!-- 
+  File: /index.html
+  Project Root: /home/lenovo/code/ltphongssvn/ac215e115groupproject/
+  Description: ERP AI Architecture Implementation Checklist - Main HTML file for deployment to ac215e115groupproject.thanhphongle.net
+  Purpose: Interactive checklist for tracking implementation progress of Rice Market AI System with NL+SQL, RAG, and Time-Series Forecasting
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ERP AI Architecture Implementation Checklist for AC215 Course - Rice Market AI System with Natural Language SQL, RAG, and Time-Series Forecasting">
+    <meta name="author" content="AC215 E115 Group">
+    <title>ERP AI Architecture Implementation Checklist | AC215 E115 Group Project</title>
+    
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        /* Main container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        /* Header section */
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 2.5rem;
+            text-align: center;
+            border-bottom: 4px solid #3498db;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        
+        .subtitle {
+            font-size: 1.15rem;
+            opacity: 0.95;
+            margin-bottom: 1.5rem;
+            line-height: 1.4;
+        }
+        
+        .meta-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            font-size: 0.95rem;
+            opacity: 0.85;
+            flex-wrap: wrap;
+        }
+        
+        .meta-info span {
+            padding: 0.25rem 0.75rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+        }
+        
+        /* Main content area */
+        main {
+            padding: 2rem;
+        }
+        
+        /* Statistics dashboard */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 1.75rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #e1e8ed;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-number {
+            font-size: 2.25rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+        
+        /* Action buttons */
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(52, 152, 219, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(52, 152, 219, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+            box-shadow: 0 4px 6px rgba(149, 165, 166, 0.3);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #27ae60, #229954);
+            box-shadow: 0 4px 6px rgba(39, 174, 96, 0.3);
+        }
+        
+        /* Checklist sections */
+        .checklist-section {
+            margin-bottom: 2rem;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+            border: 1px solid #e1e8ed;
+        }
+        
+        .section-header {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 1.25rem 1.5rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .section-stats {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        /* Table styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        thead {
+            background: #f8f9fa;
+        }
+        
+        th {
+            padding: 14px;
+            text-align: left;
+            font-weight: 600;
+            color: #2c3e50;
+            border-bottom: 2px solid #dee2e6;
+            font-size: 0.95rem;
+            position: sticky;
+            top: 0;
+            background: #f8f9fa;
+            z-index: 10;
+        }
+        
+        td {
+            padding: 12px 14px;
+            border-bottom: 1px solid #e9ecef;
+            font-size: 0.95rem;
+        }
+        
+        tbody tr {
+            transition: background-color 0.2s;
+        }
+        
+        tbody tr:hover {
+            background: #f8f9fa;
+        }
+        
+        /* Task priority styling */
+        .priority-high {
+            background: linear-gradient(90deg, #fff5f5 0%, transparent 100%);
+            border-left: 4px solid #e74c3c;
+        }
+        
+        .priority-medium {
+            background: linear-gradient(90deg, #fffbf0 0%, transparent 100%);
+            border-left: 4px solid #f39c12;
+        }
+        
+        .priority-low {
+            background: linear-gradient(90deg, #f0f8ff 0%, transparent 100%);
+            border-left: 4px solid #3498db;
+        }
+        
+        /* Task ID styling */
+        .task-id {
+            font-weight: 700;
+            color: #2c3e50;
+            font-family: 'Courier New', monospace;
+        }
+        
+        /* Checkbox styling */
+        .checkbox {
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
+            accent-color: #27ae60;
+        }
+        
+        /* Completed task styling */
+        .completed {
+            opacity: 0.6;
+        }
+        
+        .completed td {
+            text-decoration: line-through;
+            color: #7f8c8d;
+        }
+        
+        /* Priority badge */
+        .priority-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .priority-badge.high {
+            background: #ffe4e4;
+            color: #c0392b;
+        }
+        
+        .priority-badge.medium {
+            background: #fff4e4;
+            color: #d68910;
+        }
+        
+        .priority-badge.low {
+            background: #e4f4ff;
+            color: #2874a6;
+        }
+        
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2.5rem;
+            margin-top: 3rem;
+        }
+        
+        footer a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Progress bar */
+        .progress-bar-container {
+            background: #ecf0f1;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 30px;
+            margin: 2rem 0;
+            position: relative;
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, #27ae60, #229954);
+            height: 100%;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container {
+                border-radius: 0;
+                margin: -20px;
+            }
+            
+            h1 {
+                font-size: 1.75rem;
+            }
+            
+            main {
+                padding: 1rem;
+            }
+            
+            table {
+                font-size: 0.85rem;
+            }
+            
+            th, td {
+                padding: 8px;
+            }
+            
+            .hide-mobile {
+                display: none;
+            }
+            
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        /* Loading animation */
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+        
+        .loading {
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 ERP AI Architecture Implementation Checklist</h1>
+            <p class="subtitle">Rice Market AI System - Natural Language SQL, RAG, and Time-Series Forecasting</p>
+            <div class="meta-info">
+                <span>📚 AC215 Course</span>
+                <span>🗓️ Fall 2025</span>
+                <span>👥 E115 Group Project</span>
+                <span>🎯 5 Milestones</span>
+            </div>
+        </header>
+        
+        <main>
+            <!-- Progress bar -->
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-bar" style="width: 0%">
+                    <span id="progress-text">0% Complete</span>
+                </div>
+            </div>
+            
+            <!-- Statistics dashboard -->
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-number" id="total-tasks">0</div>
+                    <div class="stat-label">Total Tasks</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="completed-tasks">0</div>
+                    <div class="stat-label">Completed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="hours-remaining">0</div>
+                    <div class="stat-label">Hours Remaining</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="days-remaining">0</div>
+                    <div class="stat-label">Days to Deadline</div>
+                </div>
+            </div>
+            
+            <!-- Action buttons -->
+            <div class="action-buttons">
+                <button class="btn" onclick="exportToExcel()">📊 Export to Excel</button>
+                <button class="btn btn-secondary" onclick="exportToCSV()">📄 Export to CSV</button>
+                <button class="btn btn-success" onclick="saveProgress()">💾 Save Progress</button>
+                <button class="btn btn-secondary" onclick="loadProgress()">📂 Load Progress</button>
+                <button class="btn" onclick="resetProgress()">🔄 Reset All</button>
+            </div>
+            
+            <!-- Checklist container -->
+            <div id="checklist-container">
+                <!-- Dynamically generated checklist content will be inserted here -->
+            </div>
+        </main>
+        
+        <footer>
+            <p>© 2025 AC215 E115 Group Project | ERP AI Architecture Implementation</p>
+            <p>Deployed at: <a href="https://ac215e115groupproject.thanhphongle.net">ac215e115groupproject.thanhphongle.net</a></p>
+            <p>Repository: <a href="https://github.com/ltphongssvn/ac215e115groupproject">GitHub Project</a></p>
+        </footer>
+    </div>
+    
+    <script>
+        // Complete implementation checklist data with all milestones and tasks
+        const checklistData = {
+            "milestone1": {
+                title: "Milestone 1: Project Proposal & Team Formation",
+                dueDate: "2025-09-25",
+                tasks: [
+                    {
+                        id: "1.1",
+                        component: "Team Formation",
+                        description: "Form project team of 3-4 members with complementary skills",
+                        verification: "Team roster submitted to shared spreadsheet",
+                        dependencies: "None",
+                        hours: 4,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "1.2",
+                        component: "Project Scope",
+                        description: "Define ERP AI system scope covering NL+SQL, RAG, and forecasting capabilities",
+                        verification: "Clear problem statement documented",
+                        dependencies: "1.1",
+                        hours: 8,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "1.3",
+                        component: "Data Strategy",
+                        description: "Identify rice market data sources (prices, weather, FX rates)",
+                        verification: "Data source inventory with access verification",
+                        dependencies: "1.2",
+                        hours: 12,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "1.4",
+                        component: "Architecture Design",
+                        description: "Create preliminary microservices architecture diagram",
+                        verification: "Architecture diagram with service boundaries defined",
+                        dependencies: "1.2",
+                        hours: 10,
+                        priority: "medium",
+                        completed: false
+                    },
+                    {
+                        id: "1.5",
+                        component: "Documentation",
+                        description: "Submit Statement of Work (1-2 pages) with all required sections",
+                        verification: "PDF submitted via Canvas by deadline",
+                        dependencies: "1.1, 1.2, 1.3, 1.4",
+                        hours: 6,
+                        priority: "high",
+                        completed: false
+                    }
+                ]
+            },
+            "milestone2": {
+                title: "Milestone 2: MLOps Infrastructure & Containerization",
+                dueDate: "2025-10-16",
+                tasks: [
+                    {
+                        id: "2.1",
+                        component: "Environment Setup",
+                        description: "Configure GCP project with proper IAM roles and billing",
+                        verification: "GCP console screenshot showing active project",
+                        dependencies: "1.5",
+                        hours: 4,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "2.2",
+                        component: "Repository Structure",
+                        description: "Create monorepo with directories for each microservice",
+                        verification: "GitHub repo with proper folder structure",
+                        dependencies: "2.1",
+                        hours: 3,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "2.3",
+                        component: "API Gateway Container",
+                        description: "Containerize API Gateway with authentication middleware",
+                        verification: "Docker build successful, container runs locally",
+                        dependencies: "2.2",
+                        hours: 8,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "2.4",
+                        component: "NL+SQL Service",
+                        description: "Create Docker container for NL+SQL Agent Service with LLM integration",
+                        verification: "Container processes test NL query successfully",
+                        dependencies: "2.3",
+                        hours: 12,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "2.5",
+                        component: "RAG Orchestrator",
+                        description: "Containerize RAG Orchestrator with vector store connection",
+                        verification: "Container connects to vector DB, performs test query",
+                        dependencies: "2.3",
+                        hours: 12,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "2.6",
+                        component: "Data Pipeline",
+                        description: "Implement data ingestion pipeline with PII scrubbing",
+                        verification: "Pipeline processes sample data with PII removed",
+                        dependencies: "2.2",
+                        hours: 10,
+                        priority: "medium",
+                        completed: false
+                    },
+                    {
+                        id: "2.7",
+                        component: "Vector Store Setup",
+                        description: "Deploy vector database (Pinecone/Weaviate) with initial embeddings",
+                        verification: "Vector store accessible, test embeddings retrievable",
+                        dependencies: "2.5",
+                        hours: 8,
+                        priority: "medium",
+                        completed: false
+                    },
+                    {
+                        id: "2.8",
+                        component: "Docker Compose",
+                        description: "Create docker-compose.yml for local development environment",
+                        verification: "All services start with single command",
+                        dependencies: "2.3, 2.4, 2.5",
+                        hours: 6,
+                        priority: "low",
+                        completed: false
+                    },
+                    {
+                        id: "2.9",
+                        component: "Documentation",
+                        description: "Complete README with setup instructions and architecture overview",
+                        verification: "New team member can setup environment following docs",
+                        dependencies: "All MS2 tasks",
+                        hours: 6,
+                        priority: "high",
+                        completed: false
+                    }
+                ]
+            },
+            "milestone3": {
+                title: "Milestone 3: Midterm Presentation",
+                dueDate: "2025-10-28",
+                tasks: [
+                    {
+                        id: "3.1",
+                        component: "Model Training",
+                        description: "Fine-tune LLM for rice market domain using RAG",
+                        verification: "Model achieves >80% accuracy on test queries",
+                        dependencies: "2.4, 2.5",
+                        hours: 16,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "3.2",
+                        component: "Forecasting Model",
+                        description: "Implement time-series forecasting with LSTM/Prophet",
+                        verification: "6-month forecast generated with confidence intervals",
+                        dependencies: "2.6",
+                        hours: 14,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "3.3",
+                        component: "API Integration",
+                        description: "Connect all services through API Gateway",
+                        verification: "End-to-end flow works for all three capabilities",
+                        dependencies: "3.1, 3.2",
+                        hours: 10,
+                        priority: "medium",
+                        completed: false
+                    },
+                    {
+                        id: "3.4",
+                        component: "Presentation Prep",
+                        description: "Create investor pitch deck (5-minute presentation)",
+                        verification: "Slides cover all required sections",
+                        dependencies: "3.3",
+                        hours: 8,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "3.5",
+                        component: "Demo Preparation",
+                        description: "Prepare live demo showing all three AI capabilities",
+                        verification: "Demo runs smoothly without errors",
+                        dependencies: "3.3",
+                        hours: 6,
+                        priority: "high",
+                        completed: false
+                    }
+                ]
+            },
+            "milestone4": {
+                title: "Milestone 4: Full-Stack Development",
+                dueDate: "2025-11-25",
+                tasks: [
+                    {
+                        id: "4.1",
+                        component: "Frontend Design",
+                        description: "Design and implement React/Vue frontend with chat interface",
+                        verification: "UI mockups approved, basic components working",
+                        dependencies: "3.5",
+                        hours: 20,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "4.2",
+                        component: "API Development",
+                        description: "Implement RESTful APIs with OpenAPI specification",
+                        verification: "API documentation generated, Swagger UI accessible",
+                        dependencies: "4.1",
+                        hours: 16,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "4.3",
+                        component: "CI/CD Pipeline",
+                        description: "Setup GitHub Actions for automated testing and deployment",
+                        verification: "Pipeline triggers on PR, runs tests automatically",
+                        dependencies: "4.2",
+                        hours: 12,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "4.4",
+                        component: "Unit Testing",
+                        description: "Write unit tests for all services (>50% coverage)",
+                        verification: "Coverage report shows >50% code coverage",
+                        dependencies: "4.2",
+                        hours: 20,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "4.5",
+                        component: "Integration Testing",
+                        description: "Implement integration tests for service interactions",
+                        verification: "All service-to-service calls tested",
+                        dependencies: "4.4",
+                        hours: 16,
+                        priority: "medium",
+                        completed: false
+                    },
+                    {
+                        id: "4.6",
+                        component: "Performance Testing",
+                        description: "Load test APIs and optimize bottlenecks",
+                        verification: "APIs handle 100 concurrent users",
+                        dependencies: "4.5",
+                        hours: 12,
+                        priority: "medium",
+                        completed: false
+                    },
+                    {
+                        id: "4.7",
+                        component: "Security Audit",
+                        description: "Implement security headers and OWASP best practices",
+                        verification: "Security scan shows no critical vulnerabilities",
+                        dependencies: "4.3",
+                        hours: 10,
+                        priority: "low",
+                        completed: false
+                    },
+                    {
+                        id: "4.8",
+                        component: "Documentation",
+                        description: "Complete technical documentation and user guides",
+                        verification: "All APIs documented, setup guide complete",
+                        dependencies: "All MS4 tasks",
+                        hours: 10,
+                        priority: "high",
+                        completed: false
+                    }
+                ]
+            },
+            "milestone5": {
+                title: "Milestone 5: Deployment & Scaling",
+                dueDate: "2025-12-11",
+                tasks: [
+                    {
+                        id: "5.1",
+                        component: "Kubernetes Setup",
+                        description: "Deploy application to GKE cluster",
+                        verification: "All pods running, services accessible",
+                        dependencies: "4.8",
+                        hours: 16,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "5.2",
+                        component: "Ansible Automation",
+                        description: "Create Ansible playbooks for infrastructure provisioning",
+                        verification: "Infrastructure deployed with single command",
+                        dependencies: "5.1",
+                        hours: 14,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "5.3",
+                        component: "Auto-scaling",
+                        description: "Configure HPA for automatic scaling based on load",
+                        verification: "Pods scale up/down based on CPU usage",
+                        dependencies: "5.1",
+                        hours: 10,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "5.4",
+                        component: "ML Pipeline",
+                        description: "Implement automated model retraining pipeline",
+                        verification: "Model retrains on schedule, deploys if improved",
+                        dependencies: "5.1",
+                        hours: 12,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "5.5",
+                        component: "Video & Blog",
+                        description: "Create 6-minute demo video and Medium blog post",
+                        verification: "Video uploaded, blog published",
+                        dependencies: "5.3",
+                        hours: 10,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "5.6",
+                        component: "Test Coverage",
+                        description: "Achieve 70% test coverage across all services",
+                        verification: "Coverage report shows >70%",
+                        dependencies: "4.4, 4.5",
+                        hours: 8,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "5.7",
+                        component: "Showcase Prep",
+                        description: "Prepare booth materials and live demo for showcase",
+                        verification: "Demo runs smoothly, QR codes ready",
+                        dependencies: "All tasks",
+                        hours: 8,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "5.8",
+                        component: "Final Submission",
+                        description: "Submit all deliverables via course portal",
+                        verification: "All files uploaded before 11:59 PM",
+                        dependencies: "5.5, 5.6, 5.7",
+                        hours: 2,
+                        priority: "high",
+                        completed: false
+                    }
+                ]
+            }
+        };
+        
+        // Initialize the checklist on page load
+        function initializeChecklist() {
+            const container = document.getElementById('checklist-container');
+            let html = '';
+            
+            // Load saved progress if available
+            const savedProgress = localStorage.getItem('erpChecklistProgress');
+            if (savedProgress) {
+                const savedData = JSON.parse(savedProgress);
+                // Merge saved completion status with default data
+                Object.keys(savedData).forEach(milestoneKey => {
+                    if (checklistData[milestoneKey]) {
+                        savedData[milestoneKey].tasks.forEach((savedTask, index) => {
+                            if (checklistData[milestoneKey].tasks[index]) {
+                                checklistData[milestoneKey].tasks[index].completed = savedTask.completed;
+                            }
+                        });
+                    }
+                });
+            }
+            
+            // Generate HTML for each milestone
+            Object.entries(checklistData).forEach(([milestoneKey, milestone]) => {
+                const completedCount = milestone.tasks.filter(t => t.completed).length;
+                const totalCount = milestone.tasks.length;
+                
+                html += `
+                    <div class="checklist-section">
+                        <div class="section-header">
+                            <span>${milestone.title} (Due: ${milestone.dueDate})</span>
+                            <span class="section-stats">${completedCount}/${totalCount} tasks completed</span>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Task ID</th>
+                                    <th>Component</th>
+                                    <th>Description</th>
+                                    <th class="hide-mobile">Verification</th>
+                                    <th class="hide-mobile">Dependencies</th>
+                                    <th>Hours</th>
+                                    <th>Priority</th>
+                                    <th>Done</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                `;
+                
+                milestone.tasks.forEach(task => {
+                    const rowClass = task.completed ? 'completed' : '';
+                    const priorityClass = `priority-${task.priority}`;
+                    
+                    html += `
+                        <tr class="${priorityClass} ${rowClass}" data-task-id="${task.id}">
+                            <td class="task-id">${task.id}</td>
+                            <td>${task.component}</td>
+                            <td>${task.description}</td>
+                            <td class="hide-mobile">${task.verification}</td>
+                            <td class="hide-mobile">${task.dependencies}</td>
+                            <td>${task.hours}h</td>
+                            <td><span class="priority-badge ${task.priority}">${task.priority}</span></td>
+                            <td><input type="checkbox" class="checkbox" data-task="${task.id}" data-milestone="${milestoneKey}" ${task.completed ? 'checked' : ''}></td>
+                        </tr>
+                    `;
+                });
+                
+                html += `
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+            updateStats();
+            attachCheckboxListeners();
+        }
+        
+        // Update all statistics
+        function updateStats() {
+            let totalTasks = 0;
+            let completedTasks = 0;
+            let totalHours = 0;
+            let remainingHours = 0;
+            
+            // Calculate task statistics
+            Object.values(checklistData).forEach(milestone => {
+                milestone.tasks.forEach(task => {
+                    totalTasks++;
+                    totalHours += task.hours;
+                    if (task.completed) {
+                        completedTasks++;
+                    } else {
+                        remainingHours += task.hours;
+                    }
+                });
+            });
+            
+            // Update DOM elements
+            document.getElementById('total-tasks').textContent = totalTasks;
+            document.getElementById('completed-tasks').textContent = completedTasks;
+            document.getElementById('hours-remaining').textContent = remainingHours + 'h';
+            
+            // Calculate progress percentage
+            const progressPercent = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+            progressBar.style.width = progressPercent + '%';
+            progressText.textContent = progressPercent + '% Complete';
+            
+            // Calculate days remaining to final deadline
+            const deadline = new Date('2025-12-11T23:59:59');
+            const today = new Date();
+            const daysRemaining = Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
+            document.getElementById('days-remaining').textContent = daysRemaining > 0 ? daysRemaining : 0;
+            
+            // Update section headers with completion stats
+            document.querySelectorAll('.checklist-section').forEach((section, index) => {
+                const milestoneKey = Object.keys(checklistData)[index];
+                const milestone = checklistData[milestoneKey];
+                const completedCount = milestone.tasks.filter(t => t.completed).length;
+                const totalCount = milestone.tasks.length;
+                const statsElement = section.querySelector('.section-stats');
+                if (statsElement) {
+                    statsElement.textContent = `${completedCount}/${totalCount} tasks completed`;
+                }
+            });
+        }
+        
+        // Attach event listeners to checkboxes
+        function attachCheckboxListeners() {
+            document.querySelectorAll('.checkbox').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const taskId = this.dataset.task;
+                    const milestoneKey = this.dataset.milestone;
+                    const row = this.closest('tr');
+                    
+                    // Update data structure
+                    const task = checklistData[milestoneKey].tasks.find(t => t.id === taskId);
+                    if (task) {
+                        task.completed = this.checked;
+                    }
+                    
+                    // Update visual state
+                    if (this.checked) {
+                        row.classList.add('completed');
+                    } else {
+                        row.classList.remove('completed');
+                    }
+                    
+                    // Update statistics and save progress
+                    updateStats();
+                    autoSaveProgress();
+                });
+            });
+        }
+        
+        // Auto-save progress to localStorage
+        function autoSaveProgress() {
+            localStorage.setItem('erpChecklistProgress', JSON.stringify(checklistData));
+        }
+        
+        // Export to Excel format
+        function exportToExcel() {
+            let csvContent = 'Task ID\tMilestone\tComponent\tDescription\tVerification\tDependencies\tHours\tPriority\tStatus\n';
+            
+            Object.entries(checklistData).forEach(([milestoneKey, milestone]) => {
+                milestone.tasks.forEach(task => {
+                    const status = task.completed ? 'Completed' : 'Pending';
+                    csvContent += `${task.id}\t${milestone.title}\t${task.component}\t${task.description}\t${task.verification}\t${task.dependencies}\t${task.hours}\t${task.priority.toUpperCase()}\t${status}\n`;
+                });
+            });
+            
+            // Create and download the file
+            const blob = new Blob([csvContent], { type: 'application/vnd.ms-excel' });
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `ERP_Implementation_Checklist_${new Date().toISOString().split('T')[0]}.xls`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
+        }
+        
+        // Export to CSV format
+        function exportToCSV() {
+            let csvContent = 'Task ID,Milestone,Component,Description,Verification,Dependencies,Hours,Priority,Status\n';
+            
+            Object.entries(checklistData).forEach(([milestoneKey, milestone]) => {
+                milestone.tasks.forEach(task => {
+                    const status = task.completed ? 'Completed' : 'Pending';
+                    const description = task.description.replace(/"/g, '""');
+                    const verification = task.verification.replace(/"/g, '""');
+                    csvContent += `"${task.id}","${milestone.title}","${task.component}","${description}","${verification}","${task.dependencies}","${task.hours}","${task.priority.toUpperCase()}","${status}"\n`;
+                });
+            });
+            
+            // Create and download the file
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `ERP_Implementation_Checklist_${new Date().toISOString().split('T')[0]}.csv`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
+        }
+        
+        // Save progress manually
+        function saveProgress() {
+            localStorage.setItem('erpChecklistProgress', JSON.stringify(checklistData));
+            alert('✅ Progress saved successfully!');
+        }
+        
+        // Load saved progress
+        function loadProgress() {
+            const saved = localStorage.getItem('erpChecklistProgress');
+            if (saved) {
+                const savedData = JSON.parse(saved);
+                Object.assign(checklistData, savedData);
+                initializeChecklist();
+                alert('✅ Progress loaded successfully!');
+            } else {
+                alert('ℹ️ No saved progress found.');
+            }
+        }
+        
+        // Reset all progress
+        function resetProgress() {
+            if (confirm('⚠️ Are you sure you want to reset all progress? This cannot be undone.')) {
+                Object.values(checklistData).forEach(milestone => {
+                    milestone.tasks.forEach(task => {
+                        task.completed = false;
+                    });
+                });
+                localStorage.removeItem('erpChecklistProgress');
+                initializeChecklist();
+                alert('🔄 All progress has been reset.');
+            }
+        }
+        
+        // Initialize the application when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeChecklist();
+            
+            // Set up auto-save every 30 seconds
+            setInterval(autoSaveProgress, 30000);
+        });
+        
+        // Save progress before user leaves the page
+        window.addEventListener('beforeunload', function() {
+            autoSaveProgress();
+        });
+    </script>
+</body>
+</html>
