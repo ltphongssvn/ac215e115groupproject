@@ -1183,7 +1183,251 @@
                 </div>
             </div>
         </div>    
-    <script>
+<!-- 
+  File: /home/lenovo/code/ltphongssvn/ac215e115groupproject/team-structure-section.html
+  Purpose: Team Structure page content to be inserted into index.html
+  Insert Location: Between line 1185 (end of apiflow-page) and line 1186 (start of script tag)
+-->
+
+        <!-- Page 3: Team Structure -->
+        <div id="team-page" class="page-content">
+            <div class="team-section">
+                <h2 class="team-header">Microservices Team Structure</h2>
+                <p class="team-intro">
+                    The Rice Market AI System requires a cross-functional team of 3-4 members with complementary skills, 
+                    structured around business capabilities to ensure autonomy, ownership, and end-to-end responsibility. 
+                    Teams follow the "you build it, you run it" philosophy, taking ownership from development through production.
+                </p>
+                
+                <!-- Core Product Teams -->
+                <div class="team-category">
+                    <h3 class="category-title">I. Core Product Teams (Business Capabilities)</h3>
+                    
+                    <!-- Team 1: NL+SQL -->
+                    <div class="team-card">
+                        <div class="team-name">1. Natural Language SQL (NL+SQL) Team</div>
+                        <div class="team-mission">
+                            Mission: Enable users to query ERP data using natural language, translating it into secure SQL queries.
+                        </div>
+                        
+                        <div class="responsibilities-title">Key Responsibilities & Components:</div>
+                        <ul class="responsibility-list">
+                            <li>NL+SQL Agent Service: Process natural language, identify intent, extract entities using LLM Engine</li>
+                            <li>SQL Generator: Create parameterized SQL queries with proper escaping</li>
+                            <li>SQL Proxy/Guard: Implement query validation, row-level security, allowlist enforcement</li>
+                            <li>Result Formatter: Format query responses for user consumption (JSON with metadata)</li>
+                            <li>ERP Database Layer: Optimize query execution on read replicas, manage data retrieval</li>
+                            <li>Containerization: Docker containers for NL+SQL Agent Service with test query processing</li>
+                            <li>Model Training: Fine-tune LLMs for rice market domain, achieve >80% accuracy</li>
+                        </ul>
+                        
+                        <div class="responsibilities-title">Core Skills:</div>
+                        <div class="skills-container">
+                            <span class="skill-tag">NLP</span>
+                            <span class="skill-tag">LLMs</span>
+                            <span class="skill-tag">SQL</span>
+                            <span class="skill-tag">Database Design</span>
+                            <span class="skill-tag">Security (RBAC)</span>
+                            <span class="skill-tag">API Development</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Team 2: RAG -->
+                    <div class="team-card">
+                        <div class="team-name">2. RAG-Based Document Summarization Team</div>
+                        <div class="team-mission">
+                            Mission: Provide intelligent summarization of documents based on Retrieval-Augmented Generation.
+                        </div>
+                        
+                        <div class="responsibilities-title">Key Responsibilities & Components:</div>
+                        <ul class="responsibility-list">
+                            <li>RAG Orchestrator: Generate query embeddings (768-dimensional vectors)</li>
+                            <li>Vector Store Cluster: Perform similarity searches using HNSW indexes</li>
+                            <li>Ranker Module: Re-rank documents using cross-encoder models</li>
+                            <li>Generator Service: Create LLM-based summaries with citations</li>
+                            <li>Query Embedding: Convert text to vectors, search vector databases</li>
+                            <li>Containerization: RAG Orchestrator with vector DB connectivity</li>
+                            <li>Model Training: Fine-tune LLMs leveraging RAG for domain accuracy</li>
+                        </ul>
+                        
+                        <div class="responsibilities-title">Core Skills:</div>
+                        <div class="skills-container">
+                            <span class="skill-tag">NLP</span>
+                            <span class="skill-tag">Vector Databases</span>
+                            <span class="skill-tag">Pinecone/Weaviate</span>
+                            <span class="skill-tag">Information Retrieval</span>
+                            <span class="skill-tag">Embedding Techniques</span>
+                            <span class="skill-tag">ML Ranking</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Team 3: Forecasting -->
+                    <div class="team-card">
+                        <div class="team-name">3. Time-Series Price Forecasting Team</div>
+                        <div class="team-mission">
+                            Mission: Generate accurate, interpretable time-series forecasts for rice prices over specified horizons.
+                        </div>
+                        
+                        <div class="responsibilities-title">Key Responsibilities & Components:</div>
+                        <ul class="responsibility-list">
+                            <li>Feature Pipeline: Extract features from Feature Store (price history, weather, FX)</li>
+                            <li>Model Inference Engine: Run LSTM/Prophet ensembles with confidence intervals</li>
+                            <li>Explainability Module: Generate SHAP values for price driver identification</li>
+                            <li>Response Formatting: Package predictions with metadata and explanations</li>
+                            <li>Forecasting Models: Develop 6-month forecasts with confidence intervals</li>
+                            <li>Feature Store Management: Feature registry, generation, versioning</li>
+                            <li>Model Registry: Version control, champion/challenger strategies</li>
+                        </ul>
+                        
+                        <div class="responsibilities-title">Core Skills:</div>
+                        <div class="skills-container">
+                            <span class="skill-tag">Time-Series Analysis</span>
+                            <span class="skill-tag">LSTM/Prophet</span>
+                            <span class="skill-tag">Feature Engineering</span>
+                            <span class="skill-tag">Explainable AI</span>
+                            <span class="skill-tag">Statistical Modeling</span>
+                            <span class="skill-tag">Data Science</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Supporting Teams -->
+                <div class="team-category">
+                    <h3 class="category-title">II. Supporting Teams (Platform-Oriented)</h3>
+                    
+                    <!-- Platform Team -->
+                    <div class="team-card">
+                        <div class="team-name">4. Platform & MLOps Team</div>
+                        <div class="team-mission">
+                            Mission: Provide robust, scalable, secure microservice platform and MLOps infrastructure for all teams.
+                        </div>
+                        
+                        <div class="responsibilities-title">Key Responsibilities & Components:</div>
+                        <ul class="responsibility-list">
+                            <li>API Gateway/BFF Layer: Authentication, authorization, rate limiting, caching</li>
+                            <li>Environment Setup: GCP project configuration with IAM and billing</li>
+                            <li>Repository Structure: Monorepo with proper microservice directories</li>
+                            <li>Data Pipeline: Ingestion, PII scrubbing, embedding generation</li>
+                            <li>Vector Store Setup: Deploy and manage Pinecone/Weaviate databases</li>
+                            <li>Feature Store: Registry, generation, online/offline storage</li>
+                            <li>Model Registry: Version control, deployment configurations</li>
+                            <li>ML Pipeline: Automated model retraining workflows</li>
+                            <li>Container Orchestration: GKE deployment, HPA auto-scaling, Ansible</li>
+                            <li>CI/CD Pipeline: GitHub Actions for testing and deployment</li>
+                            <li>Monitoring: Prometheus, Grafana, ELK stack, distributed tracing</li>
+                            <li>Security: OWASP best practices, security headers implementation</li>
+                        </ul>
+                        
+                        <div class="responsibilities-title">Core Skills:</div>
+                        <div class="skills-container">
+                            <span class="skill-tag">DevOps</span>
+                            <span class="skill-tag">MLOps</span>
+                            <span class="skill-tag">GCP/Kubernetes</span>
+                            <span class="skill-tag">Docker</span>
+                            <span class="skill-tag">CI/CD</span>
+                            <span class="skill-tag">Ansible/Terraform</span>
+                            <span class="skill-tag">Monitoring Tools</span>
+                            <span class="skill-tag">Security</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Frontend Team -->
+                    <div class="team-card">
+                        <div class="team-name">5. Client Application (Frontend) Team</div>
+                        <div class="team-mission">
+                            Mission: Design and implement the user interface that interacts with the AI System's capabilities.
+                        </div>
+                        
+                        <div class="responsibilities-title">Key Responsibilities & Components:</div>
+                        <ul class="responsibility-list">
+                            <li>Frontend Design: React/Vue implementation with chat interface</li>
+                            <li>API Development: RESTful APIs with OpenAPI specification</li>
+                            <li>User Experience: Intuitive interface for queries and results</li>
+                            <li>API Gateway Integration: Consume backend microservices</li>
+                            <li>Performance Optimization: Client-side performance tuning</li>
+                        </ul>
+                        
+                        <div class="responsibilities-title">Core Skills:</div>
+                        <div class="skills-container">
+                            <span class="skill-tag">React/Vue</span>
+                            <span class="skill-tag">UI/UX Design</span>
+                            <span class="skill-tag">API Integration</span>
+                            <span class="skill-tag">Web Security</span>
+                            <span class="skill-tag">Performance Optimization</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Team Principles -->
+                <div class="principles-section">
+                    <h3 class="principles-title">Team Principles and Practices</h3>
+                    
+                    <div class="principle-item">
+                        <div class="principle-icon">1</div>
+                        <div class="principle-content">
+                            <div class="principle-name">Team Size</div>
+                            <div class="principle-desc">Each team consists of 3-4 members to foster effective collaboration and reduce communication overhead.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="principle-item">
+                        <div class="principle-icon">2</div>
+                        <div class="principle-content">
+                            <div class="principle-name">Autonomy</div>
+                            <div class="principle-desc">Teams operate with limited dependencies, making rapid, context-aware decisions.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="principle-item">
+                        <div class="principle-icon">3</div>
+                        <div class="principle-content">
+                            <div class="principle-name">Ownership</div>
+                            <div class="principle-desc">Long-term accountability from conception to production, including on-call responsibilities.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="principle-item">
+                        <div class="principle-icon">4</div>
+                        <div class="principle-content">
+                            <div class="principle-name">Cross-functional</div>
+                            <div class="principle-desc">Diverse skills within each team (ML engineers, backend developers, data engineers).</div>
+                        </div>
+                    </div>
+                    
+                    <div class="principle-item">
+                        <div class="principle-icon">5</div>
+                        <div class="principle-content">
+                            <div class="principle-name">Knowledge Sharing</div>
+                            <div class="principle-desc">Communities of practice (Chapters and Guilds) to disseminate knowledge without dictating choices.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="principle-item">
+                        <div class="principle-icon">6</div>
+                        <div class="principle-content">
+                            <div class="principle-name">Design Reviews</div>
+                            <div class="principle-desc">RFC process for new services with feedback from various teams to catch issues early.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="principle-item">
+                        <div class="principle-icon">7</div>
+                        <div class="principle-content">
+                            <div class="principle-name">Documentation</div>
+                            <div class="principle-desc">Living documentation including service overviews, contracts, runbooks, and metadata.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="principle-item">
+                        <div class="principle-icon">8</div>
+                        <div class="principle-content">
+                            <div class="principle-name">Consistency</div>
+                            <div class="principle-desc">Microservice chassis for common functionalities ensuring consistency with technical heterogeneity.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>    <script>
         // Checklist data
         const checklistData = {
             "milestone1": {
