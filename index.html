@@ -1498,41 +1498,71 @@
         
         // Update time tracking
         function updateTimeTracking() {
-            const deadline = new Date('2025-12-11T23:59:59');
             const now = new Date();
+            let nextMilestone = null;
+            let nextDeadline = null;
             
-            const msRemaining = deadline - now;
+            // Find the next incomplete milestone
+            for (const [key, milestone] of Object.entries(checklistData)) {
+                const milestoneDate = new Date(milestone.dueDate + 'T23:59:59');
+                const allCompleted = milestone.tasks.every(task => task.completed);
+                
+                if (!allCompleted && milestoneDate > now) {
+                    if (!nextDeadline || milestoneDate < nextDeadline) {
+                        nextDeadline = milestoneDate;
+                        nextMilestone = { key, ...milestone };
+                    }
+                }
+            }
+            
+            // If no upcoming milestone, use the final one
+            if (!nextDeadline) {
+                nextDeadline = new Date('2025-12-11T23:59:59');
+                nextMilestone = { title: 'Final Submission' };
+            }
+            
+            // Calculate days remaining to next milestone
+            const msRemaining = nextDeadline - now;
             const daysRemaining = Math.floor(msRemaining / (1000 * 60 * 60 * 24));
             
+            // Calculate hours only for the next milestone
             let totalHours = 0;
             let completedHours = 0;
             
-            Object.values(checklistData).forEach(milestone => {
-                milestone.tasks.forEach(task => {
+            if (nextMilestone.key) {
+                checklistData[nextMilestone.key].tasks.forEach(task => {
                     totalHours += task.hours;
                     if (task.completed) {
                         completedHours += task.hours;
                     }
                 });
-            });
+            }
             
             const workHoursRemaining = totalHours - completedHours;
             
+            // Update display
             const daysElement = document.getElementById('days-remaining');
             const hoursElement = document.getElementById('hours-remaining');
             
             if (daysElement) {
                 daysElement.textContent = daysRemaining > 0 ? daysRemaining : '0';
-                if (daysRemaining < 30) {
+                if (daysRemaining < 7) {
                     daysElement.style.color = '#e74c3c';
+                } else if (daysRemaining < 14) {
+                    daysElement.style.color = '#f39c12';
+                }
+                // Update the label to show which milestone
+                const labelElement = daysElement.parentElement.querySelector('.stat-label');
+                if (labelElement) {
+                    labelElement.textContent = 'Days to ' + nextMilestone.title.split(':')[0];
                 }
             }
             
             if (hoursElement) {
                 hoursElement.textContent = workHoursRemaining + 'h';
-                if (workHoursRemaining > 300) {
+                if (workHoursRemaining > 50) {
                     hoursElement.style.color = '#e74c3c';
-                } else if (workHoursRemaining > 150) {
+                } else if (workHoursRemaining > 25) {
                     hoursElement.style.color = '#f39c12';
                 } else {
                     hoursElement.style.color = '#27ae60';
@@ -1750,7 +1780,7 @@
             updateTimeTracking();
             
             // Update time every hour
-            setInterval(updateTimeTracking, 3600000);
+            setInterval(updateTimeTracking, 60000);
             
             // Update at midnight
             const now = new Date();
