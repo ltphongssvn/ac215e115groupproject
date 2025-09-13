@@ -647,471 +647,542 @@
         </div>
         
         <!-- Page 2: API Flow Visualization -->
+<!-- 
+  File: /home/lenovo/code/ltphongssvn/ac215e115groupproject/new-apiflow-section.html
+  Purpose: Replacement content for API Flow Architecture page
+  This replaces lines 650-1113 in index.html
+-->
+        <!-- Page 2: API Flow Visualization -->
         <div id="apiflow-page" class="page-content">
-            <!-- Flow 1: Natural Language to SQL Query -->
-            <div class="flow-container">
-                <h2 class="flow-title">Flow 1: Natural Language to SQL Query</h2>
+            <style>
+                .flow-section {
+                    margin-bottom: 50px;
+                    background: white;
+                    border-radius: 15px;
+                    padding: 25px;
+                    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                }
                 
-                <div class="flow-step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <div class="service-name">Client Application</div>
-                        <div class="action-desc">User enters natural language query: "Show me rice inventory levels for last month"</div>
-                        <div class="technical-details">POST /api/v1/nl-query | Content-Type: application/json</div>
+                .flow-title {
+                    color: #4a5568;
+                    font-size: 1.8em;
+                    margin-bottom: 20px;
+                    padding-bottom: 10px;
+                    border-bottom: 3px solid #667eea;
+                }
+                
+                .flow-container {
+                    display: flex;
+                    align-items: flex-start;
+                    gap: 30px;
+                    margin-bottom: 30px;
+                }
+                
+                .flow-diagram {
+                    flex: 1;
+                    min-width: 400px;
+                }
+                
+                .flow-description {
+                    flex: 1;
+                    padding: 20px;
+                    background: #f7fafc;
+                    border-radius: 10px;
+                }
+                
+                .step {
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 20px;
+                    opacity: 0;
+                    animation: fadeInStep 0.5s forwards;
+                }
+                
+                .step:nth-child(odd) { animation-delay: 0.1s; }
+                .step:nth-child(even) { animation-delay: 0.2s; }
+                
+                @keyframes fadeInStep {
+                    to {
+                        opacity: 1;
+                    }
+                }
+                
+                .step-number {
+                    width: 40px;
+                    height: 40px;
+                    background: linear-gradient(135deg, #667eea, #764ba2);
+                    color: white;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-weight: bold;
+                    font-size: 1.2em;
+                    margin-right: 20px;
+                    flex-shrink: 0;
+                }
+                
+                .step-content {
+                    flex: 1;
+                    background: white;
+                    padding: 15px;
+                    border-radius: 10px;
+                    border-left: 4px solid #667eea;
+                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                    transition: transform 0.3s, box-shadow 0.3s;
+                }
+                
+                .step-content:hover {
+                    transform: translateX(5px);
+                    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+                }
+                
+                .service-name {
+                    font-weight: bold;
+                    color: #2d3748;
+                    margin-bottom: 5px;
+                }
+                
+                .action {
+                    color: #4a5568;
+                    font-size: 0.95em;
+                    margin-bottom: 5px;
+                }
+                
+                .details {
+                    color: #718096;
+                    font-size: 0.85em;
+                    font-style: italic;
+                }
+                
+                .arrow {
+                    text-align: center;
+                    color: #cbd5e0;
+                    font-size: 2em;
+                    margin: -10px 0;
+                    animation: bounceArrow 2s infinite;
+                }
+                
+                @keyframes bounceArrow {
+                    0%, 100% { transform: translateY(0); }
+                    50% { transform: translateY(5px); }
+                }
+                
+                .timing-badge {
+                    display: inline-block;
+                    background: #f0fff4;
+                    color: #22543d;
+                    padding: 3px 8px;
+                    border-radius: 12px;
+                    font-size: 0.8em;
+                    margin-left: 10px;
+                    border: 1px solid #9ae6b4;
+                }
+                
+                .error-handling {
+                    background: #fef5e7;
+                    border: 1px solid #f8d7da;
+                    border-radius: 10px;
+                    padding: 15px;
+                    margin-top: 20px;
+                }
+                
+                .error-title {
+                    color: #721c24;
+                    font-weight: bold;
+                    margin-bottom: 10px;
+                }
+                
+                .performance-note {
+                    background: #e6f7ff;
+                    border: 1px solid #91d5ff;
+                    border-radius: 10px;
+                    padding: 15px;
+                    margin-top: 20px;
+                }
+                
+                .performance-title {
+                    color: #0050b3;
+                    font-weight: bold;
+                    margin-bottom: 10px;
+                }
+            </style>
+            
+            <h1 style="text-align: center; color: #2d3748; margin-bottom: 10px; font-size: 2.5em;">🔄 ERP AI Architecture - Internal API Flow</h1>
+            <p style="text-align: center; color: #718096; margin-bottom: 40px; font-size: 1.1em;">Detailed execution paths showing how requests flow through the microservices architecture</p>
+            
+            <!-- Flow 1: Natural Language to SQL -->
+            <div class="flow-section">
+                <h2 class="flow-title">📊 Flow 1: Natural Language to SQL Query</h2>
+                <div class="flow-container">
+                    <div class="flow-diagram">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <div class="service-name">Client Application</div>
+                                <div class="action">User enters: "Show me rice inventory levels for last month"</div>
+                                <div class="details">POST /api/v1/nl-query | Content-Type: application/json</div>
+                            </div>
+                        </div>
+                        <div class="arrow">↓</div>
+                        
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <div class="service-name">API Gateway / BFF Layer</div>
+                                <div class="action">Authentication & Authorization Check</div>
+                                <div class="details">Validates JWT token, checks RBAC permissions for inventory access</div>
+                                <span class="timing-badge">~50ms</span>
+                            </div>
+                        </div>
+                        <div class="arrow">↓</div>
+                        
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <div class="service-name">NL+SQL Agent Service</div>
+                                <div class="action">LLM Engine processes natural language</div>
+                                <div class="details">Identifies intent: inventory query, time range: last month</div>
+                                <span class="timing-badge">~200ms</span>
+                            </div>
+                        </div>
+                        <div class="arrow">↓</div>
+                        
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <div class="service-name">SQL Generator Component</div>
+                                <div class="action">Generates SQL query</div>
+                                <div class="details">SELECT * FROM inventory_data WHERE item_type='rice' AND date >= DATE_SUB(NOW(), INTERVAL 1 MONTH)</div>
+                                <span class="timing-badge">~100ms</span>
+                            </div>
+                        </div>
+                        <div class="arrow">↓</div>
+                        
+                        <div class="step">
+                            <div class="step-number">5</div>
+                            <div class="step-content">
+                                <div class="service-name">SQL Proxy / Guard</div>
+                                <div class="action">Query validation & security enforcement</div>
+                                <div class="details">Applies row-level security, checks allowlist, masks sensitive data</div>
+                                <span class="timing-badge">~30ms</span>
+                            </div>
+                        </div>
+                        <div class="arrow">↓</div>
+                        
+                        <div class="step">
+                            <div class="step-number">6</div>
+                            <div class="step-content">
+                                <div class="service-name">ERP Database Layer</div>
+                                <div class="action">Query execution on read replica</div>
+                                <div class="details">Retrieves inventory data from optimized read replica</div>
+                                <span class="timing-badge">~150ms</span>
+                            </div>
+                        </div>
+                        <div class="arrow">↓</div>
+                        
+                        <div class="step">
+                            <div class="step-number">7</div>
+                            <div class="step-content">
+                                <div class="service-name">Result Formatter</div>
+                                <div class="action">Formats response for user consumption</div>
+                                <div class="details">Converts to JSON, adds metadata, applies presentation logic</div>
+                                <span class="timing-badge">~20ms</span>
+                            </div>
+                        </div>
+                        <div class="arrow">↓</div>
+                        
+                        <div class="step">
+                            <div class="step-number">8</div>
+                            <div class="step-content">
+                                <div class="service-name">API Gateway</div>
+                                <div class="action">Response caching & delivery</div>
+                                <div class="details">Caches result for 5 minutes, returns to client</div>
+                                <span class="timing-badge">~10ms</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="flow-arrow">↓</div>
-                
-                <div class="flow-step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <div class="service-name">API Gateway / BFF Layer</div>
-                        <div class="action-desc">Authentication & Authorization Check</div>
-                        <div class="technical-details">Validates JWT token, checks RBAC permissions</div>
-                        <span class="timing-badge">~50ms</span>
-                    </div>
-                </div>
-                
-                <div class="flow-arrow">↓</div>
-                
-                <div class="flow-step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <div class="service-name">NL+SQL Agent Service</div>
-                        <div class="action-desc">LLM Engine processes natural language</div>
-                        <div class="technical-details">Identifies intent and extracts entities</div>
-                        <span class="timing-badge">~200ms</span>
-                    </div>
-                </div>
-                
-                <div class="flow-arrow">↓</div>
-                
-                <div class="flow-step">
-                    <div class="step-number">4</div>
-                    <div class="step-content">
-                        <div class="service-name">SQL Generator</div>
-                        <div class="action-desc">Generates SQL query from intent</div>
-                        <div class="technical-details">Creates parameterized query with proper escaping</div>
-                        <span class="timing-badge">~100ms</span>
-                    </div>
-                </div>
-                
-                <div class="flow-arrow">↓</div>
-                
-                <div class="flow-step">
-                    <div class="step-number">5</div>
-                    <div class="step-content">
-                        <div class="service-name">SQL Proxy / Guard</div>
-                        <div class="action-desc">Query validation & security enforcement</div>
-                        <div class="technical-details">Applies row-level security, checks allowlist</div>
-                        <span class="timing-badge">~30ms</span>
-                    </div>
-                </div>
-                
-                <div class="flow-arrow">↓</div>
-                
-                <div class="flow-step">
-                    <div class="step-number">6</div>
-                    <div class="step-content">
-                        <div class="service-name">ERP Database Layer</div>
-                        <div class="action-desc">Query execution on read replica</div>
-                        <div class="technical-details">Retrieves data from optimized read replica</div>
-                        <span class="timing-badge">~150ms</span>
-                    </div>
-                </div>
-                
-                <div class="flow-arrow">↓</div>
-                
-                <div class="flow-step">
-                    <div class="step-number">7</div>
-                    <div class="step-content">
-                        <div class="service-name">Result Formatter</div>
-                        <div class="action-desc">Formats response for user consumption</div>
-                        <div class="technical-details">Converts to JSON with metadata</div>
-                        <span class="timing-badge">~20ms</span>
-                    </div>
-                </div>
-                
-                <div class="flow-arrow">↓</div>
-                
-                <div class="flow-step">
-                    <div class="step-number">8</div>
-                    <div class="step-content">
-                        <div class="service-name">API Gateway Response</div>
-                        <div class="action-desc">Response caching & delivery</div>
-                        <div class="technical-details">Caches result for 5 minutes</div>
-                        <span class="timing-badge">~10ms</span>
+                    
+                    <div class="flow-description">
+                        <h3>Key Architectural Decisions</h3>
+                        <p>The Microservices Architect designs this flow with several critical considerations:</p>
+                        <ul>
+                            <li><strong>Security First:</strong> Every SQL query passes through the proxy guard to prevent injection attacks and enforce data access policies</li>
+                            <li><strong>Performance Optimization:</strong> Read replicas handle query load, keeping the primary database free for transactions</li>
+                            <li><strong>Caching Strategy:</strong> Results are cached at the gateway level for frequently requested data</li>
+                        </ul>
+                        
+                        <div class="error-handling">
+                            <div class="error-title">Error Handling & Circuit Breakers</div>
+                            <ul>
+                                <li>If LLM service fails → Fallback to keyword-based query</li>
+                                <li>If database timeout → Return cached results if available</li>
+                                <li>If SQL validation fails → Return sanitized error message</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="performance-note">
+                            <div class="performance-title">Performance Metrics</div>
+                            <p>Total latency: ~760ms | Target SLA: < 1 second</p>
+                            <p>Throughput: 1000 requests/second with horizontal scaling</p>
+                        </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Flow 2: RAG-Based Document Summarization -->
-            <div class="flow-container">
-                <h2 class="flow-title">Flow 2: RAG-Based Document Summarization</h2>
-                
-                <div class="flow-step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <div class="service-name">Client Request</div>
-                        <div class="action-desc">User requests: "Summarize all purchase orders from Q3"</div>
-                        <div class="technical-details">POST /api/v1/rag-summary</div>
+            <!-- Flow 2: RAG Orchestration -->
+            <div class="flow-section">
+                <h2 class="flow-title">🔍 Flow 2: RAG-Based Document Summarization</h2>
+                <div class="flow-container">
+                    <div class="flow-diagram">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <div class="service-name">Client Application</div>
+                                <div class="action">User requests: "Summarize all purchase orders from Q3"</div>
+                                <div class="details">POST /api/v1/rag-summary | Content-Type: application/json</div>
+                            </div>
+                        </div>
+                        <div class="arrow">↓</div>
+                        
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <div class="service-name">API Gateway</div>
+                                <div class="action">Rate limiting check & auth validation</div>
+                                <div class="details">Ensures user hasn't exceeded RAG query limits (10/minute)</div>
+                                <span class="timing-badge">~40ms</span>
+                            </div>
+                        </div>
+                        <div class="arrow">↓</div>
+                        
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <div class="service-name">RAG Orchestrator - Query Processor</div>
+                                <div class="action">Query embedding generation</div>
+                                <div class="details">Converts text to 768-dimensional vector using embedding model</div>
+                                <span class="timing-badge">~150ms</span>
+                            </div>
+                        </div>
+                        <div class="arrow">↓</div>
+                        
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <div class="service-name">Retriever Service</div>
+                                <div class="action">Vector similarity search</div>
+                                <div class="details">Queries Vector Store Cluster for top-k relevant documents</div>
+                                <span class="timing-badge">~80ms</span>
+                            </div>
+                        </div>
+                        <div class="arrow">↓</div>
+                        
+                        <div class="step">
+                            <div class="step-number">5</div>
+                            <div class="step-content">
+                                <div class="service-name">Vector Store Cluster</div>
+                                <div class="action">HNSW index search</div>
+                                <div class="details">Performs approximate nearest neighbor search across sharded indices</div>
+                                <span class="timing-badge">~120ms</span>
+                            </div>
+                        </div>
+                        <div class="arrow">↓</div>
+                        
+                        <div class="step">
+                            <div class="step-number">6</div>
+                            <div class="step-content">
+                                <div class="service-name">Ranker Module</div>
+                                <div class="action">Re-ranking retrieved documents</div>
+                                <div class="details">Applies cross-encoder model to improve relevance ordering</div>
+                                <span class="timing-badge">~200ms</span>
+                            </div>
+                        </div>
+                        <div class="arrow">↓</div>
+                        
+                        <div class="step">
+                            <div class="step-number">7</div>
+                            <div class="step-content">
+                                <div class="service-name">Generator Service</div>
+                                <div class="action">LLM-based summary generation</div>
+                                <div class="details">Creates coherent summary from top-5 documents with citations</div>
+                                <span class="timing-badge">~500ms</span>
+                            </div>
+                        </div>
+                        <div class="arrow">↓</div>
+                        
+                        <div class="step">
+                            <div class="step-number">8</div>
+                            <div class="step-content">
+                                <div class="service-name">Citation Tracker</div>
+                                <div class="action">Add source references</div>
+                                <div class="details">Appends document IDs and confidence scores to response</div>
+                                <span class="timing-badge">~20ms</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="flow-arrow">↓</div>
-                
-                <div class="flow-step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <div class="service-name">RAG Orchestrator</div>
-                        <div class="action-desc">Query embedding generation</div>
-                        <div class="technical-details">Converts text to 768-dimensional vector</div>
-                        <span class="timing-badge">~150ms</span>
-                    </div>
-                </div>
-                
-                <div class="flow-arrow">↓</div>
-                
-                <div class="flow-step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <div class="service-name">Vector Store Cluster</div>
-                        <div class="action-desc">Similarity search across documents</div>
-                        <div class="technical-details">HNSW index search for top-k documents</div>
-                        <span class="timing-badge">~120ms</span>
-                    </div>
-                </div>
-                
-                <div class="flow-arrow">↓</div>
-                
-                <div class="flow-step">
-                    <div class="step-number">4</div>
-                    <div class="step-content">
-                        <div class="service-name">Ranker Module</div>
-                        <div class="action-desc">Re-ranking retrieved documents</div>
-                        <div class="technical-details">Cross-encoder model for relevance scoring</div>
-                        <span class="timing-badge">~200ms</span>
-                    </div>
-                </div>
-                
-                <div class="flow-arrow">↓</div>
-                
-                <div class="flow-step">
-                    <div class="step-number">5</div>
-                    <div class="step-content">
-                        <div class="service-name">Generator Service</div>
-                        <div class="action-desc">LLM-based summary generation</div>
-                        <div class="technical-details">Creates coherent summary with citations</div>
-                        <span class="timing-badge">~500ms</span>
+                    
+                    <div class="flow-description">
+                        <h3>Microservices Orchestration Pattern</h3>
+                        <p>This flow demonstrates the architect's expertise in:</p>
+                        <ul>
+                            <li><strong>Service Choreography:</strong> Each service has a single responsibility and communicates through well-defined interfaces</li>
+                            <li><strong>Async Processing:</strong> Vector search and ranking can be parallelized for performance</li>
+                            <li><strong>Fallback Mechanisms:</strong> If vector store is unavailable, falls back to keyword search in ERP database</li>
+                        </ul>
+                        
+                        <div class="performance-note">
+                            <div class="performance-title">Scaling Considerations</div>
+                            <p>Vector Store Cluster uses index sharding for horizontal scaling</p>
+                            <p>Generator Service can be replicated with GPU instances for parallel processing</p>
+                        </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Flow 3: Time-Series Forecasting -->
-            <div class="flow-container">
-                <h2 class="flow-title">Flow 3: Time-Series Price Forecasting</h2>
-                
-                <div class="flow-step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <div class="service-name">Forecast Request</div>
-                        <div class="action-desc">Request 6-month rice price forecast</div>
-                        <div class="technical-details">GET /api/v1/forecast/rice-price?horizon=6m</div>
-                    </div>
-                </div>
-                
-                <div class="flow-arrow">↓</div>
-                
-                <div class="flow-step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <div class="service-name">Feature Pipeline</div>
-                        <div class="action-desc">Extract features from Feature Store</div>
-                        <div class="technical-details">Price history, weather, FX rates</div>
-                        <span class="timing-badge">~100ms</span>
-                    </div>
-                </div>
-                
-                <div class="flow-arrow">↓</div>
-                
-                <div class="flow-step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <div class="service-name">Model Inference Engine</div>
-                        <div class="action-desc">Load and run LSTM/Prophet ensemble</div>
-                        <div class="technical-details">Generate predictions with confidence intervals</div>
-                        <span class="timing-badge">~300ms</span>
-                    </div>
-                </div>
-                
-                <div class="flow-arrow">↓</div>
-                
-                <div class="flow-step">
-                    <div class="step-number">4</div>
-                    <div class="step-content">
-                        <div class="service-name">Explainability Module</div>
-                        <div class="action-desc">Generate SHAP values for interpretability</div>
-                        <div class="technical-details">Identify key price drivers</div>
-                        <span class="timing-badge">~150ms</span>
-                    </div>
-                </div>
-                
-                <div class="flow-arrow">↓</div>
-                
-                <div class="flow-step">
-                    <div class="step-number">5</div>
-                    <div class="step-content">
-                        <div class="service-name">Response Formatting</div>
-                        <div class="action-desc">Package predictions with metadata</div>
-                        <div class="technical-details">Include confidence scores and explanations</div>
-                        <span class="timing-badge">~50ms</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Page 3: Team Structure -->
-        <div id="team-page" class="page-content">
-            <div class="team-section">
-                <h2 class="team-header">Microservices Team Structure</h2>
-                <p class="team-intro">
-                    The Rice Market AI System requires a cross-functional team of 3-4 members with complementary skills, 
-                    structured around business capabilities to ensure autonomy, ownership, and end-to-end responsibility. 
-                    Teams follow the "you build it, you run it" philosophy, taking ownership from development through production.
-                </p>
-                
-                <!-- Core Product Teams -->
-                <div class="team-category">
-                    <h3 class="category-title">I. Core Product Teams (Business Capabilities)</h3>
-                    
-                    <!-- Team 1: NL+SQL -->
-                    <div class="team-card">
-                        <div class="team-name">1. Natural Language SQL (NL+SQL) Team</div>
-                        <div class="team-mission">
-                            Mission: Enable users to query ERP data using natural language, translating it into secure SQL queries.
+            <!-- Flow 3: Time Series Forecasting -->
+            <div class="flow-section">
+                <h2 class="flow-title">📈 Flow 3: Time-Series Price Forecasting</h2>
+                <div class="flow-container">
+                    <div class="flow-diagram">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <div class="service-name">Client Application</div>
+                                <div class="action">Request 6-month rice price forecast</div>
+                                <div class="details">GET /api/v1/forecast/rice-price?horizon=6m</div>
+                            </div>
                         </div>
+                        <div class="arrow">↓</div>
                         
-                        <div class="responsibilities-title">Key Responsibilities & Components:</div>
-                        <ul class="responsibility-list">
-                            <li>NL+SQL Agent Service: Process natural language, identify intent, extract entities using LLM Engine</li>
-                            <li>SQL Generator: Create parameterized SQL queries with proper escaping</li>
-                            <li>SQL Proxy/Guard: Implement query validation, row-level security, allowlist enforcement</li>
-                            <li>Result Formatter: Format query responses for user consumption (JSON with metadata)</li>
-                            <li>ERP Database Layer: Optimize query execution on read replicas, manage data retrieval</li>
-                            <li>Containerization: Docker containers for NL+SQL Agent Service with test query processing</li>
-                            <li>Model Training: Fine-tune LLMs for rice market domain, achieve >80% accuracy</li>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <div class="service-name">API Gateway</div>
+                                <div class="action">Check cache for recent predictions</div>
+                                <div class="details">Forecasts cached for 24 hours to reduce compute load</div>
+                                <span class="timing-badge">~30ms</span>
+                            </div>
+                        </div>
+                        <div class="arrow">↓</div>
+                        
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <div class="service-name">TS Forecasting Engine - Feature Pipeline</div>
+                                <div class="action">Feature extraction from Feature Store</div>
+                                <div class="details">Retrieves price history, weather data, FX rates, market indicators</div>
+                                <span class="timing-badge">~100ms</span>
+                            </div>
+                        </div>
+                        <div class="arrow">↓</div>
+                        
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <div class="service-name">Feature Store</div>
+                                <div class="action">Serve pre-computed features</div>
+                                <div class="details">Returns versioned feature vectors with monitoring metadata</div>
+                                <span class="timing-badge">~50ms</span>
+                            </div>
+                        </div>
+                        <div class="arrow">↓</div>
+                        
+                        <div class="step">
+                            <div class="step-number">5</div>
+                            <div class="step-content">
+                                <div class="service-name">Model Inference Engine</div>
+                                <div class="action">Load champion model from registry</div>
+                                <div class="details">Retrieves LSTM/Prophet ensemble model v2.3.1</div>
+                                <span class="timing-badge">~200ms</span>
+                            </div>
+                        </div>
+                        <div class="arrow">↓</div>
+                        
+                        <div class="step">
+                            <div class="step-number">6</div>
+                            <div class="step-content">
+                                <div class="service-name">Model Inference Engine</div>
+                                <div class="action">Generate predictions</div>
+                                <div class="details">Runs inference for 180-day horizon with confidence intervals</div>
+                                <span class="timing-badge">~300ms</span>
+                            </div>
+                        </div>
+                        <div class="arrow">↓</div>
+                        
+                        <div class="step">
+                            <div class="step-number">7</div>
+                            <div class="step-content">
+                                <div class="service-name">Post-processor & Explainability Module</div>
+                                <div class="action">Add interpretability layer</div>
+                                <div class="details">Generates SHAP values, identifies key price drivers</div>
+                                <span class="timing-badge">~150ms</span>
+                            </div>
+                        </div>
+                        <div class="arrow">↓</div>
+                        
+                        <div class="step">
+                            <div class="step-number">8</div>
+                            <div class="step-content">
+                                <div class="service-name">Confidence Estimator</div>
+                                <div class="action">Calculate prediction confidence</div>
+                                <div class="details">Provides uncertainty bounds based on historical accuracy</div>
+                                <span class="timing-badge">~50ms</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-description">
+                        <h3>ML Pipeline Architecture</h3>
+                        <p>The architect implements ML-specific patterns:</p>
+                        <ul>
+                            <li><strong>Feature Store Pattern:</strong> Ensures training-serving consistency and feature reusability</li>
+                            <li><strong>Model Registry:</strong> Enables A/B testing between champion and challenger models</li>
+                            <li><strong>Explainability First:</strong> Every prediction includes interpretability metrics for business trust</li>
                         </ul>
                         
-                        <div class="responsibilities-title">Core Skills:</div>
-                        <div class="skills-container">
-                            <span class="skill-tag">NLP</span>
-                            <span class="skill-tag">LLMs</span>
-                            <span class="skill-tag">SQL</span>
-                            <span class="skill-tag">Database Design</span>
-                            <span class="skill-tag">Security (RBAC)</span>
-                            <span class="skill-tag">API Development</span>
-                        </div>
-                    </div>
-                    
-                    <!-- Team 2: RAG -->
-                    <div class="team-card">
-                        <div class="team-name">2. RAG-Based Document Summarization Team</div>
-                        <div class="team-mission">
-                            Mission: Provide intelligent summarization of documents based on Retrieval-Augmented Generation.
-                        </div>
-                        
-                        <div class="responsibilities-title">Key Responsibilities & Components:</div>
-                        <ul class="responsibility-list">
-                            <li>RAG Orchestrator: Generate query embeddings (768-dimensional vectors)</li>
-                            <li>Vector Store Cluster: Perform similarity searches using HNSW indexes</li>
-                            <li>Ranker Module: Re-rank documents using cross-encoder models</li>
-                            <li>Generator Service: Create LLM-based summaries with citations</li>
-                            <li>Query Embedding: Convert text to vectors, search vector databases</li>
-                            <li>Containerization: RAG Orchestrator with vector DB connectivity</li>
-                            <li>Model Training: Fine-tune LLMs leveraging RAG for domain accuracy</li>
-                        </ul>
-                        
-                        <div class="responsibilities-title">Core Skills:</div>
-                        <div class="skills-container">
-                            <span class="skill-tag">NLP</span>
-                            <span class="skill-tag">Vector Databases</span>
-                            <span class="skill-tag">Pinecone/Weaviate</span>
-                            <span class="skill-tag">Information Retrieval</span>
-                            <span class="skill-tag">Embedding Techniques</span>
-                            <span class="skill-tag">ML Ranking</span>
-                        </div>
-                    </div>
-                    
-                    <!-- Team 3: Forecasting -->
-                    <div class="team-card">
-                        <div class="team-name">3. Time-Series Price Forecasting Team</div>
-                        <div class="team-mission">
-                            Mission: Generate accurate, interpretable time-series forecasts for rice prices over specified horizons.
-                        </div>
-                        
-                        <div class="responsibilities-title">Key Responsibilities & Components:</div>
-                        <ul class="responsibility-list">
-                            <li>Feature Pipeline: Extract features from Feature Store (price history, weather, FX)</li>
-                            <li>Model Inference Engine: Run LSTM/Prophet ensembles with confidence intervals</li>
-                            <li>Explainability Module: Generate SHAP values for price driver identification</li>
-                            <li>Response Formatting: Package predictions with metadata and explanations</li>
-                            <li>Forecasting Models: Develop 6-month forecasts with confidence intervals</li>
-                            <li>Feature Store Management: Feature registry, generation, versioning</li>
-                            <li>Model Registry: Version control, champion/challenger strategies</li>
-                        </ul>
-                        
-                        <div class="responsibilities-title">Core Skills:</div>
-                        <div class="skills-container">
-                            <span class="skill-tag">Time-Series Analysis</span>
-                            <span class="skill-tag">LSTM/Prophet</span>
-                            <span class="skill-tag">Feature Engineering</span>
-                            <span class="skill-tag">Explainable AI</span>
-                            <span class="skill-tag">Statistical Modeling</span>
-                            <span class="skill-tag">Data Science</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Supporting Teams -->
-                <div class="team-category">
-                    <h3 class="category-title">II. Supporting Teams (Platform-Oriented)</h3>
-                    
-                    <!-- Platform Team -->
-                    <div class="team-card">
-                        <div class="team-name">4. Platform & MLOps Team</div>
-                        <div class="team-mission">
-                            Mission: Provide robust, scalable, secure microservice platform and MLOps infrastructure for all teams.
-                        </div>
-                        
-                        <div class="responsibilities-title">Key Responsibilities & Components:</div>
-                        <ul class="responsibility-list">
-                            <li>API Gateway/BFF Layer: Authentication, authorization, rate limiting, caching</li>
-                            <li>Environment Setup: GCP project configuration with IAM and billing</li>
-                            <li>Repository Structure: Monorepo with proper microservice directories</li>
-                            <li>Data Pipeline: Ingestion, PII scrubbing, embedding generation</li>
-                            <li>Vector Store Setup: Deploy and manage Pinecone/Weaviate databases</li>
-                            <li>Feature Store: Registry, generation, online/offline storage</li>
-                            <li>Model Registry: Version control, deployment configurations</li>
-                            <li>ML Pipeline: Automated model retraining workflows</li>
-                            <li>Container Orchestration: GKE deployment, HPA auto-scaling, Ansible</li>
-                            <li>CI/CD Pipeline: GitHub Actions for testing and deployment</li>
-                            <li>Monitoring: Prometheus, Grafana, ELK stack, distributed tracing</li>
-                            <li>Security: OWASP best practices, security headers implementation</li>
-                        </ul>
-                        
-                        <div class="responsibilities-title">Core Skills:</div>
-                        <div class="skills-container">
-                            <span class="skill-tag">DevOps</span>
-                            <span class="skill-tag">MLOps</span>
-                            <span class="skill-tag">GCP/Kubernetes</span>
-                            <span class="skill-tag">Docker</span>
-                            <span class="skill-tag">CI/CD</span>
-                            <span class="skill-tag">Ansible/Terraform</span>
-                            <span class="skill-tag">Monitoring Tools</span>
-                            <span class="skill-tag">Security</span>
-                        </div>
-                    </div>
-                    
-                    <!-- Frontend Team -->
-                    <div class="team-card">
-                        <div class="team-name">5. Client Application (Frontend) Team</div>
-                        <div class="team-mission">
-                            Mission: Design and implement the user interface that interacts with the AI System's capabilities.
-                        </div>
-                        
-                        <div class="responsibilities-title">Key Responsibilities & Components:</div>
-                        <ul class="responsibility-list">
-                            <li>Frontend Design: React/Vue implementation with chat interface</li>
-                            <li>API Development: RESTful APIs with OpenAPI specification</li>
-                            <li>User Experience: Intuitive interface for queries and results</li>
-                            <li>API Gateway Integration: Consume backend microservices</li>
-                            <li>Performance Optimization: Client-side performance tuning</li>
-                        </ul>
-                        
-                        <div class="responsibilities-title">Core Skills:</div>
-                        <div class="skills-container">
-                            <span class="skill-tag">React/Vue</span>
-                            <span class="skill-tag">UI/UX Design</span>
-                            <span class="skill-tag">API Integration</span>
-                            <span class="skill-tag">Web Security</span>
-                            <span class="skill-tag">Performance Optimization</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Team Principles -->
-                <div class="principles-section">
-                    <h3 class="principles-title">Team Principles and Practices</h3>
-                    
-                    <div class="principle-item">
-                        <div class="principle-icon">1</div>
-                        <div class="principle-content">
-                            <div class="principle-name">Team Size</div>
-                            <div class="principle-desc">Each team consists of 3-4 members to foster effective collaboration and reduce communication overhead.</div>
-                        </div>
-                    </div>
-                    
-                    <div class="principle-item">
-                        <div class="principle-icon">2</div>
-                        <div class="principle-content">
-                            <div class="principle-name">Autonomy</div>
-                            <div class="principle-desc">Teams operate with limited dependencies, making rapid, context-aware decisions.</div>
-                        </div>
-                    </div>
-                    
-                    <div class="principle-item">
-                        <div class="principle-icon">3</div>
-                        <div class="principle-content">
-                            <div class="principle-name">Ownership</div>
-                            <div class="principle-desc">Long-term accountability from conception to production, including on-call responsibilities.</div>
-                        </div>
-                    </div>
-                    
-                    <div class="principle-item">
-                        <div class="principle-icon">4</div>
-                        <div class="principle-content">
-                            <div class="principle-name">Cross-functional</div>
-                            <div class="principle-desc">Diverse skills within each team (ML engineers, backend developers, data engineers).</div>
-                        </div>
-                    </div>
-                    
-                    <div class="principle-item">
-                        <div class="principle-icon">5</div>
-                        <div class="principle-content">
-                            <div class="principle-name">Knowledge Sharing</div>
-                            <div class="principle-desc">Communities of practice (Chapters and Guilds) to disseminate knowledge without dictating choices.</div>
-                        </div>
-                    </div>
-                    
-                    <div class="principle-item">
-                        <div class="principle-icon">6</div>
-                        <div class="principle-content">
-                            <div class="principle-name">Design Reviews</div>
-                            <div class="principle-desc">RFC process for new services with feedback from various teams to catch issues early.</div>
-                        </div>
-                    </div>
-                    
-                    <div class="principle-item">
-                        <div class="principle-icon">7</div>
-                        <div class="principle-content">
-                            <div class="principle-name">Documentation</div>
-                            <div class="principle-desc">Living documentation including service overviews, contracts, runbooks, and metadata.</div>
-                        </div>
-                    </div>
-                    
-                    <div class="principle-item">
-                        <div class="principle-icon">8</div>
-                        <div class="principle-content">
-                            <div class="principle-name">Consistency</div>
-                            <div class="principle-desc">Microservice chassis for common functionalities ensuring consistency with technical heterogeneity.</div>
+                        <div class="error-handling">
+                            <div class="error-title">Degradation Strategy</div>
+                            <ul>
+                                <li>If primary model fails → Use simpler baseline model</li>
+                                <li>If features unavailable → Use cached historical features</li>
+                                <li>If confidence too low → Flag prediction as unreliable</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    
+            
+            <!-- Cross-Cutting Concerns -->
+            <div class="flow-section" style="background: #f0f9ff;">
+                <h2 class="flow-title">🔧 Cross-Cutting Architectural Patterns</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                    <div style="background: white; padding: 20px; border-radius: 10px; border-left: 4px solid #3182ce;">
+                        <h3 style="color: #2c5282; margin-top: 0;">Distributed Tracing</h3>
+                        <p>Every request gets a correlation ID at the gateway, propagated through all service calls for end-to-end visibility</p>
+                        <code style="background: #e6fffa; padding: 5px; border-radius: 3px;">X-Correlation-ID: uuid-v4</code>
+                    </div>
+                    
+                    <div style="background: white; padding: 20px; border-radius: 10px; border-left: 4px solid #48bb78;">
+                        <h3 style="color: #22543d; margin-top: 0;">Service Mesh Communication</h3>
+                        <p>All inter-service calls use gRPC for efficiency, with automatic retry logic and circuit breakers</p>
+                        <code style="background: #f0fff4; padding: 5px; border-radius: 3px;">Protocol: gRPC + Protobuf</code>
+                    </div>
+                    
+                    <div style="background: white; padding: 20px; border-radius: 10px; border-left: 4px solid #ed8936;">
+                        <h3 style="color: #7c2d12; margin-top: 0;">Observability Stack</h3>
+                        <p>Metrics exported to Prometheus, logs to ELK, traces to Jaeger for complete system visibility</p>
+                        <code style="background: #fffaf0; padding: 5px; border-radius: 3px;">Metrics: /metrics endpoint</code>
+                    </div>
+                    
+                    <div style="background: white; padding: 20px; border-radius: 10px; border-left: 4px solid #9f7aea;">
+                        <h3 style="color: #44337a; margin-top: 0;">Async Event Bus</h3>
+                        <p>Model updates and data ingestion trigger events via Kafka for decoupled processing</p>
+                        <code style="background: #faf5ff; padding: 5px; border-radius: 3px;">Topics: model.updated, data.ingested</code>
+                    </div>
+                </div>
+            </div>
+        </div>    
     <script>
         // Checklist data
         const checklistData = {
