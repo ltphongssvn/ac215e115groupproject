@@ -34,3 +34,19 @@ dist/
 build/
 *.min.js
 *.min.css
+
+# Test environments
+test_*env/
+test_venv/
+test_uv_env/
+
+# Conda environments
+test_ac215/
+
+# Additional Python patterns
+*.egg-info/
+pip-log.txt
+.coverage
+.pytest_cache/
+*.ipynb_checkpoints/
+

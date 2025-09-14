@@ -1,0 +1,41 @@
+# /home/lenovo/code/ltphongssvn/ac215e115groupproject/pyproject.toml
+# Modern Python project configuration file
+
+[project]
+name = "ac215e115-group-project"
+version = "0.1.0"
+description = "AC215/E115 Group Project - Microservices Architecture with ML Components"
+readme = "README.md"
+requires-python = ">=3.12"
+authors = [
+    {name = "Your Team Name", email = "team@example.com"}
+]
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.black]
+line-length = 100
+target-version = ['py312']
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-v --cov=src --cov-report=term-missing"
+
+[tool.pylint.messages_control]
+disable = "C0111,R0903"
+max-line-length = 100

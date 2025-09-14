@@ -1,0 +1,12 @@
+# /home/lenovo/code/ltphongssvn/ac215e115groupproject/requirements.txt
+# Main requirements file that points to the appropriate environment
+# This file exists for compatibility with tools expecting requirements.txt in root
+
+# For development, use:
+# -r requirements/dev.txt
+
+# For production, use:
+# -r requirements/prod.txt
+
+# Default to development requirements
+-r requirements/dev.txt

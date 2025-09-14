@@ -1,0 +1,32 @@
+# /home/lenovo/code/ltphongssvn/ac215e115groupproject/requirements/dev.txt
+# Development dependencies for AC215/E115 Group Project
+# These packages are used during development but not in production
+
+# Include base requirements
+-r base.txt
+
+# Testing Framework
+pytest==8.3.3              # Testing framework for Python
+pytest-asyncio==0.24.0     # Pytest support for asyncio
+pytest-cov==5.0.0          # Coverage plugin for pytest
+pytest-mock==3.14.0        # Mock/stub helpers for pytest
+
+# Code Quality and Linting
+black==24.8.0              # Code formatter
+flake8==7.1.1              # Style guide enforcement
+mypy==1.11.2               # Static type checker
+isort==5.13.2              # Import statement organizer
+pylint==3.3.1              # Source code analyzer
+
+# Development Tools
+ipython==8.27.0            # Enhanced interactive Python shell
+jupyter==1.0.0             # Jupyter notebook environment
+notebook==7.2.2            # Jupyter notebook interface
+ipdb==0.13.13              # IPython debugger
+
+# Documentation
+sphinx==8.0.2              # Documentation generator
+sphinx-rtd-theme==2.0.0    # Read the Docs theme for Sphinx
+
+# Pre-commit hooks
+pre-commit==3.8.0          # Git hook scripts manager
