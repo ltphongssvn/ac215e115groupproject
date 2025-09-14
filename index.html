@@ -846,7 +846,7 @@
                         <div class="step">
                             <div class="step-number">2</div>
                             <div class="step-content">
-                                <div class="service-name">API Gateway / BFF Layer</div>
+                                <div class="service-name">API Gateway (FastAPI + Kong/Nginx) / BFF Layer</div>
                                 <div class="action">Authentication & Authorization Check</div>
                                 <div class="details">Validates JWT token, checks RBAC permissions for inventory access</div>
                                 <span class="timing-badge">~50ms</span>
@@ -857,7 +857,7 @@
                         <div class="step">
                             <div class="step-number">3</div>
                             <div class="step-content">
-                                <div class="service-name">NL+SQL Agent Service</div>
+                                <div class="service-name">NL+SQL Agent Service (FastAPI + OpenAI/Gemini)</div>
                                 <div class="action">LLM Engine processes natural language</div>
                                 <div class="details">Identifies intent: inventory query, time range: last month</div>
                                 <span class="timing-badge">~200ms</span>
@@ -890,7 +890,7 @@
                         <div class="step">
                             <div class="step-number">6</div>
                             <div class="step-content">
-                                <div class="service-name">ERP Database Layer</div>
+                                <div class="service-name">PostgreSQL ERP Database with Read Replicas</div>
                                 <div class="action">Query execution on read replica</div>
                                 <div class="details">Retrieves inventory data from optimized read replica</div>
                                 <span class="timing-badge">~150ms</span>
@@ -912,7 +912,7 @@
                         <div class="step">
                             <div class="step-number">8</div>
                             <div class="step-content">
-                                <div class="service-name">API Gateway</div>
+                                <div class="service-name">API Gateway (FastAPI + Kong/Nginx)</div>
                                 <div class="action">Response caching & delivery</div>
                                 <div class="details">Caches result for 5 minutes, returns to client</div>
                                 <span class="timing-badge">~10ms</span>
@@ -965,7 +965,7 @@
                         <div class="step">
                             <div class="step-number">2</div>
                             <div class="step-content">
-                                <div class="service-name">API Gateway</div>
+                                <div class="service-name">API Gateway (FastAPI + Kong/Nginx)</div>
                                 <div class="action">Rate limiting check & auth validation</div>
                                 <div class="details">Ensures user hasn't exceeded RAG query limits (10/minute)</div>
                                 <span class="timing-badge">~40ms</span>
@@ -976,7 +976,7 @@
                         <div class="step">
                             <div class="step-number">3</div>
                             <div class="step-content">
-                                <div class="service-name">RAG Orchestrator - Query Processor</div>
+                                <div class="service-name">RAG Orchestrator (FastAPI + Chroma + TensorFlow) - Query Processor</div>
                                 <div class="action">Query embedding generation</div>
                                 <div class="details">Converts text to 768-dimensional vector using embedding model</div>
                                 <span class="timing-badge">~150ms</span>
@@ -989,7 +989,7 @@
                             <div class="step-content">
                                 <div class="service-name">Retriever Service</div>
                                 <div class="action">Vector similarity search</div>
-                                <div class="details">Queries Vector Store Cluster for top-k relevant documents</div>
+                                <div class="details">Queries Chroma Vector Store Cluster for top-k relevant documents</div>
                                 <span class="timing-badge">~80ms</span>
                             </div>
                         </div>
@@ -998,7 +998,7 @@
                         <div class="step">
                             <div class="step-number">5</div>
                             <div class="step-content">
-                                <div class="service-name">Vector Store Cluster</div>
+                                <div class="service-name">Chroma Vector Store Cluster</div>
                                 <div class="action">HNSW index search</div>
                                 <div class="details">Performs approximate nearest neighbor search across sharded indices</div>
                                 <span class="timing-badge">~120ms</span>
@@ -1050,7 +1050,7 @@
                         
                         <div class="performance-note">
                             <div class="performance-title">Scaling Considerations</div>
-                            <p>Vector Store Cluster uses index sharding for horizontal scaling</p>
+                            <p>Chroma Vector Store Cluster uses index sharding for horizontal scaling</p>
                             <p>Generator Service can be replicated with GPU instances for parallel processing</p>
                         </div>
                     </div>
@@ -1075,7 +1075,7 @@
                         <div class="step">
                             <div class="step-number">2</div>
                             <div class="step-content">
-                                <div class="service-name">API Gateway</div>
+                                <div class="service-name">API Gateway (FastAPI + Kong/Nginx)</div>
                                 <div class="action">Check cache for recent predictions</div>
                                 <div class="details">Forecasts cached for 24 hours to reduce compute load</div>
                                 <span class="timing-badge">~30ms</span>
@@ -1087,7 +1087,7 @@
                             <div class="step-number">3</div>
                             <div class="step-content">
                                 <div class="service-name">TS Forecasting Engine - Feature Pipeline</div>
-                                <div class="action">Feature extraction from Feature Store</div>
+                                <div class="action">Feature extraction from BigQuery Feature Store with Feast</div>
                                 <div class="details">Retrieves price history, weather data, FX rates, market indicators</div>
                                 <span class="timing-badge">~100ms</span>
                             </div>
@@ -1097,7 +1097,7 @@
                         <div class="step">
                             <div class="step-number">4</div>
                             <div class="step-content">
-                                <div class="service-name">Feature Store</div>
+                                <div class="service-name">BigQuery Feature Store with Feast</div>
                                 <div class="action">Serve pre-computed features</div>
                                 <div class="details">Returns versioned feature vectors with monitoring metadata</div>
                                 <span class="timing-badge">~50ms</span>
@@ -1153,8 +1153,8 @@
                         <h3>ML Pipeline Architecture</h3>
                         <p>The architect implements ML-specific patterns:</p>
                         <ul>
-                            <li><strong>Feature Store Pattern:</strong> Ensures training-serving consistency and feature reusability</li>
-                            <li><strong>Model Registry:</strong> Enables A/B testing between champion and challenger models</li>
+                            <li><strong>BigQuery Feature Store with Feast Pattern:</strong> Ensures training-serving consistency and feature reusability</li>
+                            <li><strong>MLflow Model Registry on Vertex AI:</strong> Enables A/B testing between champion and challenger models</li>
                             <li><strong>Explainability First:</strong> Every prediction includes interpretability metrics for business trust</li>
                         </ul>
                         
@@ -1182,7 +1182,7 @@
                     
                     <div style="background: white; padding: 20px; border-radius: 10px; border-left: 4px solid #48bb78;">
                         <h3 style="color: #22543d; margin-top: 0;">Service Mesh Communication</h3>
-                        <p>All inter-service calls use gRPC for efficiency, with automatic retry logic and circuit breakers</p>
+                        <p>All gRPC inter-service communication with Protocol Buffers use gRPC for efficiency, with automatic retry logic and circuit breakers</p>
                         <code style="background: #f0fff4; padding: 5px; border-radius: 3px;">Protocol: gRPC + Protobuf</code>
                     </div>
                     
@@ -1229,18 +1229,18 @@
                         
                         <div class="responsibilities-title">Key Responsibilities & Components:</div>
                         <ul class="responsibility-list">
-                            <li>NL+SQL Agent Service: Process natural language, identify intent, extract entities using LLM Engine</li>
+                            <li>NL+SQL Agent Service (FastAPI + OpenAI/Gemini): Process natural language, identify intent, extract entities using LLM Engine</li>
                             <li>SQL Generator: Create parameterized SQL queries with proper escaping</li>
                             <li>SQL Proxy/Guard: Implement query validation, row-level security, allowlist enforcement</li>
                             <li>Result Formatter: Format query responses for user consumption (JSON with metadata)</li>
-                            <li>ERP Database Layer: Optimize query execution on read replicas, manage data retrieval</li>
-                            <li>Containerization: Docker containers for NL+SQL Agent Service with test query processing</li>
+                            <li>PostgreSQL ERP Database with Read Replicas: Optimize query execution on read replicas, manage data retrieval</li>
+                            <li>Containerization: Docker containerization with multi-stage builds for FastAPI services containers for NL+SQL Agent Service (FastAPI + OpenAI/Gemini) with test query processing</li>
                             <li>Model Training: Fine-tune LLMs for rice market domain, achieve >80% accuracy</li>
                         </ul>
                         
                         <div class="responsibilities-title">Core Skills:</div>
                         <div class="skills-container">
-                            <span class="skill-tag">NLP</span>
+                            <span class="skill-tag">NLP with OpenAI GPT-4 and Google Gemini APIs via LangChain</span>
                             <span class="skill-tag">LLMs</span>
                             <span class="skill-tag">SQL</span>
                             <span class="skill-tag">Database Design</span>
@@ -1258,19 +1258,19 @@
                         
                         <div class="responsibilities-title">Key Responsibilities & Components:</div>
                         <ul class="responsibility-list">
-                            <li>RAG Orchestrator: Generate query embeddings (768-dimensional vectors)</li>
-                            <li>Vector Store Cluster: Perform similarity searches using HNSW indexes</li>
+                            <li>RAG Orchestrator (FastAPI + Chroma + TensorFlow): Generate query embeddings (768-dimensional vectors)</li>
+                            <li>Chroma Vector Store Cluster: Perform similarity searches using HNSW indexes</li>
                             <li>Ranker Module: Re-rank documents using cross-encoder models</li>
                             <li>Generator Service: Create LLM-based summaries with citations</li>
                             <li>Query Embedding: Convert text to vectors, search vector databases</li>
-                            <li>Containerization: RAG Orchestrator with vector DB connectivity</li>
+                            <li>Containerization: RAG Orchestrator (FastAPI + Chroma + TensorFlow) with vector DB connectivity</li>
                             <li>Model Training: Fine-tune LLMs leveraging RAG for domain accuracy</li>
                         </ul>
                         
                         <div class="responsibilities-title">Core Skills:</div>
                         <div class="skills-container">
-                            <span class="skill-tag">NLP</span>
-                            <span class="skill-tag">Vector Databases</span>
+                            <span class="skill-tag">NLP with OpenAI GPT-4 and Google Gemini APIs via LangChain</span>
+                            <span class="skill-tag">Chroma vector database for embeddings storage and similarity search</span>
                             <span class="skill-tag">Pinecone/Weaviate</span>
                             <span class="skill-tag">Information Retrieval</span>
                             <span class="skill-tag">Embedding Techniques</span>
@@ -1287,18 +1287,18 @@
                         
                         <div class="responsibilities-title">Key Responsibilities & Components:</div>
                         <ul class="responsibility-list">
-                            <li>Feature Pipeline: Extract features from Feature Store (price history, weather, FX)</li>
+                            <li>Feature Pipeline: Extract features from BigQuery Feature Store with Feast (price history, weather, FX)</li>
                             <li>Model Inference Engine: Run LSTM/Prophet ensembles with confidence intervals</li>
                             <li>Explainability Module: Generate SHAP values for price driver identification</li>
                             <li>Response Formatting: Package predictions with metadata and explanations</li>
                             <li>Forecasting Models: Develop 6-month forecasts with confidence intervals</li>
-                            <li>Feature Store Management: Feature registry, generation, versioning</li>
-                            <li>Model Registry: Version control, champion/challenger strategies</li>
+                            <li>BigQuery Feature Store with Feast Management: Feature registry, generation, versioning</li>
+                            <li>MLflow Model Registry on Vertex AI: Version control, champion/challenger strategies</li>
                         </ul>
                         
                         <div class="responsibilities-title">Core Skills:</div>
                         <div class="skills-container">
-                            <span class="skill-tag">Time-Series Analysis</span>
+                            <span class="skill-tag">Time-Series Analysis with PyTorch LSTM models on Vertex AI</span>
                             <span class="skill-tag">LSTM/Prophet</span>
                             <span class="skill-tag">Feature Engineering</span>
                             <span class="skill-tag">Explainable AI</span>
@@ -1314,20 +1314,20 @@
                     
                     <!-- Platform Team -->
                     <div class="team-card">
-                        <div class="team-name">4. Platform & MLOps Team</div>
+                        <div class="team-name">4. Platform & MLOps with Vertex AI Pipelines, MLflow, and Weights & Biases Team</div>
                         <div class="team-mission">
-                            Mission: Provide robust, scalable, secure microservice platform and MLOps infrastructure for all teams.
+                            Mission: Provide robust, scalable, secure microservice platform and MLOps with Vertex AI Pipelines, MLflow, and Weights & Biases infrastructure for all teams.
                         </div>
                         
                         <div class="responsibilities-title">Key Responsibilities & Components:</div>
                         <ul class="responsibility-list">
-                            <li>API Gateway/BFF Layer: Authentication, authorization, rate limiting, caching</li>
+                            <li>API Gateway (FastAPI + Kong/Nginx)/BFF Layer: Authentication, authorization, rate limiting, caching</li>
                             <li>Environment Setup: GCP project configuration with IAM and billing</li>
                             <li>Repository Structure: Monorepo with proper microservice directories</li>
                             <li>Data Pipeline: Ingestion, PII scrubbing, embedding generation</li>
                             <li>Vector Store Setup: Deploy and manage Pinecone/Weaviate databases</li>
-                            <li>Feature Store: Registry, generation, online/offline storage</li>
-                            <li>Model Registry: Version control, deployment configurations</li>
+                            <li>BigQuery Feature Store with Feast: Registry, generation, online/offline storage</li>
+                            <li>MLflow Model Registry on Vertex AI: Version control, deployment configurations</li>
                             <li>ML Pipeline: Automated model retraining workflows</li>
                             <li>Container Orchestration: GKE deployment, HPA auto-scaling, Ansible</li>
                             <li>CI/CD Pipeline: GitHub Actions for testing and deployment</li>
@@ -1337,10 +1337,10 @@
                         
                         <div class="responsibilities-title">Core Skills:</div>
                         <div class="skills-container">
-                            <span class="skill-tag">DevOps</span>
-                            <span class="skill-tag">MLOps</span>
-                            <span class="skill-tag">GCP/Kubernetes</span>
-                            <span class="skill-tag">Docker</span>
+                            <span class="skill-tag">DevOps with GitHub Actions, Pulumi IaC, and Ansible automation</span>
+                            <span class="skill-tag">MLOps with Vertex AI Pipelines, MLflow, and Weights & Biases</span>
+                            <span class="skill-tag">Google Cloud Platform (GKE, Vertex AI, BigQuery)/Kubernetes orchestration</span>
+                            <span class="skill-tag">Docker containerization with multi-stage builds for FastAPI services</span>
                             <span class="skill-tag">CI/CD</span>
                             <span class="skill-tag">Ansible/Terraform</span>
                             <span class="skill-tag">Monitoring Tools</span>
@@ -1357,16 +1357,16 @@
                         
                         <div class="responsibilities-title">Key Responsibilities & Components:</div>
                         <ul class="responsibility-list">
-                            <li>Frontend Design: React/Vue implementation with chat interface</li>
+                            <li>Frontend Design: React with NextJS framework for SSR/SSG capabilities implementation with chat interface</li>
                             <li>API Development: RESTful APIs with OpenAPI specification</li>
                             <li>User Experience: Intuitive interface for queries and results</li>
-                            <li>API Gateway Integration: Consume backend microservices</li>
+                            <li>API Gateway (FastAPI + Kong/Nginx) Integration: Consume backend microservices</li>
                             <li>Performance Optimization: Client-side performance tuning</li>
                         </ul>
                         
                         <div class="responsibilities-title">Core Skills:</div>
                         <div class="skills-container">
-                            <span class="skill-tag">React/Vue</span>
+                            <span class="skill-tag">React with NextJS framework for SSR/SSG capabilities</span>
                             <span class="skill-tag">UI/UX Design</span>
                             <span class="skill-tag">API Integration</span>
                             <span class="skill-tag">Web Security</span>
@@ -1505,14 +1505,14 @@
                 ]
             },
             "milestone2": {
-                title: "Milestone 2: MLOps Infrastructure & Containerization",
+                title: "Milestone 2: MLOps with Vertex AI Pipelines, MLflow, and Weights & Biases Infrastructure & Containerization",
                 dueDate: "2025-10-16",
                 weight: "10%",
                 tasks: [
                     {
                         id: "2.1",
                         component: "Environment Setup",
-                        description: "Configure GCP project with proper IAM roles and billing",
+                        description: "Configure Google Cloud Platform project with IAM roles for Vertex AI, BigQuery, and GKE access",
                         verification: "GCP console screenshot showing active project",
                         dependencies: "1.5",
                         hours: 4,
@@ -1522,7 +1522,7 @@
                     {
                         id: "2.2",
                         component: "Repository Structure",
-                        description: "Create monorepo with directories for each microservice",
+                        description: "Create GitHub monorepo structure for microservices with GitHub Actions CI/CD pipeline configuration",
                         verification: "GitHub repo with proper folder structure",
                         dependencies: "2.1",
                         hours: 3,
@@ -1531,9 +1531,9 @@
                     },
                     {
                         id: "2.3",
-                        component: "API Gateway Container",
-                        description: "Containerize API Gateway with authentication middleware",
-                        verification: "Docker build successful, container runs locally",
+                        component: "API Gateway (FastAPI + Kong/Nginx) Container",
+                        description: "Containerize API Gateway (FastAPI + Kong/Nginx) with FastAPI framework, OAuth2/JWT authentication middleware using Docker containerization with multi-stage builds for FastAPI services",
+                        verification: "Docker containerization with multi-stage builds for FastAPI services build successful, container runs locally",
                         dependencies: "2.2",
                         hours: 8,
                         priority: "high",
@@ -1542,7 +1542,7 @@
                     {
                         id: "2.4",
                         component: "NL+SQL Service",
-                        description: "Create Docker container for NL+SQL Agent Service with LLM integration",
+                        description: "Create Docker containerization with multi-stage builds for FastAPI services container for NL+SQL Agent Service (FastAPI + OpenAI/Gemini) with OpenAI GPT-4/Google Gemini LLM integration via FastAPI framework",
                         verification: "Container processes test NL query successfully",
                         dependencies: "2.3",
                         hours: 12,
@@ -1551,8 +1551,8 @@
                     },
                     {
                         id: "2.5",
-                        component: "RAG Orchestrator",
-                        description: "Containerize RAG Orchestrator with vector store connection",
+                        component: "RAG Orchestrator (FastAPI + Chroma + TensorFlow)",
+                        description: "Containerize RAG Orchestrator (FastAPI + Chroma + TensorFlow) with Chroma vector database connection using Docker containerization with multi-stage builds for FastAPI services and FastAPI service architecture",
                         verification: "Container connects to vector DB, performs test query",
                         dependencies: "2.3",
                         hours: 12,
@@ -1562,8 +1562,8 @@
                     {
                         id: "2.6",
                         component: "Data Pipeline",
-                        description: "Implement data ingestion pipeline with PII scrubbing",
-                        verification: "Pipeline processes sample data with PII removed",
+                        description: "Implement Apache Kafka streaming data ingestion pipeline with PII scrubbing, storing to BigQuery data warehouse",
+                        verification: "Kafka pipeline processes sample data with PII scrubbing before loading to BigQuery/PostgreSQL",
                         dependencies: "2.2",
                         hours: 10,
                         priority: "medium",
@@ -1572,7 +1572,7 @@
                     {
                         id: "2.7",
                         component: "Vector Store Setup",
-                        description: "Deploy vector database (Pinecone/Weaviate) with initial embeddings",
+                        description: "Deploy Chroma vector database with TensorFlow/PyTorch embeddings managed through DVC for RAG implementation",
                         verification: "Vector store accessible, test embeddings retrievable",
                         dependencies: "2.5",
                         hours: 8,
@@ -1581,8 +1581,8 @@
                     },
                     {
                         id: "2.8",
-                        component: "Docker Compose",
-                        description: "Create docker-compose.yml for local development environment",
+                        component: "Docker containerization with multi-stage builds for FastAPI services Compose",
+                        description: "Create docker-compose.yml for local FastAPI microservices with PostgreSQL, Chroma, and Kafka development environment",
                         verification: "All services start with single command",
                         dependencies: "2.3, 2.4, 2.5",
                         hours: 6,
@@ -1592,7 +1592,7 @@
                     {
                         id: "2.9",
                         component: "Documentation",
-                        description: "Complete README with setup instructions and architecture overview",
+                        description: "Complete README with FastAPI service setup, Docker containerization with multi-stage builds for FastAPI services deployment instructions, and GCP architecture overview",
                         verification: "New team member can setup environment following docs",
                         dependencies: "All MS2 tasks",
                         hours: 6,
@@ -1609,8 +1609,8 @@
                     {
                         id: "3.1",
                         component: "Model Training",
-                        description: "Fine-tune LLM for rice market domain using RAG",
-                        verification: "Model achieves >80% accuracy on test queries",
+                        description: "Fine-tune OpenAI GPT-4/Google Gemini models for rice market domain using RAG with Weights & Biases experiment tracking",
+                        verification: "Model achieves >80% accuracy tracked via MLflow model registry and Weights & Biases metrics",
                         dependencies: "2.4, 2.5",
                         hours: 16,
                         priority: "high",
@@ -1619,8 +1619,8 @@
                     {
                         id: "3.2",
                         component: "Forecasting Model",
-                        description: "Implement time-series forecasting with LSTM/Prophet",
-                        verification: "6-month forecast generated with confidence intervals",
+                        description: "Implement time-series forecasting with PyTorch LSTM/Prophet models deployed on Vertex AI Endpoints",
+                        verification: "6-month forecast from PyTorch models on Vertex AI with confidence intervals stored in BigQuery",
                         dependencies: "2.6",
                         hours: 14,
                         priority: "high",
@@ -1629,8 +1629,8 @@
                     {
                         id: "3.3",
                         component: "API Integration",
-                        description: "Connect all services through API Gateway",
-                        verification: "End-to-end flow works for all three capabilities",
+                        description: "Connect all FastAPI microservices through API Gateway (FastAPI + Kong/Nginx) with gRPC inter-service communication",
+                        verification: "End-to-end flow validated across NL+SQL (OpenAI/Gemini), RAG (Chroma), and forecasting (Vertex AI) services",
                         dependencies: "3.1, 3.2",
                         hours: 10,
                         priority: "medium",
@@ -1666,8 +1666,8 @@
                     {
                         id: "4.1",
                         component: "Frontend Design",
-                        description: "Design and implement React/Vue frontend with chat interface",
-                        verification: "UI mockups approved, basic components working",
+                        description: "Design and implement React with NextJS frontend, FastAPI backend integration via REST/WebSocket",
+                        verification: "React/NextJS UI components with FastAPI WebSocket for real-time chat interface",
                         dependencies: "3.5",
                         hours: 20,
                         priority: "high",
@@ -1676,8 +1676,8 @@
                     {
                         id: "4.2",
                         component: "API Development",
-                        description: "Implement RESTful APIs with OpenAPI specification",
-                        verification: "API documentation generated, Swagger UI accessible",
+                        description: "Implement RESTful APIs with FastAPI automatic OpenAPI/Swagger documentation generation",
+                        verification: "FastAPI auto-generated OpenAPI docs with interactive Swagger UI at /docs endpoint",
                         dependencies: "4.1",
                         hours: 16,
                         priority: "high",
@@ -1686,8 +1686,8 @@
                     {
                         id: "4.3",
                         component: "CI/CD Pipeline",
-                        description: "Setup GitHub Actions for automated testing and deployment",
-                        verification: "Pipeline triggers on PR, runs tests automatically",
+                        description: "Setup GitHub Actions CI/CD pipeline for Docker containerization with multi-stage builds for FastAPI services builds, pytest testing, and GKE deployment via Pulumi",
+                        verification: "GitHub Actions workflow triggers pytest suite on PR, builds Docker containerization with multi-stage builds for FastAPI services images, deploys to GKE staging",
                         dependencies: "4.2",
                         hours: 12,
                         priority: "high",
@@ -1696,7 +1696,7 @@
                     {
                         id: "4.4",
                         component: "Unit Testing",
-                        description: "Write unit tests for all services (>50% coverage)",
+                        description: "Write pytest unit tests for FastAPI services with coverage.py reporting >50% code coverage",
                         verification: "Coverage report shows >50% code coverage",
                         dependencies: "4.2",
                         hours: 20,
@@ -1706,7 +1706,7 @@
                     {
                         id: "4.5",
                         component: "Integration Testing",
-                        description: "Implement integration tests for service interactions",
+                        description: "Implement pytest integration tests for FastAPI services with PostgreSQL/Chroma test fixtures",
                         verification: "All service-to-service calls tested",
                         dependencies: "4.4",
                         hours: 16,
@@ -1716,7 +1716,7 @@
                     {
                         id: "4.6",
                         component: "Performance Testing",
-                        description: "Load test APIs and optimize bottlenecks",
+                        description: "Load test FastAPI endpoints with Locust, optimize with Redis caching and PostgreSQL connection pooling",
                         verification: "APIs handle 100 concurrent users",
                         dependencies: "4.5",
                         hours: 12,
@@ -1726,7 +1726,7 @@
                     {
                         id: "4.7",
                         component: "Security Audit",
-                        description: "Implement security headers and OWASP best practices",
+                        description: "Implement FastAPI security middleware with CORS, CSP headers following OWASP guidelines",
                         verification: "Security scan shows no critical vulnerabilities",
                         dependencies: "4.3",
                         hours: 10,
@@ -1753,8 +1753,8 @@
                     {
                         id: "5.1",
                         component: "Kubernetes Setup",
-                        description: "Deploy application to GKE cluster",
-                        verification: "All pods running, services accessible",
+                        description: "Deploy containerized FastAPI services to Google Kubernetes Engine managed via Pulumi Infrastructure as Code",
+                        verification: "GKE pods running FastAPI services with Kubernetes Ingress exposing endpoints",
                         dependencies: "4.8",
                         hours: 16,
                         priority: "high",
@@ -1763,8 +1763,8 @@
                     {
                         id: "5.2",
                         component: "Ansible Automation",
-                        description: "Create Ansible playbooks for infrastructure provisioning",
-                        verification: "Infrastructure deployed with single command",
+                        description: "Create Ansible playbooks integrated with Pulumi for GCP resource provisioning and Kubernetes deployments",
+                        verification: "Pulumi stack deploys complete GCP infrastructure (GKE, BigQuery, Vertex AI) with single command",
                         dependencies: "5.1",
                         hours: 14,
                         priority: "high",
@@ -1773,8 +1773,8 @@
                     {
                         id: "5.3",
                         component: "Auto-scaling",
-                        description: "Configure HPA for automatic scaling based on load",
-                        verification: "Pods scale up/down based on CPU usage",
+                        description: "Configure Kubernetes HPA for FastAPI pods with metrics from Prometheus/Grafana monitoring",
+                        verification: "GKE pods auto-scale based on CPU/memory metrics exported to Prometheus",
                         dependencies: "5.1",
                         hours: 10,
                         priority: "high",
@@ -1783,8 +1783,8 @@
                     {
                         id: "5.4",
                         component: "ML Pipeline",
-                        description: "Implement automated model retraining pipeline",
-                        verification: "Model retrains on schedule, deploys if improved",
+                        description: "Implement Vertex AI Pipelines for automated model retraining with MLflow versioning and Weights & Biases tracking",
+                        verification: "Vertex AI Pipeline triggers weekly, deploys improved models to endpoints via MLflow MLflow Model Registry on Vertex AI",
                         dependencies: "5.1",
                         hours: 12,
                         priority: "high",
@@ -1794,7 +1794,7 @@
                         id: "5.5",
                         component: "Video & Blog",
                         description: "Create 6-minute demo video and Medium blog post",
-                        verification: "Video uploaded, blog published",
+                        verification: "Technical demo showcasing FastAPI microservices, GKE deployment, and Vertex AI ML capabilities",
                         dependencies: "5.3",
                         hours: 10,
                         priority: "high",
@@ -1803,7 +1803,7 @@
                     {
                         id: "5.6",
                         component: "Test Coverage",
-                        description: "Achieve 70% test coverage across all services",
+                        description: "Achieve 70% pytest coverage across FastAPI services, React components tested with Jest/React Testing Library",
                         verification: "Coverage report shows >70%",
                         dependencies: "4.4, 4.5",
                         hours: 8,
