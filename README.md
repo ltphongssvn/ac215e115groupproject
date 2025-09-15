@@ -1,4 +1,3 @@
-# /home/lenovo/code/ltphongssvn/ac215e115groupproject/README.md
 # ERP AI Architecture Implementation for AC215/E115
 
 ## Rice Market AI System - Natural Language SQL, RAG, and Time-Series Forecasting
