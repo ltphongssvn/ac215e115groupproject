@@ -14,7 +14,7 @@ alembic==1.13.3            # Database migration tool for SQLAlchemy
 
 # Data Analysis and Processing
 pandas==2.2.3              # Data manipulation and analysis library
-numpy==2.0.2               # Fundamental package for numerical computing
+numpy==1.26.4               # Fundamental package for numerical computing
 matplotlib==3.9.2          # Plotting and visualization library
 
 # Machine Learning and AI
@@ -25,7 +25,7 @@ langchain-community==0.3.2 # Community integrations for LangChain
 langgraph==0.2.34          # Library for building stateful LLM workflows
 
 # Model Conversion
-scikit-learn-onnx==1.16.0  # Convert scikit-learn models to ONNX format
+skl2onnx==1.16.0  # Convert scikit-learn models to ONNX format
 
 # NFL Data (if working with sports analytics)
 nfl-data-py==0.3.1         # Library for accessing NFL data
