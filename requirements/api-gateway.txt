@@ -1,0 +1,85 @@
+# /home/lenovo/code/ltphongssvn/ac215e115groupproject/requirements/api-gateway.txt
+# API Gateway and Security Requirements for AC215/E115 Group Project
+# These packages provide authentication, caching, rate limiting, and security features
+# Required for the API Gateway service that fronts all microservices
+
+# ============================================================================
+# CACHING AND SESSION MANAGEMENT
+# ============================================================================
+redis==5.0.1               # Redis client for caching API responses and storing JWT sessions
+                          # Used for 5-minute response cache as specified in API flow docs
+                          # Also stores rate limiting counters for SlowAPI
+
+# ============================================================================
+# AUTHENTICATION AND SECURITY
+# ============================================================================
+pyjwt==2.8.0              # Create and validate JSON Web Tokens for API authentication
+                          # Implements OAuth2/JWT authentication as required by architecture
+                          # Used in API Gateway authentication middleware
+
+passlib[bcrypt]==1.7.4    # Secure password hashing with bcrypt algorithm support
+                          # Protects user credentials with industry-standard hashing
+                          # Required for user registration and login endpoints
+
+python-multipart==0.0.6   # Required by FastAPI for handling form data in auth flows
+                          # Enables OAuth2 password flow with form data submission
+                          # Necessary for file uploads in multipart requests
+
+# ============================================================================
+# RATE LIMITING AND ABUSE PREVENTION
+# ============================================================================
+slowapi==0.1.9            # Rate limiting middleware to prevent API abuse
+                          # Implements 10 req/min limit for RAG service as specified
+                          # Returns 429 status with Retry-After header when exceeded
+
+# ============================================================================
+# SECURITY HEADERS MIDDLEWARE (TO BE ADDED)
+# ============================================================================
+# secure==0.3.0           # Security headers middleware for OWASP compliance
+                          # Implements CSP, HSTS, X-Frame-Options, X-Content-Type-Options
+                          # Required for Milestone 4.7 Security Audit
+
+# ============================================================================
+# MONITORING AND OBSERVABILITY (TO BE ADDED)
+# ============================================================================
+# prometheus-fastapi-instrumentator==6.1.0  # Prometheus metrics for API monitoring
+                                            # Exposes /metrics endpoint for Prometheus scraping
+                                            # Required for Kubernetes HPA and monitoring stack
+
+# ============================================================================
+# LOAD TESTING (DEVELOPMENT ONLY - TO BE ADDED)
+# ============================================================================
+# locust==2.17.0          # Load testing tool for API performance verification
+                          # Tests 100 concurrent users as per Milestone 4.6
+                          # Used to optimize Redis cache hit rates
+
+# ============================================================================
+# ADDITIONAL DEPENDENCIES AUTOMATICALLY INSTALLED
+# ============================================================================
+# The following packages are installed automatically as dependencies:
+# - bcrypt==4.3.0         # Cryptographic hashing (comes with passlib[bcrypt])
+# - limits==5.5.0         # Rate limiting backend (comes with slowapi)
+# - deprecated==1.2.18    # Utility for limits package
+# - wrapt==1.17.3         # Function wrapping utility for deprecated
+
+# ============================================================================
+# INTEGRATION WITH BASE REQUIREMENTS
+# ============================================================================
+# This file should be used alongside base.txt for complete functionality:
+# pip install -r requirements/base.txt -r requirements/api-gateway.txt
+
+# ============================================================================
+# DOCKER CONTAINER USAGE
+# ============================================================================
+# When building the API Gateway Docker container, use:
+# COPY requirements/base.txt requirements/api-gateway.txt /app/requirements/
+# RUN pip install -r /app/requirements/base.txt -r /app/requirements/api-gateway.txt
+
+# ============================================================================
+# NOTES FOR TEAM MEMBERS
+# ============================================================================
+# 1. These packages are ONLY needed for the API Gateway service
+# 2. Other microservices (NL+SQL, RAG, Forecasting) don't need these
+# 3. Redis server must be running (use docker-compose.yml)
+# 4. JWT_SECRET environment variable must be set for PyJWT
+# 5. Test authentication flow with: pytest tests/test_auth.py
