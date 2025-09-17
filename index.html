@@ -629,6 +629,7 @@
             <div class="nav-tabs">
                 <button class="nav-tab active" onclick="switchPage('checklist')">Implementation Checklist</button>
                 <button class="nav-tab" onclick="switchPage('apiflow')">API Flow Architecture</button>
+                <button class="nav-tab" onclick="switchPage('techstack')">Tech Stack</button>
                 <button class="nav-tab" onclick="switchPage('team')">Team Structure</button>
             </div>
         </header>
@@ -1211,7 +1212,245 @@
 -->
 
         <!-- Page 3: Team Structure -->
-        <div id="team-page" class="page-content">
+        <!-- Tech Stack Page (Minimal Test Version) -->
+        <!-- Tech Stack Page -->
+        <!-- Tech Stack Page -->
+<!-- Tech Stack Page -->
+        <!-- File: techstack-full.html -->
+        <!-- Purpose: Complete Tech Stack content for ERP AI Architecture -->
+        <!-- Location: To replace existing techstack-page div in index.html -->
+        <div id="techstack-page" class="page-content">
+            <div class="stats-container">
+                
+                <!-- Technology Stack Row 1: Core Technologies -->
+                <div style="display: grid !important; grid-template-columns: repeat(4, 1fr) !important; gap: 20px; width: 100%; margin-bottom: 20px;">
+                <!-- AI/ML & Language Models -->
+                <div class="checklist-section">
+                    <div class="section-header">
+                        <h3>AI/ML & Language Models</h3>
+                    </div>
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px; padding: 15px;">
+                        <span class="priority-high" style="padding: 5px 12px; border-radius: 15px;">OpenAI GPT-4</span>
+                        <span class="priority-high" style="padding: 5px 12px; border-radius: 15px;">Google Gemini</span>
+                        <span class="priority-high" style="padding: 5px 12px; border-radius: 15px;">LangChain</span>
+                        <span class="priority-medium" style="padding: 5px 12px; border-radius: 15px;">TensorFlow</span>
+                        <span class="priority-medium" style="padding: 5px 12px; border-radius: 15px;">PyTorch</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">LSTM Models</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">Prophet</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">SHAP Values</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">Embedding Models</span>
+                    </div>
+                </div>
+                
+                <!-- Backend & APIs -->
+                <div class="checklist-section">
+                    <div class="section-header">
+                        <h3>Backend & APIs</h3>
+                    </div>
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px; padding: 15px;">
+                        <span class="priority-high" style="padding: 5px 12px; border-radius: 15px;">FastAPI</span>
+                        <span class="priority-high" style="padding: 5px 12px; border-radius: 15px;">Kong/Nginx</span>
+                        <span class="priority-medium" style="padding: 5px 12px; border-radius: 15px;">gRPC</span>
+                        <span class="priority-medium" style="padding: 5px 12px; border-radius: 15px;">Protocol Buffers</span>
+                        <span class="priority-medium" style="padding: 5px 12px; border-radius: 15px;">WebSocket</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">REST APIs</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">OpenAPI/Swagger</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">Apache Kafka</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">BFF Layer</span>
+                    </div>
+                </div>
+                
+                <!-- Data & Storage -->
+                <div class="checklist-section">
+                    <div class="section-header">
+                        <h3>Data & Storage</h3>
+                    </div>
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px; padding: 15px;">
+                        <span class="priority-high" style="padding: 5px 12px; border-radius: 15px;">PostgreSQL</span>
+                        <span class="priority-high" style="padding: 5px 12px; border-radius: 15px;">BigQuery</span>
+                        <span class="priority-high" style="padding: 5px 12px; border-radius: 15px;">Chroma Vector DB</span>
+                        <span class="priority-medium" style="padding: 5px 12px; border-radius: 15px;">Pinecone/Weaviate</span>
+                        <span class="priority-medium" style="padding: 5px 12px; border-radius: 15px;">Redis Cache</span>
+                        <span class="priority-medium" style="padding: 5px 12px; border-radius: 15px;">Feast Feature Store</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">DVC</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">HNSW Index</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">Read Replicas</span>
+                    </div>
+                </div>
+                
+                <!-- Frontend & UI -->
+                <div class="checklist-section">
+                    <div class="section-header">
+                        <h3>Frontend & UI</h3>
+                    </div>
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px; padding: 15px;">
+                        <span class="priority-high" style="padding: 5px 12px; border-radius: 15px;">React</span>
+                        <span class="priority-high" style="padding: 5px 12px; border-radius: 15px;">Next.js</span>
+                        <span class="priority-medium" style="padding: 5px 12px; border-radius: 15px;">TypeScript</span>
+                        <span class="priority-medium" style="padding: 5px 12px; border-radius: 15px;">SSR/SSG</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">Jest</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">React Testing Library</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">WebSocket Client</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">Chat Interface</span>
+                    </div>
+                </div>
+                
+                </div>
+                <!-- Technology Stack Row 2: Operations & Infrastructure -->
+                <div style="display: grid !important; grid-template-columns: repeat(4, 1fr) !important; gap: 20px; width: 100%; margin-bottom: 20px;">
+                <!-- MLOps & Model Management -->
+                <div class="checklist-section">
+                    <div class="section-header">
+                        <h3>MLOps & Model Management</h3>
+                    </div>
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px; padding: 15px;">
+                        <span class="priority-high" style="padding: 5px 12px; border-radius: 15px;">Vertex AI Pipelines</span>
+                        <span class="priority-high" style="padding: 5px 12px; border-radius: 15px;">MLflow</span>
+                        <span class="priority-high" style="padding: 5px 12px; border-radius: 15px;">Weights & Biases</span>
+                        <span class="priority-medium" style="padding: 5px 12px; border-radius: 15px;">Vertex AI Endpoints</span>
+                        <span class="priority-medium" style="padding: 5px 12px; border-radius: 15px;">Model Registry</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">A/B Testing</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">Feature Registry</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">Champion/Challenger</span>
+                    </div>
+                </div>
+                
+                <!-- Cloud Infrastructure -->
+                <div class="checklist-section">
+                    <div class="section-header">
+                        <h3>Cloud Infrastructure</h3>
+                    </div>
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px; padding: 15px;">
+                        <span class="priority-high" style="padding: 5px 12px; border-radius: 15px;">Google Cloud Platform</span>
+                        <span class="priority-high" style="padding: 5px 12px; border-radius: 15px;">GKE</span>
+                        <span class="priority-high" style="padding: 5px 12px; border-radius: 15px;">Docker</span>
+                        <span class="priority-medium" style="padding: 5px 12px; border-radius: 15px;">Kubernetes</span>
+                        <span class="priority-medium" style="padding: 5px 12px; border-radius: 15px;">Pulumi IaC</span>
+                        <span class="priority-medium" style="padding: 5px 12px; border-radius: 15px;">Ansible</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">GitHub Actions</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">HPA Auto-scaling</span>
+                    </div>
+                </div>
+                
+                <!-- Monitoring & Observability -->
+                <div class="checklist-section">
+                    <div class="section-header">
+                        <h3>Monitoring & Observability</h3>
+                    </div>
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px; padding: 15px;">
+                        <span class="priority-high" style="padding: 5px 12px; border-radius: 15px;">Prometheus</span>
+                        <span class="priority-high" style="padding: 5px 12px; border-radius: 15px;">Grafana</span>
+                        <span class="priority-medium" style="padding: 5px 12px; border-radius: 15px;">ELK Stack</span>
+                        <span class="priority-medium" style="padding: 5px 12px; border-radius: 15px;">Jaeger</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">Distributed Tracing</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">Circuit Breakers</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">Correlation IDs</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">Metrics Endpoint</span>
+                    </div>
+                </div>
+                
+                <!-- Security & Testing -->
+                <div class="checklist-section">
+                    <div class="section-header">
+                        <h3>Security & Testing</h3>
+                    </div>
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px; padding: 15px;">
+                        <span class="priority-high" style="padding: 5px 12px; border-radius: 15px;">OAuth2/JWT</span>
+                        <span class="priority-high" style="padding: 5px 12px; border-radius: 15px;">RBAC</span>
+                        <span class="priority-medium" style="padding: 5px 12px; border-radius: 15px;">SQL Proxy/Guard</span>
+                        <span class="priority-medium" style="padding: 5px 12px; border-radius: 15px;">OWASP</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">Pytest</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">Coverage.py</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">Locust</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">PII Scrubbing</span>
+                    </div>
+                </div>
+                
+                </div>
+                <!-- Architecture Flow Summary -->
+<!-- File: microservices-flow-update.html -->
+<!-- Purpose: Replace the Microservices Architecture Flow section with proper horizontal layout -->
+<!-- This replaces only the Architecture Flow Summary section in your techstack-page -->
+
+                </div>
+                <!-- Architecture Flow Summary -->
+                <div class="checklist-section" style="margin-bottom: 25px; background: #f8f9fa; padding: 20px; border-radius: 10px;">
+                    <div class="section-header">
+                        <h3>Microservices Architecture Flow</h3>
+                    </div>
+                    <div style="padding: 20px; overflow-x: auto;">
+                        <!-- Main flow container with enforced horizontal layout -->
+                        <div style="display: flex; justify-content: space-between; align-items: center; min-width: 800px;">
+                            <!-- Client UI -->
+                            <div style="flex: 0 0 auto; text-align: center;">
+                                <div style="padding: 12px 20px; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); white-space: nowrap;">
+                                    Client UI
+                                </div>
+                            </div>
+                            
+                            <!-- Arrow -->
+                            <div style="flex: 0 0 auto; color: #667eea; font-size: 24px; margin: 0 10px;">→</div>
+                            
+                            <!-- API Gateway -->
+                            <div style="flex: 0 0 auto; text-align: center;">
+                                <div style="padding: 12px 20px; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); white-space: nowrap;">
+                                    API Gateway
+                                </div>
+                            </div>
+                            
+                            <!-- Arrow -->
+                            <div style="flex: 0 0 auto; color: #667eea; font-size: 24px; margin: 0 10px;">→</div>
+                            
+                            <!-- Services Container -->
+                            <div style="flex: 0 0 auto; text-align: center;">
+                                <div style="padding: 8px 15px; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                                    <div style="font-weight: 500; margin-bottom: 8px; white-space: nowrap;">Microservices</div>
+                                    <div style="display: flex; gap: 10px; font-size: 0.9em;">
+                                        <div style="padding: 4px 10px; background: #f0f0f0; border-radius: 4px; white-space: nowrap;">NL+SQL Service</div>
+                                        <div style="padding: 4px 10px; background: #f0f0f0; border-radius: 4px; white-space: nowrap;">RAG Orchestrator</div>
+                                        <div style="padding: 4px 10px; background: #f0f0f0; border-radius: 4px; white-space: nowrap;">TS Forecasting</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Arrow -->
+                            <div style="flex: 0 0 auto; color: #667eea; font-size: 24px; margin: 0 10px;">→</div>
+                            
+                            <!-- Data Layer -->
+                            <div style="flex: 0 0 auto; text-align: center;">
+                                <div style="padding: 12px 20px; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); white-space: nowrap;">
+                                    Data Layer
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Alternative compact version for very small screens -->
+                        <div style="display: none; margin-top: 20px; text-align: center; color: #7f8c8d;">
+                            <small>Client UI → API Gateway → Microservices → Data Layer</small>
+                        </div>
+                    </div>
+                </div>                
+                <!-- Key Performance Metrics -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 30px;">
+                    <div style="text-align: center; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                        <div style="font-size: 24px; margin-bottom: 10px;">⚡</div>
+                        <div style="font-weight: bold; color: #2c3e50;">Sub-Second Latency</div>
+                        <div style="color: #7f8c8d; font-size: 14px;">Target SLA < 1 second</div>
+                    </div>
+                    <div style="text-align: center; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                        <div style="font-size: 24px; margin-bottom: 10px;">📈</div>
+                        <div style="font-weight: bold; color: #2c3e50;">High Throughput</div>
+                        <div style="color: #7f8c8d; font-size: 14px;">1000 requests/second</div>
+                    </div>
+                    <div style="text-align: center; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                        <div style="font-size: 24px; margin-bottom: 10px;">🔄</div>
+                        <div style="font-weight: bold; color: #2c3e50;">Automated ML Pipeline</div>
+                        <div style="color: #7f8c8d; font-size: 14px;">Weekly model retraining</div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>        <div id="team-page" class="page-content">
             <div class="team-section">
                 <h2 class="team-header">Microservices Team Structure</h2>
                 <p class="team-intro">
@@ -1927,8 +2166,11 @@
             } else if (page === 'apiflow') {
                 document.querySelectorAll('.nav-tab')[1].classList.add('active');
                 document.getElementById('apiflow-page').classList.add('active');
-            } else if (page === 'team') {
+            } else if (page === 'techstack') {
                 document.querySelectorAll('.nav-tab')[2].classList.add('active');
+                document.getElementById('techstack-page').classList.add('active');
+            } else if (page === 'team') {
+                document.querySelectorAll('.nav-tab')[3].classList.add('active');
                 document.getElementById('team-page').classList.add('active');
             }
         }
