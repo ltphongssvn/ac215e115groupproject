@@ -1829,12 +1829,12 @@
                     },
                     {
                         id: "2.8",
-                        component: "Docker containerization with multi-stage builds for FastAPI services Compose",
-                        description: "Create docker-compose.yml for local FastAPI microservices with PostgreSQL, Chroma, and Kafka development environment",
-                        verification: "All services start with single command",
+                        component: "Docker Compose Local Development Environment",
+                        description: "Create docker-compose.yml for local FastAPI microservices development with PostgreSQL, Chroma, and Kafka, implementing volume mounts for hot-reload development and network isolation for service testing",
+                        verification: "All services start successfully with single 'docker-compose up' command verified by docker ps showing all containers healthy, code changes in mounted volumes trigger automatic service reload confirmed by log output, developers can attach debuggers to running services, and inter-service communication works via compose network verified by test API calls between services",
                         dependencies: "2.3, 2.4, 2.5",
                         hours: 6,
-                        priority: "low",
+                        priority: "high",
                         completed: false
                     },
                     {
@@ -1844,6 +1844,16 @@
                         verification: "New team member can setup environment following docs",
                         dependencies: "All MS2 tasks",
                         hours: 6,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "2.10",
+                        component: "Kubernetes Manifest Creation",
+                        description: "Create initial Kubernetes YAML manifests (Deployments, Services, ConfigMaps, Secrets) translating docker-compose service definitions into Kubernetes-native specifications, establishing foundation for container orchestration",
+                        verification: "All manifests pass 'kubectl apply --dry-run=client -f .' validation without errors, syntax validated using 'kubectl explain' for resource types, manifests successfully deploy to local Minikube cluster with 'minikube start && kubectl apply -f .', all pods reach Ready state within 5 minutes verified by 'kubectl get pods --watch', and service endpoints accessible via 'minikube service list'",
+                        dependencies: "2.8",
+                        hours: 12,
                         priority: "high",
                         completed: false
                     }
@@ -1857,7 +1867,7 @@
                     {
                         id: "3.1",
                         component: "Model Training",
-                        description: "Fine-tune OpenAI GPT-4/Google Gemini models for rice market domain using RAG with Weights & Biases experiment tracking",
+                        description: "Implement and optimize a RAG system for rice market domain using pre-trained GPT-4/Gemini models, tracking retrieval and generation metrics with Weights & Biases",
                         verification: "Model achieves >80% accuracy tracked via MLflow model registry and Weights & Biases metrics",
                         dependencies: "2.4, 2.5",
                         hours: 16,
@@ -1990,6 +2000,156 @@
                         hours: 10,
                         priority: "high",
                         completed: false
+                    },
+                    {
+                        id: "4.9",
+                        component: "Local Kubernetes Environment",
+                        description: "Install and configure Minikube or Kind to create local Kubernetes cluster mirroring GKE behavior, enabling pre-production testing of all Kubernetes manifests and configurations",
+                        verification: "End-to-end test suite executes successfully in Minikube environment with all tests passing, service discovery works via Kubernetes DNS confirmed by exec into pods and running 'nslookup <service-name>', persistent volumes retain data across pod restarts tested by deleting and recreating stateful pods, resource limits enforced verified by attempting to exceed memory limits and observing pod eviction, and network policies properly isolate services confirmed by attempting unauthorized cross-service communication",
+                        dependencies: "2.10, 4.10, 4.11, 4.12, 4.13",
+                        hours: 8,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "4.10",
+                        component: "Kubernetes Networking Layer",
+                        description: "Design and implement Kubernetes Service objects for each microservice, configure Ingress controller (nginx-ingress) for external traffic routing, and establish service discovery patterns replacing Docker Compose's automatic container linking",
+                        verification: "Successful inter-service gRPC communication verified through test queries, DNS resolution working via 'kubectl exec' nslookup tests, and Ingress routing external traffic to API Gateway",
+                        dependencies: "4.9",
+                        hours: 10,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "4.11",
+                        component: "Configuration Management Migration",
+                        description: "Transform environment variables from docker-compose.yml into Kubernetes ConfigMaps for non-sensitive configs (API endpoints, feature flags) and Secrets for sensitive data (database passwords, API keys), implementing proper RBAC for secret access",
+                        verification: "All services successfully reading configuration from ConfigMaps/Secrets confirmed via pod logs, no hardcoded values in containers, and 'kubectl describe' showing proper volume mounts",
+                        dependencies: "4.9, 4.10",
+                        hours: 6,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "4.12",
+                        component: "Stateful Service Storage",
+                        description: "Create PersistentVolumeClaim specifications for PostgreSQL (10Gi for each service database), Chroma Vector Store (20Gi), and Kafka message logs (5Gi), ensuring data persistence across pod restarts and upgrades",
+                        verification: "Data survives pod deletion and recreation tested by killing pods and verifying data integrity, storage classes properly configured for SSD performance, and backup procedures documented",
+                        dependencies: "4.9, 4.11",
+                        hours: 8,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "4.13",
+                        component: "Health Check Implementation",
+                        description: "Configure Kubernetes liveness probes (detecting hung services), readiness probes (preventing traffic to unready pods), and startup probes (allowing slow-starting ML services) for all microservices with appropriate thresholds and failure actions",
+                        verification: "Kubernetes automatically restarts failed services demonstrated by killing service processes, traffic only routes to ready pods verified under load testing, and health endpoints returning proper status codes",
+                        dependencies: "4.9, 4.10",
+                        hours: 6,
+                        priority: "medium",
+                        completed: false
+                    },
+                    {
+                        id: "4.14",
+                        component: "Resource Limits and Requests",
+                        description: "Define CPU and memory requests/limits for each service based on profiling data, ensuring efficient resource utilization and preventing resource starvation (e.g., NL+SQL: 500m CPU/1Gi memory request, 2 CPU/4Gi limit)",
+                        verification: "No OOMKilled pods during normal operation, services scale within defined resource boundaries, and cluster resources efficiently utilized shown via 'kubectl top pods'",
+                        dependencies: "4.9, 4.13",
+                        hours: 5,
+                        priority: "medium",
+                        completed: false
+                    },
+                    {
+                        id: "4.15",
+                        component: "Kubernetes Manifest Validation",
+                        description: "Implement pre-deployment validation using tools like kubeval, kube-score, and Polaris to ensure manifests follow best practices, security standards, and production readiness requirements",
+                        verification: "All manifests pass validation checks with no critical issues, security policies enforced (no root containers, read-only filesystems where appropriate), and deployment practices documented",
+                        dependencies: "4.9, 4.10, 4.11, 4.12, 4.13, 4.14",
+                        hours: 4,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "4.16",
+                        component: "Configuration Audit and Mapping",
+                        description: "Conduct comprehensive audit of all environment variables, volume mounts, and service dependencies in docker-compose.yml, creating a detailed mapping document that identifies which configurations should become ConfigMaps (non-sensitive), Secrets (sensitive), or hardcoded values in Kubernetes manifests",
+                        verification: "Configuration mapping spreadsheet completed showing every docker-compose environment variable and its Kubernetes destination, sensitive data identified and marked for Secret storage, and configuration dependencies between services documented",
+                        dependencies: "2.8, 4.9",
+                        hours: 6,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "4.17",
+                        component: "Kubernetes Secrets Creation",
+                        description: "Create Kubernetes Secret manifests for all sensitive configurations including database credentials (PostgreSQL connection strings), API keys (OpenAI, Google Gemini), authentication tokens (JWT secrets), and service account credentials, implementing proper RBAC to restrict access per service",
+                        verification: "All secrets created and accessible via kubectl get secrets, each service can only access its required secrets verified by RBAC testing, and no sensitive data visible in pod descriptions or logs",
+                        dependencies: "4.16",
+                        hours: 8,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "4.18",
+                        component: "ConfigMap Implementation",
+                        description: "Transform non-sensitive configurations from docker-compose environment variables into Kubernetes ConfigMaps, including service URLs (internal endpoints), feature flags, timeout values, batch sizes, and model parameters, organizing by service ownership",
+                        verification: "ConfigMaps created for each service verified via kubectl describe configmap, services successfully reading configuration values confirmed in pod logs, and configuration changes trigger proper pod restarts",
+                        dependencies: "4.16",
+                        hours: 6,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "4.19",
+                        component: "Service Discovery Translation",
+                        description: "Replace Docker Compose service names with Kubernetes Service DNS names in all configurations (e.g., 'postgres:5432' becomes 'postgres-service.default.svc.cluster.local:5432'), updating connection strings and implementing proper service discovery patterns",
+                        verification: "All inter-service connections working with Kubernetes DNS verified via exec into pods and testing connections, no hardcoded IP addresses in configurations, and service discovery resilient to pod restarts",
+                        dependencies: "4.10, 4.18",
+                        hours: 8,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "4.20",
+                        component: "Environment-Specific Configuration",
+                        description: "Implement Kustomize overlays or Helm values files to manage configuration differences between environments (development, staging, production), ensuring that database endpoints, resource limits, and feature flags can vary without modifying base manifests",
+                        verification: "Same base manifests deploy to different environments with appropriate configurations, staging uses test databases while production uses production databases, and configuration promotion process documented and tested",
+                        dependencies: "4.17, 4.18, 4.19",
+                        hours: 10,
+                        priority: "medium",
+                        completed: false
+                    },
+                    {
+                        id: "4.21",
+                        component: "Configuration Injection Patterns",
+                        description: "Implement proper configuration injection into containers using environment variables from ConfigMaps/Secrets, volume mounts for configuration files, and init containers for dynamic configuration generation, ensuring services start with correct configurations",
+                        verification: "Each service reads configuration correctly verified by exec into pods and checking environment variables, configuration files properly mounted in expected locations, and services handle configuration updates gracefully",
+                        dependencies: "4.17, 4.18",
+                        hours: 7,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "4.22",
+                        component: "Configuration Validation and Testing",
+                        description: "Create automated tests that verify configuration translation correctness, including unit tests for configuration loading, integration tests for service connectivity with Kubernetes configurations, and smoke tests that verify all services start with migrated configurations",
+                        verification: "Test suite passes for all configuration scenarios, misconfiguration deliberately introduced causes expected failures, and configuration validation prevents deployment of invalid configurations",
+                        dependencies: "4.17, 4.18, 4.19, 4.21",
+                        hours: 8,
+                        priority: "medium",
+                        completed: false
+                    },
+                    {
+                        id: "4.23",
+                        component: "Secrets Rotation Strategy",
+                        description: "Implement secrets rotation mechanism allowing API keys and database passwords to be updated without service downtime, including automated secret reloading, graceful connection pool drainage, and audit logging for secret access",
+                        verification: "Secrets successfully rotated without service interruption demonstrated by changing test secret, audit logs show which services accessed which secrets and when, and rotation procedure documented in runbooks",
+                        dependencies: "4.17, 4.21",
+                        hours: 6,
+                        priority: "medium",
+                        completed: false
                     }
                 ]
             },
@@ -2000,10 +2160,10 @@
                 tasks: [
                     {
                         id: "5.1",
-                        component: "Kubernetes Setup",
-                        description: "Deploy containerized FastAPI services to Google Kubernetes Engine managed via Pulumi Infrastructure as Code",
-                        verification: "GKE pods running FastAPI services with Kubernetes Ingress exposing endpoints",
-                        dependencies: "4.8",
+                        component: "GKE Production Cluster Deployment",
+                        description: "Deploy validated Kubernetes manifests from Task 2.10 and tested in Task 4.9-4.15 to Google Kubernetes Engine production cluster, including namespace creation, RBAC configuration, and workload identity setup",
+                        verification: "Production manifests deploy to GKE without modifications except environment-specific configs (verified by diff against Minikube manifests), all health checks pass in GKE confirmed by 'kubectl describe pods' showing readiness/liveness probes succeeding, workload identity properly authenticates to GCP services verified by successful BigQuery queries and Cloud Storage access from pods, production monitoring shows all services meeting SLA targets (p99 latency <1s, error rate <0.1%), external load balancer properly routes traffic confirmed by curl tests from outside cluster, and automated smoke tests pass against production endpoints",
+                        dependencies: "2.10, 4.9, 4.10, 4.11, 4.12, 4.13, 4.14, 4.15",
                         hours: 16,
                         priority: "high",
                         completed: false
