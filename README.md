@@ -442,8 +442,8 @@ This project is developed as part of the AC215/E115 course at Harvard University
 
 For questions or support, please contact the team through GitHub issues or reach out to team members directly:
 - Team member 1: Thanh Phong Le
-- Team member 2: Cornel Commodore
-- Team member 3: Martha (Boahemaa) Boahene
+- Team member 2: Martha (Boahemaa) Boahene
+- Team member 3: ✨ You? Join Us! ✨
 
 ---
 
