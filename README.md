@@ -35,7 +35,7 @@ ac215e115groupproject/
 │   ├── terraform/           # Infrastructure as Code for GCP
 │   └── ansible/             # Configuration management playbooks
 ├── data-pipeline/           # ETL and data ingestion components
-├── ml-services/             # Shared ML model training pipelines
+├── ml-services/             # Shared Vertex AI Pipelines for ML model training
 ├── requirements/            # Layered Python dependencies
 │   ├── base.txt            # Core dependencies for all services
 │   ├── dev.txt             # Development and testing tools
@@ -51,19 +51,19 @@ Our technology choices reflect industry best practices for building scalable, ma
 ### Core Technologies
 - **Python 3.12+**: Modern Python for optimal performance and type safety
 - **FastAPI**: High-performance async web framework for building APIs
-- **Docker**: Containerization for consistent deployment across environments
-- **PostgreSQL**: Primary relational database for ERP data
-- **Redis**: Caching layer for improved performance
+- **Cloud Run**: Serverless container platform for consistent deployment across environments
+- **Cloud SQL (PostgreSQL)**: Managed relational database service for ERP data
+- **Memorystore (Redis)**: Managed in-memory data store for caching and improved performance
 
 ### AI/ML Stack
-- **LangChain**: Framework for building LLM-powered applications
-- **OpenAI GPT-4 / Google Gemini**: Large language models for NL understanding
-- **Chroma**: Vector database for RAG implementation
+- **LangChain with Vertex AI**: Framework for building LLM-powered applications using Google's AI services
+- **Vertex AI (Gemini 1.5 Pro)**: Google's advanced language models for NL understanding
+- **Vertex AI Vector Search**: Managed vector similarity search for RAG implementation
 - **scikit-learn**: Classical ML algorithms for data processing
-- **PyTorch**: Deep learning framework for LSTM models
-- **Prophet**: Time-series forecasting library
+- **PyTorch on Vertex AI**: Deep learning framework for LSTM models deployed on Vertex AI
+- **Prophet on Vertex AI**: Time-series forecasting library deployed via Vertex AI Endpoints
 
-### Infrastructure
+### Infrastructure (Google Cloud Platform)
 - **Google Cloud Platform**: Cloud provider for production deployment
 - **Kubernetes (GKE)**: Container orchestration for production
 - **GitHub Actions**: CI/CD pipeline automation
@@ -120,6 +120,8 @@ Follow these steps to get your development environment running:
    ```
 
 4. **Start services with Docker Compose**
+   
+   *Note: Local development may use Docker Compose with PostgreSQL and Chroma for convenience, while production uses Cloud Run with Cloud SQL and Vertex AI Vector Search.*
    ```bash
    docker compose up -d
    ```
@@ -147,7 +149,7 @@ For comprehensive setup instructions, refer to our documentation:
 
 ## Verification and Testing Results
 
-### Infrastructure Validation (September 14, 2025)
+### Infrastructure (Google Cloud Platform) Validation (September 14, 2025)
 
 Our team has thoroughly tested and verified both the Python and Docker infrastructure components, ensuring that all documentation accurately reflects working configurations. These tests were conducted on Ubuntu 24.04 LTS running in WSL2, providing confidence that our setup will work across different development environments.
 
@@ -262,7 +264,7 @@ We successfully accessed the FastAPI-generated Swagger UI at `http://localhost:8
 - Request URL, curl command, and response headers all properly displayed
 - Real-time interaction with the containerized service verified
 
-The successful operation of Swagger UI confirms that our containerized FastAPI service is not just running but is fully self-documenting. This means that as we develop the actual microservices (NL+SQL agent, RAG orchestrator, and time-series forecasting), each service will automatically generate similarly comprehensive documentation, ensuring that API consumers always have accurate, up-to-date information about available endpoints and data structures.
+The successful operation of Swagger UI confirms that our containerized Cloud Run service (FastAPI framework) is not just running but is fully self-documenting. This means that as we develop the actual microservices (NL+SQL agent, RAG orchestrator, and time-series forecasting), each service will automatically generate similarly comprehensive documentation, ensuring that API consumers always have accurate, up-to-date information about available endpoints and data structures.
 
 **Docker Compose Orchestration:**
 - Successfully created isolated network (test-docker-service_default)
@@ -404,7 +406,7 @@ docker compose up
 
 ### Production Deployment
 
-Production deployments use Kubernetes on Google Cloud Platform:
+Production deployments use Google Kubernetes Engine (GKE) on Google Cloud Platform:
 ```bash
 # Build and push images
 make build-prod
