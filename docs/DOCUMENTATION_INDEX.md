@@ -8,9 +8,7 @@
 1. **Project Overview**: `/README.md` - Start here for project vision and structure
 2. **Statement of Work**: `/docs/milestones/ms1/Statement of Work- Rice Market AI System_Rev.04.pdf` - Detailed project scope and objectives
 3. **GitHub Workflow**: `/docs/onboarding/github-collaboration-guide.md` - How we work together
-4. **Development Setup**: Choose your OS:
-   - Windows: `/backups/docs/win-development-setup.md`
-   - MacOS: `/backups/docs/macos-development-setup.md`
+4. **Development Setup**: `/docs/onboarding/python-setup-guide.md` - Environment configuration
 
 ## Documentation by Category
 
@@ -32,10 +30,7 @@
 - **FastAPI Setup**: `docs/onboarding/fastapi-environment-setup.md` - API development setup
 
 ### 🏗️ Architecture & Design
-- **GCP Architecture**: `backups/docs/Statement_of_Work_GCP_Specific.md` - Google Cloud Platform specifics
-- **API Flow Enhancement**: `backups/docs/api_flow_enhancement_summary.md` - API design improvements
-- **GCP Enhancement Summary**: `backups/docs/complete_gcp_enhancement_summary.md` - Cloud architecture details
-- **Good vs Bad Ideas**: `docs/Ideation/Guide_ Good vs Bad Idea for AC215.pdf` - Design principles
+- **Good vs Bad Ideas**: `docs/Ideation/Guide_ Good vs Bad Idea for AC215.pdf` - Design principles and best practices
 
 ### 💻 Service Documentation
 - **NL+SQL Agent**: `services/nl-sql-agent/README.md` - Natural Language to SQL service
@@ -49,12 +44,6 @@
 ### 👥 Team Collaboration
 - **Feature Branches Guide**: `docs/team/feature-branches-guide.md` - Current active branches and workflow
 
-### 📚 Historical/Backup Documentation
-- **Previous READMEs**: 
-  - `backups/docs/README1.md`
-  - `backups/docs/README2.md`
-  - `backups/docs/README_before_martha_name_20250915_134213.md`
-
 ## Quick Links by Role
 
 ### For Backend Developers
@@ -65,7 +54,7 @@
 ### For ML Engineers
 1. `/docs/milestones/ms2/Milestone 2 _ AC215.pdf` - MLOps setup
 2. `/services/ts-forecasting/README.md` - Forecasting service
-3. `/backups/docs/complete_gcp_enhancement_summary.md` - GCP ML services
+3. `/docs/onboarding/python-setup-guide.md` - Python environment
 
 ### For Data Engineers
 1. `/data/data-readme.md` - Data structure overview
@@ -101,5 +90,5 @@ If you can't find what you need:
 
 ---
 *Last Updated: September 23, 2024*
-*Maintainer: Project Technical Lead*
+*Maintainer: AC215/E115 Rice Market AI System Team*  
 *This is a living document - please update when adding new documentation*
