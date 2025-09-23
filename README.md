@@ -1,8 +1,17 @@
 # ERP AI Architecture Implementation for AC215/E115
-
 ## Rice Market AI System - Natural Language SQL, RAG, and Time-Series Forecasting
 
+📚 **[View Complete Project Documentation](docs/DOCUMENTATION_INDEX.md)** - Comprehensive guide to all project documentation, onboarding guides, and milestone specifications.
+
 This project implements a comprehensive Enterprise Resource Planning (ERP) AI system designed for rice market operations. The system leverages cutting-edge AI technologies to provide three core capabilities that transform how businesses interact with their data and make predictions about market trends.
+
+## Quick Links
+- 📖 [Documentation Index](docs/DOCUMENTATION_INDEX.md) - All project documentation in one place
+- 🚀 [Getting Started](docs/onboarding/github-collaboration-guide.md) - GitFlow workflow and setup
+- 📋 [Statement of Work](docs/milestones/ms1/Statement%20of%20Work-%20Rice%20Market%20AI%20System_Rev.04.pdf) - Detailed project requirements
+- 👥 [Feature Branches Guide](docs/team/feature-branches-guide.md) - Current development branches
+
+## Project Overview
 
 ## Project Overview
 
