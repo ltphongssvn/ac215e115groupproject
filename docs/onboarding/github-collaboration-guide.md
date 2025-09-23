@@ -1,338 +1,471 @@
-# /home/lenovo/code/ltphongssvn/ac215e115groupproject/docs/onboarding/github-collaboration-guide.md
 # GitHub Collaboration Guide for AC215/E115 Team
-# Complete guide for team members at all technical levels to effectively use GitHub
+# Professional GitFlow-based workflow for microservices development
 
 ## Purpose of This Guide
 
-This guide teaches you how to use GitHub effectively for our microservices project, regardless of your prior Git experience. You'll learn how to find important technical decisions in our commit history, understand why specific packages and versions were chosen, and contribute to the project without getting lost in Git complexities.
+This guide establishes our team's Git workflow based on industry-standard GitFlow practices, adapted for our microservices architecture. You'll learn how to contribute safely, review code effectively, and maintain a clean project history that documents our technical decisions.
 
 ## Table of Contents
-1. [Essential Concepts You Need to Know](#essential-concepts)
-2. [Setting Up Your Environment](#setting-up)
-3. [Daily Workflow Commands](#daily-workflow)
-4. [Finding Technical Decisions in History](#finding-decisions)
-5. [Understanding Our Commit Messages](#understanding-commits)
-6. [Common Problems and Solutions](#troubleshooting)
+1. [Understanding Our Branching Strategy](#branching-strategy)
+2. [Environment Setup](#environment-setup)
+3. [Daily Development Workflow](#daily-workflow)
+4. [Feature Branch Management](#feature-branches)
+5. [Pull Request Process](#pull-requests)
+6. [Code Review Guidelines](#code-review)
+7. [Commit Message Standards](#commit-standards)
+8. [Release Management](#releases)
+9. [Finding Technical Decisions](#finding-decisions)
+10. [Troubleshooting](#troubleshooting)
 
-## Essential Concepts You Need to Know {#essential-concepts}
+## Understanding Our Branching Strategy {#branching-strategy}
 
-Before diving into commands, let's understand what GitHub does for our team:
+### Branch Types
+- **main**: Production-ready code. Protected branch - no direct commits
+- **develop**: Integration branch for features. Always in working state
+- **feature/**: Individual development branches (e.g., `feature/add-redis-cache`)
+- **release/**: Preparation for production release (e.g., `release/1.2.0`)
+- **hotfix/**: Emergency production fixes (e.g., `hotfix/auth-bypass`)
 
-**Repository (Repo)**: Think of this as our project's shared folder that keeps track of every change ever made. Everyone has their own copy to work on, and GitHub stores the master copy that we all sync with.
-
-**Commit**: A snapshot of changes with a description. Like saving a document with a note about what you changed. Each commit has a unique ID (called a hash) that looks like `343e189`.
-
-**Branch**: A parallel version of the project. We work on the `main` branch, but you might create feature branches for big changes.
-
-**Push/Pull**: Push sends your commits to GitHub, Pull gets other people's commits from GitHub to your computer.
-
-## Setting Up Your Environment {#setting-up}
-
-### First-Time Setup (Do This Once)
-
-Configure Git with your identity so your commits are properly attributed:
-
-```bash
-# Tell Git who you are (use your actual name and email)
-git config --global user.name "Your Name"
-git config --global user.email "your.email@example.com"
-
-# Set up helpful aliases to make Git easier to use
-git config --global alias.lg "log --oneline --graph --all --decorate"
-git config --global alias.st "status"
+### Branch Flow Rules
+```
+feature/* → develop → release/* → main
+hotfix/* → main + develop
 ```
 
-### Cloning the Project (First Time Only)
+## Environment Setup {#environment-setup}
 
+### Initial Configuration
 ```bash
-# Navigate to where you want the project folder
-cd ~/code
+# Set your identity
+git config --global user.name "Your Full Name"
+git config --global user.email "your.email@harvard.edu"
 
-# Clone our repository
+# Enable commit signing (recommended)
+git config --global commit.gpgsign true
+
+# Configure aliases for efficiency
+git config --global alias.co checkout
+git config --global alias.br branch
+git config --global alias.st status
+git config --global alias.lg "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+
+# Enable automatic rebase for cleaner history
+git config --global pull.rebase true
+
+# Better merge conflict display
+git config --global merge.conflictstyle diff3
+```
+
+### Repository Setup
+```bash
+# Clone repository
 git clone https://github.com/ltphongssvn/ac215e115groupproject.git
-
-# Enter the project directory
 cd ac215e115groupproject
+
+# Set up develop branch tracking
+git checkout -b develop origin/develop
+
+# Install pre-commit hooks
+pip install pre-commit
+pre-commit install
 ```
 
-## Daily Workflow Commands {#daily-workflow}
+## Daily Development Workflow {#daily-workflow}
 
-These are the commands you'll use every day. Follow this sequence to stay synchronized with the team:
-
-### Start of Each Work Session
-
+### Start Your Day
 ```bash
-# 1. Check what branch you're on and if you have any uncommitted changes
-git status
+# 1. Sync with team's work
+git checkout develop
+git pull origin develop
 
-# 2. Get the latest changes from GitHub
-git pull origin main
-
-# 3. Check if requirements have changed (important!)
-# If you see changes to any requirements/*.txt files, reinstall:
-conda activate test_ac215
+# 2. Check for dependency changes
+git diff HEAD@{1} HEAD --name-only | grep requirements
+# If changes found, update environment:
 pip install -r requirements/base.txt
-pip install -r requirements/api-gateway.txt  # if working on API gateway
+
+# 3. Create feature branch
+git checkout -b feature/descriptive-name
 ```
 
-### After Making Changes
-
+### During Development
 ```bash
-# 1. See what files you've changed
+# Check status frequently
 git status
 
-# 2. Review your actual changes (press 'q' to exit the view)
-git diff
+# Stage changes selectively
+git add -p  # Interactive staging
 
-# 3. Add your changes to staging
-git add .  # adds everything, OR
-git add specific_file.py  # add specific files only
+# Commit with meaningful messages
+git commit -m "feat(component): Add specific functionality
 
-# 4. Commit with a descriptive message
-git commit -m "Clear description of what you changed and why"
+- Detailed change item 1
+- Detailed change item 2
 
-# 5. Push to GitHub
-git push origin main
+Resolves #issue-number"
+
+# Push regularly for backup
+git push -u origin feature/your-branch
 ```
 
-## Finding Technical Decisions in History {#finding-decisions}
-
-Our commit messages contain important technical decisions. Here's how to find them:
-
-### View Recent Commits with Full Messages
-
+### End of Day
 ```bash
-# See the last 5 commits with full messages
-git log -5
-
-# Example output shows WHO made changes, WHEN, and WHY:
-# commit 343e189... (you'll see a long hash)
-# Author: Team Member <email@example.com>
-# Date:   Mon Sep 16 2024
-#
-#     Add API gateway security requirements
-#     
-#     - Added dedicated requirements file for API gateway security packages
-#     - Includes Redis (5.0.1) for caching and session management
-#     - Includes PyJWT (2.8.0) and passlib (1.7.4) for authentication
-#     ...
-```
-
-### Search for Specific Decisions
-
-```bash
-# Find all commits about numpy (to understand version choice)
-git log --grep="numpy" --all
-
-# Find all commits about requirements changes
-git log --grep="requirements" --all
-
-# Find commits that changed a specific file
-git log -- requirements/base.txt
-
-# See what changed in a specific commit (use the hash from git log)
-git show 343e189
-```
-
-### Understanding Why We Use Specific Package Versions
-
-To understand why we use specific versions (like numpy 1.26.4 instead of 2.0):
-
-```bash
-# Find the commit that set the numpy version
-git log -p -- requirements/base.txt | grep -B5 -A5 "numpy"
-
-# Read the commit message for that change
-git log --grep="numpy" --grep="compatibility" --all
-```
-
-You'll find detailed explanations like:
-- "Downgraded numpy from 2.0.2 to 1.26.4 to resolve LangChain incompatibility"
-- This tells you there's a technical constraint, not an arbitrary choice
-
-## Understanding Our Commit Messages {#understanding-commits}
-
-Our team uses structured commit messages. Here's how to read them:
-
-### Structure of Our Commit Messages
-
-```
-Short summary line (what was done)
-
-- Bullet point with specific change
-- Another specific change
-- Version numbers and packages included
-
-Paragraph explaining WHY these changes matter and 
-what problem they solve for the team.
-```
-
-### Real Example from Our Project
-
-```
-Fix critical dependency conflicts: numpy 1.26.4 for LangChain compatibility
-
-- Downgraded numpy from 2.0.2 to 1.26.4 to resolve LangChain incompatibility
-- Fixed incorrect package name from scikit-learn-onnx to skl2onnx
-- Updated documentation with troubleshooting notes
-
-These changes resolve installation failures that would block team members 
-from setting up the development environment.
-```
-
-### How to Write Good Commit Messages
-
-When you make changes, write messages that help future teammates:
-
-```bash
-# Good commit message
-git commit -m "Add Redis connection pooling to API gateway
-
-- Configured connection pool with max_connections=50
-- Added retry logic with exponential backoff
-- Set timeout to 5 seconds as per performance requirements
-
-This improves API gateway resilience under high load and prevents
-connection exhaustion issues we discussed in meeting on Sept 15."
-
-# Bad commit message (don't do this)
-git commit -m "fixed stuff"  # No one knows what was fixed or why
-```
-
-## Common Problems and Solutions {#troubleshooting}
-
-### Problem: "Your branch is behind origin/main"
-
-This means others have pushed changes you don't have yet.
-
-```bash
-# Solution: Pull the latest changes
-git pull origin main
-```
-
-### Problem: "Merge conflict" when pulling
-
-This happens when you and someone else changed the same file.
-
-```bash
-# See which files have conflicts
+# Ensure all changes committed
 git status
 
-# Open the conflicted file in your editor
-# Look for sections like this:
-<<<<<<< HEAD
-your changes
-=======
-their changes
->>>>>>> origin/main
+# Push to remote
+git push origin feature/your-branch
 
-# Edit the file to keep the right changes, remove the markers
-# Then:
-git add the_fixed_file.py
-git commit -m "Resolved merge conflict in filename"
-git push origin main
+# Create draft PR if not ready for review
 ```
 
-### Problem: "I committed the wrong thing"
+## Feature Branch Management {#feature-branches}
 
-If you haven't pushed yet:
-
-```bash
-# Undo the last commit but keep your changes
-git reset --soft HEAD~1
-
-# Now you can fix and recommit
+### Naming Conventions
+```
+feature/service-description
+bugfix/issue-number-description
+hotfix/critical-issue
 ```
 
-If you already pushed:
+Examples:
+- `feature/api-gateway-jwt-auth`
+- `bugfix/67-numpy-compatibility`
+- `hotfix/database-connection-leak`
 
+### Creating Feature Branch
 ```bash
-# Create a new commit that undoes the problematic one
+# Always start from updated develop
+git checkout develop
+git pull origin develop
+git checkout -b feature/your-feature
+
+# Push to establish remote tracking
+git push -u origin feature/your-feature
+```
+
+### Keeping Branch Updated
+```bash
+# Fetch latest changes
+git fetch origin
+
+# Rebase on develop
+git checkout feature/your-branch
+git rebase origin/develop
+
+# Resolve conflicts if any
+git add <resolved-files>
+git rebase --continue
+
+# Force push to feature branch only
+git push --force-with-lease origin feature/your-branch
+```
+
+## Pull Request Process {#pull-requests}
+
+### PR Template
+```markdown
+## Summary
+Brief description of changes and motivation
+
+## Type of Change
+- [ ] Bug fix
+- [ ] New feature
+- [ ] Breaking change
+- [ ] Documentation update
+
+## Testing
+- [ ] Unit tests pass
+- [ ] Integration tests pass
+- [ ] Manual testing completed
+
+## Checklist
+- [ ] Code follows style guidelines
+- [ ] Self-review completed
+- [ ] Documentation updated
+- [ ] No new warnings
+```
+
+### Before Creating PR
+```bash
+# Update branch
+git rebase origin/develop
+
+# Run tests
+pytest tests/
+pre-commit run --all-files
+
+# Review changes
+git diff origin/develop...HEAD
+
+# Clean commit history if needed
+git rebase -i origin/develop
+```
+
+## Code Review Guidelines {#code-review}
+
+### Review Focus Areas
+1. **Correctness**: Logic and functionality
+2. **Security**: Input validation, authentication
+3. **Performance**: Efficiency, caching
+4. **Maintainability**: Readability, documentation
+5. **Testing**: Coverage, edge cases
+
+### Review Etiquette
+- Provide constructive feedback with examples
+- Explain the "why" behind suggestions
+- Approve promptly or request changes clearly
+- Use "nit:" prefix for minor issues
+- Suggest, don't demand
+
+## Commit Message Standards {#commit-standards}
+
+### Format
+```
+<type>(<scope>): <subject>
+
+<body>
+
+<footer>
+```
+
+### Types
+- `feat`: New feature
+- `fix`: Bug fix
+- `docs`: Documentation
+- `style`: Formatting
+- `refactor`: Code restructuring
+- `perf`: Performance improvement
+- `test`: Test changes
+- `build`: Build/dependency changes
+- `ci`: CI configuration
+- `chore`: Maintenance
+
+### Examples
+```bash
+# Feature commit
+git commit -m "feat(api-gateway): Add JWT refresh token rotation
+
+- Implement 7-day refresh token expiry
+- Add token rotation on each refresh
+- Store tokens in Redis
+
+Improves security by preventing token replay attacks
+Resolves #45"
+
+# Bug fix commit
+git commit -m "fix(ml-service): Handle edge cases in confidence scoring
+
+- Fix division by zero error
+- Clamp scores to [0,1] range
+- Validate NaN values
+
+Fixes #89"
+```
+
+## Release Management {#releases}
+
+### Creating Release
+```bash
+# Start from develop
+git checkout develop
+git pull origin develop
+
+# Create release branch
+git checkout -b release/1.2.0
+
+# Update versions and changelog
+# Run full test suite
+# Commit changes
+git commit -m "chore(release): Prepare v1.2.0"
+
+# After approval, merge to main
+git checkout main
+git merge --no-ff release/1.2.0
+git tag -a v1.2.0 -m "Version 1.2.0"
+
+# Merge back to develop
+git checkout develop
+git merge --no-ff release/1.2.0
+
+# Clean up
+git branch -d release/1.2.0
+git push origin --delete release/1.2.0
+```
+
+### Hotfix Process
+```bash
+# Start from main
+git checkout main
+git checkout -b hotfix/critical-fix
+
+# Make minimal fixes
+# Test thoroughly
+git commit -m "hotfix: Fix critical issue"
+
+# Merge to both main and develop
+git checkout main
+git merge --no-ff hotfix/critical-fix
+git tag -a v1.2.1 -m "Hotfix 1.2.1"
+
+git checkout develop
+git merge --no-ff hotfix/critical-fix
+```
+
+## Finding Technical Decisions {#finding-decisions}
+
+### Search Commands
+```bash
+# Find package decisions
+git log --all --grep="numpy\|pandas" -i
+
+# Find by date range
+git log --since="2024-09-01" --until="2024-09-30"
+
+# Find file history
+git log --follow -p -- requirements/base.txt
+
+# Find by author and topic
+git log --author="Thanh" --grep="compatibility"
+
+# Find breaking changes
+git log --grep="BREAKING CHANGE"
+
+# Architecture evolution
+git log --oneline --follow -- services/api-gateway/
+```
+
+### Creating Reports
+```bash
+# Dependency change history
+git log --grep="build\|deps" --format="%ad %s" --date=short > deps-history.md
+
+# List all hotfixes
+git log --oneline --grep="^hotfix"
+```
+
+## Troubleshooting {#troubleshooting}
+
+### Merge Conflicts in Requirements
+```bash
+# View conflict
+cat requirements/base.txt
+
+# Resolution strategy:
+# 1. Keep both packages unless version conflict
+# 2. Use newer version if compatible
+# 3. Document choice in commit message
+
+git add requirements/base.txt
+git commit -m "fix(deps): Resolve requirements conflict"
+```
+
+### Wrong Branch Commits
+```bash
+# If committed to develop instead of feature
+git branch feature/your-feature
+git checkout develop
+git reset --hard origin/develop
+git checkout feature/your-feature
+```
+
+### Undo Pushed Commit
+```bash
+# On feature branch (can rewrite)
 git revert HEAD
+git push origin feature/branch
+
+# On main/develop (never rewrite)
+git revert <commit-hash>
 git push origin main
 ```
 
-### Problem: "I don't know what changed in requirements"
-
-When you pull and see requirements files changed:
-
+### Large Files
 ```bash
-# See what packages changed
-git diff HEAD~1 requirements/base.txt
+# Remove from history before push
+git reset --soft HEAD~1
+git reset HEAD large-file
+git commit -c ORIG_HEAD
 
-# Read why they changed
-git log -1 -- requirements/base.txt
+# Add to gitignore
+echo "large-file" >> .gitignore
+git add .gitignore
+git commit -m "chore: Update gitignore"
 ```
 
-## Quick Reference Card
+## Team Principles
 
-Print this section and keep it handy:
+1. **No direct commits to main/develop** - Always use PRs
+2. **One PR, one purpose** - Keep changes focused
+3. **Review within 24 hours** - Don't block teammates
+4. **Document in commits** - Explain why, not just what
+5. **Test before pushing** - Catch issues early
+6. **Communicate blockers** - Ask for help promptly
+7. **Keep branches short-lived** - Merge within days
 
-### Every Day Commands
-- `git status` - What's my current situation?
-- `git pull origin main` - Get latest from team
-- `git add .` - Stage all my changes
-- `git commit -m "message"` - Save changes with description
-- `git push origin main` - Share with team
+## Microservices Considerations
+
+### Service-Specific Branches
+```bash
+# Name includes service
+git checkout -b feature/api-gateway-rate-limiting
+
+# Commit scope includes service
+git commit -m "feat(api-gateway): Add rate limiting"
+```
+
+### Cross-Service Changes
+```bash
+# Coordinate in single feature branch
+git checkout -b feature/add-tracing
+
+# Separate commits per service
+git commit -m "feat(api-gateway): Add tracing"
+git commit -m "feat(ml-service): Add tracing"
+```
+
+### Service Versioning
+```
+services/
+  api-gateway/VERSION    # 1.2.3
+  ml-service/VERSION      # 2.1.0
+  data-service/VERSION    # 1.0.5
+```
+
+## Quick Reference
+
+### Daily Commands
+```bash
+git status                     # Current state
+git pull origin develop        # Get latest
+git checkout -b feature/name   # New feature
+git add -p                     # Stage interactively
+git commit -m "message"        # Commit
+git push origin feature/name   # Push branch
+```
 
 ### Investigation Commands
-- `git log -5` - See recent commits
-- `git log --grep="keyword"` - Search commit messages
-- `git show <hash>` - See specific commit details
-- `git diff` - What did I change?
-
-### Getting Help
-- `git status` - Always start here when confused
-- `git log --oneline -10` - Quick view of recent history
-- `git help <command>` - Detailed help for any command
-
-## Team Collaboration Rules
-
-1. **Always pull before starting work** - Get the latest changes first
-2. **Commit frequently with clear messages** - Small, focused commits are better
-3. **Push at least once per day** - Don't let changes accumulate locally
-4. **Read commit messages** - They contain important technical context
-5. **Update documentation** - If you discover something important, document it
-
-## Getting Additional Help
-
-If you're stuck:
-
-1. Run `git status` and copy the output
-2. Post in our team chat with:
-   - The command you tried
-   - The error message
-   - Output of `git status`
-3. Don't worry about "messing up" - Git keeps history of everything
-
-## Advanced: Reviewing Package Decision History
-
-For understanding architectural decisions about packages:
-
 ```bash
-# See all commits that changed requirements files
-git log --oneline -- requirements/
+git log -5                     # Recent commits
+git log --grep="keyword"       # Search commits
+git diff origin/develop        # Compare changes
+git blame file.py              # Who changed what
+```
 
-# Find when a specific package was added
-git log -p -- requirements/ | grep -B5 "package_name"
-
-# See who added a package and why
-git blame requirements/base.txt | grep "redis"
-# Then look up the commit hash shown to read the full message
+### Emergency Commands
+```bash
+git stash                      # Save work temporarily
+git reset --hard HEAD          # Discard all changes
+git checkout -- file.py        # Discard file changes
+git reflog                     # Recovery options
 ```
 
 ## Summary
 
-GitHub is our team's shared memory for the project. Every technical decision, every package choice, and every bug fix is documented in our commit history. By following this guide, you can:
+This GitFlow workflow protects our production code while enabling rapid development. Each branch type serves a specific purpose, and our commit messages document technical decisions for future reference. Following these practices ensures code quality, facilitates collaboration, and maintains a valuable project history.
 
-- Stay synchronized with the team's work
-- Understand why specific technical choices were made
-- Contribute your changes effectively
-- Find answers to technical questions in our project's history
-
-Remember: Good commit messages today save hours of confusion tomorrow. When in doubt, over-communicate in your commit messages - future teammates (including future you) will thank you.
+Remember: Good Git practices today save debugging hours tomorrow. When in doubt, ask for help before attempting fixes.
 
 ---
-*Last updated: September 2024*  
+*Last updated: September 22, 2024*  
 *Maintainer: AC215/E115 Team*  
 *For questions about this guide, post in the team chat*
