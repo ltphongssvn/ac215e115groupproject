@@ -1,23 +1,24 @@
 # GitHub Collaboration Guide for AC215/E115 Team
-# Professional GitFlow-based workflow for microservices development
+<!-- Path: /docs/onboarding/github-collaboration-guide.md -->
+<!-- Professional GitFlow-based workflow for Rice Market AI System microservices development -->
 
 ## Purpose of This Guide
 
 This guide establishes our team's Git workflow based on industry-standard GitFlow practices, adapted for our microservices architecture. You'll learn how to contribute safely, review code effectively, and maintain a clean project history that documents our technical decisions.
 
 ## Table of Contents
-1. [Understanding Our Branching Strategy](#branching-strategy)
+1. [Understanding Our Branching Strategy](#understanding-our-branching-strategy)
 2. [Environment Setup](#environment-setup)
-3. [Daily Development Workflow](#daily-workflow)
-4. [Feature Branch Management](#feature-branches)
-5. [Pull Request Process](#pull-requests)
-6. [Code Review Guidelines](#code-review)
-7. [Commit Message Standards](#commit-standards)
-8. [Release Management](#releases)
-9. [Finding Technical Decisions](#finding-decisions)
+3. [Daily Development Workflow](#daily-development-workflow)
+4. [Feature Branch Management](#feature-branch-management)
+5. [Pull Request Process](#pull-request-process)
+6. [Code Review Guidelines](#code-review-guidelines)
+7. [Commit Message Standards](#commit-message-standards)
+8. [Release Management](#release-management)
+9. [Finding Technical Decisions](#finding-technical-decisions)
 10. [Troubleshooting](#troubleshooting)
 
-## Understanding Our Branching Strategy {#branching-strategy}
+## Understanding Our Branching Strategy
 
 ### Branch Types
 - **main**: Production-ready code. Protected branch - no direct commits
@@ -32,7 +33,7 @@ feature/* → develop → release/* → main
 hotfix/* → main + develop
 ```
 
-## Environment Setup {#environment-setup}
+## Environment Setup
 
 ### Initial Configuration
 ```bash
@@ -70,7 +71,7 @@ pip install pre-commit
 pre-commit install
 ```
 
-## Daily Development Workflow {#daily-workflow}
+## Daily Development Workflow
 
 ### Start Your Day
 ```bash
@@ -118,7 +119,7 @@ git push origin feature/your-branch
 # Create draft PR if not ready for review
 ```
 
-## Feature Branch Management {#feature-branches}
+## Feature Branch Management
 
 ### Naming Conventions
 ```
@@ -128,7 +129,9 @@ hotfix/critical-issue
 ```
 
 Examples:
-- `feature/api-gateway-jwt-auth`
+- `feature/nl-sql-query-optimization`
+- `feature/rag-vector-search`
+- `feature/ts-lstm-model`
 - `bugfix/67-numpy-compatibility`
 - `hotfix/database-connection-leak`
 
@@ -160,7 +163,7 @@ git rebase --continue
 git push --force-with-lease origin feature/your-branch
 ```
 
-## Pull Request Process {#pull-requests}
+## Pull Request Process
 
 ### PR Template
 ```markdown
@@ -201,7 +204,7 @@ git diff origin/develop...HEAD
 git rebase -i origin/develop
 ```
 
-## Code Review Guidelines {#code-review}
+## Code Review Guidelines
 
 ### Review Focus Areas
 1. **Correctness**: Logic and functionality
@@ -217,7 +220,7 @@ git rebase -i origin/develop
 - Use "nit:" prefix for minor issues
 - Suggest, don't demand
 
-## Commit Message Standards {#commit-standards}
+## Commit Message Standards
 
 ### Format
 ```
@@ -243,7 +246,7 @@ git rebase -i origin/develop
 ### Examples
 ```bash
 # Feature commit
-git commit -m "feat(api-gateway): Add JWT refresh token rotation
+git commit -m "feat(nl-sql-agent): Add JWT refresh token rotation
 
 - Implement 7-day refresh token expiry
 - Add token rotation on each refresh
@@ -253,7 +256,7 @@ Improves security by preventing token replay attacks
 Resolves #45"
 
 # Bug fix commit
-git commit -m "fix(ml-service): Handle edge cases in confidence scoring
+git commit -m "fix(rag-orchestrator): Handle edge cases in confidence scoring
 
 - Fix division by zero error
 - Clamp scores to [0,1] range
@@ -262,7 +265,7 @@ git commit -m "fix(ml-service): Handle edge cases in confidence scoring
 Fixes #89"
 ```
 
-## Release Management {#releases}
+## Release Management
 
 ### Creating Release
 ```bash
@@ -311,7 +314,7 @@ git checkout develop
 git merge --no-ff hotfix/critical-fix
 ```
 
-## Finding Technical Decisions {#finding-decisions}
+## Finding Technical Decisions
 
 ### Search Commands
 ```bash
@@ -331,7 +334,7 @@ git log --author="Thanh" --grep="compatibility"
 git log --grep="BREAKING CHANGE"
 
 # Architecture evolution
-git log --oneline --follow -- services/api-gateway/
+git log --oneline --follow -- services/nl-sql-agent/
 ```
 
 ### Creating Reports
@@ -343,7 +346,7 @@ git log --grep="build\|deps" --format="%ad %s" --date=short > deps-history.md
 git log --oneline --grep="^hotfix"
 ```
 
-## Troubleshooting {#troubleshooting}
+## Troubleshooting
 
 ### Merge Conflicts in Requirements
 ```bash
@@ -402,33 +405,38 @@ git commit -m "chore: Update gitignore"
 6. **Communicate blockers** - Ask for help promptly
 7. **Keep branches short-lived** - Merge within days
 
-## Microservices Considerations
+## Rice Market AI System Specific Guidelines
 
 ### Service-Specific Branches
 ```bash
 # Name includes service
-git checkout -b feature/api-gateway-rate-limiting
+git checkout -b feature/nl-sql-query-optimization
+git checkout -b feature/rag-vector-indexing
+git checkout -b feature/ts-prophet-integration
 
 # Commit scope includes service
-git commit -m "feat(api-gateway): Add rate limiting"
+git commit -m "feat(nl-sql-agent): Add query caching"
+git commit -m "feat(rag-orchestrator): Improve ranking"
+git commit -m "feat(ts-forecasting): Add SHAP values"
 ```
 
 ### Cross-Service Changes
 ```bash
 # Coordinate in single feature branch
-git checkout -b feature/add-tracing
+git checkout -b feature/add-distributed-tracing
 
 # Separate commits per service
-git commit -m "feat(api-gateway): Add tracing"
-git commit -m "feat(ml-service): Add tracing"
+git commit -m "feat(api-gateway): Add tracing headers"
+git commit -m "feat(nl-sql-agent): Propagate trace context"
+git commit -m "feat(rag-orchestrator): Add trace spans"
 ```
 
 ### Service Versioning
 ```
 services/
-  api-gateway/VERSION    # 1.2.3
-  ml-service/VERSION      # 2.1.0
-  data-service/VERSION    # 1.0.5
+  nl-sql-agent/VERSION         # 1.2.3
+  rag-orchestrator/VERSION      # 2.1.0
+  ts-forecasting/VERSION        # 1.0.5
 ```
 
 ## Quick Reference
@@ -467,5 +475,5 @@ Remember: Good Git practices today save debugging hours tomorrow. When in doubt,
 
 ---
 *Last updated: September 22, 2024*  
-*Maintainer: AC215/E115 Team*  
+*Maintainer: AC215/E115 Rice Market AI System Team*  
 *For questions about this guide, post in the team chat*
