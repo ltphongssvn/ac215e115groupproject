@@ -2555,6 +2555,20 @@
                 completedElement.textContent = completedTasks;
             }
             
+            // Update milestone progress indicators
+            Object.entries(checklistData).forEach(([key, milestone]) => {
+                const completedCount = milestone.tasks.filter(t => t.completed).length;
+                const totalCount = milestone.tasks.length;
+                const sectionHeaders = document.querySelectorAll(".section-header");
+                sectionHeaders.forEach(header => {
+                    if (header.textContent.includes(milestone.title)) {
+                        const progressSpan = header.querySelector("span[style*=\"float: right\"]");
+                        if (progressSpan) {
+                            progressSpan.textContent = `${completedCount}/${totalCount} completed`;
+                        }
+                    }
+                });
+            });
             updateTimeTracking();
         }
         
@@ -2643,6 +2657,20 @@
         // Initialize on DOM ready
         document.addEventListener('DOMContentLoaded', function() {
             initializeChecklist();
+            // Update milestone progress indicators
+            Object.entries(checklistData).forEach(([key, milestone]) => {
+                const completedCount = milestone.tasks.filter(t => t.completed).length;
+                const totalCount = milestone.tasks.length;
+                const sectionHeaders = document.querySelectorAll(".section-header");
+                sectionHeaders.forEach(header => {
+                    if (header.textContent.includes(milestone.title)) {
+                        const progressSpan = header.querySelector("span[style*=\"float: right\"]");
+                        if (progressSpan) {
+                            progressSpan.textContent = `${completedCount}/${totalCount} completed`;
+                        }
+                    }
+                });
+            });
             updateTimeTracking();
             
             // Update time every hour
@@ -2656,6 +2684,20 @@
             const msUntilMidnight = tomorrow - now;
             
             setTimeout(() => {
+            // Update milestone progress indicators
+            Object.entries(checklistData).forEach(([key, milestone]) => {
+                const completedCount = milestone.tasks.filter(t => t.completed).length;
+                const totalCount = milestone.tasks.length;
+                const sectionHeaders = document.querySelectorAll(".section-header");
+                sectionHeaders.forEach(header => {
+                    if (header.textContent.includes(milestone.title)) {
+                        const progressSpan = header.querySelector("span[style*=\"float: right\"]");
+                        if (progressSpan) {
+                            progressSpan.textContent = `${completedCount}/${totalCount} completed`;
+                        }
+                    }
+                });
+            });
                 updateTimeTracking();
                 setInterval(updateTimeTracking, 86400000);
             }, msUntilMidnight);
