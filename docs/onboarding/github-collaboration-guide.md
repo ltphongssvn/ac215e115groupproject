@@ -1,3 +1,4 @@
+
 # GitHub Collaboration Guide for AC215/E115 Team
 <!-- Path: /docs/onboarding/github-collaboration-guide.md -->
 <!-- Professional GitFlow-based workflow for Rice Market AI System microservices development -->
@@ -8,21 +9,22 @@ This guide establishes our team's Git workflow based on industry-standard GitFlo
 
 ## Table of Contents
 1. [Understanding Our Branching Strategy](#understanding-our-branching-strategy)
-2. [Environment Setup](#environment-setup)
-3. [Daily Development Workflow](#daily-development-workflow)
-4. [Feature Branch Management](#feature-branch-management)
-5. [Pull Request Process](#pull-request-process)
-6. [Code Review Guidelines](#code-review-guidelines)
-7. [Commit Message Standards](#commit-message-standards)
-8. [Release Management](#release-management)
-9. [Finding Technical Decisions](#finding-technical-decisions)
-10. [Troubleshooting](#troubleshooting)
+2. [Branch Protection Rules](#branch-protection-rules)
+3. [Environment Setup](#environment-setup)
+4. [Daily Development Workflow](#daily-development-workflow)
+5. [Feature Branch Management](#feature-branch-management)
+6. [Pull Request Process](#pull-request-process)
+7. [Code Review Guidelines](#code-review-guidelines)
+8. [Commit Message Standards](#commit-message-standards)
+9. [Release Management](#release-management)
+10. [Finding Technical Decisions](#finding-technical-decisions)
+11. [Troubleshooting](#troubleshooting)
 
 ## Understanding Our Branching Strategy
 
 ### Branch Types
-- **main**: Production-ready code. Protected branch - no direct commits
-- **develop**: Integration branch for features. Always in working state
+- **main**: Production-ready code. Protected branch - no direct commits allowed, even for administrators
+- **develop**: Integration branch for features. Protected branch - requires pull requests, allows admin override with warning
 - **feature/**: Individual development branches (e.g., `feature/add-redis-cache`)
 - **release/**: Preparation for production release (e.g., `release/1.2.0`)
 - **hotfix/**: Emergency production fixes (e.g., `hotfix/auth-bypass`)
@@ -32,6 +34,62 @@ This guide establishes our team's Git workflow based on industry-standard GitFlo
 feature/* → develop → release/* → main
 hotfix/* → main + develop
 ```
+
+### Protection Philosophy
+
+Our repository implements a two-tier protection system that reflects the different purposes and stability requirements of each branch type. Think of this as creating security zones within your repository - some areas allow controlled flexibility for active development, while others maintain strict controls for production stability.
+
+## Branch Protection Rules
+
+### Main Branch (Production) - Maximum Protection
+
+The main branch represents production-ready code and receives the highest level of protection. This branch only accepts changes through pull requests from the develop branch during planned releases or through hotfix branches for critical production fixes.
+
+**Active Protection Settings:**
+- Require a pull request before merging: **Enabled**
+- Required number of approvals: **2**
+- Dismiss stale pull request approvals when new commits are pushed: **Enabled**
+- Require review from CODEOWNERS: **Enabled**
+- Require status checks to pass before merging: **Enabled**
+- Require conversation resolution before merging: **Enabled**
+- Require linear history: **Enabled**
+- Do not allow bypassing the above settings: **Enabled** (administrators cannot override)
+
+**What This Means for You:**
+When you attempt to push directly to main, you'll receive an error:
+```bash
+remote: error: GH006: Protected branch update failed for refs/heads/main.
+remote: - Changes must be made through a pull request.
+```
+
+This protection ensures that production deployments always go through proper review channels. Even in emergencies, you must create a pull request - there are no shortcuts to production. This absolute protection prevents the common scenario where urgent "fixes" introduce new problems because they bypassed review.
+
+### Develop Branch (Integration) - Balanced Protection
+
+The develop branch serves as the integration point for all feature development. It maintains quality standards while allowing more flexibility than main, recognizing that this is where active development convergence happens.
+
+**Active Protection Settings:**
+- Require a pull request before merging: **Enabled**
+- Required number of approvals: **1**
+- Dismiss stale pull request approvals when new commits are pushed: **Enabled**
+- Require review from CODEOWNERS: **Disabled**
+- Require status checks to pass before merging: **Enabled**
+- Require conversation resolution before merging: **Enabled**
+- Require linear history: **Disabled** (allows merge commits)
+- Do not allow bypassing the above settings: **Disabled** (administrators can override with warning)
+
+**What This Means for You:**
+Non-administrators must always use pull requests. Administrators can push directly in emergencies but will receive a warning:
+```bash
+remote: Bypassed rule violations for refs/heads/develop:
+remote: - Changes must be made through a pull request.
+```
+
+This flexibility serves as an emergency valve for situations like CI/CD failures or urgent integration fixes. The warning reminds administrators that they're circumventing normal processes, encouraging them to use this power sparingly.
+
+### Feature Branches - No Protection
+
+Feature branches remain completely unprotected to give developers maximum flexibility during implementation. You can freely experiment, refactor, force-push, and rewrite history as needed while working on features. Protection only applies when attempting to merge these changes into develop.
 
 ## Environment Setup
 
@@ -69,6 +127,14 @@ git checkout -b develop origin/develop
 # Install pre-commit hooks
 pip install pre-commit
 pre-commit install
+
+# Verify branch protection (will fail as expected)
+git checkout main
+echo "test" > test.txt
+git add test.txt
+git commit -m "test"
+git push origin main  # Should fail with GH006 error
+git reset --hard origin/main  # Clean up
 ```
 
 ## Daily Development Workflow
@@ -84,7 +150,7 @@ git diff HEAD@{1} HEAD --name-only | grep requirements
 # If changes found, update environment:
 pip install -r requirements/base.txt
 
-# 3. Create feature branch
+# 3. Create feature branch (unprotected for flexibility)
 git checkout -b feature/descriptive-name
 ```
 
@@ -104,7 +170,7 @@ git commit -m "feat(component): Add specific functionality
 
 Resolves #issue-number"
 
-# Push regularly for backup
+# Push regularly for backup (no restrictions on feature branches)
 git push -u origin feature/your-branch
 ```
 
@@ -117,6 +183,7 @@ git status
 git push origin feature/your-branch
 
 # Create draft PR if not ready for review
+# The PR will show required checks based on target branch
 ```
 
 ## Feature Branch Management
@@ -159,11 +226,28 @@ git rebase origin/develop
 git add <resolved-files>
 git rebase --continue
 
-# Force push to feature branch only
+# Force push to feature branch only (safe since unprotected)
 git push --force-with-lease origin feature/your-branch
 ```
 
 ## Pull Request Process
+
+### Understanding PR Requirements
+
+When you create a pull request, GitHub automatically applies the protection rules of the target branch. The merge button will be disabled until all requirements are met:
+
+**For PRs to develop:**
+- 1 approval required
+- All conversations must be resolved
+- Status checks must pass (when configured)
+- Can be merged with merge commit or squash
+
+**For PRs to main:**
+- 2 approvals required
+- All conversations must be resolved
+- Status checks must pass
+- Must be merged with linear history (squash or rebase)
+- CODEOWNERS review required (if configured)
 
 ### PR Template
 ```markdown
@@ -186,6 +270,7 @@ Brief description of changes and motivation
 - [ ] Self-review completed
 - [ ] Documentation updated
 - [ ] No new warnings
+- [ ] PR targets correct branch (develop for features, main for releases)
 ```
 
 ### Before Creating PR
@@ -204,6 +289,16 @@ git diff origin/develop...HEAD
 git rebase -i origin/develop
 ```
 
+### PR Merge Requirements Dashboard
+
+GitHub will show a status check at the bottom of your PR:
+```
+✓ 1 approval (or 2 for main)
+✓ All conversations resolved
+✓ Continuous integration checks passed
+✓ No merge conflicts
+```
+
 ## Code Review Guidelines
 
 ### Review Focus Areas
@@ -219,6 +314,7 @@ git rebase -i origin/develop
 - Approve promptly or request changes clearly
 - Use "nit:" prefix for minor issues
 - Suggest, don't demand
+- Remember: Your approval is required for merging (1 for develop, 2 for main)
 
 ## Commit Message Standards
 
@@ -267,7 +363,7 @@ Fixes #89"
 
 ## Release Management
 
-### Creating Release
+### Creating Release (Protected Workflow)
 ```bash
 # Start from develop
 git checkout develop
@@ -281,37 +377,57 @@ git checkout -b release/1.2.0
 # Commit changes
 git commit -m "chore(release): Prepare v1.2.0"
 
-# After approval, merge to main
+# Create PR to main (requires 2 approvals)
+# After approval and merge:
 git checkout main
-git merge --no-ff release/1.2.0
+git pull origin main
 git tag -a v1.2.0 -m "Version 1.2.0"
+git push origin v1.2.0
 
-# Merge back to develop
-git checkout develop
-git merge --no-ff release/1.2.0
-
-# Clean up
-git branch -d release/1.2.0
+# Create PR from release back to develop (requires 1 approval)
+# Clean up after merge
 git push origin --delete release/1.2.0
 ```
 
-### Hotfix Process
+### Hotfix Process (Emergency Production Fix)
 ```bash
 # Start from main
 git checkout main
+git pull origin main
 git checkout -b hotfix/critical-fix
 
 # Make minimal fixes
 # Test thoroughly
 git commit -m "hotfix: Fix critical issue"
 
-# Merge to both main and develop
+# Create PR to main (still requires 2 approvals - no exceptions)
+# After merge, tag the hotfix
 git checkout main
-git merge --no-ff hotfix/critical-fix
+git pull origin main
 git tag -a v1.2.1 -m "Hotfix 1.2.1"
+git push origin v1.2.1
 
-git checkout develop
-git merge --no-ff hotfix/critical-fix
+# Create PR to develop (requires 1 approval)
+```
+
+### Emergency Procedures
+
+**For Develop Branch (Admin Only):**
+In genuine emergencies affecting the develop branch, administrators can push directly, but will receive a warning:
+```bash
+# Not recommended but possible for administrators
+git push origin develop
+# Output: "Bypassed rule violations for refs/heads/develop"
+# Warning serves as reminder that normal procedures are being bypassed
+```
+
+**For Main Branch:**
+The main branch offers no emergency bypass option, even for administrators:
+```bash
+# This will always fail, even for administrators
+git push origin main
+# Output: "error: GH006: Protected branch update failed"
+# Production changes must always go through proper review process
 ```
 
 ## Finding Technical Decisions
@@ -347,6 +463,23 @@ git log --oneline --grep="^hotfix"
 ```
 
 ## Troubleshooting
+
+### Common Protection-Related Issues
+
+**"Protected branch update failed" when pushing to main**
+This is expected behavior. The main branch requires all changes to go through pull requests with 2 approvals. Create a pull request from develop or a hotfix branch instead.
+
+**"Changes must be made through a pull request" warning on develop**
+For administrators, this is a warning that you're bypassing normal procedures. Consider whether this emergency override is truly necessary. For non-administrators, this will be an error - create a pull request from your feature branch.
+
+**Pull request can't be merged despite approval**
+Check that all requirements are met:
+- Required number of approvals (1 for develop, 2 for main)
+- All conversations resolved
+- Status checks passing
+- No merge conflicts
+
+The merge button tooltip will show which requirements are still pending.
 
 ### Merge Conflicts in Requirements
 ```bash
@@ -397,13 +530,14 @@ git commit -m "chore: Update gitignore"
 
 ## Team Principles
 
-1. **No direct commits to main/develop** - Always use PRs
+1. **No direct commits to main/develop** - Always use PRs (enforced by protection)
 2. **One PR, one purpose** - Keep changes focused
 3. **Review within 24 hours** - Don't block teammates
 4. **Document in commits** - Explain why, not just what
 5. **Test before pushing** - Catch issues early
 6. **Communicate blockers** - Ask for help promptly
 7. **Keep branches short-lived** - Merge within days
+8. **Respect the protection** - Rules exist to protect production stability
 
 ## Rice Market AI System Specific Guidelines
 
@@ -467,13 +601,35 @@ git checkout -- file.py        # Discard file changes
 git reflog                     # Recovery options
 ```
 
+### Protection Verification Commands
+```bash
+# Test develop protection (will warn for admins)
+git checkout develop
+echo "test" > test.txt && git add test.txt && git commit -m "test"
+git push origin develop
+
+# Test main protection (will fail for everyone)
+git checkout main
+echo "test" > test.txt && git add test.txt && git commit -m "test"
+git push origin main  # Will fail with GH006
+```
+
 ## Summary
 
-This GitFlow workflow protects our production code while enabling rapid development. Each branch type serves a specific purpose, and our commit messages document technical decisions for future reference. Following these practices ensures code quality, facilitates collaboration, and maintains a valuable project history.
+This GitFlow workflow with branch protection creates a robust development environment that balances flexibility with safety. The two-tier protection system ensures that:
 
-Remember: Good Git practices today save debugging hours tomorrow. When in doubt, ask for help before attempting fixes.
+- **Feature branches** remain unprotected for maximum development flexibility
+- **Develop branch** requires reviews but allows administrative override for emergencies
+- **Main branch** is absolutely protected, ensuring production stability through mandatory review processes
+
+Each protection level serves a specific purpose in maintaining code quality while enabling efficient development. The branch protection rules actively guide the team toward best practices by making the correct workflow the path of least resistance.
+
+Remember: Good Git practices today save debugging hours tomorrow. The protection rules aren't obstacles - they're guardrails that help us deliver reliable software. When in doubt, ask for help before attempting fixes.
 
 ---
-*Last updated: September 22, 2024*  
-*Maintainer: AC215/E115 Rice Market AI System Team*  
-*For questions about this guide, post in the team chat*
+*Last updated: September 23, 2024*
+*Branch Protection Configured: Main (strict), Develop (balanced)*
+*Default Branch: develop*
+*Maintainer: AC215/E115 Rice Market AI System Team*
+*For questions about this guide or branch protection, post in the team chat*
+```
