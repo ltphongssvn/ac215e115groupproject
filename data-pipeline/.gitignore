@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+
+# Environment
+.env
+venv/
+env/
+
+# Logs
+logs/*.log
+logs/*.txt
+sync_report*.txt
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Data files
+*.csv
+*.xlsx
+*.json
+!data/schemas/*.json
+
+# Temporary files
+tmp/
+temp/
+*.tmp
