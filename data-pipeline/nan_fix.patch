@@ -1,0 +1,44 @@
+#!/usr/bin/env python3
+# /home/lenovo/code/ltphongssvn/ac215e115groupproject/data-pipeline/nan_fix.patch
+# This patch shows the exact modification needed to fix JSON NaN handling
+
+# In the transform_record method, replace the current field processing with:
+
+def transform_record(self, record: Dict, table_name: str) -> Dict:
+    """
+    Transforms an AirTable record into PostgreSQL-compatible format.
+    Enhanced to properly handle Airtable's JSON NaN values.
+    """
+    transformed = {
+        'airtable_record_id': record['id'],
+        'last_airtable_modified': record.get('createdTime')
+    }
+    
+    fields = record.get('fields', {})
+    
+    for field_name, value in fields.items():
+        # Convert field name to PostgreSQL column name
+        pg_column = self._sanitize_column_name(field_name)
+        
+        # CRITICAL FIX: Check for Airtable's JSON NaN representation
+        # When Airtable has no valid number for a calculated field, it sends
+        # a JSON string like {"specialValue": "NaN"} instead of null
+        if isinstance(value, str) and value.strip() == '{"specialValue": "NaN"}':
+            # Convert to None, which PostgreSQL will store as NULL
+            transformed[pg_column] = None
+            print(f"  Converting JSON NaN to NULL for field: {field_name}")
+        
+        # Handle relationship fields (arrays of record IDs)
+        elif isinstance(value, list) and value and isinstance(value[0], str) and value[0].startswith('rec'):
+            # Skip relationship fields - handled separately
+            continue
+            
+        # Pass through basic Python types
+        elif isinstance(value, (int, float, str, bool)) or value is None:
+            transformed[pg_column] = value
+            
+        # Complex types get JSON serialization
+        else:
+            transformed[pg_column] = Json(value)
+    
+    return transformed
