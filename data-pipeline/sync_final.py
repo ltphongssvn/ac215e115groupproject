@@ -9,6 +9,13 @@ from typing import List, Dict, Tuple
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from airtable_sync import AirTableClient, SyncConfig, PostgreSQLSync, SyncOrchestrator
 from airtable_sync_fixed import *
+from datetime import datetime
+import logging
+
+# Configure logging for synchronization operations
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
 
 class FinalAirTableClient(AirTableClient):
     """

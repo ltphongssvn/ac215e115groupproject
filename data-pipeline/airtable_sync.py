@@ -49,7 +49,7 @@ class SyncConfig:
     postgres_database: str = "rice_market_db"
     postgres_user: str = "rice_admin"
     postgres_password: str = "localdev123"
-    postgres_schema: str = "public"
+    postgres_schema: str = "airtable_sync"
     
     # Sync behavior configuration
     batch_size: int = 100  # Records to process at once
@@ -176,10 +176,9 @@ class AirTableClient:
         2. Converting field names to PostgreSQL-safe column names
         3. Handling relationship fields (which are arrays of record IDs)
         4. Managing data type conversions
-        5. Converting Airtable JSON NaN values to PostgreSQL NULL values
         
-        The NaN handling is critical for numeric fields where Airtable sends
-        {"specialValue": "NaN"} when a calculated field has no valid value.
+        Think of this as a translator that not only translates words but also
+        converts cultural concepts between two different systems.
         """
         transformed = {
             'airtable_record_id': record['id'],
@@ -192,26 +191,24 @@ class AirTableClient:
             # Convert field name to PostgreSQL column name
             pg_column = self._sanitize_column_name(field_name)
             
-            # CRITICAL FIX: Check for Airtable's JSON NaN representation
-            if (isinstance(value, str) and value.strip() == '{"specialValue": "NaN"}') or (isinstance(value, dict) and value.get('specialValue') == 'NaN'):
-                # Convert to None, which PostgreSQL will store as NULL
-                transformed[pg_column] = None
-                logger.debug(f"Converting JSON NaN to NULL for field: {field_name}")
-            
-            # Handle relationship fields (arrays of record IDs)
-            elif isinstance(value, list) and value and ((isinstance(value[0], str) and value[0].startswith('rec')) or (isinstance(value[0], dict) and isinstance(value[0].get('id'), str) and value[0].get('id').startswith('rec'))):
-                # Skip relationship fields - handled separately
-                continue
-                
-            # Pass through basic Python types
+            # Handle different value types
+            if isinstance(value, list) and value:
+                # Handle both string IDs and dict objects in lists
+                first_item = value[0]
+                if isinstance(first_item, str) and first_item.startswith('rec'):
+                    # Already record IDs, keep as is
+                    pass
+                elif isinstance(first_item, dict) and 'id' in first_item:
+                    # Extract IDs from dict objects (linked records with metadata)
+                    value = [item.get('id') if isinstance(item, dict) else item for item in value]
             elif isinstance(value, (int, float, str, bool)) or value is None:
                 transformed[pg_column] = value
-                
-            # Complex types get JSON serialization
             else:
+                # Complex types get JSON serialization
                 transformed[pg_column] = Json(value)
-        
+                
         return transformed
+    
     def _sanitize_column_name(self, name: str) -> str:
         """
         Converts AirTable field names to PostgreSQL column names.
@@ -462,8 +459,8 @@ class SyncOrchestrator:
         # Define sync order based on dependencies
         sync_order = [
             'customers',      # No dependencies
-            #             'commodities',    # No dependencies  
-            #             'price_lists',    # Depends on commodities
+            'commodities',    # No dependencies  
+            'price_lists',    # Depends on commodities
             'contracts_hp_ng',  # Depends on customers, commodities
             'contracts_hp_ng___2',  # Depends on customers, commodities
             'shipments',      # Depends on customers, contracts, commodities

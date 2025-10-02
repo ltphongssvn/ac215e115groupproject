@@ -4,6 +4,13 @@
 
 import os
 import sys
+import requests
+from dotenv import load_dotenv
+from datetime import datetime
+
+# Load environment variables
+load_dotenv('data-pipeline/.env')
+
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from sync_ultimate import *

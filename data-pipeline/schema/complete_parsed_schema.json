@@ -1,0 +1,1623 @@
+{
+  "base_id": "appmeTyHLozoqighD",
+  "parsed_at": "2025-10-01T18:43:49.542406",
+  "source": "api_documentation_v2",
+  "tables": {
+    "Contracts (Hợp Đồng)": {
+      "id": "tbl7sHbwOCOTjL2MC",
+      "name": "Contracts (Hợp Đồng)",
+      "fields": {
+        "Contract Date": {
+          "name": "Contract Date",
+          "field_id": "fldnFxNppbLta31Th",
+          "airtable_type": "Date",
+          "technical_type": "string (ISO 8601 formatted date)",
+          "postgres_type": "DATE",
+          "is_relationship": false
+        },
+        "Contract Number": {
+          "name": "Contract Number",
+          "field_id": "fld8ArVeFyNwBk0W9Text",
+          "airtable_type": "string",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "Customer": {
+          "name": "Customer",
+          "field_id": "fldUahMG4c1ZeMoas",
+          "airtable_type": "Link to another record",
+          "technical_type": "array of record IDs (strings)",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true
+        },
+        "Quantity (kg)": {
+          "name": "Quantity (kg)",
+          "field_id": "fldGUUuvCg0hNl2w8Number",
+          "airtable_type": "number",
+          "technical_type": "An integer (whole number, e.g. 1, 32, 99). This field allows negative and positive numbers.",
+          "postgres_type": "INTEGER",
+          "is_relationship": false
+        },
+        "Entry Date": {
+          "name": "Entry Date",
+          "field_id": "fldbKNJzkQ7vQ6rSe",
+          "airtable_type": "Date",
+          "technical_type": "string (ISO 8601 formatted date)",
+          "postgres_type": "DATE",
+          "is_relationship": false
+        },
+        "Voucher Number": {
+          "name": "Voucher Number",
+          "field_id": "fldC27G7NUxSWrOlMText",
+          "airtable_type": "string",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "Commodity Type": {
+          "name": "Commodity Type",
+          "field_id": "flday1wx46qvGcYaQ",
+          "airtable_type": "Link to another record",
+          "technical_type": "array of record IDs (strings)",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true
+        },
+        "Unit Price": {
+          "name": "Unit Price",
+          "field_id": "fldP6uTnlw4HLXkIGCurrency",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,2)",
+          "is_relationship": false
+        },
+        "Transport Cost": {
+          "name": "Transport Cost",
+          "field_id": "fldhIqXB9tjOwYjggCurrency",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,2)",
+          "is_relationship": false
+        },
+        "Total Price (incl. Transport)": {
+          "name": "Total Price (incl. Transport)",
+          "field_id": "fld34Vpg5RAgOSkKICurrency",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,2)",
+          "is_relationship": false
+        },
+        "Received Quantity": {
+          "name": "Received Quantity",
+          "field_id": "fldkNVgXrplfW7kPUNumber",
+          "airtable_type": "number",
+          "technical_type": "An integer (whole number, e.g. 1, 32, 99). This field allows negative and positive numbers.",
+          "postgres_type": "INTEGER",
+          "is_relationship": false
+        },
+        "Quantity Received at DN": {
+          "name": "Quantity Received at DN",
+          "field_id": "fldzZJbLaqSqSVFoZNumber",
+          "airtable_type": "number",
+          "technical_type": "An integer (whole number, e.g. 1, 32, 99). This field allows negative and positive numbers.",
+          "postgres_type": "INTEGER",
+          "is_relationship": false
+        },
+        "Loss": {
+          "name": "Loss",
+          "field_id": "fld3Dc551UUsM51gVNumber",
+          "airtable_type": "number",
+          "technical_type": "An integer (whole number, e.g. 1, 32, 99). This field allows negative and positive numbers.",
+          "postgres_type": "INTEGER",
+          "is_relationship": false
+        },
+        "Total Amount": {
+          "name": "Total Amount",
+          "field_id": "fldoXF5CjbkQl4a6KCurrency",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,2)",
+          "is_relationship": false
+        },
+        "Protein": {
+          "name": "Protein",
+          "field_id": "fldx31sZ1GOiq8dq0Number",
+          "airtable_type": "number",
+          "technical_type": "An integer (whole number, e.g. 1, 32, 99). This field allows negative and positive numbers.",
+          "postgres_type": "INTEGER",
+          "is_relationship": false
+        },
+        "Ash": {
+          "name": "Ash",
+          "field_id": "fldNZifbiYXNSE39uNumber",
+          "airtable_type": "number",
+          "technical_type": "An integer (whole number, e.g. 1, 32, 99). This field allows negative and positive numbers.",
+          "postgres_type": "INTEGER",
+          "is_relationship": false
+        },
+        "Fibre": {
+          "name": "Fibre",
+          "field_id": "fld9NTb6ajQ4yEGfxNumber",
+          "airtable_type": "number",
+          "technical_type": "An integer (whole number, e.g. 1, 32, 99). This field allows negative and positive numbers.",
+          "postgres_type": "INTEGER",
+          "is_relationship": false
+        },
+        "Fat": {
+          "name": "Fat",
+          "field_id": "fld4WmtuJKej3NdluNumber",
+          "airtable_type": "number",
+          "technical_type": "An integer (whole number, e.g. 1, 32, 99). This field allows negative and positive numbers.",
+          "postgres_type": "INTEGER",
+          "is_relationship": false
+        },
+        "Moisture": {
+          "name": "Moisture",
+          "field_id": "fldoTkX3gSk9l8CfSNumber",
+          "airtable_type": "number",
+          "technical_type": "An integer (whole number, e.g. 1, 32, 99). This field allows negative and positive numbers.",
+          "postgres_type": "INTEGER",
+          "is_relationship": false
+        },
+        "Starch": {
+          "name": "Starch",
+          "field_id": "fldoQ18SRfXpGHGE2Number",
+          "airtable_type": "number",
+          "technical_type": "An integer (whole number, e.g. 1, 32, 99). This field allows negative and positive numbers.",
+          "postgres_type": "INTEGER",
+          "is_relationship": false
+        },
+        "Acid Value": {
+          "name": "Acid Value",
+          "field_id": "fldIqj7inIUh8cAfVNumber",
+          "airtable_type": "number",
+          "technical_type": "An integer (whole number, e.g. 1, 32, 99). This field allows negative and positive numbers.",
+          "postgres_type": "INTEGER",
+          "is_relationship": false
+        },
+        "Notes": {
+          "name": "Notes",
+          "field_id": "fldMQMdvQgPnzcfrxLong",
+          "airtable_type": "string",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "Related Shipments": {
+          "name": "Related Shipments",
+          "field_id": "fld7SLmpq0v2emb14",
+          "airtable_type": "Link to another record",
+          "technical_type": "array of record IDs (strings)",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true
+        },
+        "Related Inventory Movements": {
+          "name": "Related Inventory Movements",
+          "field_id": "fldkIuQWMc5ysijFE",
+          "airtable_type": "Link to another record",
+          "technical_type": "array of record IDs (strings)",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true
+        },
+        "Price Lists": {
+          "name": "Price Lists",
+          "field_id": "fldXojdruILzM7wZS",
+          "airtable_type": "Link to another record",
+          "technical_type": "array of record IDs (strings)",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true
+        },
+        "fields%5B%5D=": {
+          "name": "fields%5B%5D=",
+          "field_id": "fldnFxNppbLta31Th",
+          "airtable_type": "Note: %5B%5D may be omitted when specifying multiple fields, but must always be included when specifying only a single field.",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        }
+      },
+      "field_count": 26
+    },
+    "Contracts (Hợp Đồng) - 2": {
+      "id": "tbllz4cazITSwnXIo",
+      "name": "Contracts (Hợp Đồng) - 2",
+      "fields": {
+        "Contract Date": {
+          "name": "Contract Date",
+          "field_id": "fldY6xkmTwaHqeSVb",
+          "airtable_type": "Date",
+          "technical_type": "string (ISO 8601 formatted date)",
+          "postgres_type": "DATE",
+          "is_relationship": false
+        },
+        "Contract Number": {
+          "name": "Contract Number",
+          "field_id": "fldpk2Cdggmqxx8hUText",
+          "airtable_type": "string",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "Customer": {
+          "name": "Customer",
+          "field_id": "fldoh3rixTrXEgo9O",
+          "airtable_type": "Link to another record",
+          "technical_type": "array of record IDs (strings)",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true
+        },
+        "Quantity (kg)": {
+          "name": "Quantity (kg)",
+          "field_id": "fldBMsRmT1KJAgoaRNumber",
+          "airtable_type": "number",
+          "technical_type": "An integer (whole number, e.g. 1, 32, 99). This field allows negative and positive numbers.",
+          "postgres_type": "INTEGER",
+          "is_relationship": false
+        },
+        "Receipt Date": {
+          "name": "Receipt Date",
+          "field_id": "fldredRFPawWMoqxjText",
+          "airtable_type": "string",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "Receipt Number": {
+          "name": "Receipt Number",
+          "field_id": "fldy78wyiIQ9rwYLFText",
+          "airtable_type": "string",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "Commodity Type": {
+          "name": "Commodity Type",
+          "field_id": "fld6EJCqwzNbopF6U",
+          "airtable_type": "Link to another record",
+          "technical_type": "array of record IDs (strings)",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true
+        },
+        "Unit Price": {
+          "name": "Unit Price",
+          "field_id": "fldSU2BLKfOjBzM6TCurrency",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,2)",
+          "is_relationship": false
+        },
+        "Logistics Cost (VC)": {
+          "name": "Logistics Cost (VC)",
+          "field_id": "fld9gnHqs4BWouoaaNumber",
+          "airtable_type": "number",
+          "technical_type": "An integer (whole number, e.g. 1, 32, 99). This field allows negative and positive numbers.",
+          "postgres_type": "INTEGER",
+          "is_relationship": false
+        },
+        "Total Price (with VC)": {
+          "name": "Total Price (with VC)",
+          "field_id": "fldYWT8OgcLXQoDLzCurrency",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,2)",
+          "is_relationship": false
+        },
+        "Received Quantity": {
+          "name": "Received Quantity",
+          "field_id": "fldI0TG8aOXCPKaKCNumber",
+          "airtable_type": "number",
+          "technical_type": "An integer (whole number, e.g. 1, 32, 99). This field allows negative and positive numbers.",
+          "postgres_type": "INTEGER",
+          "is_relationship": false
+        },
+        "Imported Quantity (ĐN)": {
+          "name": "Imported Quantity (ĐN)",
+          "field_id": "fldeegM003TCkOA6tNumber",
+          "airtable_type": "number",
+          "technical_type": "An integer (whole number, e.g. 1, 32, 99). This field allows negative and positive numbers.",
+          "postgres_type": "INTEGER",
+          "is_relationship": false
+        },
+        "Loss": {
+          "name": "Loss",
+          "field_id": "fldeDe3UnjtDGBenKNumber",
+          "airtable_type": "number",
+          "technical_type": "An integer (whole number, e.g. 1, 32, 99). This field allows negative and positive numbers.",
+          "postgres_type": "INTEGER",
+          "is_relationship": false
+        },
+        "Total Value": {
+          "name": "Total Value",
+          "field_id": "fldrVmHzToKI867gNCurrency",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,2)",
+          "is_relationship": false
+        },
+        "Protein (%)": {
+          "name": "Protein (%)",
+          "field_id": "fldkWTVv4dBkDW8a3Number",
+          "airtable_type": "number",
+          "technical_type": "An integer (whole number, e.g. 1, 32, 99). This field allows negative and positive numbers.",
+          "postgres_type": "DECIMAL(5,3)",
+          "is_relationship": false
+        },
+        "Ash (%)": {
+          "name": "Ash (%)",
+          "field_id": "fldiUY8LM8gQX0pJKNumber",
+          "airtable_type": "number",
+          "technical_type": "An integer (whole number, e.g. 1, 32, 99). This field allows negative and positive numbers.",
+          "postgres_type": "DECIMAL(5,3)",
+          "is_relationship": false
+        },
+        "Fibre (%)": {
+          "name": "Fibre (%)",
+          "field_id": "fldzqdnXjmk1LMYYTNumber",
+          "airtable_type": "number",
+          "technical_type": "An integer (whole number, e.g. 1, 32, 99). This field allows negative and positive numbers.",
+          "postgres_type": "DECIMAL(5,3)",
+          "is_relationship": false
+        },
+        "Fat (%)": {
+          "name": "Fat (%)",
+          "field_id": "fldvsGTFnKlbAdnFKNumber",
+          "airtable_type": "number",
+          "technical_type": "An integer (whole number, e.g. 1, 32, 99). This field allows negative and positive numbers.",
+          "postgres_type": "DECIMAL(5,3)",
+          "is_relationship": false
+        },
+        "Moisture (%)": {
+          "name": "Moisture (%)",
+          "field_id": "fldvHFpw7gYXd5ljKNumber",
+          "airtable_type": "number",
+          "technical_type": "An integer (whole number, e.g. 1, 32, 99). This field allows negative and positive numbers.",
+          "postgres_type": "DECIMAL(5,3)",
+          "is_relationship": false
+        },
+        "Starch (%)": {
+          "name": "Starch (%)",
+          "field_id": "fldo9CZSzbnFXPkriNumber",
+          "airtable_type": "number",
+          "technical_type": "An integer (whole number, e.g. 1, 32, 99). This field allows negative and positive numbers.",
+          "postgres_type": "DECIMAL(5,3)",
+          "is_relationship": false
+        },
+        "Acid Value (%)": {
+          "name": "Acid Value (%)",
+          "field_id": "fldZALaTnB6Ab9f0ENumber",
+          "airtable_type": "number",
+          "technical_type": "An integer (whole number, e.g. 1, 32, 99). This field allows negative and positive numbers.",
+          "postgres_type": "DECIMAL(5,3)",
+          "is_relationship": false
+        },
+        "Notes": {
+          "name": "Notes",
+          "field_id": "fldPpMnSC14epxNDiLong",
+          "airtable_type": "string",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "Related Shipments": {
+          "name": "Related Shipments",
+          "field_id": "fld3e48jug8b5REGN",
+          "airtable_type": "Link to another record",
+          "technical_type": "array of record IDs (strings)",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true
+        },
+        "Related Inventory Movements": {
+          "name": "Related Inventory Movements",
+          "field_id": "flduimURoYqJjDmIo",
+          "airtable_type": "Link to another record",
+          "technical_type": "array of record IDs (strings)",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true
+        },
+        "fields%5B%5D=": {
+          "name": "fields%5B%5D=",
+          "field_id": "fldY6xkmTwaHqeSVb",
+          "airtable_type": "Note: %5B%5D may be omitted when specifying multiple fields, but must always be included when specifying only a single field.",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        }
+      },
+      "field_count": 25
+    },
+    "Customers": {
+      "id": "tblDUfIlNy07Z0hiL",
+      "name": "Customers",
+      "fields": {
+        "Customer Name": {
+          "name": "Customer Name",
+          "field_id": "fldGptpuOe1Sq37JeText",
+          "airtable_type": "string",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "National ID (CCCD)": {
+          "name": "National ID (CCCD)",
+          "field_id": "fldLsjRhsCi1UQ4M4Text",
+          "airtable_type": "string",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "Address": {
+          "name": "Address",
+          "field_id": "fldbaQwJWCNnL3NQSText",
+          "airtable_type": "string",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "Contracts": {
+          "name": "Contracts",
+          "field_id": "fldFxcq3U2GapAliD",
+          "airtable_type": "Link to another record",
+          "technical_type": "array of record IDs (strings)",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true
+        },
+        "Shipments": {
+          "name": "Shipments",
+          "field_id": "fldWMRN03HJt5mkp3",
+          "airtable_type": "Link to another record",
+          "technical_type": "array of record IDs (strings)",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true
+        },
+        "Inventory Movements": {
+          "name": "Inventory Movements",
+          "field_id": "fld8LXzPMmLguX0zT",
+          "airtable_type": "Link to another record",
+          "technical_type": "array of record IDs (strings)",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true
+        },
+        "Finished Goods": {
+          "name": "Finished Goods",
+          "field_id": "fldoX57hMjg60AQ7G",
+          "airtable_type": "Link to another record",
+          "technical_type": "array of record IDs (strings)",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true
+        },
+        "Contracts (Hợp Đồng) - 2": {
+          "name": "Contracts (Hợp Đồng) - 2",
+          "field_id": "fldy76eXBTGxsWCPk",
+          "airtable_type": "Link to another record",
+          "technical_type": "array of record IDs (strings)",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true
+        },
+        "fields%5B%5D=": {
+          "name": "fields%5B%5D=",
+          "field_id": "fldGptpuOe1Sq37Je",
+          "airtable_type": "Note: %5B%5D may be omitted when specifying multiple fields, but must always be included when specifying only a single field.",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        }
+      },
+      "field_count": 9
+    },
+    "Shipments": {
+      "id": "tblSj7JcxYYfs6Dcl",
+      "name": "Shipments",
+      "fields": {
+        "Shipment Date": {
+          "name": "Shipment Date",
+          "field_id": "fldD1788o3l5zQonc",
+          "airtable_type": "Date",
+          "technical_type": "string (ISO 8601 formatted date)",
+          "postgres_type": "DATE",
+          "is_relationship": false
+        },
+        "Customer": {
+          "name": "Customer",
+          "field_id": "fldc9VWsxhDzDSdsM",
+          "airtable_type": "Link to another record",
+          "technical_type": "array of record IDs (strings)",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true
+        },
+        "Contract Number": {
+          "name": "Contract Number",
+          "field_id": "fldLlLMMKe8Y8p63j",
+          "airtable_type": "Link to another record",
+          "technical_type": "array of record IDs (strings)",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true
+        },
+        "Commodity Type": {
+          "name": "Commodity Type",
+          "field_id": "fldzbeiPuFiagKKAO",
+          "airtable_type": "Link to another record",
+          "technical_type": "array of record IDs (strings)",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true
+        },
+        "Vehicle/Container Number": {
+          "name": "Vehicle/Container Number",
+          "field_id": "fldca4momnwJWEVfGText",
+          "airtable_type": "string",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "Contract Quantity": {
+          "name": "Contract Quantity",
+          "field_id": "fldNBWyVGiPEhVH4XNumber",
+          "airtable_type": "number",
+          "technical_type": "An integer (whole number, e.g. 1, 32, 99). This field allows negative and positive numbers.",
+          "postgres_type": "INTEGER",
+          "is_relationship": false
+        },
+        "Delivered Quantity (kg)": {
+          "name": "Delivered Quantity (kg)",
+          "field_id": "fldGM8rWPX4p9uPOzNumber",
+          "airtable_type": "number",
+          "technical_type": "An integer (whole number, e.g. 1, 32, 99). This field allows negative and positive numbers.",
+          "postgres_type": "INTEGER",
+          "is_relationship": false
+        },
+        "Arrival Time": {
+          "name": "Arrival Time",
+          "field_id": "fldPFng60aJCADOv0Text",
+          "airtable_type": "string",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "Unloading Date": {
+          "name": "Unloading Date",
+          "field_id": "fldP83F2ku188Em2CText",
+          "airtable_type": "string",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "Inventory Movements": {
+          "name": "Inventory Movements",
+          "field_id": "fld1DmUSFEjJMbwin",
+          "airtable_type": "Link to another record",
+          "technical_type": "array of record IDs (strings)",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true
+        },
+        "Contracts (Hợp Đồng) - 2": {
+          "name": "Contracts (Hợp Đồng) - 2",
+          "field_id": "fldJpuUzhKlmrx9Ll",
+          "airtable_type": "Link to another record",
+          "technical_type": "array of record IDs (strings)",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true
+        },
+        "fields%5B%5D=": {
+          "name": "fields%5B%5D=",
+          "field_id": "fldD1788o3l5zQonc",
+          "airtable_type": "Note: %5B%5D may be omitted when specifying multiple fields, but must always be included when specifying only a single field.",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        }
+      },
+      "field_count": 12
+    },
+    "Inventory Movements": {
+      "id": "tblhb3Vxhi6Yt0BDw",
+      "name": "Inventory Movements",
+      "fields": {
+        "Date": {
+          "name": "Date",
+          "field_id": "fldnsPpu3r7hr7Ys8",
+          "airtable_type": "Date",
+          "technical_type": "string (ISO 8601 formatted date)",
+          "postgres_type": "DATE",
+          "is_relationship": false
+        },
+        "Batch/Note": {
+          "name": "Batch/Note",
+          "field_id": "fldxOkxRz7f1qLGk2Text",
+          "airtable_type": "string",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "Customer": {
+          "name": "Customer",
+          "field_id": "fld5A6gf2l88oaLFg",
+          "airtable_type": "Link to another record",
+          "technical_type": "array of record IDs (strings)",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true
+        },
+        "Vehicle/Container": {
+          "name": "Vehicle/Container",
+          "field_id": "fldjhrt6BaeonUdxaText",
+          "airtable_type": "string",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "LDH/KH": {
+          "name": "LDH/KH",
+          "field_id": "fldKhhcSH4qa6yApoText",
+          "airtable_type": "string",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "Commodity Type": {
+          "name": "Commodity Type",
+          "field_id": "fldcx9hFr6Y4Z8pOs",
+          "airtable_type": "Link to another record",
+          "technical_type": "array of record IDs (strings)",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true
+        },
+        "Opening Balance (Tons)": {
+          "name": "Opening Balance (Tons)",
+          "field_id": "fldcriB8mwis5V8RjNumber",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,4)",
+          "is_relationship": false
+        },
+        "Quantity Received (Tons)": {
+          "name": "Quantity Received (Tons)",
+          "field_id": "fldTsBlY113pHnoUcNumber",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,4)",
+          "is_relationship": false
+        },
+        "Internal Transfer Out (Tons)": {
+          "name": "Internal Transfer Out (Tons)",
+          "field_id": "fldnDTBeQVfnkunA7Number",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,4)",
+          "is_relationship": false
+        },
+        "Recovered Finished Goods In (Tons)": {
+          "name": "Recovered Finished Goods In (Tons)",
+          "field_id": "fldtkz72Hvlz42f60Number",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,4)",
+          "is_relationship": false
+        },
+        "Domestic Sales Out (Tons)": {
+          "name": "Domestic Sales Out (Tons)",
+          "field_id": "fldOjxBAYvJqhsUhUNumber",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,4)",
+          "is_relationship": false
+        },
+        "Production Out (Tons)": {
+          "name": "Production Out (Tons)",
+          "field_id": "fldUTOqntVlxpoQPFNumber",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,4)",
+          "is_relationship": false
+        },
+        "Loss 1.3% (from 1/6/2025)": {
+          "name": "Loss 1.3% (from 1/6/2025)",
+          "field_id": "fldcpXwVIUXSUSOlxNumber",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,4)",
+          "is_relationship": false
+        },
+        "Raw Material Sales Out (Tons)": {
+          "name": "Raw Material Sales Out (Tons)",
+          "field_id": "fldYtwxPKRLGXaWNgNumber",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,4)",
+          "is_relationship": false
+        },
+        "Closing Balance (Tons)": {
+          "name": "Closing Balance (Tons)",
+          "field_id": "flddDe5W7YCCQAPhSNumber",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,4)",
+          "is_relationship": false
+        },
+        "BX A. CHIN": {
+          "name": "BX A. CHIN",
+          "field_id": "fldRXHJxUq6B0vsQYText",
+          "airtable_type": "string",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "BX NGOÀI NÚI": {
+          "name": "BX NGOÀI NÚI",
+          "field_id": "fldcgFfwtYKJ7HsazText",
+          "airtable_type": "string",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "BX (TRÍ)": {
+          "name": "BX (TRÍ)",
+          "field_id": "fldDWksPTWJI9NjTeText",
+          "airtable_type": "string",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "BX (TĐỜI)": {
+          "name": "BX (TĐỜI)",
+          "field_id": "fldvpRy1JzEY1EPCvText",
+          "airtable_type": "string",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "BX A DŨNG": {
+          "name": "BX A DŨNG",
+          "field_id": "fld25l02IxALDZVbsText",
+          "airtable_type": "string",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "BX - THOA": {
+          "name": "BX - THOA",
+          "field_id": "flde09L7GUy5ojr4kText",
+          "airtable_type": "string",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "Fat (%)": {
+          "name": "Fat (%)",
+          "field_id": "fldbjUy9AmHrFTfJGNumber",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(5,3)",
+          "is_relationship": false
+        },
+        "Moisture (%)": {
+          "name": "Moisture (%)",
+          "field_id": "fldkSE2Y61hxEjwXdNumber",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(5,3)",
+          "is_relationship": false
+        },
+        "Starch": {
+          "name": "Starch",
+          "field_id": "fldEduQkTLopAysCqNumber",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,4)",
+          "is_relationship": false
+        },
+        "Acid Value": {
+          "name": "Acid Value",
+          "field_id": "fldn60uKsw7aWRUehNumber",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,4)",
+          "is_relationship": false
+        },
+        "Related Contract": {
+          "name": "Related Contract",
+          "field_id": "fldfXOybVdk8XaaTY",
+          "airtable_type": "Link to another record",
+          "technical_type": "array of record IDs (strings)",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true
+        },
+        "Related Shipment": {
+          "name": "Related Shipment",
+          "field_id": "fldaX1vNj2HOeFggH",
+          "airtable_type": "Link to another record",
+          "technical_type": "array of record IDs (strings)",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true
+        },
+        "Contracts (Hợp Đồng) - 2": {
+          "name": "Contracts (Hợp Đồng) - 2",
+          "field_id": "fldiidkA6SJStVIfA",
+          "airtable_type": "Link to another record",
+          "technical_type": "array of record IDs (strings)",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true
+        },
+        "fields%5B%5D=": {
+          "name": "fields%5B%5D=",
+          "field_id": "fldnsPpu3r7hr7Ys8",
+          "airtable_type": "Note: %5B%5D may be omitted when specifying multiple fields, but must always be included when specifying only a single field.",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        }
+      },
+      "field_count": 29
+    },
+    "Finished Goods": {
+      "id": "tblNY26FnHswHRcWS",
+      "name": "Finished Goods",
+      "fields": {
+        "Ngày nhập": {
+          "name": "Ngày nhập",
+          "field_id": "fldjyqSriXatMCiH5Text",
+          "airtable_type": "string",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "Khách hàng": {
+          "name": "Khách hàng",
+          "field_id": "fldPGHjYk5ML33688",
+          "airtable_type": "Link to another record",
+          "technical_type": "array of record IDs (strings)",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true
+        },
+        "LDH": {
+          "name": "LDH",
+          "field_id": "fldIB1JSpUCSFSn78Text",
+          "airtable_type": "string",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "Máy": {
+          "name": "Máy",
+          "field_id": "fldtyfLCePXlf5YwqText",
+          "airtable_type": "string",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "Sản xuất tổng giờ": {
+          "name": "Sản xuất tổng giờ",
+          "field_id": "fld7urI4OKVWCCQyaNumber",
+          "airtable_type": "number",
+          "technical_type": "An integer (whole number, e.g. 1, 32, 99). This field allows negative and positive numbers.",
+          "postgres_type": "INTEGER",
+          "is_relationship": false
+        },
+        "16h30-19h": {
+          "name": "16h30-19h",
+          "field_id": "fldPfUxRYlZDZZF5RNumber",
+          "airtable_type": "number",
+          "technical_type": "An integer (whole number, e.g. 1, 32, 99). This field allows negative and positive numbers.",
+          "postgres_type": "INTEGER",
+          "is_relationship": false
+        },
+        "19h-7h": {
+          "name": "19h-7h",
+          "field_id": "fld3qp42b6o1o46LhNumber",
+          "airtable_type": "number",
+          "technical_type": "An integer (whole number, e.g. 1, 32, 99). This field allows negative and positive numbers.",
+          "postgres_type": "INTEGER",
+          "is_relationship": false
+        },
+        "Mì": {
+          "name": "Mì",
+          "field_id": "fldYdlWASPYxK7cRkText",
+          "airtable_type": "string",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "Số lượng container": {
+          "name": "Số lượng container",
+          "field_id": "fldfMEjoGEmDDeVlkNumber",
+          "airtable_type": "number",
+          "technical_type": "An integer (whole number, e.g. 1, 32, 99). This field allows negative and positive numbers.",
+          "postgres_type": "INTEGER",
+          "is_relationship": false
+        },
+        "Số lượng theo đầu bao - Trong giờ": {
+          "name": "Số lượng theo đầu bao - Trong giờ",
+          "field_id": "fldhJKxzZzdMZaE7bNumber",
+          "airtable_type": "number",
+          "technical_type": "An integer (whole number, e.g. 1, 32, 99). This field allows negative and positive numbers.",
+          "postgres_type": "INTEGER",
+          "is_relationship": false
+        },
+        "Số lượng theo đầu bao - Ngoài giờ": {
+          "name": "Số lượng theo đầu bao - Ngoài giờ",
+          "field_id": "fld2Rj8Tp5KFrSeXqNumber",
+          "airtable_type": "number",
+          "technical_type": "An integer (whole number, e.g. 1, 32, 99). This field allows negative and positive numbers.",
+          "postgres_type": "INTEGER",
+          "is_relationship": false
+        },
+        "Tiền bồi dưỡng BX CONT (50K/20T, 100K/40T)": {
+          "name": "Tiền bồi dưỡng BX CONT (50K/20T, 100K/40T)",
+          "field_id": "fldrwYDBnDKwSVxvDCurrency",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,2)",
+          "is_relationship": false
+        },
+        "Tiền BX trong giờ (23K)": {
+          "name": "Tiền BX trong giờ (23K)",
+          "field_id": "fldWcvmmhowWRddutCurrency",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,2)",
+          "is_relationship": false
+        },
+        "Ngoài giờ": {
+          "name": "Ngoài giờ",
+          "field_id": "fldoJKK7ZHvi4nWrsCurrency",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,2)",
+          "is_relationship": false
+        },
+        "Tổng (ca 1)": {
+          "name": "Tổng (ca 1)",
+          "field_id": "fldd5smU9aJFEEppBCurrency",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,2)",
+          "is_relationship": false
+        },
+        "Số lượng container (ca 2)": {
+          "name": "Số lượng container (ca 2)",
+          "field_id": "fldRIq7R5un7qSl3LNumber",
+          "airtable_type": "number",
+          "technical_type": "An integer (whole number, e.g. 1, 32, 99). This field allows negative and positive numbers.",
+          "postgres_type": "INTEGER",
+          "is_relationship": false
+        },
+        "Số lượng theo đầu bao - Trong giờ (ca 2)": {
+          "name": "Số lượng theo đầu bao - Trong giờ (ca 2)",
+          "field_id": "fldn6GA9aZLdwddrJNumber",
+          "airtable_type": "number",
+          "technical_type": "An integer (whole number, e.g. 1, 32, 99). This field allows negative and positive numbers.",
+          "postgres_type": "INTEGER",
+          "is_relationship": false
+        },
+        "Số lượng theo đầu bao - Ngoài giờ (ca 2)": {
+          "name": "Số lượng theo đầu bao - Ngoài giờ (ca 2)",
+          "field_id": "fldfRCH2utRM3SkqSNumber",
+          "airtable_type": "number",
+          "technical_type": "An integer (whole number, e.g. 1, 32, 99). This field allows negative and positive numbers.",
+          "postgres_type": "INTEGER",
+          "is_relationship": false
+        },
+        "Tiền bồi dưỡng BX CONT (ca 2)": {
+          "name": "Tiền bồi dưỡng BX CONT (ca 2)",
+          "field_id": "fldHoiSxc9nTTw56RCurrency",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,2)",
+          "is_relationship": false
+        },
+        "Tiền BX trong giờ (ca 2)": {
+          "name": "Tiền BX trong giờ (ca 2)",
+          "field_id": "fldQHkIsvFMdRJR7ICurrency",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,2)",
+          "is_relationship": false
+        },
+        "Ngoài giờ (ca 2)": {
+          "name": "Ngoài giờ (ca 2)",
+          "field_id": "fldSsFnTHq2n5t8yPCurrency",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,2)",
+          "is_relationship": false
+        },
+        "Tổng (ca 2)": {
+          "name": "Tổng (ca 2)",
+          "field_id": "fldkWKe9zjdPw0hcRCurrency",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,2)",
+          "is_relationship": false
+        },
+        "Ngày ký BX (ca 1)": {
+          "name": "Ngày ký BX (ca 1)",
+          "field_id": "fldmyri0pMt6sMuZwText",
+          "airtable_type": "string",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "Trong giờ 57K (ca 1)": {
+          "name": "Trong giờ 57K (ca 1)",
+          "field_id": "fld4YwdWVh4KJ0wKfCurrency",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,2)",
+          "is_relationship": false
+        },
+        "Ngoài giờ 75K + Chủ Nhật (ca 1)": {
+          "name": "Ngoài giờ 75K + Chủ Nhật (ca 1)",
+          "field_id": "fldWzdZFjrBaCtrgrCurrency",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,2)",
+          "is_relationship": false
+        },
+        "Ngoài giờ 87K (19-7h, lễ, CN, ca đêm) (ca 1)": {
+          "name": "Ngoài giờ 87K (19-7h, lễ, CN, ca đêm) (ca 1)",
+          "field_id": "fldzIVrVW0ny2pVwpCurrency",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,2)",
+          "is_relationship": false
+        },
+        "Mì đập (ca 1)": {
+          "name": "Mì đập (ca 1)",
+          "field_id": "fldALhugB1YDjzpofNumber",
+          "airtable_type": "number",
+          "technical_type": "An integer (whole number, e.g. 1, 32, 99). This field allows negative and positive numbers.",
+          "postgres_type": "INTEGER",
+          "is_relationship": false
+        },
+        "Ngày lễ (57*1,5) (ca 1)": {
+          "name": "Ngày lễ (57*1,5) (ca 1)",
+          "field_id": "fldYpM6Yau7rwT4ISCurrency",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,2)",
+          "is_relationship": false
+        },
+        "Bồi dưỡng xếp bao/ngày (ca 1)": {
+          "name": "Bồi dưỡng xếp bao/ngày (ca 1)",
+          "field_id": "fldHA1yLVTlRUEBEbCurrency",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,2)",
+          "is_relationship": false
+        },
+        "Tổng (ca 1, BX)": {
+          "name": "Tổng (ca 1, BX)",
+          "field_id": "fldoySJZm1YyF6mmVCurrency",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,2)",
+          "is_relationship": false
+        },
+        "Ngày ký BX (ca 2)": {
+          "name": "Ngày ký BX (ca 2)",
+          "field_id": "fldJMZ4KaOMVSyugdText",
+          "airtable_type": "string",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "Trong giờ 57K (ca 2)": {
+          "name": "Trong giờ 57K (ca 2)",
+          "field_id": "fld0697W6U345PTDACurrency",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,2)",
+          "is_relationship": false
+        },
+        "Ngoài giờ 72K (ca 2)": {
+          "name": "Ngoài giờ 72K (ca 2)",
+          "field_id": "fldFXBnVhFwWYRZhqCurrency",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,2)",
+          "is_relationship": false
+        },
+        "Ngoài giờ 87K (19-7h, lễ, CN, ca đêm) (ca 2)": {
+          "name": "Ngoài giờ 87K (19-7h, lễ, CN, ca đêm) (ca 2)",
+          "field_id": "fldmVMPnR3GSj3hrKCurrency",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,2)",
+          "is_relationship": false
+        },
+        "Lúa mì trong giờ (ca 2)": {
+          "name": "Lúa mì trong giờ (ca 2)",
+          "field_id": "fldvElFV5VPe7l0hINumber",
+          "airtable_type": "number",
+          "technical_type": "An integer (whole number, e.g. 1, 32, 99). This field allows negative and positive numbers.",
+          "postgres_type": "INTEGER",
+          "is_relationship": false
+        },
+        "Lúa mì ngoài giờ (ca 2)": {
+          "name": "Lúa mì ngoài giờ (ca 2)",
+          "field_id": "fld0TWxKRY8Hd4ZPuNumber",
+          "airtable_type": "number",
+          "technical_type": "An integer (whole number, e.g. 1, 32, 99). This field allows negative and positive numbers.",
+          "postgres_type": "INTEGER",
+          "is_relationship": false
+        },
+        "Ngày lễ (57*1,5) (ca 2)": {
+          "name": "Ngày lễ (57*1,5) (ca 2)",
+          "field_id": "fld1FY4tJWRweKNXlCurrency",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,2)",
+          "is_relationship": false
+        },
+        "Bồi dưỡng dọn bao 200K/ngày (ca 2)": {
+          "name": "Bồi dưỡng dọn bao 200K/ngày (ca 2)",
+          "field_id": "fldKcvQ13kYnnq6SaCurrency",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,2)",
+          "is_relationship": false
+        },
+        "Tổng (ca 2, BX)": {
+          "name": "Tổng (ca 2, BX)",
+          "field_id": "fldSA26gTGLGkV11yCurrency",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,2)",
+          "is_relationship": false
+        },
+        "Ngày ký BX (ca 3)": {
+          "name": "Ngày ký BX (ca 3)",
+          "field_id": "fldGwvoilE7OAwp7o",
+          "airtable_type": "Date",
+          "technical_type": "string (ISO 8601 formatted date)",
+          "postgres_type": "DATE",
+          "is_relationship": false
+        },
+        "Trong giờ 57K (ca 3)": {
+          "name": "Trong giờ 57K (ca 3)",
+          "field_id": "fld0TsTsNPlfgdKHjCurrency",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,2)",
+          "is_relationship": false
+        },
+        "Ngoài giờ 76K (ca 3)": {
+          "name": "Ngoài giờ 76K (ca 3)",
+          "field_id": "fldNauBnViiO9EcT5Currency",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,2)",
+          "is_relationship": false
+        },
+        "Ngoài giờ 87K (19-7h, lễ, CN, ca đêm) (ca 3)": {
+          "name": "Ngoài giờ 87K (19-7h, lễ, CN, ca đêm) (ca 3)",
+          "field_id": "fldpyBCid9PidUQBlCurrency",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,2)",
+          "is_relationship": false
+        },
+        "Lúa mì trong giờ (ca 3)": {
+          "name": "Lúa mì trong giờ (ca 3)",
+          "field_id": "fldJVCEK71e2ZUcdeNumber",
+          "airtable_type": "number",
+          "technical_type": "An integer (whole number, e.g. 1, 32, 99). This field allows negative and positive numbers.",
+          "postgres_type": "INTEGER",
+          "is_relationship": false
+        },
+        "Lúa mì ngoài giờ (ca 3)": {
+          "name": "Lúa mì ngoài giờ (ca 3)",
+          "field_id": "fldd09qLi2zJ3qfcWNumber",
+          "airtable_type": "number",
+          "technical_type": "An integer (whole number, e.g. 1, 32, 99). This field allows negative and positive numbers.",
+          "postgres_type": "INTEGER",
+          "is_relationship": false
+        },
+        "Ngày lễ (57*1,5) (ca 3)": {
+          "name": "Ngày lễ (57*1,5) (ca 3)",
+          "field_id": "fldseLYO1LvMG7PdACurrency",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,2)",
+          "is_relationship": false
+        },
+        "Bồi dưỡng dọn bao 200K/ngày (ca 3)": {
+          "name": "Bồi dưỡng dọn bao 200K/ngày (ca 3)",
+          "field_id": "fldwZy3FedwuFivDVCurrency",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,2)",
+          "is_relationship": false
+        },
+        "Tổng (ca 3, BX)": {
+          "name": "Tổng (ca 3, BX)",
+          "field_id": "fldKm2JVaHCa8nY5HCurrency",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,2)",
+          "is_relationship": false
+        },
+        "Ngày ký BX (ca 4)": {
+          "name": "Ngày ký BX (ca 4)",
+          "field_id": "fldNcL6OzFnXuPx4L",
+          "airtable_type": "Date",
+          "technical_type": "string (ISO 8601 formatted date)",
+          "postgres_type": "DATE",
+          "is_relationship": false
+        },
+        "Trong giờ 57K (ca 4)": {
+          "name": "Trong giờ 57K (ca 4)",
+          "field_id": "fldYJcvnsDk1vmCpKCurrency",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,2)",
+          "is_relationship": false
+        },
+        "Ngoài giờ 75K + Chủ Nhật (ca 4)": {
+          "name": "Ngoài giờ 75K + Chủ Nhật (ca 4)",
+          "field_id": "fldYSHmQVg9VrVnOPCurrency",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,2)",
+          "is_relationship": false
+        },
+        "Ngoài giờ 87K (19-7h, lễ, CN, ca đêm) (ca 4)": {
+          "name": "Ngoài giờ 87K (19-7h, lễ, CN, ca đêm) (ca 4)",
+          "field_id": "fldJO2dnmLgJZzm76Currency",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,2)",
+          "is_relationship": false
+        },
+        "Mì đập (ca 4)": {
+          "name": "Mì đập (ca 4)",
+          "field_id": "fldKs7of6QwkaFvWHNumber",
+          "airtable_type": "number",
+          "technical_type": "An integer (whole number, e.g. 1, 32, 99). This field allows negative and positive numbers.",
+          "postgres_type": "INTEGER",
+          "is_relationship": false
+        },
+        "Ngày lễ (57*1,5) (ca 4)": {
+          "name": "Ngày lễ (57*1,5) (ca 4)",
+          "field_id": "fldK6i01quzTi2lMlCurrency",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,2)",
+          "is_relationship": false
+        },
+        "Bồi dưỡng xếp bao/ngày (ca 4)": {
+          "name": "Bồi dưỡng xếp bao/ngày (ca 4)",
+          "field_id": "fld7ulfDGPTiwIIX3Currency",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,2)",
+          "is_relationship": false
+        },
+        "Tổng (ca 4, BX)": {
+          "name": "Tổng (ca 4, BX)",
+          "field_id": "flddWFhejBekszAQhCurrency",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,2)",
+          "is_relationship": false
+        },
+        "Ngày ký BX (ca 5)": {
+          "name": "Ngày ký BX (ca 5)",
+          "field_id": "fldBjMOYP9BDZLvF8",
+          "airtable_type": "Date",
+          "technical_type": "string (ISO 8601 formatted date)",
+          "postgres_type": "DATE",
+          "is_relationship": false
+        },
+        "Commodities": {
+          "name": "Commodities",
+          "field_id": "fldthc7c3QrI4W3k2",
+          "airtable_type": "Link to another record",
+          "technical_type": "array of record IDs (strings)",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true
+        },
+        "fields%5B%5D=": {
+          "name": "fields%5B%5D=",
+          "field_id": "fldjyqSriXatMCiH5",
+          "airtable_type": "Note: %5B%5D may be omitted when specifying multiple fields, but must always be included when specifying only a single field.",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        }
+      },
+      "field_count": 59
+    },
+    "Commodities": {
+      "id": "tblawXefYSXa6UFSX",
+      "name": "Commodities",
+      "fields": {
+        "Commodity Name": {
+          "name": "Commodity Name",
+          "field_id": "fldMuIRUuAkRiBaHRText",
+          "airtable_type": "string",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "Commodity Photo": {
+          "name": "Commodity Photo",
+          "field_id": "fld5uzzKAnzDpG0Bl",
+          "airtable_type": "Attachment",
+          "technical_type": "array of attachment objects",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "Commodity Type": {
+          "name": "Commodity Type",
+          "field_id": "fldd1LqZX6bMBqzkq",
+          "airtable_type": "Single select",
+          "technical_type": "",
+          "postgres_type": "VARCHAR(100)",
+          "is_relationship": false
+        },
+        "Description": {
+          "name": "Description",
+          "field_id": "fldF8E2zeCw6GC8e8Long",
+          "airtable_type": "string",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "Contracts": {
+          "name": "Contracts",
+          "field_id": "fldHYRNYHxjhOUoW3",
+          "airtable_type": "Link to another record",
+          "technical_type": "array of record IDs (strings)",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true
+        },
+        "Shipments": {
+          "name": "Shipments",
+          "field_id": "fldE5O2vRgEOkX0IA",
+          "airtable_type": "Link to another record",
+          "technical_type": "array of record IDs (strings)",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true
+        },
+        "Inventory Movements": {
+          "name": "Inventory Movements",
+          "field_id": "fldZDJj9BfbyIIQfL",
+          "airtable_type": "Link to another record",
+          "technical_type": "array of record IDs (strings)",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true
+        },
+        "Finished Goods": {
+          "name": "Finished Goods",
+          "field_id": "fldsDv8qkJCz2O6je",
+          "airtable_type": "Link to another record",
+          "technical_type": "array of record IDs (strings)",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true
+        },
+        "Number of Contracts": {
+          "name": "Number of Contracts",
+          "field_id": "fldyHIjON72SfhQDo",
+          "airtable_type": "Count",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "Total Contracted Quantity (kg)": {
+          "name": "Total Contracted Quantity (kg)",
+          "field_id": "fld7NgQHQm89fPTVK",
+          "airtable_type": "Rollup",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "Average Unit Price (from Contracts)": {
+          "name": "Average Unit Price (from Contracts)",
+          "field_id": "fldl4hkV7pbJj4ngS",
+          "airtable_type": "Rollup",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "Total Shipments": {
+          "name": "Total Shipments",
+          "field_id": "fldn8VBucWhb6ssPU",
+          "airtable_type": "Count",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "Total Inventory Movements": {
+          "name": "Total Inventory Movements",
+          "field_id": "fldIvjD507mqWi6CS",
+          "airtable_type": "Count",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "Total Finished Goods Records": {
+          "name": "Total Finished Goods Records",
+          "field_id": "fldea9nBRm2oPMzdk",
+          "airtable_type": "Count",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "Latest Contract Date": {
+          "name": "Latest Contract Date",
+          "field_id": "fldHBB9iutApLN0ll",
+          "airtable_type": "Rollup",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "Commodity Summary (AI)": {
+          "name": "Commodity Summary (AI)",
+          "field_id": "fldMXYxztUeRhdcsy",
+          "airtable_type": "",
+          "technical_type": "Market Price Research (AI)flduXySJiP9lD29wq",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "Market Price Research (AI)": {
+          "name": "Market Price Research (AI)",
+          "field_id": "flduXySJiP9lD29wq",
+          "airtable_type": "",
+          "technical_type": "",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true
+        },
+        "Price Lists": {
+          "name": "Price Lists",
+          "field_id": "fldoJYdzfVeUUsOIF",
+          "airtable_type": "Link to another record",
+          "technical_type": "array of record IDs (strings)",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true
+        },
+        "Contracts (Hợp Đồng) - 2": {
+          "name": "Contracts (Hợp Đồng) - 2",
+          "field_id": "fldaadkzafceeMfI8",
+          "airtable_type": "Link to another record",
+          "technical_type": "array of record IDs (strings)",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true
+        },
+        "fields%5B%5D=": {
+          "name": "fields%5B%5D=",
+          "field_id": "fldMuIRUuAkRiBaHR",
+          "airtable_type": "Note: %5B%5D may be omitted when specifying multiple fields, but must always be included when specifying only a single field.",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        }
+      },
+      "field_count": 20
+    },
+    "Price Lists": {
+      "id": "tbl0B7ON9dDTtj3mP",
+      "name": "Price Lists",
+      "fields": {
+        "Price Name": {
+          "name": "Price Name",
+          "field_id": "fld4YjLqNX5e4h7cIText",
+          "airtable_type": "string",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "Commodity": {
+          "name": "Commodity",
+          "field_id": "fld0TZQKKhqvhdeVn",
+          "airtable_type": "Link to another record",
+          "technical_type": "array of record IDs (strings)",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true
+        },
+        "Contract": {
+          "name": "Contract",
+          "field_id": "fld5O4JjiZ3Vs99Kv",
+          "airtable_type": "Link to another record",
+          "technical_type": "array of record IDs (strings)",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true
+        },
+        "Price Type": {
+          "name": "Price Type",
+          "field_id": "fldBenGPz0MUfiwR1",
+          "airtable_type": "Single select",
+          "technical_type": "",
+          "postgres_type": "VARCHAR(100)",
+          "is_relationship": false
+        },
+        "Price Value": {
+          "name": "Price Value",
+          "field_id": "fldjTxqNuUbRuYRjNCurrency",
+          "airtable_type": "number",
+          "technical_type": "",
+          "postgres_type": "DECIMAL(15,2)",
+          "is_relationship": false
+        },
+        "Effective Date": {
+          "name": "Effective Date",
+          "field_id": "fldGmHRhGIv2UqUTR",
+          "airtable_type": "Date",
+          "technical_type": "string (ISO 8601 formatted date)",
+          "postgres_type": "DATE",
+          "is_relationship": false
+        },
+        "Notes": {
+          "name": "Notes",
+          "field_id": "fldvWMshzegB5O5HcLong",
+          "airtable_type": "string",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "Commodity Name (Lookup)": {
+          "name": "Commodity Name (Lookup)",
+          "field_id": "flddea6DRNpKkvbEg",
+          "airtable_type": "Lookup",
+          "technical_type": "array of numbers, strings, booleans, or objects",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "Contract Number (Lookup)": {
+          "name": "Contract Number (Lookup)",
+          "field_id": "fldIkljFX2gw9sMrW",
+          "airtable_type": "Lookup",
+          "technical_type": "array of numbers, strings, booleans, or objects",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "Is Current Price?": {
+          "name": "Is Current Price?",
+          "field_id": "fldKlwf9KarzHPCQXFormula",
+          "airtable_type": "number, string, array of numbers or strings",
+          "technical_type": "Computed value: IF(Effective Date=BLANK(), FALSE(), BLANK()).",
+          "postgres_type": "INTEGER",
+          "is_relationship": false
+        },
+        "Days Since Effective": {
+          "name": "Days Since Effective",
+          "field_id": "fldn3pLDXjiDNhbI8Formula",
+          "airtable_type": "number, string, array of numbers or strings",
+          "technical_type": "Computed value: DATETIME_DIFF(TODAY(), Effective Date, 'days').",
+          "postgres_type": "INTEGER",
+          "is_relationship": false
+        },
+        "Related Contracts (Rollup)": {
+          "name": "Related Contracts (Rollup)",
+          "field_id": "fldWUFbOTNSciPkXr",
+          "airtable_type": "Rollup",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "Price Summary (AI)": {
+          "name": "Price Summary (AI)",
+          "field_id": "fldCEN5gDNHqiAthz",
+          "airtable_type": "",
+          "technical_type": "Market Price Research (AI)fldV1tg1K48ippCwy",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "Market Price Research (AI)": {
+          "name": "Market Price Research (AI)",
+          "field_id": "fldV1tg1K48ippCwy",
+          "airtable_type": "",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        },
+        "fields%5B%5D=": {
+          "name": "fields%5B%5D=",
+          "field_id": "fld4YjLqNX5e4h7cI",
+          "airtable_type": "Note: %5B%5D may be omitted when specifying multiple fields, but must always be included when specifying only a single field.",
+          "technical_type": "",
+          "postgres_type": "TEXT",
+          "is_relationship": false
+        }
+      },
+      "field_count": 15
+    }
+  }
+}
