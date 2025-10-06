@@ -643,6 +643,7 @@
                 <button class="nav-tab" onclick="switchPage('apiflow')">API Flow Architecture</button>
                 <button class="nav-tab" onclick="switchPage('techstack')">Tech Stack</button>
                 <button class="nav-tab" onclick="switchPage('team')">Team Structure</button>
+                <button class="nav-tab" onclick="switchPage('frontend')">Frontend</button>
             </div>
         </header>
         
@@ -1809,6 +1810,17 @@
                     </div>
                 </div>
             </div>
+        <!-- Frontend React Application -->
+        <div id="frontend-page" class="page-content">
+            <div style="width: 100%; height: calc(100vh - 200px); position: relative;">
+                <iframe 
+                    src="https://frontend.thanhphongle.net/"
+                    style="width: 100%; height: 100%; border: none; border-radius: 8px;"
+                    title="Rice Market AI System Frontend"
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
         </div>    <script>
         // Checklist data
         const checklistData = {
@@ -2432,32 +2444,95 @@
                 }
             }
         }
-        
+        //
+        // // Switch between pages
+        // function switchPage(page) {
+        //     // First, remove 'active' class from all navigation tabs
+        //     document.querySelectorAll('.nav-tab').forEach(tab => {
+        //         tab.classList.remove('active');
+        //     });
+        //
+        //     // Then, remove 'active' class from all page content divs
+        //     document.querySelectorAll('.page-content').forEach(content => {
+        //         content.classList.remove('active');
+        //     });
+        //
+        //     // Now activate the appropriate tab and content based on the page parameter
+        //     if (page === 'checklist') {
+        //         // Activate first tab (index 0) and checklist content
+        //         document.querySelectorAll('.nav-tab')[0].classList.add('active');
+        //         document.getElementById('checklist-page').classList.add('active');
+        //     } else if (page === 'apiflow') {
+        //         // Activate second tab (index 1) and API flow content
+        //         document.querySelectorAll('.nav-tab')[1].classList.add('active');
+        //         document.getElementById('apiflow-page').classList.add('active');
+        //     } else if (page === 'techstack') {
+        //         // Activate third tab (index 2) and tech stack content
+        //         document.querySelectorAll('.nav-tab')[2].classList.add('active');
+        //         document.getElementById('techstack-page').classList.add('active');
+        //     } else if (page === 'team') {
+        //         // Activate fourth tab (index 3) and team content
+        //         document.querySelectorAll('.nav-tab')[3].classList.add('active');
+        //         document.getElementById('team-page').classList.add('active');
+        //     } else if (page === 'frontend') {
+        //         // Activate fifth tab (index 4) and frontend content
+        //         document.querySelectorAll('.nav-tab')[4].classList.add('active');
+        //         document.getElementById('frontend-page').classList.add('active');
+        //     }
+        // }
+
+
+        // ~/code/ltphongssvn/ac215e115groupproject/index.html - switchPage function
         // Switch between pages
         function switchPage(page) {
+            // Special handling for Frontend tab - redirect to external React app
+            if (page === 'frontend') {
+                // Open the React frontend in the same tab
+                // Change to window.open('https://frontend.thanhphongle.net/', '_blank')
+                // if you prefer opening in a new tab
+                // window.location.href = 'https://frontend.thanhphongle.net/';
+                window.open('https://frontend.thanhphongle.net/', '_blank');
+                return; // Exit the function early since we're navigating away
+            }
+
+            // For all other tabs, use the normal show/hide logic
+            // First, remove 'active' class from all navigation tabs
             document.querySelectorAll('.nav-tab').forEach(tab => {
                 tab.classList.remove('active');
             });
+
+            // Then, remove 'active' class from all page content divs
             document.querySelectorAll('.page-content').forEach(content => {
                 content.classList.remove('active');
             });
-            
+
+            // Now activate the appropriate tab and content based on the page parameter
             if (page === 'checklist') {
+                // Activate first tab (index 0) and checklist content
                 document.querySelectorAll('.nav-tab')[0].classList.add('active');
                 document.getElementById('checklist-page').classList.add('active');
             } else if (page === 'apiflow') {
+                // Activate second tab (index 1) and API flow content
                 document.querySelectorAll('.nav-tab')[1].classList.add('active');
                 document.getElementById('apiflow-page').classList.add('active');
             } else if (page === 'techstack') {
+                // Activate third tab (index 2) and tech stack content
                 document.querySelectorAll('.nav-tab')[2].classList.add('active');
                 document.getElementById('techstack-page').classList.add('active');
             } else if (page === 'team') {
+                // Activate fourth tab (index 3) and team content
                 document.querySelectorAll('.nav-tab')[3].classList.add('active');
                 document.getElementById('team-page').classList.add('active');
             }
         }
-        
-        // Initialize checklist
+
+
+
+
+
+
+
+       // Initialize checklist
         function initializeChecklist() {
             const container = document.getElementById('checklist-container');
             if (!container) return;
