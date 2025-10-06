@@ -1,0 +1,87 @@
+# File path: ~/code/ltphongssvn/ac215e115groupproject/docker-compose.test.yml
+# Test configuration with modified ports to avoid conflicts with running containers
+
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: test_rice_market_postgres
+    environment:
+      POSTGRES_USER: rice_admin
+      POSTGRES_PASSWORD: localdev123
+      POSTGRES_DB: rice_market_db
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=en_US.utf8"
+      POSTGRES_MAX_CONNECTIONS: 100
+      POSTGRES_SHARED_BUFFERS: 256MB
+    ports:
+      - "15433:5432"  # Test port: 15433 instead of 5433
+    volumes:
+      - ./data-pipeline/schema/postgresql_ddl.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro
+      - test_postgres_data:/var/lib/postgresql/data
+    command: >
+      postgres
+      -c shared_preload_libraries=pg_stat_statements
+      -c pg_stat_statements.track=all
+      -c log_statement=all
+      -c log_duration=on
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U rice_admin -d rice_market_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - test_rice_market_network
+
+  redis:
+    image: redis:7-alpine
+    container_name: test_rice_market_redis
+    ports:
+      - "16380:6379"  # Test port: 16380 instead of 6380
+    volumes:
+      - test_redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - test_rice_market_network
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: test_rice_market_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: 'False'
+    ports:
+      - "15050:80"  # Test port: 15050 instead of 5050
+    volumes:
+      - test_pgadmin_data:/var/lib/pgadmin
+    networks:
+      - test_rice_market_network
+
+  adminer:
+    image: adminer:latest
+    container_name: test_rice_market_adminer
+    environment:
+      ADMINER_DEFAULT_SERVER: postgres
+      ADMINER_DESIGN: pepa-linha
+    ports:
+      - "18081:8080"  # Test port: 18081 instead of 8081
+    networks:
+      - test_rice_market_network
+
+volumes:
+  test_postgres_data:
+    driver: local
+  test_redis_data:
+    driver: local
+  test_pgadmin_data:
+    driver: local
+
+networks:
+  test_rice_market_network:
+    driver: bridge

@@ -1,0 +1,279 @@
+{
+  "base_id": "appmeTyHLozoqighD",
+  "discovered_at": "2025-09-27T00:54:01.041926",
+  "tables": {
+    "Contracts (H\u1ee3p \u0110\u1ed3ng)": {
+      "id": "tbl7sHbwOCOTjL2MC",
+      "name": "Contracts (H\u1ee3p \u0110\u1ed3ng)",
+      "fields": {
+        "Received Quantity": {
+          "name": "Received Quantity",
+          "postgres_type": "INTEGER",
+          "inferred": true
+        },
+        "Quantity Received at DN": {
+          "name": "Quantity Received at DN",
+          "postgres_type": "INTEGER",
+          "inferred": true
+        },
+        "Loss": {
+          "name": "Loss",
+          "postgres_type": "INTEGER",
+          "inferred": true
+        },
+        "Total Amount": {
+          "name": "Total Amount",
+          "postgres_type": "INTEGER",
+          "inferred": true
+        }
+      },
+      "relationships": [],
+      "discovered_by": "sampling"
+    },
+    "Contracts (H\u1ee3p \u0110\u1ed3ng) - 2": {
+      "id": "tbllz4cazITSwnXIo",
+      "name": "Contracts (H\u1ee3p \u0110\u1ed3ng) - 2",
+      "fields": {
+        "Receipt Date": {
+          "name": "Receipt Date",
+          "postgres_type": "VARCHAR(255)",
+          "inferred": true
+        },
+        "Receipt Number": {
+          "name": "Receipt Number",
+          "postgres_type": "VARCHAR(255)",
+          "inferred": true
+        },
+        "Commodity Type": {
+          "name": "Commodity Type",
+          "postgres_type": "INTEGER[]",
+          "inferred": true
+        },
+        "Unit Price": {
+          "name": "Unit Price",
+          "postgres_type": "INTEGER",
+          "inferred": true
+        },
+        "Logistics Cost (VC)": {
+          "name": "Logistics Cost (VC)",
+          "postgres_type": "INTEGER",
+          "inferred": true
+        },
+        "Total Price (with VC)": {
+          "name": "Total Price (with VC)",
+          "postgres_type": "INTEGER",
+          "inferred": true
+        },
+        "Received Quantity": {
+          "name": "Received Quantity",
+          "postgres_type": "INTEGER",
+          "inferred": true
+        },
+        "Imported Quantity (\u0110N)": {
+          "name": "Imported Quantity (\u0110N)",
+          "postgres_type": "INTEGER",
+          "inferred": true
+        },
+        "Loss": {
+          "name": "Loss",
+          "postgres_type": "INTEGER",
+          "inferred": true
+        },
+        "Total Value": {
+          "name": "Total Value",
+          "postgres_type": "INTEGER",
+          "inferred": true
+        },
+        "Protein (%)": {
+          "name": "Protein (%)",
+          "postgres_type": "DECIMAL(15,4)",
+          "inferred": true
+        },
+        "Ash (%)": {
+          "name": "Ash (%)",
+          "postgres_type": "DECIMAL(15,4)",
+          "inferred": true
+        },
+        "Fibre (%)": {
+          "name": "Fibre (%)",
+          "postgres_type": "DECIMAL(15,4)",
+          "inferred": true
+        },
+        "Fat (%)": {
+          "name": "Fat (%)",
+          "postgres_type": "DECIMAL(15,4)",
+          "inferred": true
+        },
+        "Moisture (%)": {
+          "name": "Moisture (%)",
+          "postgres_type": "DECIMAL(15,4)",
+          "inferred": true
+        },
+        "Starch (%)": {
+          "name": "Starch (%)",
+          "postgres_type": "DECIMAL(15,4)",
+          "inferred": true
+        },
+        "Acid Value (%)": {
+          "name": "Acid Value (%)",
+          "postgres_type": "INTEGER",
+          "inferred": true
+        }
+      },
+      "relationships": [],
+      "discovered_by": "sampling"
+    },
+    "Customers": {
+      "id": "tblDUfIlNy07Z0hiL",
+      "name": "Customers",
+      "fields": {
+        "Customer Name": {
+          "name": "Customer Name",
+          "postgres_type": "VARCHAR(255)",
+          "inferred": true
+        },
+        "National ID (CCCD)": {
+          "name": "National ID (CCCD)",
+          "postgres_type": "VARCHAR(255)",
+          "inferred": true
+        },
+        "Address": {
+          "name": "Address",
+          "postgres_type": "VARCHAR(255)",
+          "inferred": true
+        }
+      },
+      "relationships": [],
+      "discovered_by": "sampling"
+    },
+    "Shipments": {
+      "id": "tblSj7JcxYYfs6Dcl",
+      "name": "Shipments",
+      "fields": {
+        "Commodity Type": {
+          "name": "Commodity Type",
+          "postgres_type": "INTEGER[]",
+          "inferred": true
+        },
+        "Vehicle/Container Number": {
+          "name": "Vehicle/Container Number",
+          "postgres_type": "VARCHAR(255)",
+          "inferred": true
+        },
+        "Delivered Quantity (kg)": {
+          "name": "Delivered Quantity (kg)",
+          "postgres_type": "INTEGER",
+          "inferred": true
+        },
+        "Arrival Time": {
+          "name": "Arrival Time",
+          "postgres_type": "VARCHAR(255)",
+          "inferred": true
+        }
+      },
+      "relationships": [],
+      "discovered_by": "sampling"
+    },
+    "Inventory Movements": {
+      "id": "tblhb3Vxhi6Yt0BDw",
+      "name": "Inventory Movements",
+      "fields": {
+        "Date": {
+          "name": "Date",
+          "postgres_type": "DATE",
+          "inferred": true
+        },
+        "Batch/Note": {
+          "name": "Batch/Note",
+          "postgres_type": "VARCHAR(255)",
+          "inferred": true
+        },
+        "Vehicle/Container": {
+          "name": "Vehicle/Container",
+          "postgres_type": "VARCHAR(255)",
+          "inferred": true
+        },
+        "LDH/KH": {
+          "name": "LDH/KH",
+          "postgres_type": "VARCHAR(255)",
+          "inferred": true
+        },
+        "Commodity Type": {
+          "name": "Commodity Type",
+          "postgres_type": "INTEGER[]",
+          "inferred": true
+        },
+        "Production Out (Tons)": {
+          "name": "Production Out (Tons)",
+          "postgres_type": "INTEGER",
+          "inferred": true
+        },
+        "Loss 1.3% (from 1/6/2025)": {
+          "name": "Loss 1.3% (from 1/6/2025)",
+          "postgres_type": "INTEGER",
+          "inferred": true
+        }
+      },
+      "relationships": [],
+      "discovered_by": "sampling"
+    },
+    "Finished Goods": {
+      "id": "tblNY26FnHswHRcWS",
+      "name": "Finished Goods",
+      "fields": {
+        "Ng\u00e0y nh\u1eadp": {
+          "name": "Ng\u00e0y nh\u1eadp",
+          "postgres_type": "VARCHAR(255)",
+          "inferred": true
+        },
+        "LDH": {
+          "name": "LDH",
+          "postgres_type": "VARCHAR(255)",
+          "inferred": true
+        },
+        "M\u00e1y": {
+          "name": "M\u00e1y",
+          "postgres_type": "VARCHAR(255)",
+          "inferred": true
+        },
+        "S\u1ed1 l\u01b0\u1ee3ng container": {
+          "name": "S\u1ed1 l\u01b0\u1ee3ng container",
+          "postgres_type": "INTEGER",
+          "inferred": true
+        },
+        "S\u1ed1 l\u01b0\u1ee3ng theo \u0111\u1ea7u bao - Trong gi\u1edd": {
+          "name": "S\u1ed1 l\u01b0\u1ee3ng theo \u0111\u1ea7u bao - Trong gi\u1edd",
+          "postgres_type": "DECIMAL(15,4)",
+          "inferred": true
+        },
+        "S\u1ed1 l\u01b0\u1ee3ng theo \u0111\u1ea7u bao - Ngo\u00e0i gi\u1edd": {
+          "name": "S\u1ed1 l\u01b0\u1ee3ng theo \u0111\u1ea7u bao - Ngo\u00e0i gi\u1edd",
+          "postgres_type": "DECIMAL(15,4)",
+          "inferred": true
+        },
+        "Ti\u1ec1n b\u1ed3i d\u01b0\u1ee1ng BX CONT (50K/20T, 100K/40T)": {
+          "name": "Ti\u1ec1n b\u1ed3i d\u01b0\u1ee1ng BX CONT (50K/20T, 100K/40T)",
+          "postgres_type": "INTEGER",
+          "inferred": true
+        },
+        "Ti\u1ec1n BX trong gi\u1edd (23K)": {
+          "name": "Ti\u1ec1n BX trong gi\u1edd (23K)",
+          "postgres_type": "DECIMAL(15,4)",
+          "inferred": true
+        },
+        "Ngo\u00e0i gi\u1edd": {
+          "name": "Ngo\u00e0i gi\u1edd",
+          "postgres_type": "DECIMAL(15,4)",
+          "inferred": true
+        },
+        "T\u1ed5ng (ca 1)": {
+          "name": "T\u1ed5ng (ca 1)",
+          "postgres_type": "DECIMAL(15,4)",
+          "inferred": true
+        }
+      },
+      "relationships": [],
+      "discovered_by": "sampling"
+    }
+  }
+}

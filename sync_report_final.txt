@@ -1,0 +1,76 @@
+============================================================
+SYNCHRONIZATION REPORT
+============================================================
+Generated: 2025-10-02T17:26:26.035036
+
+Table: customers
+  Status: success
+  Records Processed: 0
+  Inserted: 0
+  Updated: 0
+  Duration: 0.79 seconds
+
+Table: commodities
+  Status: success
+  Records Processed: 0
+  Inserted: 0
+  Updated: 0
+  Duration: 0.34 seconds
+
+Table: price_lists
+  Status: success
+  Records Processed: 0
+  Inserted: 0
+  Updated: 0
+  Duration: 0.36 seconds
+
+Table: contracts_hp_ng
+  Status: success
+  Records Processed: 0
+  Inserted: 0
+  Updated: 0
+  Duration: 0.34 seconds
+
+Table: contracts_hp_ng___2
+  Status: success
+  Records Processed: 0
+  Inserted: 0
+  Updated: 0
+  Duration: 0.34 seconds
+
+Table: shipments
+  Status: success
+  Records Processed: 0
+  Inserted: 0
+  Updated: 0
+  Duration: 0.35 seconds
+
+Table: inventory_movements
+  Status: success
+  Records Processed: 0
+  Inserted: 0
+  Updated: 0
+  Duration: 0.35 seconds
+
+Table: finished_goods
+  Status: success
+  Records Processed: 1690
+  Inserted: 1690
+  Updated: 0
+  Duration: 8.15 seconds
+
+============================================================
+SUMMARY
+Total Records Processed: 1690
+Total Inserted: 1690
+Total Updated: 0
+Total Duration: 11.03 seconds
+============================================================
+
+Completed at: 2025-10-02 17:26:26.035655
+
+This synchronization includes fixes for:
+- Vietnamese character handling
+- Column naming inconsistencies
+- Numeric overflow protection
+- SQL identifier compliance
