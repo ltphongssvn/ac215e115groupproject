@@ -1,0 +1,29 @@
+{
+  "source": "Synthetic (based on historical climatological patterns)",
+  "generation_date": "2025-10-03T10:12:41.440627",
+  "start_date": "2008-07-01",
+  "end_date": "2024-12-01",
+  "regions": [
+    "Thailand",
+    "Vietnam",
+    "India",
+    "China",
+    "Indonesia",
+    "Philippines"
+  ],
+  "methodology": {
+    "seasonal_patterns": "Based on 30-year climatological averages from national meteorological agencies",
+    "enso_effects": "Multipliers derived from documented ENSO impacts on Asian monsoons",
+    "variability": "20% standard deviation to simulate natural weather variability",
+    "validation": "Patterns validated against published climate normals"
+  },
+  "data_quality": {
+    "total_months": 198,
+    "completeness": "100.0%",
+    "missing_values": 0
+  },
+  "units": {
+    "rainfall": "millimeters per month (mm/month)",
+    "anomaly": "percentage deviation from long-term mean (%)"
+  }
+}
