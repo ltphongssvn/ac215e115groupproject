@@ -1,0 +1,20 @@
+# File path: ~/code/ltphongssvn/ac215e115groupproject/Dockerfile.postgres
+# Custom PostgreSQL image with Rice Market schema
+FROM postgres:15-alpine
+
+# Set environment variables
+ENV POSTGRES_USER=rice_admin
+ENV POSTGRES_PASSWORD=localdev123
+ENV POSTGRES_DB=rice_market_db
+ENV POSTGRES_INITDB_ARGS="--encoding=UTF8 --locale=en_US.utf8"
+
+# Copy schema file
+COPY data-pipeline/schema/postgresql_ddl.sql /docker-entrypoint-initdb.d/01_schema.sql
+
+# Add custom configuration
+RUN echo "shared_preload_libraries = 'pg_stat_statements'" >> /usr/local/share/postgresql/postgresql.conf.sample && \
+    echo "pg_stat_statements.track = all" >> /usr/local/share/postgresql/postgresql.conf.sample && \
+    echo "log_statement = all" >> /usr/local/share/postgresql/postgresql.conf.sample && \
+    echo "log_duration = on" >> /usr/local/share/postgresql/postgresql.conf.sample
+
+EXPOSE 5432
