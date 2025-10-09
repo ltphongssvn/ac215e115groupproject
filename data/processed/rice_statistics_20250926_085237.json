@@ -1,0 +1,207 @@
+{
+  "metadata": {
+    "analysis_date": "2025-09-26T08:52:37.519294",
+    "start_date": "2008-07-01T00:00:00",
+    "end_date": "2024-12-01T00:00:00",
+    "total_months": 198,
+    "data_source": "World Bank Pink Sheet"
+  },
+  "overall_statistics": {
+    "Thai 5%": {
+      "mean": 481.7613636363636,
+      "median": 465.0,
+      "std": 80.02540441032299,
+      "min": 357.0,
+      "max": 731.75,
+      "cv": 16.611005043303276,
+      "valid_months": 198
+    },
+    "Thai 25%": {
+      "mean": 454.3771885521886,
+      "median": 434.375,
+      "std": 71.98086721808743,
+      "min": 346.0,
+      "max": 700.0,
+      "cv": 15.841655134018659,
+      "valid_months": 198
+    },
+    "Thai A.1": {
+      "mean": 434.48989668946194,
+      "median": 415.69,
+      "std": 75.07040827100501,
+      "min": 287.0,
+      "max": 648.86,
+      "cv": 17.277825984676287,
+      "valid_months": 198
+    },
+    "Vietnamese 5%": {
+      "mean": 427.723757803558,
+      "median": 409.08,
+      "std": 73.26908954871242,
+      "min": 325.79,
+      "max": 698.0,
+      "cv": 17.130002299840204,
+      "valid_months": 197
+    }
+  },
+  "period_analysis": {
+    "2008-2009 Crisis": {
+      "Thai 5%": {
+        "mean": 581.2231481481483,
+        "volatility": 64.0522759691365,
+        "months": 18
+      },
+      "Thai 25%": {
+        "mean": 491.9472222222222,
+        "volatility": 85.80566358693797,
+        "months": 18
+      },
+      "Thai A.1": {
+        "mean": 349.6787037037039,
+        "volatility": 67.84219959533434,
+        "months": 18
+      },
+      "Vietnamese 5%": {
+        "mean": 462.86487254901937,
+        "volatility": 88.47592129097373,
+        "months": 17
+      }
+    },
+    "2010-2011 Recovery": {
+      "Thai 5%": {
+        "mean": 515.9680555555555,
+        "volatility": 52.066443039070364,
+        "months": 24
+      },
+      "Thai 25%": {
+        "mean": 473.772916666667,
+        "volatility": 55.585808412941596,
+        "months": 24
+      },
+      "Thai A.1": {
+        "mean": 421.10833333333335,
+        "volatility": 59.51350717469005,
+        "months": 24
+      },
+      "Vietnamese 5%": {
+        "mean": 471.41302083333335,
+        "volatility": 66.84946624815034,
+        "months": 24
+      }
+    },
+    "2012-2015 Stability": {
+      "Thai 5%": {
+        "mean": 469.4270833333333,
+        "volatility": 76.66013344233862,
+        "months": 48
+      },
+      "Thai 25%": {
+        "mean": 442.87673611111126,
+        "volatility": 77.73127587964115,
+        "months": 48
+      },
+      "Thai A.1": {
+        "mean": 452.5604766218083,
+        "volatility": 60.944466136622886,
+        "months": 48
+      },
+      "Vietnamese 5%": {
+        "mean": 396.471769874325,
+        "volatility": 34.812822730119244,
+        "months": 48
+      }
+    },
+    "2016-2019 Pre-COVID": {
+      "Thai 5%": {
+        "mean": 408.4375,
+        "volatility": 24.100769167561545,
+        "months": 48
+      },
+      "Thai 25%": {
+        "mean": 397.125,
+        "volatility": 21.574832658802226,
+        "months": 48
+      },
+      "Thai A.1": {
+        "mean": 388.6997916666667,
+        "volatility": 22.347056304748257,
+        "months": 48
+      },
+      "Vietnamese 5%": {
+        "mean": 369.34291666666667,
+        "volatility": 28.54686091162742,
+        "months": 48
+      }
+    },
+    "2020-2022 COVID Period": {
+      "Thai 5%": {
+        "mean": 463.9166666666667,
+        "volatility": 47.45606991132506,
+        "months": 36
+      },
+      "Thai 25%": {
+        "mean": 453.25,
+        "volatility": 43.57743518316397,
+        "months": 36
+      },
+      "Thai A.1": {
+        "mean": 442.8130555555556,
+        "volatility": 45.821452419422464,
+        "months": 36
+      },
+      "Vietnamese 5%": {
+        "mean": 426.2786111111111,
+        "volatility": 40.85351099811393,
+        "months": 36
+      }
+    },
+    "2023-Present": {
+      "Thai 5%": {
+        "mean": 571.0416666666666,
+        "volatility": 56.29385568963807,
+        "months": 24
+      },
+      "Thai 25%": {
+        "mean": 546.0,
+        "volatility": 47.78302409124341,
+        "months": 24
+      },
+      "Thai A.1": {
+        "mean": 554.4341666666667,
+        "volatility": 59.38565145955176,
+        "months": 24
+      },
+      "Vietnamese 5%": {
+        "mean": 540.5762500000001,
+        "volatility": 61.670276880710354,
+        "months": 24
+      }
+    }
+  },
+  "correlation_matrix": {
+    "Thai 5%_price": {
+      "Thai 5%_price": 1.0,
+      "Thai 25%_price": 0.9497496041156767,
+      "Thai A.1_price": 0.6585000993471892,
+      "Vietnamese 5%_price": 0.8014888938664411
+    },
+    "Thai 25%_price": {
+      "Thai 5%_price": 0.9497496041156767,
+      "Thai 25%_price": 1.0,
+      "Thai A.1_price": 0.8072981723700238,
+      "Vietnamese 5%_price": 0.8209308476693001
+    },
+    "Thai A.1_price": {
+      "Thai 5%_price": 0.6585000993471892,
+      "Thai 25%_price": 0.8072981723700238,
+      "Thai A.1_price": 1.0,
+      "Vietnamese 5%_price": 0.683719326445842
+    },
+    "Vietnamese 5%_price": {
+      "Thai 5%_price": 0.8014888938664411,
+      "Thai 25%_price": 0.8209308476693001,
+      "Thai A.1_price": 0.683719326445842,
+      "Vietnamese 5%_price": 1.0
+    }
+  }
+}
