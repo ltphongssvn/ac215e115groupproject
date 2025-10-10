@@ -1,3 +1,11 @@
+import matplotlib
+from pathlib import Path
+PROJECT_ROOT = Path(__file__).parent.parent
+DATA_DIR = PROJECT_ROOT / "data"
+PROCESSED_DATA_DIR = DATA_DIR / "processed"
+PROCESSED_DATA_DIR.mkdir(parents=True, exist_ok=True)
+from datetime import datetime
+matplotlib.use("Agg")  # Non-interactive backend
 # -*- coding: utf-8 -*-
 """project rice price.ipynb
 
@@ -14,6 +22,7 @@ import io, re, requests
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+matplotlib.use('Agg')  # Non-interactive backend
 
 START = pd.Timestamp("2008-07-01")
 END   = pd.Timestamp("2024-12-31")
@@ -132,7 +141,9 @@ plt.title("Dubai/Oman Benchmark Oil Price (USD/bbl)")
 plt.xlabel("Date")
 plt.ylabel("USD per barrel")
 plt.tight_layout()
-plt.show()
+# plt.show()  # Disabled for pipeline
+plt.savefig(PROCESSED_DATA_DIR / f"market_factor_{datetime.now().strftime('%Y%m%d_%H%M%S')}.png", dpi=300)
+plt.close()
 
 import requests
 import pandas as pd
@@ -181,7 +192,9 @@ def pivot_and_plot(df):
     plt.grid(True, alpha=0.3)
     plt.legend(title="Country")
     plt.tight_layout()
-    plt.show()
+    # plt.show()  # Disabled for pipeline
+    plt.savefig(PROCESSED_DATA_DIR / f"market_factor_{datetime.now().strftime('%Y%m%d_%H%M%S')}.png", dpi=300)
+    plt.close()
 
 if __name__ == "__main__":
     # Example countries: India, China, Indonesia, Thailand, Vietnam, Philippines
@@ -241,7 +254,9 @@ def pivot_and_plot(df):
     plt.grid(True, alpha=0.3)
     plt.legend(title="Country / Avg")
     plt.tight_layout()
-    plt.show()
+    # plt.show()  # Disabled for pipeline
+    plt.savefig(PROCESSED_DATA_DIR / f"market_factor_{datetime.now().strftime('%Y%m%d_%H%M%S')}.png", dpi=300)
+    plt.close()
 
 if __name__ == "__main__":
     # Example countries: India, China, Indonesia, Thailand, Vietnam, Philippines
@@ -298,7 +313,9 @@ def plot_indicator(df, title, ylabel):
     plt.grid(True, alpha=0.3)
     plt.legend(title="Country / Avg")
     plt.tight_layout()
-    plt.show()
+    # plt.show()  # Disabled for pipeline
+    plt.savefig(PROCESSED_DATA_DIR / f"market_factor_{datetime.now().strftime('%Y%m%d_%H%M%S')}.png", dpi=300)
+    plt.close()
 
 if __name__ == "__main__":
     countries = ["IN", "CN", "ID", "TH", "VN", "PH"]
@@ -360,7 +377,9 @@ def plot_indicator(df, title, ylabel):
     plt.grid(True, alpha=0.3)
     plt.legend(title="Country / Avg")
     plt.tight_layout()
-    plt.show()
+    # plt.show()  # Disabled for pipeline
+    plt.savefig(PROCESSED_DATA_DIR / f"market_factor_{datetime.now().strftime('%Y%m%d_%H%M%S')}.png", dpi=300)
+    plt.close()
 
 if __name__ == "__main__":
     countries = ["IN", "CN", "ID", "TH", "VN", "PH"]
@@ -405,7 +424,9 @@ def plot_nino34(df):
     plt.legend()
     plt.grid(alpha=0.3)
     plt.tight_layout()
-    plt.show()
+    # plt.show()  # Disabled for pipeline
+    plt.savefig(PROCESSED_DATA_DIR / f"market_factor_{datetime.now().strftime('%Y%m%d_%H%M%S')}.png", dpi=300)
+    plt.close()
 
 if __name__ == "__main__":
     df_enso = fetch_nino34(2008, 2024)
@@ -450,7 +471,9 @@ def plot_fertilizer_prices(df):
     plt.ylabel("US$/metric ton")
     plt.grid(alpha=0.3)
     plt.tight_layout()
-    plt.show()
+    # plt.show()  # Disabled for pipeline
+    plt.savefig(PROCESSED_DATA_DIR / f"market_factor_{datetime.now().strftime('%Y%m%d_%H%M%S')}.png", dpi=300)
+    plt.close()
 
 if __name__ == "__main__":
     fert_df = fetch_fertilizer_prices(2008, 2024)
@@ -498,7 +521,9 @@ def _align_and_plot(series_list):
     for col in aligned.columns:
         plt.figure()
         aligned[col].plot(title=f"{col} (Monthly, aligned)", grid=True)
-        plt.show()
+        # plt.show()  # Disabled for pipeline
+        plt.savefig(PROCESSED_DATA_DIR / f"market_factor_{datetime.now().strftime('%Y%m%d_%H%M%S')}.png", dpi=300)
+        plt.close()
 
 # ---------------------------
 # 1) Oil (Dubai/Oman, Pink Sheet)
