@@ -1,4 +1,3 @@
-# /home/lenovo/code/ltphongssvn/ac215e115groupproject/README.md
 
 # ERP AI Architecture Implementation for AC215/E115
 ## Rice Market AI System - Natural Language SQL, RAG, and Time-Series Forecasting
@@ -157,10 +156,9 @@ locust -f tests/load/locustfile.py --host=http://localhost:8000
 - Database schema and migration pipeline
 
 ### Current Sprint 🚀
-- Milestone 1: Project Proposal (Due: 2025-09-25)
+- Milestone 2: MLOps Infrastructure (Due: 2025-10-16)
 
 ### Upcoming 📅
-- Milestone 2: Infrastructure & Containerization (2025-10-16)
 - Milestone 3: Midterm Presentation (2025-10-28)
 - Milestone 4: Full-Stack Development (2025-11-25)
 - Milestone 5: Deployment & Scaling (2025-12-11)
@@ -204,9 +202,16 @@ docker exec rice_market_postgres pg_isready -U rice_admin
 
 ## Support
 
-- Team members: Check troubleshooting, review logs
-- Reviewers: Docker environment works without API keys, request demos for sync
+- Team Members: Develop code in feature branches and submit Pull Requests for review and merging into the develop branch.
+- Reviewers: Review submitted Pull Requests and request live demos from the team as needed.
+
+## Contact
+
+For questions or support, please contact the team through GitHub issues or reach out to team members directly:
+- Team member 1: Thanh Phong Le
+- Team member 2: Davar Jamali
+- Team member 3: Pranab Nepal
 
 ---
 
-*Active development - check regularly for updates*
+*This project is actively under development. Check back regularly for updates and new features.*
