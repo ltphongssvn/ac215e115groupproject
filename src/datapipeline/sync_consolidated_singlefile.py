@@ -53,7 +53,7 @@ class SyncConfig:
         self.postgres_port: int = int(d.get("POSTGRES_PORT", 5433))
         self.postgres_database: str = d.get("POSTGRES_DATABASE", "rice_market_db")
         self.postgres_user: str = d.get("POSTGRES_USER", "rice_admin")
-        self.postgres_password: str = d.get("POSTGRES_PASSWORD", "localdev123")
+        self.postgres_password: str = d.get("POSTGRES_PASSWORD", "")
         self.postgres_schema: str = d.get("POSTGRES_SCHEMA", "airtable_sync")
 
         self.sync_mode: str = d.get("SYNC_MODE", "incremental").lower()
