@@ -1,6 +1,5 @@
 # File path: ~/code/ltphongssvn/ac215e115groupproject/docker-compose.yml
 # Docker Compose configuration with custom builds
-version: '3.8'
 
 services:
   postgres:
