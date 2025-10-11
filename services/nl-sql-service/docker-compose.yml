@@ -1,5 +1,4 @@
-# ~/code/ltphongssvn/ac215e115groupproject/docker-compose.yml
-# Docker Compose configuration with custom builds
+# services/nl-sql-service/docker-compose.yml
 services:
   postgres:
     build:
