@@ -11,12 +11,15 @@ import os
 from .data_processing.preprocessor import TimeSeriesPreprocessor
 from .models.statistical_models import StatisticalForecaster
 from .models.ml_models import ProphetForecaster
+from .models.foundation.timegpt import TimeGPT
+from .models.foundation.chronos import Chronos
+from .models.foundation.moirai import MOIRAI
 from .evaluation.metrics import calculate_metrics
 
 logging.basicConfig(level=os.getenv("LOG_LEVEL", "INFO"))
 logger = logging.getLogger(__name__)
 
-app = FastAPI(title="Time-Series Forecasting Service", version="1.0.0")
+app = FastAPI(title="Time-Series Forecasting Service", version="2.0.0")
 
 app.add_middleware(
     CORSMiddleware,
@@ -32,6 +35,13 @@ class ForecastRequest(BaseModel):
     horizon: int = 30
     frequency: str = "D"
 
+class GenerativeForecastRequest(BaseModel):
+    data: List[float]
+    model: str = "timegpt"
+    horizon: int = 30
+    mode: str = "zero-shot"
+    covariates: Optional[Dict] = None
+
 class ForecastResponse(BaseModel):
     model_config = ConfigDict(protected_namespaces=())
     
@@ -39,9 +49,19 @@ class ForecastResponse(BaseModel):
     model_info: Dict[str, Any]
     metrics: Optional[Dict[str, float]] = None
 
+def convert_numpy(obj):
+    """Convert numpy arrays to lists recursively"""
+    if isinstance(obj, np.ndarray):
+        return obj.tolist()
+    elif isinstance(obj, dict):
+        return {k: convert_numpy(v) for k, v in obj.items()}
+    elif isinstance(obj, list):
+        return [convert_numpy(item) for item in obj]
+    return obj
+
 @app.get("/health")
 async def health_check():
-    return {"status": "healthy", "service": "forecasting", "version": "1.0.0"}
+    return {"status": "healthy", "service": "forecasting", "version": "2.0.0"}
 
 @app.post("/forecast/univariate", response_model=ForecastResponse)
 async def forecast_univariate(request: ForecastRequest):
@@ -86,13 +106,46 @@ async def forecast_univariate(request: ForecastRequest):
         logger.error(f"Forecast failed: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
 
+@app.post("/forecast/generative", response_model=ForecastResponse)
+async def forecast_generative(request: GenerativeForecastRequest):
+    """Generative AI forecasting endpoint"""
+    try:
+        y = np.array(request.data)
+        
+        if request.model == "timegpt":
+            model = TimeGPT()
+            result = model.forecast(y, request.horizon, mode=request.mode, covariates=request.covariates)
+            
+        elif request.model == "chronos":
+            model = Chronos()
+            result = model.forecast(y, request.horizon)
+            
+        elif request.model == "moirai":
+            model = MOIRAI()
+            result = model.forecast(y, request.horizon)
+            
+        else:
+            raise HTTPException(status_code=400, detail=f"Unknown generative model: {request.model}")
+        
+        # Convert numpy arrays to lists
+        result_clean = convert_numpy(result)
+        
+        return ForecastResponse(
+            forecast=result_clean["forecast"],
+            model_info=result_clean
+        )
+        
+    except Exception as e:
+        logger.error(f"Generative forecast failed: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
 @app.get("/models")
 async def list_models():
     """List available forecasting models"""
     return {
         "statistical": ["arima", "sarima"],
         "ml": ["prophet", "lstm"],
-        "generative": ["timegen", "lag-llama"]
+        "generative": ["timegpt", "chronos", "moirai"]
     }
 
 if __name__ == "__main__":
