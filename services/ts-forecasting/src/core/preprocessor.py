@@ -1,4 +1,4 @@
-# services/forecasting-service/app/data_processing/preprocessor.py
+# services/ts-forecasting/src/core/preprocessor.py
 import pandas as pd
 import numpy as np
 from typing import Tuple
@@ -16,22 +16,20 @@ class TimeSeriesPreprocessor:
         """Main preprocessing pipeline"""
         df = df.copy()
         
-        # Ensure datetime index
+        # Ensure datetime index with explicit frequency
         if not isinstance(df.index, pd.DatetimeIndex):
             if 'date' in df.columns:
                 df['date'] = pd.to_datetime(df['date'])
                 df = df.set_index('date')
             else:
-                # Create default date range if no dates provided
                 df.index = pd.date_range(start='2020-01-01', periods=len(df), freq=self.freq)
         
-        # Sort by date
+        # Set explicit frequency to suppress warnings
+        if df.index.freq is None:
+            df = df.asfreq(self.freq)
+        
         df = df.sort_index()
-        
-        # Handle missing values
         df = self._handle_missing_values(df, target_col)
-        
-        # Detect and handle outliers
         df = self._handle_outliers(df, target_col)
         
         logger.info(f"Preprocessed data shape: {df.shape}")
