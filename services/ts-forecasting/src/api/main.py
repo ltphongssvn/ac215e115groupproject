@@ -12,7 +12,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from models.statistical.statistical_models import StatisticalForecaster
-from models.ml_models import ProphetForecaster
+from models.ml_models import ProphetForecaster, LSTMForecaster
 from models.foundation.timegpt import TimeGPT
 from models.foundation.chronos import Chronos
 from models.foundation.moirai import MOIRAI
@@ -96,6 +96,11 @@ async def forecast_univariate(request: ForecastRequest):
             model_info = model.fit(df, 'value')
             forecast_df = model.forecast(request.horizon, freq=request.frequency)
             forecast = forecast_df['yhat'].values
+            
+        elif request.model == "lstm":
+            model = LSTMForecaster()
+            model_info = model.fit(df['value'].values)
+            forecast = model.forecast(request.horizon)
             
         else:
             raise HTTPException(status_code=400, detail=f"Unknown model: {request.model}")

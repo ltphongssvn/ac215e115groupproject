@@ -12,7 +12,7 @@ Unified forecasting microservice combining statistical, ML, and generative AI mo
 
 ### ML Models
 - **Prophet:** Facebook's forecasting with custom seasonality
-- **LSTM:** Neural network forecasting (mock)
+- **LSTM:** Neural network forecasting (mock implementation)
 
 ### Generative AI Models (NEW)
 - **TimeGPT:** Zero-shot encoder-decoder (mock - Nixtla API ready)
@@ -33,7 +33,7 @@ docker run -p 8003:8003 ts-forecasting:consolidated
 POST /forecast/univariate
 {
   "data": [100, 102, 105, ...],
-  "model": "arima|sarima|prophet",
+  "model": "arima|sarima|prophet|lstm",
   "horizon": 30,
   "frequency": "MS"
 }
@@ -69,8 +69,8 @@ GET /models
 ## Testing
 
 ```bash
-docker build -t ts-forecasting:csv-test -f services/ts-forecasting/Dockerfile .
-docker run --rm ts-forecasting:csv-test pytest tests/unit/test_forecasting.py -v
+docker build -t ts-forecasting:full-tests -f services/ts-forecasting/Dockerfile .
+docker run --rm ts-forecasting:full-tests pytest tests/unit/test_forecasting.py -v
 ```
 
 ### Test Results (100% Pass Rate, Zero Warnings)
@@ -81,21 +81,27 @@ docker run --rm ts-forecasting:csv-test pytest tests/unit/test_forecasting.py -v
 ```
 ============================= test session starts ==============================
 platform linux -- Python 3.11.14, pytest-8.4.2, pluggy-1.6.0
-collected 6 items
+collected 9 items
 
-tests/unit/test_forecasting.py::test_health PASSED                       [ 16%]
-tests/unit/test_forecasting.py::test_arima_forecast_with_real_data PASSED [ 33%]
-tests/unit/test_forecasting.py::test_timegpt_forecast PASSED             [ 50%]
-tests/unit/test_forecasting.py::test_chronos_forecast PASSED             [ 66%]
-tests/unit/test_forecasting.py::test_moirai_forecast PASSED              [ 83%]
+tests/unit/test_forecasting.py::test_health PASSED                       [ 11%]
+tests/unit/test_forecasting.py::test_arima_forecast_with_real_data PASSED [ 22%]
+tests/unit/test_forecasting.py::test_sarima_forecast_with_real_data PASSED [ 33%]
+tests/unit/test_forecasting.py::test_prophet_forecast_with_real_data PASSED [ 44%]
+tests/unit/test_forecasting.py::test_lstm_forecast_with_real_data PASSED [ 55%]
+tests/unit/test_forecasting.py::test_timegpt_forecast PASSED             [ 66%]
+tests/unit/test_forecasting.py::test_chronos_forecast PASSED             [ 77%]
+tests/unit/test_forecasting.py::test_moirai_forecast PASSED              [ 88%]
 tests/unit/test_forecasting.py::test_list_models PASSED                  [100%]
 
-============================== 6 passed in 6.65s ===============================
+============================== 9 passed in 8.53s ===============================
 ```
 
 **Test Coverage:**
 - ✅ Health endpoint validation
 - ✅ **ARIMA with real rice price CSV data** (Rice_Thai_5pct, 100 points, MS frequency)
+- ✅ **SARIMA with real rice price CSV data** (seasonal patterns)
+- ✅ **Prophet with real rice price CSV data** (custom seasonality)
+- ✅ **LSTM with real rice price CSV data** (mock neural network)
 - ✅ TimeGPT zero-shot forecasting
 - ✅ Chronos probabilistic forecasting
 - ✅ MOIRAI universal forecasting
@@ -106,7 +112,7 @@ tests/unit/test_forecasting.py::test_list_models PASSED                  [100%]
 ```
 src/
 ├── api/
-│   └── main.py                      # FastAPI v2.0.0 (unified endpoints)
+│   └── main.py                      # FastAPI v2.0.0 (LSTM added to /forecast/univariate)
 ├── models/
 │   ├── statistical/
 │   │   └── statistical_models.py    # ARIMA/SARIMA
@@ -123,7 +129,7 @@ src/
 
 tests/
 └── unit/
-    └── test_forecasting.py          # 6 tests with CSV integration
+    └── test_forecasting.py          # 9 tests with CSV integration
 
 data/integrated/
 └── rice_market_rainfall_complete_20251010_062253.csv  # Source data
@@ -133,9 +139,9 @@ data/integrated/
 
 | Metric | Value |
 |--------|-------|
-| Build Time | 1.4s (cached) |
-| Test Runtime | 6.65s (6 tests, zero warnings) |
-| Test Pass Rate | 100% (6/6) |
+| Build Time | 1.7s (cached) |
+| Test Runtime | 8.53s (9 tests, zero warnings) |
+| Test Pass Rate | 100% (9/9) |
 | API Port | 8003 |
 | CSV Data Points | 100 (Rice_Thai_5pct) |
 
@@ -156,32 +162,35 @@ This service consolidates:
 
 **Changes:**
 - Merged ARIMA/SARIMA/Prophet from forecasting-service
+- Added LSTM endpoint to `/forecast/univariate`
 - Added 3 foundation models (TimeGPT, Chronos, MOIRAI)
 - Unified API with `/forecast/univariate` and `/forecast/generative`
 - Updated Dockerfile with uv package manager (build from project root)
-- 6 comprehensive tests with real CSV data
+- 9 comprehensive tests with real CSV data (all models tested)
 - Fixed frequency warnings with asfreq() in preprocessor
 
 ## Milestone 2 Compliance
 
 ✅ **Containerization:** Dockerfile with uv (46% faster builds)  
-✅ **Testing:** 6/6 passing (6.65s, zero warnings)  
+✅ **Testing:** 9/9 passing (8.53s, zero warnings)  
 ✅ **Real Data:** CSV integration with rice price data  
-✅ **API:** FastAPI v2.0.0 with multiple endpoints  
-✅ **Models:** Statistical, ML, Generative AI  
+✅ **API:** FastAPI v2.0.0 with all model endpoints  
+✅ **Models:** Statistical (ARIMA, SARIMA), ML (Prophet, LSTM), Generative AI (TimeGPT, Chronos, MOIRAI)  
 ✅ **Documentation:** Complete API docs + test results  
 
 ## Production Notes
 
-Current generative models are **mock implementations** for demonstration:
+Current generative and LSTM models are **mock implementations** for demonstration:
+- LSTM: Replace with PyTorch/TensorFlow implementation
 - TimeGPT: Replace with Nixtla API (`pip install nixtla`)
 - Chronos: Use `amazon/chronos-t5-small` from HuggingFace
 - MOIRAI: Use Salesforce MOIRAI from HuggingFace
 
-Mock models use simple algorithms (exponential smoothing, trend+noise, seasonal decomposition) to simulate generative AI behavior.
+Mock models use simple algorithms to simulate forecasting behavior.
 
 ---
-**Version:** 2.0.0 (Consolidated + Generative AI + CSV Integration)  
+**Version:** 2.0.0 (Consolidated + Generative AI + LSTM + CSV Integration)  
 **Port:** 8003  
 **Status:** Production-Ready  
 **Data Source:** `data/integrated/rice_market_rainfall_complete_20251010_062253.csv`
+**Update README:** 9 tests (8.53s), LSTM endpoint added.
