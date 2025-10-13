@@ -1,217 +1,140 @@
+# feature/microservices-nl-sql Branch
 
-# ERP AI Architecture Implementation for AC215/E115
-## Rice Market AI System - Natural Language SQL, RAG, and Time-Series Forecasting
+## Branch Purpose
+Implementation of Natural Language to SQL microservice for the Rice Market ERP system, completing Milestone 2 requirements for containerized ML components.
 
-📚 **[View Complete Project Documentation](docs/DOCUMENTATION_INDEX.md)**
+## What Was Built
 
-This project implements a comprehensive Enterprise Resource Planning (ERP) AI system for rice market operations, leveraging cutting-edge AI technologies for natural language interfaces, document understanding, and predictive analytics.
+### Core Service Components
+- **NL-SQL Agent**: FastAPI service translating natural language queries to SQL
+- **SQL Generator**: LangChain-based query generation with Vertex AI support
+- **Database Layer**: SQLAlchemy connection to PostgreSQL (34.45.44.214)
+- **Mock Mode**: Local testing without GCP credentials
 
-## Quick Links
-- 📖 [Documentation Index](docs/DOCUMENTATION_INDEX.md)
-- 🚀 [Getting Started](docs/onboarding/github-collaboration-guide.md)
-- 📋 [Statement of Work](docs/milestones/ms1/Statement%20of%20Work-%20Rice%20Market%20AI%20System_Rev.04.pdf)
-- 👥 [Milestones](docs/milestones/)
-
-## Core Capabilities
-
-1. **Natural Language to SQL (NL+SQL) Agent**: Query ERP databases using natural language
-2. **RAG-Based Document Summarization**: Intelligent document analysis with vector search and LLM generation
-3. **Time-Series Price Forecasting**: 6-month price predictions using LSTM/Prophet ensemble models
-
-## Architecture
-
+### Files Created
 ```
-ac215e115groupproject/
-├── api-gateway/              # Kong/Nginx API gateway
-├── services/
-│   ├── nl-sql-agent/        # Natural language to SQL service
-│   ├── rag-orchestrator/    # Document retrieval and generation
-│   └── ts-forecasting/      # Time-series prediction
-├── infrastructure/
-│   ├── docker/              # Docker configurations
-│   ├── kubernetes/          # K8s manifests
-│   └── terraform/           # Infrastructure as Code
-├── data-pipeline/           # ETL and data ingestion
-└── ml-services/            # Vertex AI Pipelines
+services/nl-sql-service/
+├── app/
+│   ├── __init__.py
+│   ├── main.py              # FastAPI application
+│   ├── database.py          # PostgreSQL connection
+│   ├── nl_sql_agent.py     # Query processing orchestrator
+│   ├── sql_generator.py    # Original Vertex AI generator
+│   └── sql_generator_local.py  # Mock mode for testing
+├── tests/
+│   ├── __init__.py
+│   └── test_nl_sql.py       # Unit tests
+├── Dockerfile               # Multi-stage container build
+├── requirements.txt         # Python dependencies
+├── pyproject.toml          # uv package management
+├── Makefile                # Build automation
+├── .env.example            # Environment template
+├── create_tables.sql       # Database schema
+└── README.md              # Service documentation
 ```
 
-## Technology Stack
+## Issues Resolved During Development
 
-- **Core**: Python 3.12+, FastAPI, Cloud Run, Cloud SQL (PostgreSQL), Redis
-- **AI/ML**: LangChain, Vertex AI (Gemini 1.5 Pro), Vector Search, PyTorch, Prophet
-- **Infrastructure**: Google Cloud Platform, Kubernetes (GKE), GitHub Actions
+### 1. Package Version Conflicts
+**Problem**: langchain 0.1.0 incompatible with langchain-community 0.2.16
+**Solution**: Updated to langchain==0.2.16 to match community version
 
-## Quick Start
+### 2. WSL Volume Mount Issues
+**Problem**: Docker volumes not mounting in WSL environment
+**Solution**: Used `docker cp` to copy credentials into running container
 
-### Prerequisites
-- Ubuntu 24.04 LTS or compatible (WSL2 supported)
-- Python 3.12+
-- Docker 28.0+
-- Git
+### 3. GCP Authentication
+**Problem**: Service account credentials required for Vertex AI
+**Solution**: Implemented `USE_MOCK_LLM=true` flag for local testing without GCP
 
-### Development Setup
+### 4. Docker Compose Version
+**Problem**: docker-compose v1 KeyError: 'ContainerConfig'
+**Solution**: Use `docker compose` (v2) instead of `docker-compose`
 
-1. **Clone and navigate**
+### 5. Database Tables Missing
+**Problem**: PostgreSQL tables didn't exist initially
+**Solution**: Created `create_tables.sql` with sample data
+
+## Working Test Results
+
+### Successful Query Processing
 ```bash
-git clone https://github.com/ltphongssvn/ac215e115groupproject.git
-cd ac215e115groupproject
+curl -X POST http://localhost:8001/query \
+  -H "Content-Type: application/json" \
+  -d '{"question": "Show me all inventory records"}'
 ```
 
-2. **Python environment** (choose one)
-```bash
-# venv (recommended for beginners)
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements/dev.txt
-
-# conda
-conda create -n ac215project python=3.12
-conda activate ac215project
-pip install -r requirements/dev.txt
-
-# uv (fastest)
-uv venv
-source .venv/bin/activate
-uv pip install -r requirements/dev.txt
+**Response**:
+```json
+{
+  "success": true,
+  "sql_query": "SELECT * FROM inventory_data LIMIT 10",
+  "results": [
+    {"id": 1, "item_type": "Basmati Rice", "quantity": "500.00", "price": "45.50"},
+    {"id": 2, "item_type": "Jasmine Rice", "quantity": "300.00", "price": "42.00"},
+    {"id": 3, "item_type": "Brown Rice", "quantity": "200.00", "price": "38.50"}
+  ],
+  "row_count": 3
+}
 ```
 
-3. **Configure environment**
+## How to Test This Branch
+
 ```bash
+# 1. Switch to branch
+git checkout feature/microservices-nl-sql
+
+# 2. Navigate to service
+cd services/nl-sql-service
+
+# 3. Setup environment
 cp .env.example .env
-# Edit .env with your configurations
+
+# 4. Initialize database
+psql "postgresql://rice_admin:localdev123@34.45.44.214:5432/rice_market_db" < create_tables.sql
+
+# 5. Run with docker-compose (from project root)
+cd ../..
+docker compose up -d nl-sql-service
+
+# 6. Test the service
+curl http://localhost:8001/health
 ```
 
-4. **Start Docker services**
-```bash
-docker compose up -d
-```
+## Milestone 2 Compliance
 
-5. **Verify installation**
-```bash
-curl http://localhost:8000/health
-```
+| Requirement | Implementation |
+|------------|---------------|
+| Containerization | ✅ Dockerfile with python:3.11-slim |
+| pyproject.toml | ✅ Added with uv support |
+| Build automation | ✅ Makefile with build/run/test targets |
+| Docker Compose | ✅ Integrated in main docker-compose.yml |
+| End-to-end pipeline | ✅ NL → SQL → Results working |
+| Documentation | ✅ README with full setup instructions |
+| Testing | ✅ pytest unit tests included |
 
-## Docker Environment
+## Key Decisions Made
 
-### Services
-- **PostgreSQL**: Port 5433, Database: rice_market_db
-- **Redis**: Port 6380, Caching layer
-- **pgAdmin**: http://localhost:5050 (admin@example.com/admin123)
-- **Adminer**: http://localhost:8081
+1. **Mock LLM Mode**: Enables testing without GCP credentials
+2. **Direct Database Connection**: Using external PostgreSQL at 34.45.44.214
+3. **FastAPI Framework**: Chosen for async support and auto-documentation
+4. **SQLAlchemy 2.0**: Modern ORM with connection pooling
 
-### Database Setup
+## Next Steps for Team
 
-The PostgreSQL container auto-initializes with schema from `data-pipeline/schema/postgresql_ddl.sql`, containing:
-- 8 core tables (customers, commodities, contracts, shipments, etc.)
-- 13,638 records representing Vietnamese rice trading operations
-- Specialized fields for warehouse locations (BX prefixes) and quality metrics
+1. Integrate with RAG pipeline for context-aware queries
+2. Add Redis caching for frequent queries
+3. Implement complex JOIN support
+4. Connect to real Vertex AI when credentials available
 
-### Data Synchronization (Optional)
-
-**Security Note**: Never commit API keys. Use `.env` files (gitignored).
-
-1. **Setup credentials**
-```bash
-cp data-pipeline/.env.example data-pipeline/.env
-# Add AIRTABLE_API_KEY and AIRTABLE_BASE_ID
-```
-
-2. **Run sync**
-```bash
-# Full sync (first time)
-SYNC_MODE=full python data-pipeline/pipeline_complete_from_source.py
-
-# Incremental sync
-python data-pipeline/pipeline_complete_from_source.py
-```
-
-## Testing
-
-```bash
-# Unit tests
-cd services/nl-sql-agent
-pytest tests/
-
-# Integration tests
-docker compose -f docker-compose.test.yml up --abort-on-container-exit
-
-# Load testing
-locust -f tests/load/locustfile.py --host=http://localhost:8000
-```
-
-## Performance Metrics
-
-| Operation | Traditional | Optimized | Improvement |
-|-----------|------------|-----------|-------------|
-| Package Install | 5-10s | 398ms | 12-25x |
-| Docker Rebuild | 30+s | 1.6s | 18x |
-| Service Startup | 10-15s | <5s | 2-3x |
-
-## Development Status
-
-### Completed ✅
-- Python environment foundation with multi-manager support
-- Docker containerization with health checks
-- FastAPI test service with Swagger UI
-- Database schema and migration pipeline
-
-### Current Sprint 🚀
-- Milestone 2: MLOps Infrastructure (Due: 2025-10-16)
-
-### Upcoming 📅
-- Milestone 3: Midterm Presentation (2025-10-28)
-- Milestone 4: Full-Stack Development (2025-11-25)
-- Milestone 5: Deployment & Scaling (2025-12-11)
-
-## Troubleshooting
-
-### Port Conflicts
-Modify ports in docker-compose.yml if defaults are in use
-
-### Database Issues
-```bash
-docker compose logs postgres | grep ERROR
-docker exec rice_market_postgres pg_isready -U rice_admin
-```
-
-### Airtable Sync
-- Verify API key format (starts with 'pat')
-- Check network connectivity
-- Respect rate limits (5 req/sec)
-
-## Security Best Practices
-
-- Never commit credentials
-- Use environment variables for configuration
-- Different credentials per environment
-- Rotate keys regularly
-- Apply least privilege principle
-
-## Contributing
-
-1. Create feature branch from `develop`
-2. Follow coding standards (Black, mypy, type hints)
-3. Include tests
-4. Submit PR with clear description
-
-## Team
-
-- **Thanh Phong Le**
-- **Davar Jamali**
-- **Pranab Nepal**
-
-## Support
-
-- Team Members: Develop code in feature branches and submit Pull Requests for review and merging into the develop branch.
-- Reviewers: Review submitted Pull Requests and request live demos from the team as needed.
-
-## Contact
-
-For questions or support, please contact the team through GitHub issues or reach out to team members directly:
-- Team member 1: Thanh Phong Le
-- Team member 2: Davar Jamali
-- Team member 3: Pranab Nepal
+---
+**Branch Status**: Ready for merge to develop
+**Tests Passing**: Yes
+**Service Running**: http://localhost:8001
 
 ---
 
-*This project is actively under development. Check back regularly for updates and new features.*
+**Last Updated:** October 11, 2025  
+**Version:** 2.0 (with complete execution results)  
+**Milestone:** AC215 M2 - Data Pipeline with UV  
+**Status:** ✅ Fully Operational
