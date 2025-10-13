@@ -9,15 +9,14 @@ This is the consolidated documentation for the Rice Market AI data pipeline syst
 
 ### Primary Pipeline Script
 ```bash
-python data-pipeline/pipeline_complete_from_source.py
+python data-pipeline/pipeline_full_migration.py
 ```
 
-This script orchestrates the complete data pipeline including:
-- Airtable to PostgreSQL synchronization
-- Rice price data collection from World Bank Pink Sheet
-- Market factors integration
-- Weather data processing
-- Final dataset generation for ML models
+This script orchestrates the complete data migration including:
+1. Cleans GCP Cloud SQL database
+2. Rebuilds Docker containers from scratch
+3. Syncs data from Airtable to local Docker PostgreSQL
+4. Migrates data from Docker to GCP Cloud SQL
 
 ---
 
@@ -48,10 +47,10 @@ RATE_LIMIT_DELAY=0.25
 ### Running Sync Operations
 ```bash
 # Full sync
-SYNC_MODE=full python data-pipeline/pipeline_complete_from_source.py
+SYNC_MODE=full python data-pipeline/pipeline_full_migration.py
 
 # Incremental sync (default)
-python data-pipeline/pipeline_complete_from_source.py
+python data-pipeline/pipeline_full_migration.py
 ```
 
 ---
@@ -66,35 +65,43 @@ python data-pipeline/pipeline_complete_from_source.py
 
 ### Migration Process
 1. **Clean GCP Cloud SQL database**
-2. **Rebuild Docker containers**
+2. **Rebuild Docker containers from scratch**
 3. **Sync from Airtable to Docker PostgreSQL**
 4. **Migrate to GCP Cloud SQL**
 
 ### Setup Instructions
 
-1. **Install Dependencies**:
+1. **Clone Repository**:
+```bash
+git clone https://github.com/ltphongssvn/ac215e115groupproject.git
+cd ac215e115groupproject
+```
+
+2. **Install Dependencies**:
 ```bash
 pip install -r data-pipeline/requirements.txt
 ```
 
-2. **Configure Environment Files**:
+3. **Configure Environment Files**:
 ```bash
 # Local Docker config
-cp .env.example .env
+cp data-pipeline/.env.example data-pipeline/.env
+# Edit with actual credentials
 
-# GCP config  
-cp .env.gcp.example .env.gcp
+# GCP config
+cp data-pipeline/.env.gcp.example data-pipeline/.env.gcp
+# Edit with actual credentials
 ```
 
-3. **Authenticate GCP**:
+4. **Authenticate GCP**:
 ```bash
 gcloud auth login
 gcloud config set project erp-for-smes
 ```
 
-4. **Run Migration**:
+5. **Run Migration**:
 ```bash
-python data-pipeline/pipeline_complete_from_source.py
+python data-pipeline/pipeline_full_migration.py
 ```
 
 ### Expected Results
@@ -241,7 +248,7 @@ psql -h <GCP_IP> -U rice_admin -d rice_market_db -c "SELECT 1;"
 ```
 
 **Airtable Rate Limiting**:
-Increase `RATE_LIMIT_DELAY` in `.env`
+Increase `RATE_LIMIT_DELAY` in `data-pipeline/.env`
 
 **Numeric Overflow Errors**:
 Check for malformed percent inputs, verify normalization logic
@@ -251,27 +258,29 @@ Check for malformed percent inputs, verify normalization logic
 ## Operational Checklist
 
 1. **Pre-deployment**:
-   - [ ] Run full sync in staging
-   - [ ] Verify no JSON NaN artifacts
-   - [ ] Check numeric value ranges
-   - [ ] Validate correlation metrics
+    - [ ] Run full sync in staging
+    - [ ] Verify no JSON NaN artifacts
+    - [ ] Check numeric value ranges
+    - [ ] Validate correlation metrics
 
 2. **Deployment**:
-   - [ ] Backup existing data
-   - [ ] Run pipeline_complete_from_source.py
-   - [ ] Verify record counts
-   - [ ] Test downstream services
+    - [ ] Backup existing data
+    - [ ] Run pipeline_full_migration.py
+    - [ ] Verify record counts
+    - [ ] Test downstream services
 
 3. **Post-deployment**:
-   - [ ] Monitor error logs
-   - [ ] Verify ML model inputs
-   - [ ] Check API response times
-   - [ ] Validate dashboard updates
+    - [ ] Monitor error logs
+    - [ ] Verify ML model inputs
+    - [ ] Check API response times
+    - [ ] Validate dashboard updates
 
 ---
 
 ## Security Notes
-- Never commit `.env` files
+- NEVER commit `data-pipeline/.env` or `data-pipeline/.env.gcp` files
+- These files are in .gitignore
+- Share credentials securely via encrypted channels only
 - Use encrypted channels for credential sharing
 - Rotate API keys quarterly
 - Monitor access logs for anomalies
@@ -285,4 +294,4 @@ For issues or questions:
 - Review archived scripts in `/data-pipeline/archive/`
 - Contact the Data Engineering team
 
-Last Updated: October 2024
+Last Updated: October 13,  2024
