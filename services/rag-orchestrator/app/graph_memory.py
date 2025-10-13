@@ -1,6 +1,7 @@
 # services/rag-orchestrator/app/graph_memory.py
 from typing import Dict, Any, List, Optional
 from datetime import datetime
+from datetime import timezone
 import logging
 
 logger = logging.getLogger(__name__)
@@ -15,8 +16,8 @@ class GraphMemory:
     
     def add_episodic(self, event: Dict[str, Any]) -> str:
         """Store raw event in episodic memory (short-term)"""
-        event_id = f"ep_{datetime.utcnow().isoformat()}_{len(self.episodic_buffer)}"
-        event_time = datetime.utcnow().isoformat()
+        event_id = f"ep_{datetime.now(timezone.utc).isoformat()}_{len(self.episodic_buffer)}"
+        event_time = datetime.now(timezone.utc).isoformat()
         ingestion_time = event_time
         
         event_data = {
@@ -84,8 +85,8 @@ class GraphMemory:
                 entity_id=entity_id,
                 entity_type="SemanticMemory",
                 properties=data,
-                event_time=datetime.utcnow().isoformat(),
-                ingestion_time=datetime.utcnow().isoformat()
+                event_time=datetime.now(timezone.utc).isoformat(),
+                ingestion_time=datetime.now(timezone.utc).isoformat()
             )
         
         # Store relationships
@@ -107,8 +108,8 @@ class GraphMemory:
             entity_id=procedure_id,
             entity_type="ProceduralMemory",
             properties={"workflow": workflow_id, "step_count": len(steps)},
-            event_time=datetime.utcnow().isoformat(),
-            ingestion_time=datetime.utcnow().isoformat()
+            event_time=datetime.now(timezone.utc).isoformat(),
+            ingestion_time=datetime.now(timezone.utc).isoformat()
         )
         
         # Link steps in sequence
@@ -118,8 +119,8 @@ class GraphMemory:
                 entity_id=step_id,
                 entity_type="ProcedureStep",
                 properties=step,
-                event_time=datetime.utcnow().isoformat(),
-                ingestion_time=datetime.utcnow().isoformat()
+                event_time=datetime.now(timezone.utc).isoformat(),
+                ingestion_time=datetime.now(timezone.utc).isoformat()
             )
             
             self.graph.add_relationship(

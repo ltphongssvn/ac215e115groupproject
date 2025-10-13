@@ -1,6 +1,4 @@
 # /home/lenovo/code/ltphongssvn/ac215e115groupproject/pyproject.toml
-# Modern Python project configuration file
-
 [project]
 name = "ac215e115-group-project"
 version = "0.1.0"
@@ -34,7 +32,7 @@ ignore_missing_imports = true
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]
-addopts = "-v --cov=src --cov-report=term-missing"
+addopts = "-v --no-cov"
 
 [tool.pylint.messages_control]
 disable = "C0111,R0903"

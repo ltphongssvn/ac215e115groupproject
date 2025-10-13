@@ -4,6 +4,7 @@ from .graph_memory import GraphMemory
 from .hybrid_retrieval import HybridRetrieval
 from typing import Dict, Any
 from datetime import datetime
+from datetime import timezone
 import logging
 
 logger = logging.getLogger(__name__)
@@ -47,7 +48,7 @@ class AgenticRAG:
     async def _handle_temporal_query(self, query: str) -> Dict[str, Any]:
         """Handle queries about past states"""
         # Extract time reference (simplified)
-        event_time = datetime.utcnow().isoformat()
+        event_time = datetime.now(timezone.utc).isoformat()
         
         retrieved = self.retrieval.retrieve(query, top_k=5)
         
