@@ -1,0 +1,817 @@
+{
+  "base_id": "appmeTyHLozoqighD",
+  "discovered_at": "2025-09-27T00:54:01.041926",
+  "tables": {
+    "Contracts (H\u1ee3p \u0110\u1ed3ng)": {
+      "id": "tbl7sHbwOCOTjL2MC",
+      "name": "Contracts (H\u1ee3p \u0110\u1ed3ng)",
+      "fields": {
+        "Received Quantity": {
+          "name": "Received Quantity",
+          "postgres_type": "INTEGER",
+          "inferred": true,
+          "is_relationship": false
+        },
+        "Quantity Received at DN": {
+          "name": "Quantity Received at DN",
+          "postgres_type": "INTEGER",
+          "inferred": true,
+          "is_relationship": false
+        },
+        "Loss": {
+          "name": "Loss",
+          "postgres_type": "INTEGER",
+          "inferred": true,
+          "is_relationship": false
+        },
+        "Total Amount": {
+          "name": "Total Amount",
+          "postgres_type": "INTEGER",
+          "inferred": true,
+          "is_relationship": false
+        },
+        "Contract Date": {
+          "name": "Contract Date",
+          "postgres_type": "DATE",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "Contract Number": {
+          "name": "Contract Number",
+          "postgres_type": "VARCHAR(50)",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "Customer": {
+          "name": "Customer",
+          "postgres_type": "INTEGER",
+          "is_relationship": true,
+          "source": "documentation"
+        },
+        "Quantity (kg)": {
+          "name": "Quantity (kg)",
+          "postgres_type": "INTEGER",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "Entry Date": {
+          "name": "Entry Date",
+          "postgres_type": "DATE",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "Voucher Number": {
+          "name": "Voucher Number",
+          "postgres_type": "VARCHAR(50)",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "Commodity Type": {
+          "name": "Commodity Type",
+          "postgres_type": "INTEGER",
+          "is_relationship": true,
+          "source": "documentation"
+        },
+        "Unit Price": {
+          "name": "Unit Price",
+          "postgres_type": "DECIMAL(10,2)",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "Transport Cost": {
+          "name": "Transport Cost",
+          "postgres_type": "DECIMAL(10,2)",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "Total Price (incl. Transport)": {
+          "name": "Total Price (incl. Transport)",
+          "postgres_type": "DECIMAL(10,2)",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "Protein": {
+          "name": "Protein",
+          "postgres_type": "DECIMAL(5,2)",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "Ash": {
+          "name": "Ash",
+          "postgres_type": "DECIMAL(5,2)",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "Fibre": {
+          "name": "Fibre",
+          "postgres_type": "DECIMAL(5,2)",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "Fat": {
+          "name": "Fat",
+          "postgres_type": "DECIMAL(5,2)",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "Moisture": {
+          "name": "Moisture",
+          "postgres_type": "DECIMAL(5,2)",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "Starch": {
+          "name": "Starch",
+          "postgres_type": "DECIMAL(5,2)",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "Acid Value": {
+          "name": "Acid Value",
+          "postgres_type": "DECIMAL(5,2)",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "Notes": {
+          "name": "Notes",
+          "postgres_type": "TEXT",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "Related Shipments": {
+          "name": "Related Shipments",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true,
+          "source": "documentation"
+        },
+        "Related Inventory Movements": {
+          "name": "Related Inventory Movements",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true,
+          "source": "documentation"
+        },
+        "Price Lists": {
+          "name": "Price Lists",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true,
+          "source": "documentation"
+        }
+      },
+      "relationships": [
+        {
+          "field_name": "Customer",
+          "type": "foreign_key"
+        },
+        {
+          "field_name": "Commodity Type",
+          "type": "foreign_key"
+        },
+        {
+          "field_name": "Related Shipments",
+          "type": "many_to_many"
+        },
+        {
+          "field_name": "Related Inventory Movements",
+          "type": "many_to_many"
+        },
+        {
+          "field_name": "Price Lists",
+          "type": "many_to_many"
+        }
+      ],
+      "discovered_by": "sampling"
+    },
+    "Contracts (H\u1ee3p \u0110\u1ed3ng) - 2": {
+      "id": "tbllz4cazITSwnXIo",
+      "name": "Contracts (H\u1ee3p \u0110\u1ed3ng) - 2",
+      "fields": {
+        "Receipt Date": {
+          "name": "Receipt Date",
+          "postgres_type": "VARCHAR(255)",
+          "inferred": true,
+          "is_relationship": false
+        },
+        "Receipt Number": {
+          "name": "Receipt Number",
+          "postgres_type": "VARCHAR(255)",
+          "inferred": true,
+          "is_relationship": false
+        },
+        "Commodity Type": {
+          "name": "Commodity Type",
+          "postgres_type": "INTEGER[]",
+          "inferred": true,
+          "is_relationship": true
+        },
+        "Unit Price": {
+          "name": "Unit Price",
+          "postgres_type": "INTEGER",
+          "inferred": true,
+          "is_relationship": false
+        },
+        "Logistics Cost (VC)": {
+          "name": "Logistics Cost (VC)",
+          "postgres_type": "INTEGER",
+          "inferred": true,
+          "is_relationship": false
+        },
+        "Total Price (with VC)": {
+          "name": "Total Price (with VC)",
+          "postgres_type": "INTEGER",
+          "inferred": true,
+          "is_relationship": false
+        },
+        "Received Quantity": {
+          "name": "Received Quantity",
+          "postgres_type": "INTEGER",
+          "inferred": true,
+          "is_relationship": false
+        },
+        "Imported Quantity (\u0110N)": {
+          "name": "Imported Quantity (\u0110N)",
+          "postgres_type": "INTEGER",
+          "inferred": true,
+          "is_relationship": false
+        },
+        "Loss": {
+          "name": "Loss",
+          "postgres_type": "INTEGER",
+          "inferred": true,
+          "is_relationship": false
+        },
+        "Total Value": {
+          "name": "Total Value",
+          "postgres_type": "INTEGER",
+          "inferred": true,
+          "is_relationship": false
+        },
+        "Protein (%)": {
+          "name": "Protein (%)",
+          "postgres_type": "DECIMAL(15,4)",
+          "inferred": true,
+          "is_relationship": false
+        },
+        "Ash (%)": {
+          "name": "Ash (%)",
+          "postgres_type": "DECIMAL(15,4)",
+          "inferred": true,
+          "is_relationship": false
+        },
+        "Fibre (%)": {
+          "name": "Fibre (%)",
+          "postgres_type": "DECIMAL(15,4)",
+          "inferred": true,
+          "is_relationship": false
+        },
+        "Fat (%)": {
+          "name": "Fat (%)",
+          "postgres_type": "DECIMAL(15,4)",
+          "inferred": true,
+          "is_relationship": false
+        },
+        "Moisture (%)": {
+          "name": "Moisture (%)",
+          "postgres_type": "DECIMAL(15,4)",
+          "inferred": true,
+          "is_relationship": false
+        },
+        "Starch (%)": {
+          "name": "Starch (%)",
+          "postgres_type": "DECIMAL(15,4)",
+          "inferred": true,
+          "is_relationship": false
+        },
+        "Acid Value (%)": {
+          "name": "Acid Value (%)",
+          "postgres_type": "INTEGER",
+          "inferred": true,
+          "is_relationship": false
+        },
+        "Contract Date": {
+          "name": "Contract Date",
+          "postgres_type": "DATE",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "Contract Number": {
+          "name": "Contract Number",
+          "postgres_type": "VARCHAR(50)",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "Customer": {
+          "name": "Customer",
+          "postgres_type": "INTEGER",
+          "is_relationship": true,
+          "source": "documentation"
+        },
+        "Quantity (kg)": {
+          "name": "Quantity (kg)",
+          "postgres_type": "INTEGER",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "Notes": {
+          "name": "Notes",
+          "postgres_type": "TEXT",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "Related Inventory Movements": {
+          "name": "Related Inventory Movements",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true,
+          "source": "documentation"
+        }
+      },
+      "relationships": [
+        {
+          "field_name": "Commodity Type",
+          "type": "many_to_many"
+        },
+        {
+          "field_name": "Customer",
+          "type": "foreign_key"
+        },
+        {
+          "field_name": "Related Inventory Movements",
+          "type": "many_to_many"
+        }
+      ],
+      "discovered_by": "sampling"
+    },
+    "Customers": {
+      "id": "tblDUfIlNy07Z0hiL",
+      "name": "Customers",
+      "fields": {
+        "Customer Name": {
+          "name": "Customer Name",
+          "postgres_type": "VARCHAR(255)",
+          "inferred": true,
+          "is_relationship": false
+        },
+        "National ID (CCCD)": {
+          "name": "National ID (CCCD)",
+          "postgres_type": "VARCHAR(255)",
+          "inferred": true,
+          "is_relationship": false
+        },
+        "Address": {
+          "name": "Address",
+          "postgres_type": "VARCHAR(255)",
+          "inferred": true,
+          "is_relationship": false
+        },
+        "Contracts": {
+          "name": "Contracts",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true,
+          "source": "documentation"
+        },
+        "Shipments": {
+          "name": "Shipments",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true,
+          "source": "documentation"
+        },
+        "Inventory Movements": {
+          "name": "Inventory Movements",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true,
+          "source": "documentation"
+        },
+        "Finished Goods": {
+          "name": "Finished Goods",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true,
+          "source": "documentation"
+        },
+        "Contracts (H\u1ee3p \u0110\u1ed3ng) - 2": {
+          "name": "Contracts (H\u1ee3p \u0110\u1ed3ng) - 2",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true,
+          "source": "documentation"
+        }
+      },
+      "relationships": [
+        {
+          "field_name": "Contracts",
+          "type": "many_to_many"
+        },
+        {
+          "field_name": "Shipments",
+          "type": "many_to_many"
+        },
+        {
+          "field_name": "Inventory Movements",
+          "type": "many_to_many"
+        },
+        {
+          "field_name": "Finished Goods",
+          "type": "many_to_many"
+        },
+        {
+          "field_name": "Contracts (H\u1ee3p \u0110\u1ed3ng) - 2",
+          "type": "many_to_many"
+        }
+      ],
+      "discovered_by": "sampling"
+    },
+    "Shipments": {
+      "id": "tblSj7JcxYYfs6Dcl",
+      "name": "Shipments",
+      "fields": {
+        "Commodity Type": {
+          "name": "Commodity Type",
+          "postgres_type": "INTEGER[]",
+          "inferred": true,
+          "is_relationship": true
+        },
+        "Vehicle/Container Number": {
+          "name": "Vehicle/Container Number",
+          "postgres_type": "VARCHAR(255)",
+          "inferred": true,
+          "is_relationship": false
+        },
+        "Delivered Quantity (kg)": {
+          "name": "Delivered Quantity (kg)",
+          "postgres_type": "INTEGER",
+          "inferred": true,
+          "is_relationship": false
+        },
+        "Arrival Time": {
+          "name": "Arrival Time",
+          "postgres_type": "VARCHAR(255)",
+          "inferred": true,
+          "is_relationship": false
+        },
+        "Shipment Date": {
+          "name": "Shipment Date",
+          "postgres_type": "DATE",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "Customer": {
+          "name": "Customer",
+          "postgres_type": "INTEGER",
+          "is_relationship": true,
+          "source": "documentation"
+        },
+        "Contract Number": {
+          "name": "Contract Number",
+          "postgres_type": "INTEGER",
+          "is_relationship": true,
+          "source": "documentation"
+        },
+        "Contract Quantity": {
+          "name": "Contract Quantity",
+          "postgres_type": "INTEGER",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "Unloading Date": {
+          "name": "Unloading Date",
+          "postgres_type": "VARCHAR(50)",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "Inventory Movements": {
+          "name": "Inventory Movements",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true,
+          "source": "documentation"
+        },
+        "Contracts (H\u1ee3p \u0110\u1ed3ng) - 2": {
+          "name": "Contracts (H\u1ee3p \u0110\u1ed3ng) - 2",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true,
+          "source": "documentation"
+        }
+      },
+      "relationships": [
+        {
+          "field_name": "Commodity Type",
+          "type": "many_to_many"
+        },
+        {
+          "field_name": "Customer",
+          "type": "foreign_key"
+        },
+        {
+          "field_name": "Contract Number",
+          "type": "foreign_key"
+        },
+        {
+          "field_name": "Inventory Movements",
+          "type": "many_to_many"
+        },
+        {
+          "field_name": "Contracts (H\u1ee3p \u0110\u1ed3ng) - 2",
+          "type": "many_to_many"
+        }
+      ],
+      "discovered_by": "sampling"
+    },
+    "Inventory Movements": {
+      "id": "tblhb3Vxhi6Yt0BDw",
+      "name": "Inventory Movements",
+      "fields": {
+        "Date": {
+          "name": "Date",
+          "postgres_type": "DATE",
+          "inferred": true,
+          "is_relationship": false
+        },
+        "Batch/Note": {
+          "name": "Batch/Note",
+          "postgres_type": "VARCHAR(255)",
+          "inferred": true,
+          "is_relationship": false
+        },
+        "Vehicle/Container": {
+          "name": "Vehicle/Container",
+          "postgres_type": "VARCHAR(255)",
+          "inferred": true,
+          "is_relationship": false
+        },
+        "LDH/KH": {
+          "name": "LDH/KH",
+          "postgres_type": "VARCHAR(255)",
+          "inferred": true,
+          "is_relationship": false
+        },
+        "Commodity Type": {
+          "name": "Commodity Type",
+          "postgres_type": "INTEGER[]",
+          "inferred": true,
+          "is_relationship": true
+        },
+        "Production Out (Tons)": {
+          "name": "Production Out (Tons)",
+          "postgres_type": "INTEGER",
+          "inferred": true,
+          "is_relationship": false
+        },
+        "Loss 1.3% (from 1/6/2025)": {
+          "name": "Loss 1.3% (from 1/6/2025)",
+          "postgres_type": "INTEGER",
+          "inferred": true,
+          "is_relationship": false
+        },
+        "Customer": {
+          "name": "Customer",
+          "postgres_type": "INTEGER",
+          "is_relationship": true,
+          "source": "documentation"
+        },
+        "Opening Balance (Tons)": {
+          "name": "Opening Balance (Tons)",
+          "postgres_type": "DECIMAL(10,2)",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "Quantity Received (Tons)": {
+          "name": "Quantity Received (Tons)",
+          "postgres_type": "DECIMAL(10,2)",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "Internal Transfer Out (Tons)": {
+          "name": "Internal Transfer Out (Tons)",
+          "postgres_type": "DECIMAL(10,2)",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "Recovered Finished Goods In (Tons)": {
+          "name": "Recovered Finished Goods In (Tons)",
+          "postgres_type": "DECIMAL(10,2)",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "Domestic Sales Out (Tons)": {
+          "name": "Domestic Sales Out (Tons)",
+          "postgres_type": "DECIMAL(10,2)",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "Raw Material Sales Out (Tons)": {
+          "name": "Raw Material Sales Out (Tons)",
+          "postgres_type": "DECIMAL(10,2)",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "Closing Balance (Tons)": {
+          "name": "Closing Balance (Tons)",
+          "postgres_type": "DECIMAL(10,2)",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "Fat (%)": {
+          "name": "Fat (%)",
+          "postgres_type": "DECIMAL(5,2)",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "Moisture (%)": {
+          "name": "Moisture (%)",
+          "postgres_type": "DECIMAL(5,2)",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "Starch": {
+          "name": "Starch",
+          "postgres_type": "DECIMAL(5,2)",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "Acid Value": {
+          "name": "Acid Value",
+          "postgres_type": "DECIMAL(5,2)",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "Related Contract": {
+          "name": "Related Contract",
+          "postgres_type": "INTEGER",
+          "is_relationship": true,
+          "source": "documentation"
+        },
+        "Related Shipment": {
+          "name": "Related Shipment",
+          "postgres_type": "INTEGER",
+          "is_relationship": true,
+          "source": "documentation"
+        },
+        "Contracts (H\u1ee3p \u0110\u1ed3ng) - 2": {
+          "name": "Contracts (H\u1ee3p \u0110\u1ed3ng) - 2",
+          "postgres_type": "INTEGER[]",
+          "is_relationship": true,
+          "source": "documentation"
+        }
+      },
+      "relationships": [
+        {
+          "field_name": "Commodity Type",
+          "type": "many_to_many"
+        },
+        {
+          "field_name": "Customer",
+          "type": "foreign_key"
+        },
+        {
+          "field_name": "Related Contract",
+          "type": "foreign_key"
+        },
+        {
+          "field_name": "Related Shipment",
+          "type": "foreign_key"
+        },
+        {
+          "field_name": "Contracts (H\u1ee3p \u0110\u1ed3ng) - 2",
+          "type": "many_to_many"
+        }
+      ],
+      "discovered_by": "sampling"
+    },
+    "Finished Goods": {
+      "id": "tblNY26FnHswHRcWS",
+      "name": "Finished Goods",
+      "fields": {
+        "Ng\u00e0y nh\u1eadp": {
+          "name": "Ng\u00e0y nh\u1eadp",
+          "postgres_type": "VARCHAR(255)",
+          "inferred": true,
+          "is_relationship": false
+        },
+        "LDH": {
+          "name": "LDH",
+          "postgres_type": "VARCHAR(255)",
+          "inferred": true,
+          "is_relationship": false
+        },
+        "M\u00e1y": {
+          "name": "M\u00e1y",
+          "postgres_type": "VARCHAR(255)",
+          "inferred": true,
+          "is_relationship": false
+        },
+        "S\u1ed1 l\u01b0\u1ee3ng container": {
+          "name": "S\u1ed1 l\u01b0\u1ee3ng container",
+          "postgres_type": "INTEGER",
+          "inferred": true,
+          "is_relationship": false
+        },
+        "S\u1ed1 l\u01b0\u1ee3ng theo \u0111\u1ea7u bao - Trong gi\u1edd": {
+          "name": "S\u1ed1 l\u01b0\u1ee3ng theo \u0111\u1ea7u bao - Trong gi\u1edd",
+          "postgres_type": "DECIMAL(15,4)",
+          "inferred": true,
+          "is_relationship": false
+        },
+        "S\u1ed1 l\u01b0\u1ee3ng theo \u0111\u1ea7u bao - Ngo\u00e0i gi\u1edd": {
+          "name": "S\u1ed1 l\u01b0\u1ee3ng theo \u0111\u1ea7u bao - Ngo\u00e0i gi\u1edd",
+          "postgres_type": "DECIMAL(15,4)",
+          "inferred": true,
+          "is_relationship": false
+        },
+        "Ti\u1ec1n b\u1ed3i d\u01b0\u1ee1ng BX CONT (50K/20T, 100K/40T)": {
+          "name": "Ti\u1ec1n b\u1ed3i d\u01b0\u1ee1ng BX CONT (50K/20T, 100K/40T)",
+          "postgres_type": "INTEGER",
+          "inferred": true,
+          "is_relationship": false
+        },
+        "Ti\u1ec1n BX trong gi\u1edd (23K)": {
+          "name": "Ti\u1ec1n BX trong gi\u1edd (23K)",
+          "postgres_type": "DECIMAL(15,4)",
+          "inferred": true,
+          "is_relationship": false
+        },
+        "Ngo\u00e0i gi\u1edd": {
+          "name": "Ngo\u00e0i gi\u1edd",
+          "postgres_type": "DECIMAL(15,4)",
+          "inferred": true,
+          "is_relationship": false
+        },
+        "T\u1ed5ng (ca 1)": {
+          "name": "T\u1ed5ng (ca 1)",
+          "postgres_type": "DECIMAL(15,4)",
+          "inferred": true,
+          "is_relationship": false
+        },
+        "Kh\u00e1ch h\u00e0ng": {
+          "name": "Kh\u00e1ch h\u00e0ng",
+          "postgres_type": "INTEGER",
+          "is_relationship": true,
+          "source": "documentation"
+        },
+        "S\u1ea3n xu\u1ea5t t\u1ed5ng gi\u1edd": {
+          "name": "S\u1ea3n xu\u1ea5t t\u1ed5ng gi\u1edd",
+          "postgres_type": "INTEGER",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "16h30-19h": {
+          "name": "16h30-19h",
+          "postgres_type": "INTEGER",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "19h-7h": {
+          "name": "19h-7h",
+          "postgres_type": "INTEGER",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "M\u00ec": {
+          "name": "M\u00ec",
+          "postgres_type": "VARCHAR(50)",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "S\u1ed1 l\u01b0\u1ee3ng container (ca 2)": {
+          "name": "S\u1ed1 l\u01b0\u1ee3ng container (ca 2)",
+          "postgres_type": "INTEGER",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "S\u1ed1 l\u01b0\u1ee3ng theo \u0111\u1ea7u bao - Trong gi\u1edd (ca 2)": {
+          "name": "S\u1ed1 l\u01b0\u1ee3ng theo \u0111\u1ea7u bao - Trong gi\u1edd (ca 2)",
+          "postgres_type": "DECIMAL(10,2)",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "S\u1ed1 l\u01b0\u1ee3ng theo \u0111\u1ea7u bao - Ngo\u00e0i gi\u1edd (ca 2)": {
+          "name": "S\u1ed1 l\u01b0\u1ee3ng theo \u0111\u1ea7u bao - Ngo\u00e0i gi\u1edd (ca 2)",
+          "postgres_type": "DECIMAL(10,2)",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "Ti\u1ec1n b\u1ed3i d\u01b0\u1ee1ng BX CONT (ca 2)": {
+          "name": "Ti\u1ec1n b\u1ed3i d\u01b0\u1ee1ng BX CONT (ca 2)",
+          "postgres_type": "DECIMAL(10,2)",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "Ti\u1ec1n BX trong gi\u1edd (ca 2)": {
+          "name": "Ti\u1ec1n BX trong gi\u1edd (ca 2)",
+          "postgres_type": "DECIMAL(10,2)",
+          "is_relationship": false,
+          "source": "documentation"
+        },
+        "Ngo\u00e0i gi\u1edd (ca 2)": {
+          "name": "Ngo\u00e0i gi\u1edd (ca 2)",
+          "postgres_type": "DECIMAL(10,2)",
+          "is_relationship": false,
+          "source": "documentation"
+        }
+      },
+      "relationships": [
+        {
+          "field_name": "Kh\u00e1ch h\u00e0ng",
+          "type": "foreign_key"
+        }
+      ],
+      "discovered_by": "sampling"
+    }
+  },
+  "enhanced_at": "2025-10-02T17:02:46.362244"
+}

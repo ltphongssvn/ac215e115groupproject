@@ -1,0 +1,49 @@
+{
+  "metadata": {
+    "creation_date": "2025-10-03T10:24:43.443228",
+    "total_records": 198,
+    "date_range": {
+      "start": "2008-07-01T00:00:00",
+      "end": "2024-12-01T00:00:00"
+    },
+    "data_sources": {
+      "rice_prices": "4 varieties from World Bank Pink Sheet",
+      "market_factors": "6 factors (oil, inflation, population, ENSO, fertilizer)",
+      "rainfall": "Climatologically-based synthetic data with ENSO effects"
+    }
+  },
+  "correlations": {
+    "Rice_Vietnamese_5pct": {
+      "Oil_Dubai_Oman_USD_per_bbl": 0.388,
+      "Inflation_Asia_Avg_pct": 0.426,
+      "Population_Growth_Asia_Avg_pct": -0.045,
+      "Population_Total_Asia_Avg_millions": -0.116,
+      "ENSO_Nino34_Anomaly": -0.074,
+      "Fertilizer_Composite_USD_per_mt": 0.374,
+      "Asia_Avg_Rainfall_mm": 0.054,
+      "Rainfall_Anomaly_pct": 0.054
+    }
+  },
+  "data_completeness": {
+    "Rice_Thai_5pct": "100.0%",
+    "Rice_Thai_25pct": "100.0%",
+    "Rice_Thai_A1": "100.0%",
+    "Rice_Vietnamese_5pct": "99.5%",
+    "Oil_Dubai_Oman_USD_per_bbl": "100.0%",
+    "Inflation_Asia_Avg_pct": "94.4%",
+    "Population_Growth_Asia_Avg_pct": "94.4%",
+    "Population_Total_Asia_Avg_millions": "94.4%",
+    "ENSO_Nino34_Anomaly": "100.0%",
+    "Fertilizer_Composite_USD_per_mt": "100.0%",
+    "Year": "100.0%",
+    "Month": "100.0%",
+    "Quarter": "100.0%",
+    "ENSO_Phase": "100.0%",
+    "Crisis_2008_Financial": "100.0%",
+    "Crisis_2011_Food": "100.0%",
+    "COVID_Period": "100.0%",
+    "Ukraine_Conflict": "100.0%",
+    "Asia_Avg_Rainfall_mm": "100.0%",
+    "Rainfall_Anomaly_pct": "100.0%"
+  }
+}

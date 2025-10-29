@@ -1,0 +1,93 @@
+# services/nl-sql-service/docker-compose.yml
+services:
+  postgres:
+    build:
+      context: .
+      dockerfile: Dockerfile.postgres
+    container_name: rice_market_postgres
+    environment:
+      POSTGRES_USER: rice_admin
+      POSTGRES_PASSWORD: localdev123
+      POSTGRES_DB: rice_market_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U rice_admin -d rice_market_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - rice_market_network
+
+  redis:
+    image: redis:7-alpine
+    container_name: rice_market_redis
+    ports:
+      - "6380:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - rice_market_network
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: rice_market_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: 'False'
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    networks:
+      - rice_market_network
+
+  adminer:
+    image: adminer:latest
+    container_name: rice_market_adminer
+    environment:
+      ADMINER_DEFAULT_SERVER: postgres
+      ADMINER_DESIGN: pepa-linha
+    ports:
+      - "8081:8080"
+    networks:
+      - rice_market_network
+
+  nl-sql-service:
+    build: ./services/nl-sql-service
+    container_name: nl-sql-service
+    ports:
+      - "8001:8001"
+    env_file:
+      - ./services/nl-sql-service/.env
+    networks:
+      - rice_market_network
+    depends_on:
+      - postgres
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  pgadmin_data:
+    driver: local
+
+networks:
+  rice_market_network:
+    driver: bridge

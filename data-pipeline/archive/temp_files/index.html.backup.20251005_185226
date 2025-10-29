@@ -1,0 +1,2716 @@
+<!-- 
+  File: /home/lenovo/code/ltphongssvn/ac215e115groupproject/index.html
+  Project Root: /home/lenovo/code/ltphongssvn/ac215e115groupproject/
+  Description: Complete ERP AI Architecture Implementation with checklist, API flow, and team structure
+  Purpose: Comprehensive project dashboard with all navigation sections
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ERP AI Architecture Implementation for AC215 Course">
+    <meta name="author" content="AC215 E115 Group">
+    <title>ERP AI Architecture Implementation | AC215 E115 Group Project</title>
+    
+    <style>
+        /* Global reset and base typography */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        /* Main container */
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        /* Header section */
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 2rem;
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.15rem;
+            opacity: 0.95;
+            margin-bottom: 1rem;
+        }
+        
+        /* Navigation tabs */
+        .nav-tabs {
+            display: flex;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            padding: 4px;
+            margin-top: 1.5rem;
+        }
+        
+        .nav-tab {
+            flex: 1;
+            padding: 12px 24px;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.7);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .nav-tab.active {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .nav-tab:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        /* Page content containers */
+        .page-content {
+            display: none;
+            padding: 2rem;
+            animation: fadeIn 0.5s;
+        }
+        
+        .page-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        /* Statistics dashboard */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 1.75rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+            text-align: center;
+            transition: transform 0.3s;
+            border: 1px solid #e1e8ed;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            animation: shimmer 2s infinite;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+        }
+        
+        .stat-number {
+            font-size: 2.25rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .time-remaining {
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+        }
+        
+        /* Action buttons */
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(52, 152, 219, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(52, 152, 219, 0.4);
+        }
+        
+        /* Checklist section */
+        .checklist-section {
+            margin-bottom: 2rem;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+        }
+        
+        .section-header {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 1.25rem 1.5rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        .section-header h3 {
+            font-size: 1rem;
+            margin: 0;
+            font-weight: 600;
+        }
+        
+        /* Table styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th {
+            padding: 14px;
+            text-align: left;
+            font-weight: 600;
+            color: #2c3e50;
+            background: #f8f9fa;
+            border-bottom: 2px solid #dee2e6;
+            font-size: 0.95rem;
+        }
+        
+        td {
+            padding: 12px 14px;
+            border-bottom: 1px solid #e9ecef;
+            font-size: 0.95rem;
+        }
+        
+        tbody tr:hover {
+            background: #f8f9fa;
+        }
+        
+        /* Priority color coding */
+        .priority-high {
+            background: linear-gradient(90deg, #fff5f5 0%, transparent 100%);
+            border-left: 4px solid #e74c3c;
+        }
+        
+        .priority-medium {
+            background: linear-gradient(90deg, #fffbf0 0%, transparent 100%);
+            border-left: 4px solid #f39c12;
+        }
+        
+        .priority-low {
+            background: linear-gradient(90deg, #f0f8ff 0%, transparent 100%);
+            border-left: 4px solid #3498db;
+        }
+        
+        .task-id {
+            font-weight: 700;
+            color: #2c3e50;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .checkbox {
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
+            accent-color: #27ae60;
+        }
+        
+        .completed {
+            opacity: 0.6;
+        }
+        
+        .completed td {
+            text-decoration: line-through;
+            color: #7f8c8d;
+        }
+        
+        /* API Flow Visualization */
+        .flow-container {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+        }
+        
+        .flow-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid #3498db;
+        }
+        
+        .flow-step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: slideIn 0.5s forwards;
+            position: relative;
+        }
+        
+        .flow-step:nth-child(odd) { animation-delay: 0.1s; }
+        .flow-step:nth-child(even) { animation-delay: 0.2s; }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.3em;
+            margin-right: 20px;
+            flex-shrink: 0;
+            box-shadow: 0 4px 6px rgba(102, 126, 234, 0.3);
+        }
+        
+        .step-content {
+            flex: 1;
+            background: #f8f9fa;
+            padding: 1.25rem;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s;
+        }
+        
+        .step-content:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            background: white;
+        }
+        
+        .service-name {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+        
+        .action-desc {
+            color: #4a5568;
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+        
+        .technical-details {
+            color: #718096;
+            font-size: 0.9rem;
+            font-style: italic;
+            background: rgba(52, 152, 219, 0.05);
+            padding: 8px;
+            border-radius: 4px;
+            margin-top: 8px;
+        }
+        
+        .timing-badge {
+            display: inline-block;
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            margin-top: 8px;
+            font-weight: 600;
+        }
+        
+        .flow-arrow {
+            text-align: center;
+            font-size: 2rem;
+            color: #cbd5e0;
+            margin: -10px 0;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(5px); }
+        }
+        
+        /* Team Structure Styles */
+        .team-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+        }
+        
+        .team-header {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .team-intro {
+            color: #4a5568;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+        
+        .team-category {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.1);
+        }
+        
+        .category-title {
+            font-size: 1.5rem;
+            color: #34495e;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .category-title::before {
+            content: '';
+            width: 5px;
+            height: 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 3px;
+        }
+        
+        .team-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s;
+        }
+        
+        .team-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            background: white;
+        }
+        
+        .team-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+        
+        .team-mission {
+            color: #4a5568;
+            font-style: italic;
+            margin-bottom: 1rem;
+            padding: 10px;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 5px;
+        }
+        
+        .responsibilities-title {
+            font-weight: 600;
+            color: #34495e;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .responsibility-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .responsibility-list li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #4a5568;
+            line-height: 1.6;
+        }
+        
+        .responsibility-list li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-size: 0.8rem;
+        }
+        
+        .skills-container {
+            margin-top: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .skill-tag {
+            background: linear-gradient(135deg, #667eea20, #764ba220);
+            color: #667eea;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid #667eea30;
+        }
+        
+        .principles-section {
+            background: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .principles-title {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+        }
+        
+        .principle-item {
+            display: flex;
+            margin-bottom: 1rem;
+            align-items: flex-start;
+        }
+        
+        .principle-icon {
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .principle-content {
+            flex: 1;
+        }
+        
+        .principle-name {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 4px;
+        }
+        
+        .principle-desc {
+            color: #4a5568;
+            line-height: 1.6;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container {
+                border-radius: 0;
+                margin: -20px;
+            }
+            
+            h1 {
+                font-size: 1.75rem;
+            }
+            
+            .nav-tabs {
+                flex-direction: column;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .hide-mobile {
+                display: none;
+            }
+            
+            table {
+                font-size: 0.85rem;
+            }
+            
+            th, td {
+                padding: 8px;
+            }
+            
+            .team-card {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+<!-- 
+  File: /home/lenovo/code/ltphongssvn/ac215e115groupproject/group-info-adjusted.html
+  Purpose: Final group information with ERP for SMEs shifted right and proper alignment
+  Insert Location: Replaces existing group information in header
+-->
+            <div style="position: absolute; top: 15px; right: 30px; color: white; font-size: 0.75rem; text-align: left; line-height: 1.2;">
+                <div style="border-bottom: 1px solid rgba(255,255,255,0.6); padding-bottom: 1px; margin-bottom: 3px; display: inline-block;">
+                    <span style="font-weight: 500;">Group name:</span>
+                    <span style="margin-left: 35px; font-weight: 500;">ERP for SMEs</span>
+                </div>
+                <div style="margin-top: 2px;">
+                    <span style="font-weight: 500;">Group members:</span>
+                    <span style="margin-left: 10px; font-weight: 400;">1. <a href="https://www.linkedin.com/in/thanh-phong-le-993339128/" target="_blank" style="color: inherit; text-decoration: none; transition: all 0.3s ease;" onmouseover="this.style.textDecoration='underline'; this.style.opacity='0.8'" onmouseout="this.style.textDecoration='none'; this.style.opacity='1'">Thanh Phong Le</a></span>
+                </div>
+                <div style="padding-left: 106px; font-weight: 400;">2. Davar Jamali</div>
+                <div style="padding-left: 106px; font-weight: 400;">3. Pranab Nepal</div>
+                <div style="margin-top: 5px; padding-top: 3px; border-top: 1px solid rgba(255,255,255,0.4);">
+                    <div style="font-weight: 500;"><a href="https://github.com/ltphongssvn/ac215e115groupproject" target="_blank" style="color: inherit; text-decoration: none; font-weight: 500;">GitHub:</a></div>
+                    <div style="padding-left: 20px; margin-top: 8px; font-weight: 400;"><a href="https://github.com/ltphongssvn/ac215e115groupproject" target="_blank" style="color: #4299e1; text-decoration: underline; font-weight: 400;">https://github.com/ltphongssvn/ac215e115groupproject</a></div>
+                </div>
+            </div>
+            <h1>ERP AI Architecture Implementation</h1>
+            <p class="subtitle">Rice Market AI System - Natural Language SQL, RAG, and Time-Series Forecasting</p>
+            
+            <!-- Navigation tabs -->
+            <div class="nav-tabs">
+                <button class="nav-tab active" onclick="switchPage('checklist')">Implementation Checklist</button>
+                <button class="nav-tab" onclick="switchPage('apiflow')">API Flow Architecture</button>
+                <button class="nav-tab" onclick="switchPage('techstack')">Tech Stack</button>
+                <button class="nav-tab" onclick="switchPage('team')">Team Structure</button>
+            </div>
+        </header>
+        
+        <!-- Page 1: Implementation Checklist -->
+        <div id="checklist-page" class="page-content active">
+            <!-- Statistics dashboard -->
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-number" id="total-tasks">0</div>
+                    <div class="stat-label">Total Tasks</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="completed-tasks">0</div>
+                    <div class="stat-label">Completed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number time-remaining" id="hours-remaining">0h</div>
+                    <div class="stat-label">Hours Remaining</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number time-remaining" id="days-remaining">0</div>
+                    <div class="stat-label">Days to Deadline</div>
+                </div>
+            </div>
+            
+            <!-- Action buttons -->
+            <div class="action-buttons">
+                <button class="btn" onclick="exportToExcel()">Export to Excel</button>
+                <button class="btn" onclick="saveProgress()">Save Progress</button>
+                <button class="btn" onclick="loadProgress()">Load Progress</button>
+                <button class="btn" onclick="resetProgress()">Reset All</button>
+            </div>
+            
+            <!-- Checklist container -->
+            <div id="checklist-container"></div>
+        </div>
+        
+        <!-- Page 2: API Flow Visualization -->
+<!-- 
+  File: /home/lenovo/code/ltphongssvn/ac215e115groupproject/new-apiflow-section.html
+  Purpose: Replacement content for API Flow Architecture page
+  This replaces lines 650-1113 in index.html
+-->
+        <!-- Page 2: API Flow Visualization -->
+        <div id="apiflow-page" class="page-content">
+            <style>
+                .flow-section {
+                    margin-bottom: 50px;
+                    background: white;
+                    border-radius: 15px;
+                    padding: 25px;
+                    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                }
+                
+                .flow-title {
+                    color: #4a5568;
+                    font-size: 1.8em;
+                    margin-bottom: 20px;
+                    padding-bottom: 10px;
+                    border-bottom: 3px solid #667eea;
+                }
+                
+                .flow-container {
+                    display: flex;
+                    align-items: flex-start;
+                    gap: 30px;
+                    margin-bottom: 30px;
+                }
+                
+                .flow-diagram {
+                    flex: 1;
+                    min-width: 400px;
+                }
+                
+                .flow-description {
+                    flex: 1;
+                    padding: 20px;
+                    background: #f7fafc;
+                    border-radius: 10px;
+                }
+                
+                .step {
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 20px;
+                    opacity: 0;
+                    animation: fadeInStep 0.5s forwards;
+                }
+                
+                .step:nth-child(odd) { animation-delay: 0.1s; }
+                .step:nth-child(even) { animation-delay: 0.2s; }
+                
+                @keyframes fadeInStep {
+                    to {
+                        opacity: 1;
+                    }
+                }
+                
+                .step-number {
+                    width: 40px;
+                    height: 40px;
+                    background: linear-gradient(135deg, #667eea, #764ba2);
+                    color: white;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-weight: bold;
+                    font-size: 1.2em;
+                    margin-right: 20px;
+                    flex-shrink: 0;
+                }
+                
+                .step-content {
+                    flex: 1;
+                    background: white;
+                    padding: 15px;
+                    border-radius: 10px;
+                    border-left: 4px solid #667eea;
+                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                    transition: transform 0.3s, box-shadow 0.3s;
+                }
+                
+                .step-content:hover {
+                    transform: translateX(5px);
+                    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+                }
+                
+                .service-name {
+                    font-weight: bold;
+                    color: #2d3748;
+                    margin-bottom: 5px;
+                }
+                
+                .action {
+                    color: #4a5568;
+                    font-size: 0.95em;
+                    margin-bottom: 5px;
+                }
+                
+                .details {
+                    color: #718096;
+                    font-size: 0.85em;
+                    font-style: italic;
+                }
+                
+                .arrow {
+                    text-align: center;
+                    color: #cbd5e0;
+                    font-size: 2em;
+                    margin: -10px 0;
+                    animation: bounceArrow 2s infinite;
+                }
+                
+                @keyframes bounceArrow {
+                    0%, 100% { transform: translateY(0); }
+                    50% { transform: translateY(5px); }
+                }
+                
+                .timing-badge {
+                    display: inline-block;
+                    background: #f0fff4;
+                    color: #22543d;
+                    padding: 3px 8px;
+                    border-radius: 12px;
+                    font-size: 0.8em;
+                    margin-left: 10px;
+                    border: 1px solid #9ae6b4;
+                }
+                
+                .error-handling {
+                    background: #fef5e7;
+                    border: 1px solid #f8d7da;
+                    border-radius: 10px;
+                    padding: 15px;
+                    margin-top: 20px;
+                }
+                
+                .error-title {
+                    color: #721c24;
+                    font-weight: bold;
+                    margin-bottom: 10px;
+                }
+                
+                .performance-note {
+                    background: #e6f7ff;
+                    border: 1px solid #91d5ff;
+                    border-radius: 10px;
+                    padding: 15px;
+                    margin-top: 20px;
+                }
+                
+                .performance-title {
+                    color: #0050b3;
+                    font-weight: bold;
+                    margin-bottom: 10px;
+                }
+            </style>
+            
+            <h1 style="text-align: center; color: #2d3748; margin-bottom: 10px; font-size: 2.5em;">🔄 ERP AI Architecture - Internal API Flow</h1>
+            <p style="text-align: center; color: #718096; margin-bottom: 40px; font-size: 1.1em;">Detailed execution paths showing how requests flow through the microservices architecture</p>
+            
+            <!-- Flow 1: Natural Language to SQL -->
+            <div class="flow-section">
+                <h2 class="flow-title">📊 Flow 1: Natural Language to SQL Query</h2>
+                <div class="flow-container">
+                    <div class="flow-diagram">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <div class="service-name">Client Application</div>
+                                <div class="action">User enters: "Show me rice inventory levels for last month"</div>
+                                <div class="details">POST /api/v1/nl-query | Content-Type: application/json</div>
+                            </div>
+                        </div>
+                        <div class="arrow">↓</div>
+                        
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <div class="service-name">API Gateway (Cloud Endpoints + Cloud Run) / BFF Layer</div>
+                                <div class="action">Authentication & Authorization Check</div>
+                                <div class="details">Validates JWT token, checks RBAC permissions for inventory access</div>
+                                <span class="timing-badge">~50ms</span>
+                            </div>
+                        </div>
+                        <div class="arrow">↓</div>
+                        
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <div class="service-name">NL+SQL Agent Service (Vertex AI + LangChain)</div>
+                                <div class="action">Gemini 1.5 Pro processes natural language via LangGraph StateGraph</div>
+                                <div class="details">Identifies intent: inventory query, time range: last month</div>
+                                <span class="timing-badge">~200ms</span>
+                            </div>
+                        </div>
+                        <div class="arrow">↓</div>
+                        
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <div class="service-name">SQL Generator (LangChain Tool + Vertex AI)</div>
+                                <div class="action">Generates parameterized SQL with Vertex AI validation</div>
+                                <div class="details">SELECT * FROM inventory_data WHERE item_type='rice' AND date >= DATE_SUB(NOW(), INTERVAL 1 MONTH)</div>
+                                <span class="timing-badge">~100ms</span>
+                            </div>
+                        </div>
+                        <div class="arrow">↓</div>
+                        
+                        <div class="step">
+                            <div class="step-number">5</div>
+                            <div class="step-content">
+                                <div class="service-name">SQL Proxy / Guard (Cloud SQL Auth Proxy)</div>
+                                <div class="action">Query validation with Cloud IAM row-level security</div>
+                                <div class="details">Applies row-level security, checks allowlist, masks sensitive data</div>
+                                <span class="timing-badge">~30ms</span>
+                            </div>
+                        </div>
+                        <div class="arrow">↓</div>
+                        
+                        <div class="step">
+                            <div class="step-number">6</div>
+                            <div class="step-content">
+                                <div class="service-name">Cloud SQL PostgreSQL with Read Replicas</div>
+                                <div class="action">Query execution on managed read replica instances</div>
+                                <div class="details">Retrieves inventory data from optimized read replica</div>
+                                <span class="timing-badge">~150ms</span>
+                            </div>
+                        </div>
+                        <div class="arrow">↓</div>
+                        
+                        <div class="step">
+                            <div class="step-number">7</div>
+                            <div class="step-content">
+                                <div class="service-name">Result Formatter</div>
+                                <div class="action">Formats response for user consumption</div>
+                                <div class="details">Converts to JSON, adds metadata, applies presentation logic</div>
+                                <span class="timing-badge">~20ms</span>
+                            </div>
+                        </div>
+                        <div class="arrow">↓</div>
+                        
+                        <div class="step">
+                            <div class="step-number">8</div>
+                            <div class="step-content">
+                                <div class="service-name">API Gateway (Cloud Endpoints + Cloud Run)</div>
+                                <div class="action">Response caching & delivery</div>
+                                <div class="details">Caches result for 5 minutes, returns to client</div>
+                                <span class="timing-badge">~10ms</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-description">
+                        <h3>Key Architectural Decisions</h3>
+                        
+                        <ul>
+                            <li><strong>Security First:</strong> Every SQL query passes through the proxy guard to prevent injection attacks and enforce data access policies</li>
+                            <li><strong>Performance Optimization:</strong> Read replicas handle query load, keeping the primary Cloud SQL database free for transactions</li>
+                            <li><strong>Caching Strategy:</strong> Results are cached at the gateway level for frequently requested data</li>
+                        </ul>
+                        
+                        <div class="error-handling">
+                            <div class="error-title">Error Handling & Circuit Breakers</div>
+                            <ul>
+                                <li>If Vertex AI Gemini service fails → Fallback to keyword-based query</li>
+                                <li>If Cloud SQL database timeout → Return cached results if available</li>
+                                <li>If SQL validation fails → Return sanitized error message</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="performance-note">
+                            <div class="performance-title">Performance Metrics</div>
+                            <p>Total latency: ~760ms | Target SLA: < 1 second</p>
+                            <p>Throughput: 1000 requests/second with horizontal scaling</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Flow 2: RAG Orchestration -->
+            <div class="flow-section">
+                <h2 class="flow-title">🔍 Flow 2: RAG-Based Document Summarization</h2>
+                <div class="flow-container">
+                    <div class="flow-diagram">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <div class="service-name">Client Application</div>
+                                <div class="action">User requests: "Summarize all purchase orders from Q3"</div>
+                                <div class="details">POST /api/v1/rag-summary | Content-Type: application/json</div>
+                            </div>
+                        </div>
+                        <div class="arrow">↓</div>
+                        
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <div class="service-name">API Gateway (Cloud Endpoints + Cloud Run)</div>
+                                <div class="action">Rate limiting check & auth validation</div>
+                                <div class="details">Ensures user hasn't exceeded RAG query limits (10/minute)</div>
+                                <span class="timing-badge">~40ms</span>
+                            </div>
+                        </div>
+                        <div class="arrow">↓</div>
+                        
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <div class="service-name">RAG Orchestrator (Vertex AI Agent Builder)</div>
+                                <div class="action">Query embedding with textembedding-gecko@003</div>
+                                <div class="details">Converts text to 768-dimensional vector using embedding model</div>
+                                <span class="timing-badge">~150ms</span>
+                            </div>
+                        </div>
+                        <div class="arrow">↓</div>
+                        
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <div class="service-name">Retriever Service (Vertex AI Vector Search)</div>
+                                <div class="action">Similarity search with automatic index optimization</div>
+                                <div class="details">Queries Vertex AI Vector Search for top-k relevant documents</div>
+                                <span class="timing-badge">~80ms</span>
+                            </div>
+                        </div>
+                        <div class="arrow">↓</div>
+                        
+                        <div class="step">
+                            <div class="step-number">5</div>
+                            <div class="step-content">
+                                <div class="service-name">Vertex AI Vector Search + Cloud SQL pgvector</div>
+                                <div class="action">HNSW index with metadata filtering via SQL</div>
+                                <div class="details">Performs approximate nearest neighbor search across sharded indices</div>
+                                <span class="timing-badge">~120ms</span>
+                            </div>
+                        </div>
+                        <div class="arrow">↓</div>
+                        
+                        <div class="step">
+                            <div class="step-number">6</div>
+                            <div class="step-content">
+                                <div class="service-name">Ranker Module</div>
+                                <div class="action">Re-ranking retrieved documents</div>
+                                <div class="details">Applies cross-encoder model to improve relevance ordering</div>
+                                <span class="timing-badge">~200ms</span>
+                            </div>
+                        </div>
+                        <div class="arrow">↓</div>
+                        
+                        <div class="step">
+                            <div class="step-number">7</div>
+                            <div class="step-content">
+                                <div class="service-name">Generator Service (Vertex AI Gemini 1.5 Pro)</div>
+                                <div class="action">Vertex AI Gemini synthesis with Document AI context grounding</div>
+                                <div class="details">Creates coherent summary from top-5 documents with citations</div>
+                                <span class="timing-badge">~500ms</span>
+                            </div>
+                        </div>
+                        <div class="arrow">↓</div>
+                        
+                        <div class="step">
+                            <div class="step-number">8</div>
+                            <div class="step-content">
+                                <div class="service-name">Citation Tracker</div>
+                                <div class="action">Add source references</div>
+                                <div class="details">Appends document IDs and confidence scores to response</div>
+                                <span class="timing-badge">~20ms</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-description">
+                        <h3>Microservices Orchestration Pattern</h3>
+                        
+                        <ul>
+                            <li><strong>Service Choreography:</strong> Each service has a single responsibility and communicates through well-defined interfaces</li>
+                            <li><strong>Async Processing:</strong> Vector search and ranking can be parallelized for performance</li>
+                            <li><strong>Fallback Mechanisms:</strong> If vector store is unavailable, falls back to keyword search in Cloud SQL ERP database</li>
+                        </ul>
+                        
+                        <div class="performance-note">
+                            <div class="performance-title">Scaling Considerations</div>
+                            <p>Vertex AI Vector Search uses managed index sharding for horizontal scaling</p>
+                            <p>Generator Service can be replicated with GPU instances for parallel processing</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Flow 3: Time Series Forecasting -->
+            <div class="flow-section">
+                <h2 class="flow-title">📈 Flow 3: Time-Series Price Forecasting</h2>
+                <div class="flow-container">
+                    <div class="flow-diagram">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <div class="service-name">Client Application</div>
+                                <div class="action">Request 6-month rice price forecast</div>
+                                <div class="details">GET /api/v1/forecast/rice-price?horizon=6m</div>
+                            </div>
+                        </div>
+                        <div class="arrow">↓</div>
+                        
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <div class="service-name">API Gateway (Cloud Endpoints + Cloud Run)</div>
+                                <div class="action">Check cache for recent predictions</div>
+                                <div class="details">Forecasts cached for 24 hours to reduce compute load</div>
+                                <span class="timing-badge">~30ms</span>
+                            </div>
+                        </div>
+                        <div class="arrow">↓</div>
+                        
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <div class="service-name">TS Forecasting Engine (BigQuery + Feast)</div>
+                                <div class="action">Feature extraction from BigQuery Feature Store via Feast registry</div>
+                                <div class="details">Retrieves price history, weather data, FX rates, market indicators</div>
+                                <span class="timing-badge">~100ms</span>
+                            </div>
+                        </div>
+                        <div class="arrow">↓</div>
+                        
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <div class="service-name">BigQuery Feature Store with Feast</div>
+                                <div class="action">Serve pre-computed features</div>
+                                <div class="details">Returns versioned feature vectors with monitoring metadata</div>
+                                <span class="timing-badge">~50ms</span>
+                            </div>
+                        </div>
+                        <div class="arrow">↓</div>
+                        
+                        <div class="step">
+                            <div class="step-number">5</div>
+                            <div class="step-content">
+                                <div class="service-name">Model Inference (Vertex AI Endpoints)</div>
+                                <div class="action">Load model from Vertex AI Model Registry with MLflow</div>
+                                <div class="details">Retrieves LSTM/Prophet ensemble model v2.3.1</div>
+                                <span class="timing-badge">~200ms</span>
+                            </div>
+                        </div>
+                        <div class="arrow">↓</div>
+                        
+                        <div class="step">
+                            <div class="step-number">6</div>
+                            <div class="step-content">
+                                <div class="service-name">Vertex AI Custom Training Models</div>
+                                <div class="action">LSTM/Prophet ensemble on managed GPU instances</div>
+                                <div class="details">Runs inference for 180-day horizon with confidence intervals</div>
+                                <span class="timing-badge">~300ms</span>
+                            </div>
+                        </div>
+                        <div class="arrow">↓</div>
+                        
+                        <div class="step">
+                            <div class="step-number">7</div>
+                            <div class="step-content">
+                                <div class="service-name">Post-processor & Explainability Module</div>
+                                <div class="action">Add interpretability layer</div>
+                                <div class="details">Generates SHAP values, identifies key price drivers</div>
+                                <span class="timing-badge">~150ms</span>
+                            </div>
+                        </div>
+                        <div class="arrow">↓</div>
+                        
+                        <div class="step">
+                            <div class="step-number">8</div>
+                            <div class="step-content">
+                                <div class="service-name">Confidence Estimator</div>
+                                <div class="action">Calculate prediction confidence</div>
+                                <div class="details">Provides uncertainty bounds based on historical accuracy</div>
+                                <span class="timing-badge">~50ms</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-description">
+                        <h3>ML Pipeline Architecture</h3>
+                        
+                        <ul>
+                            <li><strong>BigQuery Feature Store with Feast Pattern:</strong> Ensures training-serving consistency and feature reusability</li>
+                            <li><strong>MLflow Model Registry on Vertex AI:</strong> Enables A/B testing between champion and challenger models</li>
+                            <li><strong>Explainability First:</strong> Every prediction includes interpretability metrics for business trust</li>
+                        </ul>
+                        
+                        <div class="error-handling">
+                            <div class="error-title">Degradation Strategy</div>
+                            <ul>
+                                <li>If primary model fails → Use simpler baseline model</li>
+                                <li>If features unavailable → Use cached historical features</li>
+                                <li>If confidence too low → Flag prediction as unreliable</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Cross-Cutting Concerns -->
+            <div class="flow-section" style="background: #f0f9ff;">
+                <h2 class="flow-title">🔧 Cross-Cutting Architectural Patterns</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                    <div style="background: white; padding: 20px; border-radius: 10px; border-left: 4px solid #3182ce;">
+                        <h3 style="color: #2c5282; margin-top: 0;">Distributed Tracing</h3>
+                        <p>Every request gets a correlation ID at the gateway, propagated through all service calls for end-to-end visibility</p>
+                        <code style="background: #e6fffa; padding: 5px; border-radius: 3px;">X-Correlation-ID: uuid-v4</code>
+                    </div>
+                    
+                    <div style="background: white; padding: 20px; border-radius: 10px; border-left: 4px solid #48bb78;">
+                        <h3 style="color: #22543d; margin-top: 0;">Service Mesh Communication</h3>
+                        <p>All gRPC inter-service communication with Protocol Buffers use gRPC for efficiency, with automatic retry logic and circuit breakers</p>
+                        <code style="background: #f0fff4; padding: 5px; border-radius: 3px;">Protocol: gRPC + Protobuf</code>
+                    </div>
+                    
+                    <div style="background: white; padding: 20px; border-radius: 10px; border-left: 4px solid #ed8936;">
+                        <h3 style="color: #7c2d12; margin-top: 0;">Observability Stack</h3>
+                        <p>Metrics exported to Prometheus, logs to ELK, traces to Jaeger for complete system visibility</p>
+                        <code style="background: #fffaf0; padding: 5px; border-radius: 3px;">Metrics: /metrics endpoint</code>
+                    </div>
+                    
+                    <div style="background: white; padding: 20px; border-radius: 10px; border-left: 4px solid #9f7aea;">
+                        <h3 style="color: #44337a; margin-top: 0;">Async Event Bus</h3>
+                        <p>Model updates and data ingestion trigger events via Kafka for decoupled processing</p>
+                        <code style="background: #faf5ff; padding: 5px; border-radius: 3px;">Topics: model.updated, data.ingested</code>
+                    </div>
+                </div>
+            </div>
+        </div>    
+<!-- 
+  File: /home/lenovo/code/ltphongssvn/ac215e115groupproject/team-structure-section.html
+  Purpose: Team Structure page content to be inserted into index.html
+  Insert Location: Between line 1185 (end of apiflow-page) and line 1186 (start of script tag)
+-->
+
+        <!-- Page 3: Team Structure -->
+        <!-- Tech Stack Page (Minimal Test Version) -->
+        <!-- Tech Stack Page -->
+        <!-- Tech Stack Page -->
+<!-- Tech Stack Page -->
+        <!-- File: techstack-full.html -->
+        <!-- Purpose: Complete Tech Stack content for ERP AI Architecture -->
+        <!-- Location: To replace existing techstack-page div in index.html -->
+        <div id="techstack-page" class="page-content">
+            <div class="stats-container">
+                
+                <!-- Technology Stack Row 1: Core Technologies -->
+                <div style="display: grid !important; grid-template-columns: repeat(4, 1fr) !important; gap: 20px; width: 100%; margin-bottom: 20px;">
+                <!-- AI/ML & Language Models -->
+                <div class="checklist-section">
+                    <div class="section-header">
+                        <h3>AI/ML & Language Models</h3>
+                    </div>
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px; padding: 15px;">
+                        <span class="priority-high" style="padding: 5px 12px; border-radius: 15px;">Vertex AI Gemini</span>
+                        <span class="priority-high" style="padding: 5px 12px; border-radius: 15px;">Google Gemini</span>
+                        <span class="priority-high" style="padding: 5px 12px; border-radius: 15px;">LangChain</span>
+                        <span class="priority-medium" style="padding: 5px 12px; border-radius: 15px;">TensorFlow</span>
+                        <span class="priority-medium" style="padding: 5px 12px; border-radius: 15px;">PyTorch</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">LSTM Models</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">Prophet</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">SHAP Values</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">Embedding Models</span>
+                    </div>
+                </div>
+                
+                <!-- Backend & APIs -->
+                <div class="checklist-section">
+                    <div class="section-header">
+                        <h3>Backend & APIs</h3>
+                    </div>
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px; padding: 15px;">
+                        <span class="priority-high" style="padding: 5px 12px; border-radius: 15px;">Cloud Run + Cloud Run services</span>
+                        <span class="priority-high" style="padding: 5px 12px; border-radius: 15px;">Kong/Nginx</span>
+                        <span class="priority-medium" style="padding: 5px 12px; border-radius: 15px;">gRPC</span>
+                        <span class="priority-medium" style="padding: 5px 12px; border-radius: 15px;">Protocol Buffers</span>
+                        <span class="priority-medium" style="padding: 5px 12px; border-radius: 15px;">WebSocket</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">REST APIs</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">OpenAPI/Swagger</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">Pub/Sub</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">BFF Layer</span>
+                    </div>
+                </div>
+                
+                <!-- Data & Storage -->
+                <div class="checklist-section">
+                    <div class="section-header">
+                        <h3>Data & Storage</h3>
+                    </div>
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px; padding: 15px;">
+                        <span class="priority-high" style="padding: 5px 12px; border-radius: 15px;">Cloud SQL PostgreSQL</span>
+                        <span class="priority-high" style="padding: 5px 12px; border-radius: 15px;">BigQuery</span>
+                        <span class="priority-high" style="padding: 5px 12px; border-radius: 15px;">Vertex AI Vector Search</span>
+                        <span class="priority-medium" style="padding: 5px 12px; border-radius: 15px;">Cloud SQL pgvector</span>
+                        <span class="priority-medium" style="padding: 5px 12px; border-radius: 15px;">Redis Cache</span>
+                        <span class="priority-medium" style="padding: 5px 12px; border-radius: 15px;">Feast Feature Store</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">DVC</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">HNSW Index</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">Read Replicas</span>
+                    </div>
+                </div>
+                
+                <!-- Frontend & UI -->
+                <div class="checklist-section">
+                    <div class="section-header">
+                        <h3>Frontend & UI</h3>
+                    </div>
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px; padding: 15px;">
+                        <span class="priority-high" style="padding: 5px 12px; border-radius: 15px;">React</span>
+                        <span class="priority-high" style="padding: 5px 12px; border-radius: 15px;">Next.js</span>
+                        <span class="priority-medium" style="padding: 5px 12px; border-radius: 15px;">TypeScript</span>
+                        <span class="priority-medium" style="padding: 5px 12px; border-radius: 15px;">SSR/SSG</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">Jest</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">React Testing Library</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">WebSocket Client</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">Chat Interface</span>
+                    </div>
+                </div>
+                
+                </div>
+                <!-- Technology Stack Row 2: Operations & Infrastructure -->
+                <div style="display: grid !important; grid-template-columns: repeat(4, 1fr) !important; gap: 20px; width: 100%; margin-bottom: 20px;">
+                <!-- MLOps & Model Management -->
+                <div class="checklist-section">
+                    <div class="section-header">
+                        <h3>MLOps & Model Management</h3>
+                    </div>
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px; padding: 15px;">
+                        <span class="priority-high" style="padding: 5px 12px; border-radius: 15px;">Vertex AI Pipelines</span>
+                        <span class="priority-high" style="padding: 5px 12px; border-radius: 15px;">MLflow</span>
+                        <span class="priority-high" style="padding: 5px 12px; border-radius: 15px;">Weights & Biases</span>
+                        <span class="priority-medium" style="padding: 5px 12px; border-radius: 15px;">Vertex AI Endpoints</span>
+                        <span class="priority-medium" style="padding: 5px 12px; border-radius: 15px;">Model Registry</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">A/B Testing</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">Feature Registry</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">Champion/Challenger</span>
+                    </div>
+                </div>
+                
+                <!-- Cloud Infrastructure -->
+                <div class="checklist-section">
+                    <div class="section-header">
+                        <h3>Cloud Infrastructure</h3>
+                    </div>
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px; padding: 15px;">
+                        <span class="priority-high" style="padding: 5px 12px; border-radius: 15px;">Google Cloud Platform</span>
+                        <span class="priority-high" style="padding: 5px 12px; border-radius: 15px;">GKE</span>
+                        <span class="priority-high" style="padding: 5px 12px; border-radius: 15px;">Docker</span>
+                        <span class="priority-medium" style="padding: 5px 12px; border-radius: 15px;">Kubernetes</span>
+                        <span class="priority-medium" style="padding: 5px 12px; border-radius: 15px;">Pulumi IaC</span>
+                        <span class="priority-medium" style="padding: 5px 12px; border-radius: 15px;">Ansible</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">GitHub Actions</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">HPA Auto-scaling</span>
+                    </div>
+                </div>
+                
+                <!-- Monitoring & Observability -->
+                <div class="checklist-section">
+                    <div class="section-header">
+                        <h3>Monitoring & Observability</h3>
+                    </div>
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px; padding: 15px;">
+                        <span class="priority-high" style="padding: 5px 12px; border-radius: 15px;">Prometheus</span>
+                        <span class="priority-high" style="padding: 5px 12px; border-radius: 15px;">Grafana</span>
+                        <span class="priority-medium" style="padding: 5px 12px; border-radius: 15px;">ELK Stack</span>
+                        <span class="priority-medium" style="padding: 5px 12px; border-radius: 15px;">Jaeger</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">Distributed Tracing</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">Circuit Breakers</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">Correlation IDs</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">Metrics Endpoint</span>
+                    </div>
+                </div>
+                
+                <!-- Security & Testing -->
+                <div class="checklist-section">
+                    <div class="section-header">
+                        <h3>Security & Testing</h3>
+                    </div>
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px; padding: 15px;">
+                        <span class="priority-high" style="padding: 5px 12px; border-radius: 15px;">OAuth2/JWT</span>
+                        <span class="priority-high" style="padding: 5px 12px; border-radius: 15px;">RBAC</span>
+                        <span class="priority-medium" style="padding: 5px 12px; border-radius: 15px;">SQL Proxy/Guard</span>
+                        <span class="priority-medium" style="padding: 5px 12px; border-radius: 15px;">OWASP</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">Pytest</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">Coverage.py</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">Locust</span>
+                        <span class="priority-low" style="padding: 5px 12px; border-radius: 15px;">PII Scrubbing</span>
+                    </div>
+                </div>
+                
+                </div>
+                <!-- Architecture Flow Summary -->
+<!-- File: microservices-flow-update.html -->
+<!-- Purpose: Replace the Microservices Architecture Flow section with proper horizontal layout -->
+<!-- This replaces only the Architecture Flow Summary section in your techstack-page -->
+
+                </div>
+                <!-- Architecture Flow Summary -->
+                <div class="checklist-section" style="margin-bottom: 25px; background: #f8f9fa; padding: 20px; border-radius: 10px;">
+                    <div class="section-header">
+                        <h3>Microservices Architecture Flow</h3>
+                    </div>
+                    <div style="padding: 20px; overflow-x: auto;">
+                        <!-- Main flow container with enforced horizontal layout -->
+                        <div style="display: flex; justify-content: space-between; align-items: center; min-width: 800px;">
+                            <!-- Client UI -->
+                            <div style="flex: 0 0 auto; text-align: center;">
+                                <div style="padding: 12px 20px; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); white-space: nowrap;">
+                                    Client UI
+                                </div>
+                            </div>
+                            
+                            <!-- Arrow -->
+                            <div style="flex: 0 0 auto; color: #667eea; font-size: 24px; margin: 0 10px;">→</div>
+                            
+                            <!-- API Gateway -->
+                            <div style="flex: 0 0 auto; text-align: center;">
+                                <div style="padding: 12px 20px; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); white-space: nowrap;">
+                                    API Gateway
+                                </div>
+                            </div>
+                            
+                            <!-- Arrow -->
+                            <div style="flex: 0 0 auto; color: #667eea; font-size: 24px; margin: 0 10px;">→</div>
+                            
+                            <!-- Services Container -->
+                            <div style="flex: 0 0 auto; text-align: center;">
+                                <div style="padding: 8px 15px; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                                    <div style="font-weight: 500; margin-bottom: 8px; white-space: nowrap;">Microservices</div>
+                                    <div style="display: flex; gap: 10px; font-size: 0.9em;">
+                                        <div style="padding: 8px 14px; background: linear-gradient(135deg, #4299e1, #3182ce); color: white; border-radius: 6px; white-space: nowrap; font-weight: 600; box-shadow: 0 2px 4px rgba(66, 153, 225, 0.3);">NL+SQL Service</div>
+                                        <div style="padding: 8px 14px; background: linear-gradient(135deg, #805ad5, #6b46c1); color: white; border-radius: 6px; white-space: nowrap; font-weight: 600; box-shadow: 0 2px 4px rgba(128, 90, 213, 0.3);">RAG Orchestrator</div>
+                                        <div style="padding: 8px 14px; background: linear-gradient(135deg, #38b2ac, #319795); color: white; border-radius: 6px; white-space: nowrap; font-weight: 600; box-shadow: 0 2px 4px rgba(56, 178, 172, 0.3);">TS Forecasting</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Arrow -->
+                            <div style="flex: 0 0 auto; color: #667eea; font-size: 24px; margin: 0 10px;">→</div>
+                            
+                            <!-- Data Layer -->
+                            <div style="flex: 0 0 auto; text-align: center;">
+                                <div style="padding: 12px 20px; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); white-space: nowrap;">
+                                    Data Layer
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Alternative compact version for very small screens -->
+                        <div style="display: none; margin-top: 20px; text-align: center; color: #7f8c8d;">
+                            <small>Client UI → API Gateway → Microservices → Data Layer</small>
+                        </div>
+                    </div>
+                </div>                
+<!-- File: ~/code/ltphongssvn/ac215e115groupproject/microservices_gcp_detail.html -->
+<!-- Purpose: GCP Technology Implementation Details for Microservices -->
+<!-- Insert this after line 1442 in index.html, before Key Performance Metrics -->
+
+                <!-- GCP Technology Implementation Details -->
+                <div class="checklist-section" style="margin-bottom: 25px; background: #f0f7ff; padding: 20px; border-radius: 10px; border-left: 4px solid #4299e1;">
+                    <div class="section-header">
+                        <h3 style="color: #2d3748; margin-bottom: 15px;">🔧 GCP Technology Implementation Layer</h3>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; padding: 10px;">
+                        
+                        <!-- NL+SQL Service Technologies -->
+                        <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                            <div style="padding: 6px 12px; background: linear-gradient(135deg, #4299e1, #3182ce); color: white; border-radius: 6px; font-weight: 600; margin-bottom: 15px; text-align: center;">
+                                NL+SQL Service
+                            </div>
+                            <div style="font-size: 14px; color: #2d3748;">
+                                <div style="margin-bottom: 12px;">
+                                    <strong style="color: #4299e1;">Primary Database:</strong>
+                                    <div style="margin-left: 10px; margin-top: 5px;">• Cloud SQL with PostgreSQL</div>
+                                    <div style="margin-left: 10px; color: #718096; font-size: 13px;">Read replicas for query optimization</div>
+                                </div>
+                                <div style="margin-bottom: 12px;">
+                                    <strong style="color: #4299e1;">LLM Engine (Vertex AI):</strong>
+                                    <div style="margin-left: 10px; margin-top: 5px;">• Vertex AI with Gemini 1.5 Pro</div>
+                                    <div style="margin-left: 10px; color: #718096; font-size: 13px;">2M token context for complex queries</div>
+                                </div>
+                                <div style="margin-bottom: 12px;">
+                                    <strong style="color: #4299e1;">Orchestration:</strong>
+                                    <div style="margin-left: 10px; margin-top: 5px;">• LangGraph StateGraph</div>
+                                    <div style="margin-left: 10px; color: #718096; font-size: 13px;">Query refinement & error handling</div>
+                                </div>
+                                <div>
+                                    <strong style="color: #4299e1;">Deployment:</strong>
+                                    <div style="margin-left: 10px; margin-top: 5px;">• Cloud Run (Serverless)</div>
+                                    <div style="margin-left: 10px; color: #718096; font-size: 13px;">Auto-scaling with load balancing</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- RAG Orchestrator Technologies -->
+                        <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                            <div style="padding: 6px 12px; background: linear-gradient(135deg, #805ad5, #6b46c1); color: white; border-radius: 6px; font-weight: 600; margin-bottom: 15px; text-align: center;">
+                                RAG Orchestrator
+                            </div>
+                            <div style="font-size: 14px; color: #2d3748;">
+                                <div style="margin-bottom: 12px;">
+                                    <strong style="color: #805ad5;">Core Platform:</strong>
+                                    <div style="margin-left: 10px; margin-top: 5px;">• Vertex AI Agent Builder</div>
+                                    <div style="margin-left: 10px; color: #718096; font-size: 13px;">Managed document processing</div>
+                                </div>
+                                <div style="margin-bottom: 12px;">
+                                    <strong style="color: #805ad5;">Document Processing:</strong>
+                                    <div style="margin-left: 10px; margin-top: 5px;">• Document AI</div>
+                                    <div style="margin-left: 10px; color: #718096; font-size: 13px;">OCR, table extraction, layout parsing</div>
+                                </div>
+                                <div style="margin-bottom: 12px;">
+                                    <strong style="color: #805ad5;">Vector Storage:</strong>
+                                    <div style="margin-left: 10px; margin-top: 5px;">• Vertex AI Vector Search</div>
+                                    <div style="margin-left: 10px; color: #718096; font-size: 13px;">Billions of docs, <10ms latency</div>
+                                    <div style="margin-left: 10px; margin-top: 5px;">• Cloud SQL with pgvector</div>
+                                    <div style="margin-left: 10px; color: #718096; font-size: 13px;">Metadata filtering & SQL queries</div>
+                                </div>
+                                <div>
+                                    <strong style="color: #805ad5;">Embeddings:</strong>
+                                    <div style="margin-left: 10px; margin-top: 5px;">• textembedding-gecko@003</div>
+                                    <div style="margin-left: 10px; color: #718096; font-size: 13px;">768-dim vectors for similarity</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TS Forecasting Technologies -->
+                        <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                            <div style="padding: 6px 12px; background: linear-gradient(135deg, #38b2ac, #319795); color: white; border-radius: 6px; font-weight: 600; margin-bottom: 15px; text-align: center;">
+                                TS Forecasting
+                            </div>
+                            <div style="font-size: 14px; color: #2d3748;">
+                                <div style="margin-bottom: 12px;">
+                                    <strong style="color: #38b2ac;">Data Warehouse:</strong>
+                                    <div style="margin-left: 10px; margin-top: 5px;">• BigQuery</div>
+                                    <div style="margin-left: 10px; color: #718096; font-size: 13px;">Time-series data & aggregations</div>
+                                </div>
+                                <div style="margin-bottom: 12px;">
+                                    <strong style="color: #38b2ac;">ML Platform:</strong>
+                                    <div style="margin-left: 10px; margin-top: 5px;">• Vertex AI Custom Training</div>
+                                    <div style="margin-left: 10px; color: #718096; font-size: 13px;">LSTM/Prophet ensemble models</div>
+                                </div>
+                                <div style="margin-bottom: 12px;">
+                                    <strong style="color: #38b2ac;">Feature Store:</strong>
+                                    <div style="margin-left: 10px; margin-top: 5px;">• BigQuery with Feast</div>
+                                    <div style="margin-left: 10px; color: #718096; font-size: 13px;">Training-serving consistency</div>
+                                </div>
+                                <div>
+                                    <strong style="color: #38b2ac;">Model Registry:</strong>
+                                    <div style="margin-left: 10px; margin-top: 5px;">• Vertex AI Model Registry</div>
+                                    <div style="margin-left: 10px; color: #718096; font-size: 13px;">A/B testing & versioning</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Integration Note -->
+                    <div style="margin-top: 20px; padding: 15px; background: #edf2f7; border-radius: 8px; text-align: center;">
+                        <div style="color: #4a5568; font-size: 14px;">
+                            <strong>Integration Pattern:</strong> All services deployed on <span style="color: #4299e1; font-weight: 600;">Cloud Run</span> with 
+                            <span style="color: #805ad5; font-weight: 600;">LangChain</span> orchestration and 
+                            <span style="color: #38b2ac; font-weight: 600;">LangGraph</span> for stateful workflows
+                        </div>
+                    </div>
+                </div>
+                <!-- Key Performance Metrics -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 30px;">
+                    <div style="text-align: center; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                        <div style="font-size: 24px; margin-bottom: 10px;">⚡</div>
+                        <div style="font-weight: bold; color: #2c3e50;">Sub-Second Latency</div>
+                        <div style="color: #7f8c8d; font-size: 14px;">Target SLA < 1 second</div>
+                    </div>
+                    <div style="text-align: center; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                        <div style="font-size: 24px; margin-bottom: 10px;">📈</div>
+                        <div style="font-weight: bold; color: #2c3e50;">High Throughput</div>
+                        <div style="color: #7f8c8d; font-size: 14px;">1000 requests/second</div>
+                    </div>
+                    <div style="text-align: center; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                        <div style="font-size: 24px; margin-bottom: 10px;">🔄</div>
+                        <div style="font-weight: bold; color: #2c3e50;">Automated ML Pipeline</div>
+                        <div style="color: #7f8c8d; font-size: 14px;">Weekly model retraining</div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>        <div id="team-page" class="page-content">
+            <div class="team-section">
+                <h2 class="team-header">Microservices Team Structure</h2>
+                <p class="team-intro">
+                    The Rice Market AI System requires a cross-functional team of 3-4 members with complementary skills, 
+                    structured around business capabilities to ensure autonomy, ownership, and end-to-end responsibility. 
+                    Teams follow the "you build it, you run it" philosophy, taking ownership from development through production.
+                </p>
+                
+                <!-- Core Product Teams -->
+                <div class="team-category">
+                    <h3 class="category-title">I. Core Product Teams (Business Capabilities)</h3>
+                    
+                    <!-- Team 1: NL+SQL -->
+                    <div class="team-card">
+                        <div class="team-name">1. Natural Language SQL (NL+SQL) Team</div>
+                        <div class="team-mission">
+                            Mission: Enable users to query ERP data using natural language, translating it into secure SQL queries.
+                        </div>
+                        
+                        <div class="responsibilities-title">Key Responsibilities & Components:</div>
+                        <ul class="responsibility-list">
+                            <li>NL+SQL Agent Service (Vertex AI Gemini 1.5 Pro + LangChain): Process natural language, identify intent, extract entities using LLM Engine</li>
+                            <li>SQL Generator (LangChain + Vertex AI): Create parameterized SQL queries with proper escaping</li>
+                            <li>SQL Proxy/Guard (Cloud SQL Auth Proxy): Implement Cloud IAM-based validation, row-level security, allowlist enforcement</li>
+                            <li>Result Formatter: Format query responses for user consumption (JSON with metadata)</li>
+                            <li>Cloud SQL PostgreSQL with Read Replicas: Optimize query execution on read replicas, manage data retrieval</li>
+                            <li>Containerization: Cloud Run containerization with multi-stage builds for NL+SQL Agent Service (Vertex AI Gemini 1.5 Pro + LangChain) with test query processing</li>
+                            <li>Model Training: Fine-tune Vertex AI Gemini models for rice market domain, achieve >80% accuracy</li>
+                        </ul>
+                        
+                        <div class="responsibilities-title">Core Skills:</div>
+                        <div class="skills-container">
+                            <span class="skill-tag">NLP with Vertex AI Gemini 1.5 Pro via LangChain</span>
+                            <span class="skill-tag">Vertex AI LLMs (Gemini Models)</span>
+                            <span class="skill-tag">SQL</span>
+                            <span class="skill-tag">Cloud SQL Database Design</span>
+                            <span class="skill-tag">Cloud IAM & SQL Security (RBAC)</span>
+                            <span class="skill-tag">Cloud Run API Development</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Team 2: RAG -->
+                    <div class="team-card">
+                        <div class="team-name">2. RAG-Based Document Summarization Team</div>
+                        <div class="team-mission">
+                            Mission: Provide intelligent summarization of documents based on Retrieval-Augmented Generation.
+                        </div>
+                        
+                        <div class="responsibilities-title">Key Responsibilities & Components:</div>
+                        <ul class="responsibility-list">
+                            <li>RAG Orchestrator (Vertex AI Agent Builder + Vector Search): Generate query embeddings (768-dimensional vectors)</li>
+                            <li>Vertex AI Vector Search: Perform similarity searches using HNSW indexes</li>
+                            <li>Ranker Module: Re-rank documents using cross-encoder models</li>
+                            <li>Generator Service (Vertex AI Gemini): Create LLM-based summaries with citations</li>
+                            <li>Query Embedding (textembedding-gecko@003): Convert text to 768-dimensional vectors, search Vertex AI Vector Search</li>
+                            <li>Cloud Run Deployment: RAG Orchestrator (Vertex AI Agent Builder + Vector Search) with vector DB connectivity</li>
+                            <li>Model Training: Fine-tune Vertex AI models leveraging RAG for domain accuracy</li>
+                        </ul>
+                        
+                        <div class="responsibilities-title">Core Skills:</div>
+                        <div class="skills-container">
+                            <span class="skill-tag">NLP with Vertex AI Gemini 1.5 Pro via LangChain</span>
+                            <span class="skill-tag">Vertex AI Vector Search for production embeddings</span>
+                            <span class="skill-tag">Cloud SQL with pgvector for hybrid search</span>
+                            <span class="skill-tag">Document AI & Information Retrieval</span>
+                            <span class="skill-tag">Vertex AI Embedding Models (gecko family)</span>
+                            <span class="skill-tag">ML Ranking</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Team 3: Forecasting -->
+                    <div class="team-card">
+                        <div class="team-name">3. Time-Series Price Forecasting Team</div>
+                        <div class="team-mission">
+                            Mission: Generate accurate, interpretable time-series forecasts for rice prices over specified horizons.
+                        </div>
+                        
+                        <div class="responsibilities-title">Key Responsibilities & Components:</div>
+                        <ul class="responsibility-list">
+                            <li>Feature Pipeline: Extract features from BigQuery Feature Store with Feast (price history, weather, FX)</li>
+                            <li>Model Inference Engine: Run LSTM/Prophet ensembles with confidence intervals</li>
+                            <li>Explainability Module: Generate SHAP values for price driver identification</li>
+                            <li>Response Formatting: Package predictions with metadata and explanations</li>
+                            <li>Forecasting Models: Develop 6-month forecasts with confidence intervals</li>
+                            <li>BigQuery Feature Store with Feast Management: Feature registry, generation, versioning</li>
+                            <li>MLflow Model Registry on Vertex AI: Version control, champion/challenger strategies</li>
+                        </ul>
+                        
+                        <div class="responsibilities-title">Core Skills:</div>
+                        <div class="skills-container">
+                            <span class="skill-tag">Time-Series Analysis with PyTorch LSTM models on Vertex AI</span>
+                            <span class="skill-tag">LSTM/Prophet</span>
+                            <span class="skill-tag">Feature Engineering</span>
+                            <span class="skill-tag">Explainable AI</span>
+                            <span class="skill-tag">Statistical Modeling</span>
+                            <span class="skill-tag">Data Science</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Supporting Teams -->
+                <div class="team-category">
+                    <h3 class="category-title">II. Supporting Teams (Platform-Oriented)</h3>
+                    
+                    <!-- Platform Team -->
+                    <div class="team-card">
+                        <div class="team-name">4. Platform & MLOps with Vertex AI Pipelines, MLflow, and Weights & Biases Team</div>
+                        <div class="team-mission">
+                            Mission: Provide robust, scalable, secure microservice platform and MLOps with Vertex AI Pipelines, MLflow, and Weights & Biases infrastructure for all teams.
+                        </div>
+                        
+                        <div class="responsibilities-title">Key Responsibilities & Components:</div>
+                        <ul class="responsibility-list">
+                            <li>API Gateway (Cloud Endpoints + Cloud Run)/BFF Layer: Authentication, authorization, rate limiting, caching</li>
+                            <li>Environment Setup: GCP project configuration with IAM and billing</li>
+                            <li>Repository Structure: Monorepo with proper microservice directories</li>
+                            <li>Data Pipeline: Ingestion, PII scrubbing, embedding generation</li>
+                            <li>Vector Store Setup: Deploy and manage Vertex AI Vector Search with Cloud SQL pgvector</li>
+                            <li>BigQuery Feature Store with Feast: Registry, generation, online/offline storage</li>
+                            <li>MLflow Model Registry on Vertex AI: Version control, deployment configurations</li>
+                            <li>ML Pipeline: Automated model retraining workflows</li>
+                            <li>Container Orchestration: GKE deployment, HPA auto-scaling, Ansible</li>
+                            <li>CI/CD Pipeline: GitHub Actions for testing and deployment</li>
+                            <li>Monitoring: Prometheus, Grafana, ELK stack, distributed tracing</li>
+                            <li>Security: OWASP best practices, security headers implementation</li>
+                        </ul>
+                        
+                        <div class="responsibilities-title">Core Skills:</div>
+                        <div class="skills-container">
+                            <span class="skill-tag">DevOps with GitHub Actions, Pulumi IaC, and Ansible automation</span>
+                            <span class="skill-tag">MLOps with Vertex AI Pipelines, MLflow, and Weights & Biases</span>
+                            <span class="skill-tag">Google Cloud Platform (GKE, Vertex AI, BigQuery)/Kubernetes orchestration</span>
+                            <span class="skill-tag">Cloud Run containerization with multi-stage builds</span>
+                            <span class="skill-tag">CI/CD</span>
+                            <span class="skill-tag">Ansible/Terraform</span>
+                            <span class="skill-tag">Monitoring Tools</span>
+                            <span class="skill-tag">Security</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Frontend Team -->
+                    <div class="team-card">
+                        <div class="team-name">5. Client Application (Frontend) Team</div>
+                        <div class="team-mission">
+                            Mission: Design and implement the user interface that interacts with the AI System's capabilities.
+                        </div>
+                        
+                        <div class="responsibilities-title">Key Responsibilities & Components:</div>
+                        <ul class="responsibility-list">
+                            <li>Frontend Design: React with NextJS framework for SSR/SSG capabilities implementation with chat interface</li>
+                            <li>API Development: RESTful APIs with OpenAPI specification</li>
+                            <li>User Experience: Intuitive interface for queries and results</li>
+                            <li>API Gateway (Cloud Endpoints + Cloud Run) Integration: Consume backend microservices</li>
+                            <li>Performance Optimization: Client-side performance tuning</li>
+                        </ul>
+                        
+                        <div class="responsibilities-title">Core Skills:</div>
+                        <div class="skills-container">
+                            <span class="skill-tag">React with NextJS framework for SSR/SSG capabilities</span>
+                            <span class="skill-tag">UI/UX Design</span>
+                            <span class="skill-tag">API Integration</span>
+                            <span class="skill-tag">Web Security</span>
+                            <span class="skill-tag">Performance Optimization</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Team Principles -->
+                <div class="principles-section">
+                    <h3 class="principles-title">Team Principles and Practices</h3>
+                    
+                    <div class="principle-item">
+                        <div class="principle-icon">1</div>
+                        <div class="principle-content">
+                            <div class="principle-name">Team Size</div>
+                            <div class="principle-desc">Each team consists of 3-4 members to foster effective collaboration and reduce communication overhead.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="principle-item">
+                        <div class="principle-icon">2</div>
+                        <div class="principle-content">
+                            <div class="principle-name">Autonomy</div>
+                            <div class="principle-desc">Teams operate with limited dependencies, making rapid, context-aware decisions.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="principle-item">
+                        <div class="principle-icon">3</div>
+                        <div class="principle-content">
+                            <div class="principle-name">Ownership</div>
+                            <div class="principle-desc">Long-term accountability from conception to production, including on-call responsibilities.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="principle-item">
+                        <div class="principle-icon">4</div>
+                        <div class="principle-content">
+                            <div class="principle-name">Cross-functional</div>
+                            <div class="principle-desc">Diverse skills within each team (ML engineers, backend developers, data engineers).</div>
+                        </div>
+                    </div>
+                    
+                    <div class="principle-item">
+                        <div class="principle-icon">5</div>
+                        <div class="principle-content">
+                            <div class="principle-name">Knowledge Sharing</div>
+                            <div class="principle-desc">Communities of practice (Chapters and Guilds) to disseminate knowledge without dictating choices.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="principle-item">
+                        <div class="principle-icon">6</div>
+                        <div class="principle-content">
+                            <div class="principle-name">Design Reviews</div>
+                            <div class="principle-desc">RFC process for new services with feedback from various teams to catch issues early.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="principle-item">
+                        <div class="principle-icon">7</div>
+                        <div class="principle-content">
+                            <div class="principle-name">Documentation</div>
+                            <div class="principle-desc">Living documentation including service overviews, contracts, runbooks, and metadata.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="principle-item">
+                        <div class="principle-icon">8</div>
+                        <div class="principle-content">
+                            <div class="principle-name">Consistency</div>
+                            <div class="principle-desc">Microservice chassis for common functionalities ensuring consistency with technical heterogeneity.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>    <script>
+        // Checklist data
+        const checklistData = {
+            "milestone1": {
+                title: "Milestone 1: Project Proposal & Team Formation",
+                dueDate: "2025-09-25",
+                weight: "4%",
+                tasks: [
+                    {
+                        id: "1.1",
+                        component: "Team Formation",
+                        description: "Form project team of 3-4 members with complementary skills",
+                        verification: "Team roster submitted to shared spreadsheet",
+                        dependencies: "None",
+                        hours: 4,
+                        priority: "high",
+                        completed: true
+                    },
+                    {
+                        id: "1.2",
+                        component: "Project Scope",
+                        description: "Define ERP AI system scope covering NL+SQL, RAG, and forecasting capabilities",
+                        verification: "Clear problem statement documented",
+                        dependencies: "1.1",
+                        hours: 8,
+                        priority: "high",
+                        completed: true
+                    },
+                    {
+                        id: "1.3",
+                        component: "Data Strategy",
+                        description: "Identify rice market data sources (prices, weather, FX)",
+                        verification: "Data source inventory with access verification",
+                        dependencies: "1.2",
+                        hours: 12,
+                        priority: "high",
+                        completed: true
+                    },
+                    {
+                        id: "1.4",
+                        component: "Architecture Design",
+                        description: "Create preliminary microservices architecture diagram",
+                        verification: "Architecture diagram with service boundaries",
+                        dependencies: "1.2",
+                        hours: 10,
+                        priority: "medium",
+                        completed: true
+                    },
+                    {
+                        id: "1.5",
+                        component: "Documentation",
+                        description: "Submit Statement of Work (1-2 pages) with all required sections via Canvas by deadline",
+                        verification: "PDF submitted via Canvas",
+                        dependencies: "1.1, 1.2, 1.3, 1.4",
+                        hours: 6,
+                        priority: "high",
+                        completed: true
+                    }
+                ]
+            },
+            "milestone2": {
+                title: "Milestone 2: MLOps with Vertex AI Pipelines, MLflow, and W&B Infrastructure & Cloud Run Containerization",
+                dueDate: "2025-10-16",
+                weight: "10%",
+                tasks: [
+                    {
+                        id: "2.1",
+                        component: "Environment Setup",
+                        description: "Configure Google Cloud Platform project with IAM roles for Vertex AI, BigQuery, and GKE access",
+                        verification: "GCP console screenshot showing active project",
+                        dependencies: "1.5",
+                        hours: 4,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "2.2",
+                        component: "Repository Structure",
+                        description: "Create GitHub monorepo structure for microservices with GitHub Actions CI/CD pipeline configuration",
+                        verification: "GitHub repo with proper folder structure",
+                        dependencies: "2.1",
+                        hours: 3,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "2.3",
+                        component: "API Gateway (Cloud Endpoints + Cloud Run) Container",
+                        description: "Containerize API Gateway (Cloud Endpoints + Cloud Run) with FastAPI framework, OAuth2/JWT authentication middleware using Cloud Run containerization with multi-stage builds optimized for serverless deployment",
+                        verification: "Cloud Run container with multi-stage builds build successful, container runs locally",
+                        dependencies: "2.2",
+                        hours: 8,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "2.4",
+                        component: "NL+SQL Service",
+                        description: "Create Cloud Run containerization with multi-stage builds optimized for serverless deployment container for NL+SQL Agent Service (Vertex AI Gemini 1.5 Pro + LangChain) with Vertex AI Gemini 1.5 Pro via LangGraph StateGraph via FastAPI framework",
+                        verification: "Cloud Run container processes test NL query successfully",
+                        dependencies: "2.3",
+                        hours: 12,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "2.5",
+                        component: "RAG Orchestrator (Vertex AI Agent Builder + Vector Search)",
+                        description: "Containerize RAG Orchestrator (Vertex AI Agent Builder + Vector Search) with Vertex AI Vector Search and Cloud SQL pgvector using Cloud Run containerization with multi-stage builds optimized for serverless deployment and Cloud Run services service architecture",
+                        verification: "Container connects to vector DB, performs test query",
+                        dependencies: "2.3",
+                        hours: 12,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "2.6",
+                        component: "Data Pipeline",
+                        description: "Implement Pub/Sub streaming (GCP alternative to Kafka) data ingestion pipeline with PII scrubbing, storing to BigQuery data warehouse",
+                        verification: "Kafka pipeline processes sample data with PII scrubbing before loading to BigQuery/PostgreSQL",
+                        dependencies: "2.2",
+                        hours: 10,
+                        priority: "medium",
+                        completed: false
+                    },
+                    {
+                        id: "2.7",
+                        component: "Vector Store Setup",
+                        description: "Deploy Vertex AI Vector Search with TensorFlow/PyTorch embeddings managed through DVC for RAG implementation",
+                        verification: "Vector store accessible, test embeddings retrievable",
+                        dependencies: "2.5",
+                        hours: 8,
+                        priority: "medium",
+                        completed: false
+                    },
+                    {
+                        id: "2.8",
+                        component: "Docker Compose Local Development Environment",
+                        description: "Create docker-compose.yml for local development with PostgreSQL, Chroma (local substitute for Vertex AI Vector Search), and Kafka (local substitute for Pub/Sub), implementing volume mounts for hot-reload development and network isolation for service testing",
+                        verification: "All services start successfully with single 'docker-compose up' command verified by docker ps showing all containers healthy, code changes in mounted volumes trigger automatic service reload confirmed by log output, developers can attach debuggers to running services, and inter-service communication works via compose network verified by test API calls between services",
+                        dependencies: "2.3, 2.4, 2.5",
+                        hours: 6,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "2.9",
+                        component: "Documentation",
+                        description: "Complete README with Cloud Run service setup, Cloud Run containerization with multi-stage builds optimized for serverless deployment deployment instructions, and GCP architecture overview",
+                        verification: "New team member can setup environment following docs",
+                        dependencies: "All MS2 tasks",
+                        hours: 6,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "2.10",
+                        component: "Kubernetes Manifest Creation",
+                        description: "Create initial Kubernetes YAML manifests (Deployments, Services, ConfigMaps, Secrets) translating docker-compose service definitions into Kubernetes-native specifications, establishing foundation for container orchestration",
+                        verification: "All manifests pass 'kubectl apply --dry-run=client -f .' validation without errors, syntax validated using 'kubectl explain' for resource types, manifests successfully deploy to local Minikube cluster with 'minikube start && kubectl apply -f .', all pods reach Ready state within 5 minutes verified by 'kubectl get pods --watch', and service endpoints accessible via 'minikube service list'",
+                        dependencies: "2.8",
+                        hours: 12,
+                        priority: "high",
+                        completed: false
+                    }
+                ]
+            },
+            "milestone3": {
+                title: "Milestone 3: Midterm Presentation",
+                dueDate: "2025-10-28",
+                weight: "25%",
+                tasks: [
+                    {
+                        id: "3.1",
+                        component: "Model Training",
+                        description: "Implement and optimize a RAG system for rice market domain using pre-trained GPT-4/Gemini models, tracking retrieval and generation metrics with Weights & Biases",
+                        verification: "Model achieves >80% accuracy tracked via MLflow model registry and Weights & Biases metrics",
+                        dependencies: "2.4, 2.5",
+                        hours: 16,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "3.2",
+                        component: "Forecasting Model",
+                        description: "Implement time-series forecasting with PyTorch LSTM/Prophet models deployed on Vertex AI Endpoints",
+                        verification: "6-month forecast from PyTorch models on Vertex AI with confidence intervals stored in BigQuery",
+                        dependencies: "2.6",
+                        hours: 14,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "3.3",
+                        component: "API Integration",
+                        description: "Connect all FastAPI microservices through API Gateway (Cloud Endpoints + Cloud Run) with gRPC inter-service communication",
+                        verification: "End-to-end flow validated across NL+SQL (OpenAI/Gemini), RAG (Chroma), and forecasting (Vertex AI) services",
+                        dependencies: "3.1, 3.2",
+                        hours: 10,
+                        priority: "medium",
+                        completed: false
+                    },
+                    {
+                        id: "3.4",
+                        component: "Presentation Prep",
+                        description: "Create investor pitch deck (5-minute presentation)",
+                        verification: "Slides cover problem, value prop, scalability, future dev",
+                        dependencies: "3.3",
+                        hours: 8,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "3.5",
+                        component: "Demo Preparation",
+                        description: "Prepare live demo showing all three AI capabilities",
+                        verification: "Demo runs smoothly without errors",
+                        dependencies: "3.3",
+                        hours: 6,
+                        priority: "high",
+                        completed: false
+                    }
+                ]
+            },
+            "milestone4": {
+                title: "Milestone 4: Full-Stack Development",
+                dueDate: "2025-11-25",
+                weight: "14%",
+                tasks: [
+                    {
+                        id: "4.1",
+                        component: "Frontend Design",
+                        description: "Design and implement React with NextJS frontend, Cloud Run backend integration via REST/WebSocket",
+                        verification: "React/NextJS UI components with Cloud Run WebSocket for real-time chat interface",
+                        dependencies: "3.5",
+                        hours: 20,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "4.2",
+                        component: "API Development",
+                        description: "Implement RESTful APIs with Cloud Run automatic OpenAPI/Swagger documentation generation",
+                        verification: "Cloud Run service auto-generated OpenAPI docs with interactive Swagger UI at /docs endpoint",
+                        dependencies: "4.1",
+                        hours: 16,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "4.3",
+                        component: "CI/CD Pipeline",
+                        description: "Setup GitHub Actions CI/CD pipeline for Cloud Run containerization with multi-stage builds optimized for serverless deployment builds, pytest testing with Cloud Build, and GKE deployment via Pulumi",
+                        verification: "GitHub Actions workflow triggers pytest suite on PR, builds Cloud Run container with multi-stage builds images, deploys to GKE staging",
+                        dependencies: "4.2",
+                        hours: 12,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "4.4",
+                        component: "Unit Testing",
+                        description: "Write pytest unit tests for Cloud Run services with coverage.py reporting >50% code coverage",
+                        verification: "Coverage report shows >50% code coverage",
+                        dependencies: "4.2",
+                        hours: 20,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "4.5",
+                        component: "Integration Testing",
+                        description: "Implement pytest integration tests for Cloud Run services with Cloud SQL/Vertex AI Vector Search test fixtures",
+                        verification: "All service-to-service calls tested",
+                        dependencies: "4.4",
+                        hours: 16,
+                        priority: "medium",
+                        completed: false
+                    },
+                    {
+                        id: "4.6",
+                        component: "Performance Testing",
+                        description: "Load test Cloud Run endpoints with Locust, optimize with Redis caching and PostgreSQL connection pooling",
+                        verification: "APIs handle 100 concurrent users",
+                        dependencies: "4.5",
+                        hours: 12,
+                        priority: "medium",
+                        completed: false
+                    },
+                    {
+                        id: "4.7",
+                        component: "Security Audit",
+                        description: "Implement Cloud Run security middleware with CORS, CSP headers following OWASP guidelines",
+                        verification: "Security scan shows no critical vulnerabilities",
+                        dependencies: "4.3",
+                        hours: 10,
+                        priority: "low",
+                        completed: false
+                    },
+                    {
+                        id: "4.8",
+                        component: "Documentation",
+                        description: "Complete technical documentation and user guides",
+                        verification: "All APIs documented, setup guide complete",
+                        dependencies: "All MS4 tasks",
+                        hours: 10,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "4.9",
+                        component: "Local Kubernetes Environment",
+                        description: "Install and configure Minikube or Kind to create local Kubernetes cluster mirroring GKE behavior, enabling pre-production testing of all Kubernetes manifests and configurations",
+                        verification: "End-to-end test suite executes successfully in Minikube environment with all tests passing, service discovery works via Kubernetes DNS confirmed by exec into pods and running 'nslookup <service-name>', persistent volumes retain data across pod restarts tested by deleting and recreating stateful pods, resource limits enforced verified by attempting to exceed memory limits and observing pod eviction, and network policies properly isolate services confirmed by attempting unauthorized cross-service communication",
+                        dependencies: "2.10, 4.10, 4.11, 4.12, 4.13",
+                        hours: 8,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "4.10",
+                        component: "Kubernetes Networking Layer",
+                        description: "Design and implement Kubernetes Service objects for each microservice, configure Ingress controller (nginx-ingress) for external traffic routing, and establish service discovery patterns replacing Docker Compose's automatic container linking",
+                        verification: "Successful inter-service gRPC communication verified through test queries, DNS resolution working via 'kubectl exec' nslookup tests, and Ingress routing external traffic to API Gateway",
+                        dependencies: "4.9",
+                        hours: 10,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "4.11",
+                        component: "Configuration Management Migration",
+                        description: "Transform environment variables from docker-compose.yml into Kubernetes ConfigMaps for non-sensitive configs (API endpoints, feature flags) and Secrets for sensitive data (database passwords, API keys), implementing proper RBAC for secret access",
+                        verification: "All services successfully reading configuration from ConfigMaps/Secrets confirmed via pod logs, no hardcoded values in containers, and 'kubectl describe' showing proper volume mounts",
+                        dependencies: "4.9, 4.10",
+                        hours: 6,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "4.12",
+                        component: "Stateful Service Storage",
+                        description: "Create PersistentVolumeClaim specifications for PostgreSQL (10Gi for each service database), Vertex AI Vector Search persistent storage (20Gi), and Kafka message logs (5Gi), ensuring data persistence across pod restarts and upgrades",
+                        verification: "Data survives pod deletion and recreation tested by killing pods and verifying data integrity, storage classes properly configured for SSD performance, and backup procedures documented",
+                        dependencies: "4.9, 4.11",
+                        hours: 8,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "4.13",
+                        component: "Health Check Implementation",
+                        description: "Configure Kubernetes liveness probes (detecting hung services), readiness probes (preventing traffic to unready pods), and startup probes (allowing slow-starting ML services) for all microservices with appropriate thresholds and failure actions",
+                        verification: "Kubernetes automatically restarts failed services demonstrated by killing service processes, traffic only routes to ready pods verified under load testing, and health endpoints returning proper status codes",
+                        dependencies: "4.9, 4.10",
+                        hours: 6,
+                        priority: "medium",
+                        completed: false
+                    },
+                    {
+                        id: "4.14",
+                        component: "Resource Limits and Requests",
+                        description: "Define CPU and memory requests/limits for each service based on profiling data, ensuring efficient resource utilization and preventing resource starvation (e.g., NL+SQL: 500m CPU/1Gi memory request, 2 CPU/4Gi limit)",
+                        verification: "No OOMKilled pods during normal operation, services scale within defined resource boundaries, and cluster resources efficiently utilized shown via 'kubectl top pods'",
+                        dependencies: "4.9, 4.13",
+                        hours: 5,
+                        priority: "medium",
+                        completed: false
+                    },
+                    {
+                        id: "4.15",
+                        component: "Kubernetes Manifest Validation",
+                        description: "Implement pre-deployment validation using tools like kubeval, kube-score, and Polaris to ensure manifests follow best practices, security standards, and production readiness requirements",
+                        verification: "All manifests pass validation checks with no critical issues, security policies enforced (no root containers, read-only filesystems where appropriate), and deployment practices documented",
+                        dependencies: "4.9, 4.10, 4.11, 4.12, 4.13, 4.14",
+                        hours: 4,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "4.16",
+                        component: "Configuration Audit and Mapping",
+                        description: "Conduct comprehensive audit of all environment variables, volume mounts, and service dependencies in docker-compose.yml, creating a detailed mapping document that identifies which configurations should become ConfigMaps (non-sensitive), Secrets (sensitive), or hardcoded values in Kubernetes manifests",
+                        verification: "Configuration mapping spreadsheet completed showing every docker-compose environment variable and its Kubernetes destination, sensitive data identified and marked for Secret storage, and configuration dependencies between services documented",
+                        dependencies: "2.8, 4.9",
+                        hours: 6,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "4.17",
+                        component: "Kubernetes Secrets Creation",
+                        description: "Create Kubernetes Secret manifests for all sensitive configurations including database credentials (Cloud SQL PostgreSQL connection strings), API keys (Vertex AI, Google Cloud services), authentication tokens (JWT secrets), and service account credentials, implementing proper RBAC to restrict access per service",
+                        verification: "All secrets created and accessible via kubectl get secrets, each service can only access its required secrets verified by RBAC testing, and no sensitive data visible in pod descriptions or logs",
+                        dependencies: "4.16",
+                        hours: 8,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "4.18",
+                        component: "ConfigMap Implementation",
+                        description: "Transform non-sensitive configurations from docker-compose environment variables into Kubernetes ConfigMaps, including service URLs (internal endpoints), feature flags, timeout values, batch sizes, and model parameters, organizing by service ownership",
+                        verification: "ConfigMaps created for each service verified via kubectl describe configmap, services successfully reading configuration values confirmed in pod logs, and configuration changes trigger proper pod restarts",
+                        dependencies: "4.16",
+                        hours: 6,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "4.19",
+                        component: "Service Discovery Translation",
+                        description: "Replace Docker Compose service names with Kubernetes Service DNS names in all configurations (e.g., 'postgres:5432' becomes 'postgres-service.default.svc.cluster.local:5432'), updating connection strings and implementing proper service discovery patterns",
+                        verification: "All inter-service connections working with Kubernetes DNS verified via exec into pods and testing connections, no hardcoded IP addresses in configurations, and service discovery resilient to pod restarts",
+                        dependencies: "4.10, 4.18",
+                        hours: 8,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "4.20",
+                        component: "Environment-Specific Configuration",
+                        description: "Implement Kustomize overlays or Helm values files to manage configuration differences between environments (development, staging, production), ensuring that Cloud SQL endpoints, resource limits, and feature flags can vary without modifying base manifests",
+                        verification: "Same base manifests deploy to different environments with appropriate configurations, staging uses test Cloud SQL instances while production uses production Cloud SQL instances, and configuration promotion process documented and tested",
+                        dependencies: "4.17, 4.18, 4.19",
+                        hours: 10,
+                        priority: "medium",
+                        completed: false
+                    },
+                    {
+                        id: "4.21",
+                        component: "Configuration Injection Patterns",
+                        description: "Implement proper configuration injection into containers using environment variables from ConfigMaps/Secrets, volume mounts for configuration files, and init containers for dynamic configuration generation, ensuring services start with correct configurations",
+                        verification: "Each service reads configuration correctly verified by exec into pods and checking environment variables, configuration files properly mounted in expected locations, and services handle configuration updates gracefully",
+                        dependencies: "4.17, 4.18",
+                        hours: 7,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "4.22",
+                        component: "Configuration Validation and Testing",
+                        description: "Create automated tests that verify configuration translation correctness, including unit tests for configuration loading, integration tests for service connectivity with Kubernetes configurations, and smoke tests that verify all services start with migrated configurations",
+                        verification: "Test suite passes for all configuration scenarios, misconfiguration deliberately introduced causes expected failures, and configuration validation prevents deployment of invalid configurations",
+                        dependencies: "4.17, 4.18, 4.19, 4.21",
+                        hours: 8,
+                        priority: "medium",
+                        completed: false
+                    },
+                    {
+                        id: "4.23",
+                        component: "Secrets Rotation Strategy",
+                        description: "Implement secrets rotation mechanism allowing API keys and database passwords to be updated without service downtime, including automated secret reloading, graceful connection pool drainage, and audit logging for secret access",
+                        verification: "Secrets successfully rotated without service interruption demonstrated by changing test secret, audit logs show which services accessed which secrets and when, and rotation procedure documented in runbooks",
+                        dependencies: "4.17, 4.21",
+                        hours: 6,
+                        priority: "medium",
+                        completed: false
+                    }
+                ]
+            },
+            "milestone5": {
+                title: "Milestone 5: Deployment & Scaling",
+                dueDate: "2025-12-11",
+                weight: "35%",
+                tasks: [
+                    {
+                        id: "5.1",
+                        component: "GKE Production Cluster Deployment",
+                        description: "Deploy validated Kubernetes manifests from Task 2.10 and tested in Task 4.9-4.15 to Google Kubernetes Engine production cluster, including namespace creation, RBAC configuration, and workload identity setup",
+                        verification: "Production manifests deploy to GKE without modifications except environment-specific configs (verified by diff against Minikube manifests), all health checks pass in GKE confirmed by 'kubectl describe pods' showing readiness/liveness probes succeeding, workload identity properly authenticates to GCP services verified by successful BigQuery queries and Cloud Storage access from pods, production monitoring shows all services meeting SLA targets (p99 latency <1s, error rate <0.1%), external load balancer properly routes traffic confirmed by curl tests from outside cluster, and automated smoke tests pass against production endpoints",
+                        dependencies: "2.10, 4.9, 4.10, 4.11, 4.12, 4.13, 4.14, 4.15",
+                        hours: 16,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "5.2",
+                        component: "Ansible Automation",
+                        description: "Create Ansible playbooks integrated with Pulumi for GCP resource provisioning and Kubernetes deployments",
+                        verification: "Pulumi stack deploys complete GCP infrastructure (GKE, BigQuery, Vertex AI) with single command",
+                        dependencies: "5.1",
+                        hours: 14,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "5.3",
+                        component: "Auto-scaling",
+                        description: "Configure Kubernetes HPA for Cloud Run pods with metrics from Prometheus/Grafana monitoring",
+                        verification: "GKE pods auto-scale based on CPU/memory metrics exported to Prometheus",
+                        dependencies: "5.1",
+                        hours: 10,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "5.4",
+                        component: "ML Pipeline",
+                        description: "Implement Vertex AI Pipelines for automated model retraining with MLflow versioning and Weights & Biases tracking",
+                        verification: "Vertex AI Pipeline triggers weekly, deploys improved models to endpoints via MLflow MLflow Model Registry on Vertex AI",
+                        dependencies: "5.1",
+                        hours: 12,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "5.5",
+                        component: "Video & Blog",
+                        description: "Create 6-minute demo video and Medium blog post",
+                        verification: "Technical demo showcasing Cloud Run microservices, GKE deployment, and Vertex AI ML capabilities",
+                        dependencies: "5.3",
+                        hours: 10,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "5.6",
+                        component: "Test Coverage",
+                        description: "Achieve 70% pytest coverage across Cloud Run services, React components tested with Jest/React Testing Library",
+                        verification: "Coverage report shows >70%",
+                        dependencies: "4.4, 4.5",
+                        hours: 8,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "5.7",
+                        component: "Showcase Prep",
+                        description: "Prepare booth materials and live demo for showcase",
+                        verification: "Demo runs smoothly, QR codes ready",
+                        dependencies: "All tasks",
+                        hours: 8,
+                        priority: "high",
+                        completed: false
+                    },
+                    {
+                        id: "5.8",
+                        component: "Final Submission",
+                        description: "Submit all deliverables via course portal",
+                        verification: "All files uploaded before 11:59 PM",
+                        dependencies: "5.5, 5.6, 5.7",
+                        hours: 2,
+                        priority: "high",
+                        completed: false
+                    }
+                ]
+            }
+        };
+        
+        // Update time tracking
+        function updateTimeTracking() {
+            const now = new Date();
+            let nextMilestone = null;
+            let nextDeadline = null;
+            
+            // Find the next incomplete milestone
+            for (const [key, milestone] of Object.entries(checklistData)) {
+                const milestoneDate = new Date(milestone.dueDate + 'T23:59:59');
+                const allCompleted = milestone.tasks.every(task => task.completed);
+                
+                if (!allCompleted && milestoneDate > now) {
+                    if (!nextDeadline || milestoneDate < nextDeadline) {
+                        nextDeadline = milestoneDate;
+                        nextMilestone = { key, ...milestone };
+                    }
+                }
+            }
+            
+            // If no upcoming milestone, use the final one
+            if (!nextDeadline) {
+                nextDeadline = new Date('2025-12-11T23:59:59');
+                nextMilestone = { title: 'Final Submission' };
+            }
+            
+            // Calculate days remaining to next milestone
+            const msRemaining = nextDeadline - now;
+            const daysRemaining = Math.floor(msRemaining / (1000 * 60 * 60 * 24));
+            
+            // Calculate hours only for the next milestone
+            let totalHours = 0;
+            let completedHours = 0;
+            
+            if (nextMilestone.key) {
+                checklistData[nextMilestone.key].tasks.forEach(task => {
+                    totalHours += task.hours;
+                    if (task.completed) {
+                        completedHours += task.hours;
+                    }
+                });
+            }
+            
+            const workHoursRemaining = totalHours - completedHours;
+            
+            // Update display
+            const daysElement = document.getElementById('days-remaining');
+            const hoursElement = document.getElementById('hours-remaining');
+            
+            if (daysElement) {
+                daysElement.textContent = daysRemaining > 0 ? daysRemaining : '0';
+                if (daysRemaining < 7) {
+                    daysElement.style.color = '#e74c3c';
+                } else if (daysRemaining < 14) {
+                    daysElement.style.color = '#f39c12';
+                }
+                // Update the label to show which milestone
+                const labelElement = daysElement.parentElement.querySelector('.stat-label');
+                if (labelElement) {
+                    labelElement.textContent = 'Days to ' + nextMilestone.title.split(':')[0];
+                }
+            }
+            
+            if (hoursElement) {
+                hoursElement.textContent = workHoursRemaining + 'h';
+                if (workHoursRemaining > 50) {
+                    hoursElement.style.color = '#e74c3c';
+                } else if (workHoursRemaining > 25) {
+                    hoursElement.style.color = '#f39c12';
+                } else {
+                    hoursElement.style.color = '#27ae60';
+                }
+            }
+        }
+        
+        // Switch between pages
+        function switchPage(page) {
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.page-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            if (page === 'checklist') {
+                document.querySelectorAll('.nav-tab')[0].classList.add('active');
+                document.getElementById('checklist-page').classList.add('active');
+            } else if (page === 'apiflow') {
+                document.querySelectorAll('.nav-tab')[1].classList.add('active');
+                document.getElementById('apiflow-page').classList.add('active');
+            } else if (page === 'techstack') {
+                document.querySelectorAll('.nav-tab')[2].classList.add('active');
+                document.getElementById('techstack-page').classList.add('active');
+            } else if (page === 'team') {
+                document.querySelectorAll('.nav-tab')[3].classList.add('active');
+                document.getElementById('team-page').classList.add('active');
+            }
+        }
+        
+        // Initialize checklist
+        function initializeChecklist() {
+            const container = document.getElementById('checklist-container');
+            if (!container) return;
+            
+            let html = '';
+            
+            const savedProgress = localStorage.getItem('erpChecklistProgress');
+            if (savedProgress) {
+                const savedData = JSON.parse(savedProgress);
+                Object.keys(savedData).forEach(milestoneKey => {
+                    if (checklistData[milestoneKey]) {
+                        savedData[milestoneKey].tasks.forEach((savedTask, index) => {
+                            if (checklistData[milestoneKey].tasks[index]) {
+                                checklistData[milestoneKey].tasks[index].completed = savedTask.completed;
+                            }
+                        });
+                    }
+                });
+            }
+            
+            Object.entries(checklistData).forEach(([milestoneKey, milestone]) => {
+                const completedCount = milestone.tasks.filter(t => t.completed).length;
+                const totalCount = milestone.tasks.length;
+                
+                html += `
+                    <div class="checklist-section">
+                        <div class="section-header">
+                            ${milestone.title} (Due: ${milestone.dueDate}) - ${milestone.weight} of grade
+                            <span style="float: right; font-size: 0.9em;">${completedCount}/${totalCount} completed</span>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Task ID</th>
+                                    <th>Component</th>
+                                    <th>Description</th>
+                                    <th class="hide-mobile">Verification</th>
+                                    <th class="hide-mobile">Dependencies</th>
+                                    <th>Hours</th>
+                                    <th>Priority</th>
+                                    <th>Done</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                `;
+                
+                milestone.tasks.forEach(task => {
+                    const priorityClass = `priority-${task.priority}`;
+                    const completedClass = task.completed ? 'completed' : '';
+                    
+                    html += `
+                        <tr class="${priorityClass} ${completedClass}" data-task-id="${task.id}">
+                            <td class="task-id">${task.id}</td>
+                            <td>${task.component}</td>
+                            <td>${task.description}</td>
+                            <td class="hide-mobile">${task.verification}</td>
+                            <td class="hide-mobile">${task.dependencies}</td>
+                            <td>${task.hours}h</td>
+                            <td>${task.priority.toUpperCase()}</td>
+                            <td><input type="checkbox" class="checkbox" data-task="${task.id}" data-milestone="${milestoneKey}" ${task.completed ? 'checked' : ''}></td>
+                        </tr>
+                    `;
+                });
+                
+                html += `
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+            updateStats();
+            attachCheckboxListeners();
+        }
+        
+        // Update statistics
+        function updateStats() {
+            let totalTasks = 0;
+            let completedTasks = 0;
+            
+            Object.values(checklistData).forEach(milestone => {
+                totalTasks += milestone.tasks.length;
+                completedTasks += milestone.tasks.filter(t => t.completed).length;
+            });
+            
+            const totalElement = document.getElementById('total-tasks');
+            const completedElement = document.getElementById('completed-tasks');
+            
+            if (totalElement) {
+                totalElement.textContent = totalTasks;
+            }
+            
+            if (completedElement) {
+                completedElement.textContent = completedTasks;
+            }
+            
+            // Update milestone progress indicators
+            Object.entries(checklistData).forEach(([key, milestone]) => {
+                const completedCount = milestone.tasks.filter(t => t.completed).length;
+                const totalCount = milestone.tasks.length;
+                const sectionHeaders = document.querySelectorAll(".section-header");
+                sectionHeaders.forEach(header => {
+                    if (header.textContent.includes(milestone.title)) {
+                        const progressSpan = header.querySelector("span[style*=\"float: right\"]");
+                        if (progressSpan) {
+                            progressSpan.textContent = `${completedCount}/${totalCount} completed`;
+                        }
+                    }
+                });
+            });
+            updateTimeTracking();
+        }
+        
+        // Attach checkbox listeners
+        function attachCheckboxListeners() {
+            document.querySelectorAll('.checkbox').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const taskId = this.dataset.task;
+                    const milestoneKey = this.dataset.milestone;
+                    const row = this.closest('tr');
+                    
+                    const task = checklistData[milestoneKey].tasks.find(t => t.id === taskId);
+                    if (task) {
+                        task.completed = this.checked;
+                    }
+                    
+                    if (this.checked) {
+                        row.classList.add('completed');
+                    } else {
+                        row.classList.remove('completed');
+                    }
+                    
+                    updateStats();
+                    autoSaveProgress();
+                });
+            });
+        }
+        
+        // Auto-save progress
+        function autoSaveProgress() {
+            localStorage.setItem('erpChecklistProgress', JSON.stringify(checklistData));
+        }
+        
+        // Export to Excel
+        function exportToExcel() {
+            let csvContent = 'Task ID\tMilestone\tComponent\tDescription\tVerification\tDependencies\tHours\tPriority\tStatus\n';
+            
+            Object.entries(checklistData).forEach(([key, milestone]) => {
+                milestone.tasks.forEach(task => {
+                    const status = task.completed ? 'Completed' : 'Pending';
+                    csvContent += `${task.id}\t${milestone.title}\t${task.component}\t${task.description}\t${task.verification}\t${task.dependencies}\t${task.hours}\t${task.priority.toUpperCase()}\t${status}\n`;
+                });
+            });
+            
+            const blob = new Blob([csvContent], { type: 'application/vnd.ms-excel' });
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `ERP_Implementation_Checklist_${new Date().toISOString().split('T')[0]}.xls`;
+            link.click();
+            window.URL.revokeObjectURL(url);
+        }
+        
+        // Save progress
+        function saveProgress() {
+            localStorage.setItem('erpChecklistProgress', JSON.stringify(checklistData));
+            alert('Progress saved successfully!');
+        }
+        
+        // Load progress
+        function loadProgress() {
+            const saved = localStorage.getItem('erpChecklistProgress');
+            if (saved) {
+                Object.assign(checklistData, JSON.parse(saved));
+                initializeChecklist();
+                alert('Progress loaded successfully!');
+            } else {
+                alert('No saved progress found.');
+            }
+        }
+        
+        // Reset progress
+        function resetProgress() {
+            if (confirm('Are you sure you want to reset all progress? This cannot be undone.')) {
+                Object.values(checklistData).forEach(milestone => {
+                    milestone.tasks.forEach(task => {
+                        task.completed = false;
+                    });
+                });
+                localStorage.removeItem('erpChecklistProgress');
+                initializeChecklist();
+                alert('All progress has been reset.');
+            }
+        }
+        
+        // Initialize on DOM ready
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeChecklist();
+            // Update milestone progress indicators
+            Object.entries(checklistData).forEach(([key, milestone]) => {
+                const completedCount = milestone.tasks.filter(t => t.completed).length;
+                const totalCount = milestone.tasks.length;
+                const sectionHeaders = document.querySelectorAll(".section-header");
+                sectionHeaders.forEach(header => {
+                    if (header.textContent.includes(milestone.title)) {
+                        const progressSpan = header.querySelector("span[style*=\"float: right\"]");
+                        if (progressSpan) {
+                            progressSpan.textContent = `${completedCount}/${totalCount} completed`;
+                        }
+                    }
+                });
+            });
+            updateTimeTracking();
+            
+            // Update time every hour
+            setInterval(updateTimeTracking, 60000);
+            
+            // Update at midnight
+            const now = new Date();
+            const tomorrow = new Date(now);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            tomorrow.setHours(0, 0, 0, 0);
+            const msUntilMidnight = tomorrow - now;
+            
+            setTimeout(() => {
+            // Update milestone progress indicators
+            Object.entries(checklistData).forEach(([key, milestone]) => {
+                const completedCount = milestone.tasks.filter(t => t.completed).length;
+                const totalCount = milestone.tasks.length;
+                const sectionHeaders = document.querySelectorAll(".section-header");
+                sectionHeaders.forEach(header => {
+                    if (header.textContent.includes(milestone.title)) {
+                        const progressSpan = header.querySelector("span[style*=\"float: right\"]");
+                        if (progressSpan) {
+                            progressSpan.textContent = `${completedCount}/${totalCount} completed`;
+                        }
+                    }
+                });
+            });
+                updateTimeTracking();
+                setInterval(updateTimeTracking, 86400000);
+            }, msUntilMidnight);
+            
+            // Auto-save every 30 seconds
+            setInterval(autoSaveProgress, 30000);
+        });
+        
+        // Save before leaving
+        window.addEventListener('beforeunload', function() {
+            autoSaveProgress();
+        });
+    </script>
+</body>
+</html>
+                                

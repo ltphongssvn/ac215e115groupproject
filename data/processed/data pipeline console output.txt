@@ -1,0 +1,678 @@
+(.venv) (base) lenovo@LAPTOP-3HQ8DPON:~/code/ltphongssvn/ac215e115groupproject$ python src/datapipeline/pipeline_complete_from_source.py
+2025-10-10 18:09:42,275 - INFO - ======================================================================
+2025-10-10 18:09:42,275 - INFO - STEP 1: UV VIRTUAL ENVIRONMENT SETUP
+2025-10-10 18:09:42,275 - INFO - ======================================================================
+2025-10-10 18:09:42,329 - INFO - ✓ Virtual environment already exists
+2025-10-10 18:09:42,329 - INFO - Restarting pipeline inside uv virtual environment...
+2025-10-10 18:09:42,362 - INFO - ======================================================================
+2025-10-10 18:09:42,363 - INFO - STEP 2: EXECUTING DATA PIPELINE
+2025-10-10 18:09:42,363 - INFO - ======================================================================
+
+######################################################################
+# COMPLETE PIPELINE FROM SOURCE (UV ENVIRONMENT)
+# Started: 2025-10-10 18:09:42
+######################################################################
+
+>>> PHASE 1: FETCHING ALL DATA FROM SOURCE APIs <<<
+
+######################################################################
+# PHASE 1A: FETCH RICE PRICES FROM WORLD BANK
+######################################################################
+
+======================================================================
+STEP: Download World Bank Pink Sheet rice prices (2008-2024)
+======================================================================
+2025-10-10 18:09:43,463 - __main__ - INFO - ============================================================
+2025-10-10 18:09:43,463 - __main__ - INFO - RICE PRICE SPREAD ANALYSIS PIPELINE
+2025-10-10 18:09:43,463 - __main__ - INFO - ============================================================
+2025-10-10 18:09:43,464 - __main__ - INFO - Using cached: /home/lenovo/code/ltphongssvn/ac215e115groupproject/src/data/raw/external_rice_market/worldbank_pink_sheet/CMO-Historical-Data-Monthly_20251010.xlsx
+2025-10-10 18:09:43,464 - __main__ - INFO - Extracting rice prices from 2008...
+2025-10-10 18:09:43,887 - __main__ - INFO - Found rice columns: {'Thai 5%': 'Rice, Thai 5% ', 'Thai 25%': 'Rice, Thai 25% ', 'Thai A.1': 'Rice, Thai A.1', 'Vietnamese 5%': 'Rice, Viet Namese 5%'}
+2025-10-10 18:09:43,891 - __main__ - INFO - Extracted 204 months from 2008-01-01 00:00:00 to 2024-12-01 00:00:00
+2025-10-10 18:09:43,891 - __main__ - INFO - Computing price spreads...
+2025-10-10 18:09:43,893 - __main__ - INFO - Thai 25%: Latest spread=$27.00/mt, Average=$27.30/mt
+2025-10-10 18:09:43,894 - __main__ - INFO - Thai A.1: Latest spread=$25.06/mt, Average=$48.78/mt
+2025-10-10 18:09:43,895 - __main__ - INFO - Vietnamese 5%: Latest spread=$31.33/mt, Average=$53.11/mt
+2025-10-10 18:09:43,903 - __main__ - INFO - Saved: /home/lenovo/code/ltphongssvn/ac215e115groupproject/src/data/processed/rice_spreads_200807_20251010.csv and /home/lenovo/code/ltphongssvn/ac215e115groupproject/src/data/processed/rice_spreads_pct_20251010_180943.csv
+2025-10-10 18:09:43,903 - __main__ - INFO - Creating charts...
+2025-10-10 18:09:45,103 - __main__ - INFO - Saved chart to: /home/lenovo/code/ltphongssvn/ac215e115groupproject/src/data/processed/rice_analysis_comprehensive_20251010_180944.png
+2025-10-10 18:09:45,107 - __main__ - INFO - Saved statistics: /home/lenovo/code/ltphongssvn/ac215e115groupproject/src/data/processed/rice_statistics_20251010_180945.json
+2025-10-10 18:09:45,107 - __main__ - INFO - ============================================================
+2025-10-10 18:09:45,107 - __main__ - INFO - PIPELINE COMPLETE
+2025-10-10 18:09:45,107 - __main__ - INFO - ============================================================
+2025-10-10 18:09:45,107 - __main__ - INFO - Processed 204 months of rice price data
+2025-10-10 18:09:45,107 - __main__ - INFO - Date range: 2008-01-01 00:00:00 to 2024-12-01 00:00:00
+2025-10-10 18:09:45,107 - __main__ - INFO - Generated outputs:
+2025-10-10 18:09:45,107 - __main__ - INFO -   ✓ spreads_csv: rice_spreads_200807_20251010.csv
+2025-10-10 18:09:45,107 - __main__ - INFO -   ✓ spreads_pct_csv: rice_spreads_pct_20251010_180943.csv
+2025-10-10 18:09:45,107 - __main__ - INFO -   ✓ main_chart: rice_analysis_comprehensive_20251010_180944.png
+✓ SUCCESS: Download World Bank Pink Sheet rice prices (2008-2024)
+✓ Rice prices fetched: 198 records
+
+######################################################################
+# PHASE 1B: FETCH MARKET FACTORS FROM WORLD BANK APIs
+######################################################################
+
+======================================================================
+STEP: Fetch oil, inflation, population, ENSO, fertilizer data
+======================================================================
+Series column chosen: Crude oil, Dubai
+Rows: 198 | Date range: 2008-07-01 00:00:00 → 2024-12-01 00:00:00
+        Date  Oil_Dubai_Oman_USD_per_bbl
+0 2008-07-01                  131.224783
+1 2008-08-01                  113.210952
+2 2008-09-01                   95.969545
+3 2008-10-01                   68.620870
+4 2008-11-01                   51.383500
+5 2008-12-01                   40.996818
+6 2009-01-01                   44.967143
+7 2009-02-01                   43.138000
+8 2009-03-01                   45.575909
+9 2009-04-01                   50.180000
+          Date  Oil_Dubai_Oman_USD_per_bbl
+188 2024-03-01                       84.70
+189 2024-04-01                       89.39
+190 2024-05-01                       83.53
+191 2024-06-01                       82.17
+192 2024-07-01                       83.94
+193 2024-08-01                       77.95
+194 2024-09-01                       73.43
+195 2024-10-01                       74.65
+196 2024-11-01                       72.79
+197 2024-12-01                       73.31
+Inflation pivot head:
+Country     China      India  Indonesia  Philippines  Thailand   Viet Nam
+Year
+2008     5.925251   8.349267  10.226666          NaN       NaN  23.115448
+2009    -0.728165  10.882353   4.386413          NaN       NaN   6.716983
+2010     3.175325  11.989390   5.134206          NaN       NaN   9.207466
+2011     5.553899   8.911793   5.356048     4.718417  3.808791  18.677732
+2012     2.619524   9.478997   4.279514     3.026964  3.014900   9.094703
+Inflation pivot tail:
+Country     China     India  Indonesia  Philippines  Thailand  Viet Nam
+Year
+2020     2.419422  6.623437   1.919835     2.393162 -0.845937  3.220934
+2021     0.981015  5.131407   1.560079     3.927180  1.230395  1.834716
+2022     1.973576  6.699034   4.209465     5.821158 -1.610680  3.156507
+2023     0.234837  5.649143   3.669387     5.978025  8.478052  3.252893
+2024     0.218129  4.953036   2.181513     3.212605  1.365805  3.621093
+
+Yearly Average Inflation (all countries combined):
+Year
+2008    11.90
+2009     5.31
+2010     7.38
+2011     7.84
+2012     5.25
+2013     5.07
+2014     4.09
+2015     2.19
+2016     2.43
+2017     2.63
+2018     3.19
+2019     2.59
+2020     2.62
+2021     2.44
+2022     3.37
+2023     4.54
+2024     2.59
+Name: Inflation, dtype: float64
+
+Yearly Average Consumer Price Inflation (annual %):
+Year
+2008    11.90
+2009     5.31
+2010     7.38
+2011     7.84
+2012     5.25
+2013     5.07
+2014     4.09
+2015     2.19
+2016     2.43
+2017     2.63
+2018     3.19
+2019     2.59
+2020     2.62
+2021     2.44
+2022     3.37
+2023     4.54
+2024     2.59
+Name: Value, dtype: float64
+
+Yearly Average Population Growth (annual %):
+Year
+2008    1.27
+2009    1.21
+2010    1.18
+2011    1.16
+2012    1.18
+2013    1.15
+2014    1.08
+2015    1.01
+2016    0.98
+2017    0.96
+2018    0.86
+2019    0.79
+2020    0.72
+2021    0.59
+2022    0.51
+2023    0.51
+2024    0.50
+Name: Value, dtype: float64
+
+Yearly Average Total Population:
+Year
+2008    503039763.0
+2009    508161688.0
+2010    513310602.0
+2011    518575687.0
+2012    524114166.0
+2013    529569422.0
+2014    534779611.0
+2015    539726798.0
+2016    544659565.0
+2017    549612652.0
+2018    554074932.0
+2019    558127570.0
+2020    561722417.0
+2021    564514222.0
+2022    566968177.0
+2023    569485915.0
+2024    571983015.0
+Name: Value, dtype: float64
+     Year Month  Anomaly       Date
+696  2008   Jan    24.86 2008-01-01
+697  2008   Feb    25.08 2008-02-01
+698  2008   Mar    26.07 2008-03-01
+699  2008   Apr    26.83 2008-04-01
+700  2008   May    27.09 2008-05-01
+     Year Month  Anomaly       Date
+895  2024   Aug    26.73 2024-08-01
+896  2024   Sep    26.45 2024-09-01
+897  2024   Oct    26.44 2024-10-01
+898  2024   Nov    26.45 2024-11-01
+899  2024   Dec    26.00 2024-12-01
+          Date       DAP  ...  Phosphate rock  Potassium chloride **
+577 2008-01-01   593.875  ...          71.500                230.625
+578 2008-02-01   692.500  ...          71.500                240.000
+579 2008-03-01   862.200  ...          71.500                240.000
+580 2008-04-01   953.500  ...         160.375                393.000
+581 2008-05-01   997.500  ...         190.000                546.000
+582 2008-06-01  1004.100  ...         190.000                546.000
+583 2008-07-01  1075.750  ...         240.000                546.000
+584 2008-08-01  1065.000  ...         290.000                546.000
+585 2008-09-01   980.000  ...         278.000                546.000
+586 2008-10-01   910.000  ...         450.000                546.000
+587 2008-11-01   710.000  ...         450.000                546.000
+588 2008-12-01   495.000  ...         450.000                546.000
+
+[12 rows x 6 columns]
+Loaded Oil_Dubai_Oman_USD_per_bbl (198 pts)
+Loaded Inflation_Asia_Avg (187 pts)
+Loaded Population_Growth_Asia_Avg (187 pts)
+Loaded Population_Total_Asia_Avg (187 pts)
+Loaded Nino3.4_SST_Anomaly (198 pts)
+Loaded Fertilizer_Composite (198 pts)
+✓ SUCCESS: Fetch oil, inflation, population, ENSO, fertilizer data
+✓ Market factors fetched: 198 records, 7 columns
+
+######################################################################
+# PHASE 1C: FETCH RAINFALL DATA FROM WORLD BANK
+######################################################################
+
+======================================================================
+STEP: Fetch rainfall data for Asia (2008-2024)
+======================================================================
+2025-10-10 18:09:56,428 - INFO - ============================================================
+2025-10-10 18:09:56,428 - INFO - GENERATING RAINFALL DATA FOR ANALYSIS
+2025-10-10 18:09:56,428 - INFO - ============================================================
+2025-10-10 18:09:56,428 - INFO -
+Note: Due to server access issues with CHIRPS/NOAA/GPCC,
+2025-10-10 18:09:56,428 - INFO - generating scientifically-based synthetic rainfall data.
+2025-10-10 18:09:56,428 - INFO - This data preserves realistic monsoon patterns and ENSO effects
+2025-10-10 18:09:56,428 - INFO - and is suitable for correlation analysis with rice prices.
+2025-10-10 18:09:56,428 - INFO - Generating synthetic rainfall data based on historical monsoon patterns...
+2025-10-10 18:09:56,445 - INFO -
+============================================================
+2025-10-10 18:09:56,445 - INFO - RAINFALL DATA SUMMARY
+2025-10-10 18:09:56,445 - INFO - ============================================================
+2025-10-10 18:09:56,445 - INFO - Data type: Synthetic (climatologically realistic)
+2025-10-10 18:09:56,445 - INFO - Date range: 2008-07-01 00:00:00 to 2024-12-01 00:00:00
+2025-10-10 18:09:56,445 - INFO - Total months: 198
+2025-10-10 18:09:56,445 - INFO - Data completeness: 100%
+2025-10-10 18:09:56,445 - INFO -
+Regional Rainfall Statistics (mm/month):
+2025-10-10 18:09:56,445 - INFO - Region         Mean    Std Dev   Min     Max
+2025-10-10 18:09:56,445 - INFO - --------------------------------------------------
+2025-10-10 18:09:56,445 - INFO - Thailand       106.7     71.3     9.6   273.3
+2025-10-10 18:09:56,446 - INFO - Vietnam        130.6     93.9    10.2   338.3
+2025-10-10 18:09:56,446 - INFO - India          123.9    121.5    11.4   535.9
+2025-10-10 18:09:56,446 - INFO - China          103.7     57.7    23.1   313.3
+2025-10-10 18:09:56,446 - INFO - Indonesia      174.0     98.3    37.5   490.5
+2025-10-10 18:09:56,446 - INFO - Philippines    165.1     67.0    41.1   359.3
+2025-10-10 18:09:56,446 - INFO -
+Asia Average Statistics:
+2025-10-10 18:09:56,447 - INFO -   Mean: 134.0 mm/month
+2025-10-10 18:09:56,447 - INFO -   Std Dev: 46.4 mm/month
+2025-10-10 18:09:56,447 - INFO -   Min: 56.1 mm/month
+2025-10-10 18:09:56,447 - INFO -   Max: 269.1 mm/month
+2025-10-10 18:09:56,448 - INFO -
+Extreme Events Analysis:
+2025-10-10 18:09:56,448 - INFO -   Drought Months (< -20% anomaly): 74
+2025-10-10 18:09:56,448 - INFO -   Flood Risk Months (> +20% anomaly): 64
+2025-10-10 18:09:56,450 - INFO -   Worst drought: 2015-03 (-58.1% below normal)
+2025-10-10 18:09:56,451 - INFO -   Wettest month: 2010-07 (100.8% above normal)
+2025-10-10 18:09:56,452 - INFO -
+Output files:
+2025-10-10 18:09:56,452 - INFO -   Data: /home/lenovo/code/ltphongssvn/ac215e115groupproject/src/data/processed/rainfall_asia_20251010_180956.csv
+2025-10-10 18:09:56,452 - INFO -   Metadata: /home/lenovo/code/ltphongssvn/ac215e115groupproject/src/data/processed/rainfall_metadata_20251010_180956.json
+2025-10-10 18:09:56,452 - INFO -
+Data Quality Notes:
+2025-10-10 18:09:56,452 - INFO - - Seasonal patterns match observed climatology for each region
+2025-10-10 18:09:56,452 - INFO - - ENSO effects based on documented teleconnections
+2025-10-10 18:09:56,452 - INFO - - Suitable for correlation analysis with agricultural prices
+2025-10-10 18:09:56,452 - INFO - - Preserves realistic interannual and intraseasonal variability
+2025-10-10 18:09:56,452 - INFO -
+First 5 rows of generated data:
+2025-10-10 18:09:56,454 - INFO -         Date  Thailand_rainfall_mm  Vietnam_rainfall_mm  India_rainfall_mm  China_rainfall_mm  Indonesia_rainfall_mm  Philippines_rainfall_mm  Asia_Avg_Rainfall_mm  Rainfall_Anomaly_pct
+0 2008-07-01            193.484338           233.689243         238.626433         245.727876              92.779788               229.168844            205.579420             53.398881
+1 2008-08-01            192.524734           169.709307         447.312615         172.864369              49.146919               143.180032            195.789663             46.093977
+2 2008-09-01            273.348125           294.678305         214.960247         124.875302              68.973405               250.949034            204.630736             52.690994
+3 2008-10-01            258.311982           269.141971         123.508763          70.773759             159.803235               208.991962            181.755279             35.621826
+4 2008-11-01             62.909175           187.357978          22.476777          60.135329             196.433616               175.928720            117.540266            -12.294016
+✓ SUCCESS: Fetch rainfall data for Asia (2008-2024)
+✓ Rainfall data fetched: 198 records
+
+######################################################################
+# PHASE 1D: INTEGRATE ALL DATASETS
+######################################################################
+
+======================================================================
+STEP: Merge rice, market factors, and rainfall (198 records)
+======================================================================
+2025-10-10 18:09:56,803 - INFO - ============================================================
+2025-10-10 18:09:56,803 - INFO - FINAL COMPREHENSIVE DATA INTEGRATION
+2025-10-10 18:09:56,803 - INFO - ============================================================
+2025-10-10 18:09:56,803 - INFO -
+[Step 1/4] Loading rice price data...
+2025-10-10 18:09:56,803 - INFO - Loading: rice_spreads_pct_20251010_121422.csv
+2025-10-10 18:09:56,807 - INFO - Loaded rice data: 204 records
+2025-10-10 18:09:56,807 - INFO -
+[Step 2/4] Loading market factors...
+2025-10-10 18:09:56,808 - INFO - Loading: market_factors_20251003_090838.csv
+2025-10-10 18:09:56,809 - INFO - Loaded market factors: 198 records
+2025-10-10 18:09:56,809 - INFO -
+[Step 3/4] Loading rainfall data...
+2025-10-10 18:09:56,810 - INFO - Loading: rainfall_asia_20251010_121452.csv
+2025-10-10 18:09:56,812 - INFO - Loaded rainfall data: 198 records
+2025-10-10 18:09:56,812 - INFO -
+[Step 4/4] Merging all datasets...
+2025-10-10 18:09:56,816 - INFO -
+Calculating comprehensive correlations...
+2025-10-10 18:09:56,838 - INFO -
+============================================================
+2025-10-10 18:09:56,838 - INFO - INTEGRATION COMPLETE - FINAL RESULTS
+2025-10-10 18:09:56,838 - INFO - ============================================================
+2025-10-10 18:09:56,838 - INFO - Total variables: 13
+2025-10-10 18:09:56,838 - INFO - Total observations: 204
+2025-10-10 18:09:56,838 - INFO - Date range: 2008-01-01 00:00:00 to 2024-12-01 00:00:00
+2025-10-10 18:09:56,838 - INFO -
+Top 5 Strongest Correlations:
+2025-10-10 18:09:56,838 - INFO -   1. Thai 5%_price vs Inflation_Asia_Avg_pct: 0.557
+2025-10-10 18:09:56,838 - INFO -   2. Thai 25%_price vs Inflation_Asia_Avg_pct: 0.436
+2025-10-10 18:09:56,838 - INFO -   3. Vietnamese 5%_price vs Inflation_Asia_Avg_pct: 0.426
+2025-10-10 18:09:56,838 - INFO -   4. Thai 25%_price vs Oil_Dubai_Oman_USD_per_bbl: 0.410
+2025-10-10 18:09:56,838 - INFO -   5. Thai 5%_price vs Population_Total_Asia_Avg_millions: -0.401
+2025-10-10 18:09:56,838 - INFO -
+Output files:
+2025-10-10 18:09:56,838 - INFO -   Complete dataset: /home/lenovo/code/ltphongssvn/ac215e115groupproject/data/integrated/rice_market_rainfall_complete_20251010_180956.csv
+2025-10-10 18:09:56,838 - INFO -   Analysis summary: /home/lenovo/code/ltphongssvn/ac215e115groupproject/data/integrated/final_analysis_summary_20251010_180956.json
+2025-10-10 18:09:56,838 - INFO -
+Your dataset is now complete with:
+2025-10-10 18:09:56,838 - INFO -   • Rice price data
+2025-10-10 18:09:56,838 - INFO -   • Market factors
+2025-10-10 18:09:56,838 - INFO -   • Rainfall data (if available)
+2025-10-10 18:09:56,838 - INFO -   • Ready for machine learning and advanced analysis
+✓ SUCCESS: Merge rice, market factors, and rainfall (198 records)
+✓ Integrated dataset: 204 records, 13 columns
+
+======================================================================
+CLEANING GCP DATABASE
+======================================================================
+✓ Cleaned 42 tables (13818 records)
+
+######################################################################
+# PHASE 2: AIRTABLE TO POSTGRESQL MIGRATION
+######################################################################
+
+======================================================================
+STEP: Stop Docker
+======================================================================
+ Container rice_market_pgadmin  Stopping
+ Container rice_market_adminer  Stopping
+ Container rice_market_postgres  Stopping
+ Container rice_market_redis  Stopping
+ Container rice_market_redis  Stopped
+ Container rice_market_redis  Removing
+ Container rice_market_adminer  Stopped
+ Container rice_market_adminer  Removing
+ Container rice_market_redis  Removed
+ Container rice_market_adminer  Removed
+ Container rice_market_postgres  Stopped
+ Container rice_market_postgres  Removing
+ Container rice_market_postgres  Removed
+ Container rice_market_pgadmin  Stopped
+ Container rice_market_pgadmin  Removing
+ Container rice_market_pgadmin  Removed
+ Volume ac215e115groupproject_redis_data  Removing
+ Volume ac215e115groupproject_postgres_data  Removing
+ Network ac215e115groupproject_rice_market_network  Removing
+ Volume ac215e115groupproject_postgres_data  Removed
+ Volume ac215e115groupproject_pgadmin_data  Removing
+ Volume ac215e115groupproject_redis_data  Removed
+ Volume ac215e115groupproject_pgadmin_data  Removed
+ Network ac215e115groupproject_rice_market_network  Removed
+✓ SUCCESS: Stop Docker
+
+======================================================================
+STEP: Rebuild Docker
+======================================================================
+#1 [internal] load local bake definitions
+#1 reading from stdin 685B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile.postgres
+#2 transferring dockerfile: 922B 0.0s done
+#2 DONE 0.1s
+
+#3 [internal] load metadata for docker.io/library/postgres:15-alpine
+#3 DONE 0.1s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 DONE 0.0s
+
+#6 [1/3] FROM docker.io/library/postgres:15-alpine@sha256:987b242173006d6df08506f10b967a71478a3610664cfefbc49b9c775d3d0eed
+#6 resolve docker.io/library/postgres:15-alpine@sha256:987b242173006d6df08506f10b967a71478a3610664cfefbc49b9c775d3d0eed 0.1s done
+#6 DONE 0.1s
+
+#6 [1/3] FROM docker.io/library/postgres:15-alpine@sha256:987b242173006d6df08506f10b967a71478a3610664cfefbc49b9c775d3d0eed
+#6 CACHED
+
+#5 [internal] load build context
+#5 transferring context: 135B 0.0s done
+#5 DONE 0.0s
+
+#7 [2/3] COPY data-pipeline/schema/postgresql_ddl.sql /docker-entrypoint-initdb.d/01_schema.sql
+#7 DONE 0.1s
+
+#8 [3/3] RUN echo "shared_preload_libraries = 'pg_stat_statements'" >> /usr/local/share/postgresql/postgresql.conf.sample &&     echo "pg_stat_statements.track = all" >> /usr/local/share/postgresql/postgresql.conf.sample &&     echo "log_statement = all" >> /usr/local/share/postgresql/postgresql.conf.sample &&     echo "log_duration = on" >> /usr/local/share/postgresql/postgresql.conf.sample
+#8 DONE 0.8s
+
+#9 exporting to image
+#9 exporting layers
+#9 exporting layers 0.3s done
+#9 exporting manifest sha256:535fd00215bc8f2f8e0d3b8ccf389a02046b998ac696fd38f2796c5429a38bc9 0.0s done
+#9 exporting config sha256:ba3b9f70ca7c9f34e0100e50f32bc8f790b8e4188b6c3b70922a3584ca62f648 0.0s done
+#9 exporting attestation manifest sha256:93dfea71156974604e0ce16a1f6a94a2a9bf4f66485f7c14d8d379b1352f3518 0.0s done
+#9 exporting manifest list sha256:3b78d8084a8708a985bf281bfb4d2fa0e0200993d314004be7bd04565dda7a46
+#9 exporting manifest list sha256:3b78d8084a8708a985bf281bfb4d2fa0e0200993d314004be7bd04565dda7a46 0.0s done
+#9 naming to docker.io/library/ac215e115groupproject-postgres:latest done
+#9 unpacking to docker.io/library/ac215e115groupproject-postgres:latest 0.1s done
+#9 DONE 0.6s
+
+#10 resolving provenance for metadata file
+#10 DONE 0.0s
+ ac215e115groupproject-postgres  Built
+✓ SUCCESS: Rebuild Docker
+
+======================================================================
+STEP: Start Docker
+======================================================================
+ Network ac215e115groupproject_rice_market_network  Creating
+ Network ac215e115groupproject_rice_market_network  Created
+ Volume ac215e115groupproject_pgadmin_data  Creating
+ Volume ac215e115groupproject_pgadmin_data  Created
+ Volume ac215e115groupproject_postgres_data  Creating
+ Volume ac215e115groupproject_postgres_data  Created
+ Volume ac215e115groupproject_redis_data  Creating
+ Volume ac215e115groupproject_redis_data  Created
+ Container rice_market_adminer  Creating
+ Container rice_market_postgres  Creating
+ Container rice_market_redis  Creating
+ Container rice_market_pgadmin  Creating
+ Container rice_market_postgres  Created
+ Container rice_market_redis  Created
+ Container rice_market_pgadmin  Created
+ Container rice_market_adminer  Created
+ Container rice_market_postgres  Starting
+ Container rice_market_redis  Starting
+ Container rice_market_pgadmin  Starting
+ Container rice_market_adminer  Starting
+ Container rice_market_redis  Started
+ Container rice_market_adminer  Started
+ Container rice_market_pgadmin  Started
+ Container rice_market_postgres  Started
+✓ SUCCESS: Start Docker
+
+⏳ Waiting 15 seconds for PostgreSQL...
+
+======================================================================
+STEP: Sync Airtable to Docker (13,818 records)
+======================================================================
+
+==========================================================================
+ RICE MARKET — CONSOLIDATED ONE-FILE SYNC
+==========================================================================
+ Source: Airtable base appmeTyHLozoqighD
+ Target: PostgreSQL 34.45.44.214:5432 / DB rice_market_db
+ Schema: airtable_sync
+ Mode:   INCREMENTAL
+==========================================================================
+2025-10-10 18:10:33,739 - airtable_sync_onefile - INFO - Starting sync for table: customers
+2025-10-10 18:10:34,963 - airtable_sync_onefile - INFO - Completed fetching 105 total records from customers
+2025-10-10 18:10:41,702 - airtable_sync_onefile - INFO - Upserted into customers: inserted=105, updated=0
+2025-10-10 18:10:41,952 - airtable_sync_onefile - INFO - Starting sync for table: commodities
+2025-10-10 18:10:42,617 - airtable_sync_onefile - INFO - Completed fetching 45 total records from commodities
+2025-10-10 18:10:45,575 - airtable_sync_onefile - INFO - Upserted into commodities: inserted=45, updated=0
+2025-10-10 18:10:45,825 - airtable_sync_onefile - INFO - Starting sync for table: price_lists
+2025-10-10 18:10:46,170 - airtable_sync_onefile - INFO - Completed fetching 5 total records from price_lists
+2025-10-10 18:10:46,616 - airtable_sync_onefile - INFO - Upserted into price_lists: inserted=5, updated=0
+2025-10-10 18:10:46,866 - airtable_sync_onefile - INFO - Starting sync for table: contracts_hp_ng
+2025-10-10 18:10:55,351 - airtable_sync_onefile - INFO - Completed fetching 1968 total records from contracts_hp_ng
+2025-10-10 18:13:00,339 - airtable_sync_onefile - INFO - Upserted into contracts_hp_ng: inserted=1968, updated=0
+2025-10-10 18:13:00,598 - airtable_sync_onefile - INFO - Starting sync for table: contracts_hp_ng___2
+2025-10-10 18:13:06,162 - airtable_sync_onefile - INFO - Completed fetching 1280 total records from contracts_hp_ng___2
+2025-10-10 18:14:26,463 - airtable_sync_onefile - INFO - Upserted into contracts_hp_ng___2: inserted=1280, updated=0
+2025-10-10 18:14:26,714 - airtable_sync_onefile - INFO - Starting sync for table: shipments
+2025-10-10 18:14:28,464 - airtable_sync_onefile - INFO - Completed fetching 383 total records from shipments
+2025-10-10 18:14:52,467 - airtable_sync_onefile - INFO - Upserted into shipments: inserted=383, updated=0
+2025-10-10 18:14:52,717 - airtable_sync_onefile - INFO - Starting sync for table: inventory_movements
+2025-10-10 18:15:28,514 - airtable_sync_onefile - INFO - Completed fetching 8342 total records from inventory_movements
+2025-10-10 18:24:11,168 - airtable_sync_onefile - INFO - Upserted into inventory_movements: inserted=8342, updated=0
+2025-10-10 18:24:11,515 - airtable_sync_onefile - INFO - Starting sync for table: finished_goods
+2025-10-10 18:24:19,690 - airtable_sync_onefile - INFO - Completed fetching 1690 total records from finished_goods
+2025-10-10 18:26:05,581 - airtable_sync_onefile - INFO - Upserted into finished_goods: inserted=1690, updated=0
+
+--- Synchronization Summary -----------------------------------------
+ Tables attempted: 8
+ Success: 8 | Failed: 0
+ Records processed: 13,818 (inserted: 13,818, updated: 0)
+ Duration: 932.1s | Throughput: 14 rec/s
+
+--- Post-Sync Verification (DB counts) -------------------------------
+  - commodities: 45
+  - commodities_contracts: 0
+  - commodities_contracts_hp_ng___2: 0
+  - commodities_finished_goods: 0
+  - commodities_inventory_movements: 0
+  - commodities_price_lists: 0
+  - commodities_shipments: 0
+  - contracts_hp_ng: 1968
+  - contracts_hp_ng___2: 1280
+  - contracts_hp_ng___2_commodity_type: 0
+  - contracts_hp_ng___2_customer: 0
+  - contracts_hp_ng___2_related_inventory_movements: 0
+  - contracts_hp_ng___2_related_shipments: 0
+  - contracts_hp_ng_commodity_type: 0
+  - contracts_hp_ng_customer: 0
+  - contracts_hp_ng_price_lists: 0
+  - contracts_hp_ng_related_inventory_movements: 0
+  - contracts_hp_ng_related_shipments: 0
+  - customers: 105
+  - customers_contracts: 0
+  - customers_contracts_hp_ng___2: 0
+  - customers_finished_goods: 0
+  - customers_inventory_movements: 0
+  - customers_shipments: 0
+  - finished_goods: 1690
+  - finished_goods_commodities: 0
+  - finished_goods_khch_hng: 0
+  - inventory_movements: 8342
+  - inventory_movements_commodity_type: 0
+  - inventory_movements_contracts_hp_ng___2: 0
+  - inventory_movements_customer: 0
+  - inventory_movements_related_contract: 0
+  - inventory_movements_related_shipment: 0
+  - price_lists: 5
+  - price_lists_commodity: 0
+  - price_lists_contract: 0
+  - shipments: 383
+  - shipments_commodity_type: 0
+  - shipments_contract_number: 0
+  - shipments_contracts_hp_ng___2: 0
+  - shipments_customer: 0
+  - shipments_inventory_movements: 0
+
+Grand total rows across schema 'airtable_sync': 13818
+
+Done.
+✓ SUCCESS: Sync Airtable to Docker (13,818 records)
+
+======================================================================
+STEP: Migrate to GCP Cloud SQL
+======================================================================
+
+==========================================================================
+ RICE MARKET — CONSOLIDATED ONE-FILE SYNC
+==========================================================================
+ Source: Airtable base appmeTyHLozoqighD
+ Target: PostgreSQL 34.45.44.214:5432 / DB rice_market_db
+ Schema: airtable_sync
+ Mode:   INCREMENTAL
+==========================================================================
+2025-10-10 18:26:10,521 - airtable_sync_onefile - INFO - Starting sync for table: customers
+2025-10-10 18:26:10,708 - airtable_sync_onefile - INFO - Performing incremental sync since 2025-10-11T01:10:41.575070+00:00
+2025-10-10 18:26:11,209 - airtable_sync_onefile - INFO - Completed fetching 0 total records from customers
+2025-10-10 18:26:11,459 - airtable_sync_onefile - INFO - Starting sync for table: commodities
+2025-10-10 18:26:11,652 - airtable_sync_onefile - INFO - Performing incremental sync since 2025-10-11T01:10:45.452103+00:00
+2025-10-10 18:26:11,821 - airtable_sync_onefile - INFO - Completed fetching 0 total records from commodities
+2025-10-10 18:26:12,071 - airtable_sync_onefile - INFO - Starting sync for table: price_lists
+2025-10-10 18:26:12,251 - airtable_sync_onefile - INFO - Performing incremental sync since 2025-10-11T01:10:46.491503+00:00
+2025-10-10 18:26:12,400 - airtable_sync_onefile - INFO - Completed fetching 0 total records from price_lists
+2025-10-10 18:26:12,650 - airtable_sync_onefile - INFO - Starting sync for table: contracts_hp_ng
+2025-10-10 18:26:12,832 - airtable_sync_onefile - INFO - Performing incremental sync since 2025-10-11T01:13:00.210881+00:00
+2025-10-10 18:26:12,986 - airtable_sync_onefile - INFO - Completed fetching 0 total records from contracts_hp_ng
+2025-10-10 18:26:13,236 - airtable_sync_onefile - INFO - Starting sync for table: contracts_hp_ng___2
+2025-10-10 18:26:13,413 - airtable_sync_onefile - INFO - Performing incremental sync since 2025-10-11T01:14:26.343253+00:00
+2025-10-10 18:26:13,552 - airtable_sync_onefile - INFO - Completed fetching 0 total records from contracts_hp_ng___2
+2025-10-10 18:26:13,803 - airtable_sync_onefile - INFO - Starting sync for table: shipments
+2025-10-10 18:26:13,989 - airtable_sync_onefile - INFO - Performing incremental sync since 2025-10-11T01:14:52.342712+00:00
+2025-10-10 18:26:14,138 - airtable_sync_onefile - INFO - Completed fetching 0 total records from shipments
+2025-10-10 18:26:14,388 - airtable_sync_onefile - INFO - Starting sync for table: inventory_movements
+2025-10-10 18:26:14,568 - airtable_sync_onefile - INFO - Performing incremental sync since 2025-10-11T01:24:11.044311+00:00
+2025-10-10 18:26:14,729 - airtable_sync_onefile - INFO - Completed fetching 0 total records from inventory_movements
+2025-10-10 18:26:14,979 - airtable_sync_onefile - INFO - Starting sync for table: finished_goods
+2025-10-10 18:26:15,158 - airtable_sync_onefile - INFO - Performing incremental sync since 2025-10-11T01:26:05.458386+00:00
+2025-10-10 18:26:15,328 - airtable_sync_onefile - INFO - Completed fetching 0 total records from finished_goods
+
+--- Synchronization Summary -----------------------------------------
+ Tables attempted: 8
+ Success: 8 | Failed: 0
+ Records processed: 0 (inserted: 0, updated: 0)
+ Duration: 5.1s | Throughput: 0 rec/s
+
+--- Post-Sync Verification (DB counts) -------------------------------
+  - commodities: 45
+  - commodities_contracts: 0
+  - commodities_contracts_hp_ng___2: 0
+  - commodities_finished_goods: 0
+  - commodities_inventory_movements: 0
+  - commodities_price_lists: 0
+  - commodities_shipments: 0
+  - contracts_hp_ng: 1968
+  - contracts_hp_ng___2: 1280
+  - contracts_hp_ng___2_commodity_type: 0
+  - contracts_hp_ng___2_customer: 0
+  - contracts_hp_ng___2_related_inventory_movements: 0
+  - contracts_hp_ng___2_related_shipments: 0
+  - contracts_hp_ng_commodity_type: 0
+  - contracts_hp_ng_customer: 0
+  - contracts_hp_ng_price_lists: 0
+  - contracts_hp_ng_related_inventory_movements: 0
+  - contracts_hp_ng_related_shipments: 0
+  - customers: 105
+  - customers_contracts: 0
+  - customers_contracts_hp_ng___2: 0
+  - customers_finished_goods: 0
+  - customers_inventory_movements: 0
+  - customers_shipments: 0
+  - finished_goods: 1690
+  - finished_goods_commodities: 0
+  - finished_goods_khch_hng: 0
+  - inventory_movements: 8342
+  - inventory_movements_commodity_type: 0
+  - inventory_movements_contracts_hp_ng___2: 0
+  - inventory_movements_customer: 0
+  - inventory_movements_related_contract: 0
+  - inventory_movements_related_shipment: 0
+  - price_lists: 5
+  - price_lists_commodity: 0
+  - price_lists_contract: 0
+  - shipments: 383
+  - shipments_commodity_type: 0
+  - shipments_contract_number: 0
+  - shipments_contracts_hp_ng___2: 0
+  - shipments_customer: 0
+  - shipments_inventory_movements: 0
+
+Grand total rows across schema 'airtable_sync': 13818
+
+Done.
+✓ SUCCESS: Migrate to GCP Cloud SQL
+
+######################################################################
+# PIPELINE COMPLETE
+# Duration: 996.5 seconds (16.6 minutes)
+# Environment: UV (Modern Python Package Manager)
+# Results Summary:
+#   DATA FETCHED FROM SOURCE:
+#     - World Bank Pink Sheet (Rice Prices)
+#     - World Bank APIs (Market Factors)
+#     - World Bank Climate API (Rainfall)
+#   INTEGRATED DATASET:
+#     - 198 monthly records (2008-2024)
+#     - 21 columns merged
+#   AIRTABLE MIGRATION:
+#     - 13,818 transaction records
+#     - 8 tables synchronized
+#   ✓ Download World Bank Pink Sheet rice prices (2008-2024)
+#   ✓ Rice prices: 198 monthly records
+#   ✓ Fetch oil, inflation, population, ENSO, fertilizer data
+#   ✓ Market factors: 7 indicators
+#   ✓ Fetch rainfall data for Asia (2008-2024)
+#   ✓ Rainfall: 198 monthly records
+#   ✓ Merge rice, market factors, and rainfall (198 records)
+#   ✓ Final dataset: 204 x 13
+#   ✓ Cleaned 42 GCP tables
+#   ✓ Stop Docker
+#   ✓ Rebuild Docker
+#   ✓ Start Docker
+#   ✓ Sync Airtable to Docker (13,818 records)
+#   ✓ Migrate to GCP Cloud SQL
+# Completed: 2025-10-10 18:26:18
+######################################################################
+(.venv) (base) lenovo@LAPTOP-3HQ8DPON:~/code/ltphongssvn/ac215e115groupproject$

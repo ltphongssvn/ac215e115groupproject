@@ -643,6 +643,7 @@
                 <button class="nav-tab" onclick="switchPage('apiflow')">API Flow Architecture</button>
                 <button class="nav-tab" onclick="switchPage('techstack')">Tech Stack</button>
                 <button class="nav-tab" onclick="switchPage('team')">Team Structure</button>
+                <button class="nav-tab" onclick="switchPage('frontend')">Frontend</button>
             </div>
         </header>
         
@@ -1809,6 +1810,17 @@
                     </div>
                 </div>
             </div>
+        <!-- Frontend React Application -->
+        <div id="frontend-page" class="page-content">
+            <div style="width: 100%; height: calc(100vh - 200px); position: relative;">
+                <iframe 
+                    src="https://frontend.thanhphongle.net/"
+                    style="width: 100%; height: 100%; border: none; border-radius: 8px;"
+                    title="Rice Market AI System Frontend"
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
         </div>    <script>
         // Checklist data
         const checklistData = {
@@ -1825,7 +1837,7 @@
                         dependencies: "None",
                         hours: 4,
                         priority: "high",
-                        completed: false
+                        completed: true
                     },
                     {
                         id: "1.2",
@@ -1835,7 +1847,7 @@
                         dependencies: "1.1",
                         hours: 8,
                         priority: "high",
-                        completed: false
+                        completed: true
                     },
                     {
                         id: "1.3",
@@ -1845,7 +1857,7 @@
                         dependencies: "1.2",
                         hours: 12,
                         priority: "high",
-                        completed: false
+                        completed: true
                     },
                     {
                         id: "1.4",
@@ -1855,7 +1867,7 @@
                         dependencies: "1.2",
                         hours: 10,
                         priority: "medium",
-                        completed: false
+                        completed: true
                     },
                     {
                         id: "1.5",
@@ -1865,112 +1877,112 @@
                         dependencies: "1.1, 1.2, 1.3, 1.4",
                         hours: 6,
                         priority: "high",
-                        completed: false
+                        completed: true
                     }
                 ]
             },
             "milestone2": {
-                title: "Milestone 2: MLOps with Vertex AI Pipelines, MLflow, and Weights & Biases Infrastructure & Cloud Run Containerization",
+                title: "Milestone 2: MLOps Infrastructure & Containerization",
                 dueDate: "2025-10-16",
                 weight: "10%",
                 tasks: [
                     {
                         id: "2.1",
-                        component: "Environment Setup",
-                        description: "Configure Google Cloud Platform project with IAM roles for Vertex AI, BigQuery, and GKE access",
-                        verification: "GCP console screenshot showing active project",
+                        component: "Virtual Environment & Development Setup",
+                        description: "Create and configure virtual environments (local VMs or cloud instances) with Docker, Docker Compose, Python 3.11, and development tools for reproducible development across team members",
+                        verification: "Screenshots of running VMs with docker --version output, successful docker run hello-world, and README documenting exact setup steps",
                         dependencies: "1.5",
-                        hours: 4,
+                        hours: 6,
                         priority: "high",
                         completed: true
                     },
                     {
                         id: "2.2",
-                        component: "Repository Structure",
-                        description: "Create GitHub monorepo structure for microservices with GitHub Actions CI/CD pipeline configuration",
-                        verification: "GitHub repo with proper folder structure",
+                        component: "Repository Structure & Build System",
+                        description: "Establish monorepo with containers/ directory structure, Makefile with build/run/test targets, and pyproject.toml using uv for each service",
+                        verification: "GitHub repo with proper structure, working Makefile targets (make build-all, make run), and CI/CD workflow validating builds",
                         dependencies: "2.1",
-                        hours: 3,
+                        hours: 4,
                         priority: "high",
                         completed: true
                     },
                     {
                         id: "2.3",
-                        component: "API Gateway (Cloud Endpoints + Cloud Run) Container",
-                        description: "Containerize API Gateway (Cloud Endpoints + Cloud Run) with FastAPI framework, OAuth2/JWT authentication middleware using Cloud Run containerization with multi-stage builds optimized for serverless deployment",
-                        verification: "Cloud Run container with multi-stage builds build successful, container runs locally",
+                        component: "Data Pipeline Container",
+                        description: "Build containerized data ingestion/preprocessing pipeline with document chunking (3 methods: fixed-size, semantic, sentence-based), PII scrubbing using spaCy, and sample rice market data processing",
+                        verification: "Container processes sample dataset, outputs cleaned/chunked JSON documents, shows PII removal statistics, unit tests >70% coverage",
                         dependencies: "2.2",
-                        hours: 8,
+                        hours: 12,
                         priority: "high",
                         completed: true
                     },
                     {
                         id: "2.4",
-                        component: "NL+SQL Service",
-                        description: "Create Cloud Run containerization with multi-stage builds optimized for serverless deployment container for NL+SQL Agent Service (Vertex AI Gemini 1.5 Pro + LangChain) with Vertex AI Gemini 1.5 Pro via LangGraph StateGraph via FastAPI framework",
-                        verification: "Cloud Run container processes test NL query successfully",
+                        component: "RAG Pipeline Container",
+                        description: "Implement complete RAG pipeline with embedding generation (sentence-transformers), ChromaDB/Qdrant vector storage, similarity search, re-ranking, and context window management",
+                        verification: "Container vectorizes documents, vector DB persists between restarts, retrieval API at http://localhost:8001/search returns relevant documents",
                         dependencies: "2.3",
-                        hours: 12,
+                        hours: 14,
                         priority: "high",
                         completed: false
                     },
                     {
                         id: "2.5",
-                        component: "RAG Orchestrator (Vertex AI Agent Builder + Vector Search)",
-                        description: "Containerize RAG Orchestrator (Vertex AI Agent Builder + Vector Search) with Vertex AI Vector Search and Cloud SQL pgvector using Cloud Run containerization with multi-stage builds optimized for serverless deployment and Cloud Run services service architecture",
-                        verification: "Container connects to vector DB, performs test query",
-                        dependencies: "2.3",
-                        hours: 12,
+                        component: "Model Services Container Suite",
+                        description: "Containerize NL-SQL service (with Ollama/llama-cpp-python), forecasting service (Prophet/LSTM), and experimentation framework with MLflow tracking and Jupyter notebooks",
+                        verification: "Services respond at /health endpoints, MLflow UI at http://localhost:5000 shows experiments, notebooks compare 3+ model variants",
+                        dependencies: "2.2",
+                        hours: 16,
                         priority: "high",
                         completed: false
                     },
                     {
                         id: "2.6",
-                        component: "Data Pipeline",
-                        description: "Implement Pub/Sub streaming (GCP alternative to Kafka) data ingestion pipeline with PII scrubbing, storing to BigQuery data warehouse",
-                        verification: "Kafka pipeline processes sample data with PII scrubbing before loading to BigQuery/PostgreSQL",
-                        dependencies: "2.2",
+                        component: "End-to-End Pipeline Integration",
+                        description: "Connect all containers via Docker Compose with RabbitMQ/Redis for messaging, orchestration script for pipeline coordination, and single-command startup",
+                        verification: "docker-compose up starts all services, end-to-end test shows data flowing through pipeline, inter-service communication verified by test API calls",
+                        dependencies: "2.3, 2.4, 2.5",
                         hours: 10,
-                        priority: "medium",
+                        priority: "high",
                         completed: false
                     },
                     {
                         id: "2.7",
-                        component: "Vector Store Setup",
-                        description: "Deploy Vertex AI Vector Search with TensorFlow/PyTorch embeddings managed through DVC for RAG implementation",
-                        verification: "Vector store accessible, test embeddings retrievable",
-                        dependencies: "2.5",
-                        hours: 8,
+                        component: "Experimentation & Documentation Suite",
+                        description: "Document model experiments comparing chunking strategies (fixed vs semantic vs sentence), embedding models (3+ variants), and LLM fine-tuning with rice market data",
+                        verification: "Experiment notebooks with reproducible results, MLflow logged metrics, markdown report with comparison tables/graphs, config files for best models",
+                        dependencies: "2.5, 2.6",
+                        hours: 12,
                         priority: "medium",
                         completed: false
                     },
                     {
                         id: "2.8",
-                        component: "Docker Compose Local Development Environment",
-                        description: "Create docker-compose.yml for local development with PostgreSQL, Chroma (local substitute for Vertex AI Vector Search), and Kafka (local substitute for Pub/Sub), implementing volume mounts for hot-reload development and network isolation for service testing",
-                        verification: "All services start successfully with single 'docker-compose up' command verified by docker ps showing all containers healthy, code changes in mounted volumes trigger automatic service reload confirmed by log output, developers can attach debuggers to running services, and inter-service communication works via compose network verified by test API calls between services",
-                        dependencies: "2.3, 2.4, 2.5",
-                        hours: 6,
-                        priority: "high",
+                        component: "Application Mock-up Enhancement",
+                        description: "Refine Milestone 1 prototype connecting to containerized backend with real API calls, WebSocket support, and demo scenarios for NL-SQL, RAG retrieval, and forecasting",
+                        verification: "Mock-up at http://localhost:3000 demonstrates all capabilities, no hardcoded data, screen recording of full user journey",
+                        dependencies: "2.6",
+                        hours: 10,
+                        priority: "medium",
                         completed: false
                     },
                     {
                         id: "2.9",
-                        component: "Documentation",
-                        description: "Complete README with Cloud Run service setup, Cloud Run containerization with multi-stage builds optimized for serverless deployment deployment instructions, and GCP architecture overview",
-                        verification: "New team member can setup environment following docs",
-                        dependencies: "All MS2 tasks",
-                        hours: 6,
-                        priority: "high",
+                        component: "Testing & Quality Assurance",
+                        description: "Implement comprehensive testing with unit tests (>70% coverage), integration tests for service communication, and end-to-end pipeline tests with performance benchmarks",
+                        verification: "make test runs all suites successfully, coverage reports in HTML, CI/CD runs tests on commits, performance metrics documented",
+                        dependencies: "2.6",
+                        hours: 8,
+                        priority: "medium",
                         completed: false
                     },
                     {
                         id: "2.10",
-                        component: "Kubernetes Manifest Creation",
-                        description: "Create initial Kubernetes YAML manifests (Deployments, Services, ConfigMaps, Secrets) translating docker-compose service definitions into Kubernetes-native specifications, establishing foundation for container orchestration",
-                        verification: "All manifests pass 'kubectl apply --dry-run=client -f .' validation without errors, syntax validated using 'kubectl explain' for resource types, manifests successfully deploy to local Minikube cluster with 'minikube start && kubectl apply -f .', all pods reach Ready state within 5 minutes verified by 'kubectl get pods --watch', and service endpoints accessible via 'minikube service list'",
-                        dependencies: "2.8",
-                        hours: 12,
+                        component: "Deployment Documentation & Handoff",
+                        description: "Create comprehensive docs including README (overview, 5-command quickstart), SETUP.md (detailed environment), EXPERIMENTS.md (findings), and API.md (endpoints)",
+                        verification: "New team member successfully sets up using only docs, all commands tested, architecture diagrams included, 5-10 min video walkthrough",
+                        dependencies: "All MS2 tasks",
+                        hours: 8,
                         priority: "high",
                         completed: false
                     }
@@ -1983,53 +1995,73 @@
                 tasks: [
                     {
                         id: "3.1",
-                        component: "Model Training",
-                        description: "Implement and optimize a RAG system for rice market domain using pre-trained GPT-4/Gemini models, tracking retrieval and generation metrics with Weights & Biases",
-                        verification: "Model achieves >80% accuracy tracked via MLflow model registry and Weights & Biases metrics",
+                        component: "LLM Integration & RAG Implementation",
+                        description: "Implement and optimize RAG system using Vertex AI Gemini 1.5 Pro with LangChain orchestration, including document chunking strategies, embedding generation with textembedding-gecko@003, and Vertex AI Vector Search integration",
+                        verification: "RAG pipeline achieves >80% retrieval accuracy tracked via Weights & Biases, vector search returns relevant documents with <100ms latency, embeddings stored in Vertex AI Vector Search with metadata filtering",
                         dependencies: "2.4, 2.5",
-                        hours: 16,
+                        hours: 18,
                         priority: "high",
-                        completed: false
+                        completed: true
                     },
                     {
                         id: "3.2",
-                        component: "Forecasting Model",
-                        description: "Implement time-series forecasting with PyTorch LSTM/Prophet models deployed on Vertex AI Endpoints",
-                        verification: "6-month forecast from PyTorch models on Vertex AI with confidence intervals stored in BigQuery",
-                        dependencies: "2.6",
-                        hours: 14,
+                        component: "Model Fine-tuning on GCP",
+                        description: "Fine-tune Vertex AI Gemini models for rice market domain using Vertex AI Custom Training jobs, implement transfer learning with domain-specific data, track experiments with MLflow Model Registry on Vertex AI",
+                        verification: "Fine-tuned model deployed to Vertex AI Endpoints, achieves >85% domain accuracy improvement over base model, all experiments logged in MLflow with hyperparameters and metrics",
+                        dependencies: "3.1",
+                        hours: 20,
                         priority: "high",
-                        completed: false
+                        completed: true
                     },
                     {
                         id: "3.3",
-                        component: "API Integration",
-                        description: "Connect all FastAPI microservices through API Gateway (Cloud Endpoints + Cloud Run) with gRPC inter-service communication",
-                        verification: "End-to-end flow validated across NL+SQL (OpenAI/Gemini), RAG (Chroma), and forecasting (Vertex AI) services",
-                        dependencies: "3.1, 3.2",
-                        hours: 10,
-                        priority: "medium",
-                        completed: false
+                        component: "DVC Data Versioning Setup",
+                        description: "Implement DVC for dataset versioning and pipeline management, configure remote storage on Google Cloud Storage, track training data, embeddings, and model artifacts with version control",
+                        verification: "DVC pipeline reproduces training runs deterministically, data versions tracked in Git with .dvc files, remote storage configured with GCS backend, dvc repro executes full pipeline successfully",
+                        dependencies: "3.2",
+                        hours: 12,
+                        priority: "high",
+                        completed: true
                     },
                     {
                         id: "3.4",
-                        component: "Presentation Prep",
-                        description: "Create investor pitch deck (5-minute presentation)",
-                        verification: "Slides cover problem, value prop, scalability, future dev",
-                        dependencies: "3.3",
-                        hours: 8,
+                        component: "Vertex AI Pipeline Orchestration",
+                        description: "Build end-to-end ML pipeline using Vertex AI Pipelines with Kubeflow components for data preprocessing, model training, evaluation, and deployment automation",
+                        verification: "Vertex AI Pipeline executes successfully from data ingestion to model deployment, automated retraining triggers weekly, pipeline artifacts logged to Vertex AI Metadata Store",
+                        dependencies: "3.2, 3.3",
+                        hours: 16,
                         priority: "high",
-                        completed: false
+                        completed: true
                     },
                     {
                         id: "3.5",
-                        component: "Demo Preparation",
-                        description: "Prepare live demo showing all three AI capabilities",
-                        verification: "Demo runs smoothly without errors",
-                        dependencies: "3.3",
+                        component: "GCP Cloud Deployment",
+                        description: "Deploy all microservices to GCP using Cloud Run for API services, configure Cloud SQL PostgreSQL with read replicas, set up BigQuery for analytics, implement Cloud IAM and security policies",
+                        verification: "All services running on Cloud Run with auto-scaling enabled, Cloud SQL connected with workload identity, BigQuery tables populated with training/inference data, security audit passes with no critical issues",
+                        dependencies: "3.1, 3.4",
+                        hours: 14,
+                        priority: "high",
+                        completed: true
+                    },
+                    {
+                        id: "3.6",
+                        component: "Presentation Preparation",
+                        description: "Create investor pitch deck (5-minute presentation) showcasing LLM/RAG architecture, fine-tuning results, GCP deployment strategy, and system scalability",
+                        verification: "Slides cover problem statement, technical architecture with GCP services, model performance metrics, DVC workflow, live demo plan, and future roadmap",
+                        dependencies: "3.5",
+                        hours: 8,
+                        priority: "high",
+                        completed: true
+                    },
+                    {
+                        id: "3.7",
+                        component: "Live Demo Execution",
+                        description: "Prepare and rehearse live demonstration of NL+SQL queries, RAG document retrieval, time-series forecasting, showing end-to-end flow through GCP services",
+                        verification: "Demo runs smoothly without errors, showcases all three AI capabilities with real-time responses, includes explanation of underlying GCP architecture and Vertex AI components",
+                        dependencies: "3.5, 3.6",
                         hours: 6,
                         priority: "high",
-                        completed: false
+                        completed: true
                     }
                 ]
             },
@@ -2432,32 +2464,95 @@
                 }
             }
         }
-        
+        //
+        // // Switch between pages
+        // function switchPage(page) {
+        //     // First, remove 'active' class from all navigation tabs
+        //     document.querySelectorAll('.nav-tab').forEach(tab => {
+        //         tab.classList.remove('active');
+        //     });
+        //
+        //     // Then, remove 'active' class from all page content divs
+        //     document.querySelectorAll('.page-content').forEach(content => {
+        //         content.classList.remove('active');
+        //     });
+        //
+        //     // Now activate the appropriate tab and content based on the page parameter
+        //     if (page === 'checklist') {
+        //         // Activate first tab (index 0) and checklist content
+        //         document.querySelectorAll('.nav-tab')[0].classList.add('active');
+        //         document.getElementById('checklist-page').classList.add('active');
+        //     } else if (page === 'apiflow') {
+        //         // Activate second tab (index 1) and API flow content
+        //         document.querySelectorAll('.nav-tab')[1].classList.add('active');
+        //         document.getElementById('apiflow-page').classList.add('active');
+        //     } else if (page === 'techstack') {
+        //         // Activate third tab (index 2) and tech stack content
+        //         document.querySelectorAll('.nav-tab')[2].classList.add('active');
+        //         document.getElementById('techstack-page').classList.add('active');
+        //     } else if (page === 'team') {
+        //         // Activate fourth tab (index 3) and team content
+        //         document.querySelectorAll('.nav-tab')[3].classList.add('active');
+        //         document.getElementById('team-page').classList.add('active');
+        //     } else if (page === 'frontend') {
+        //         // Activate fifth tab (index 4) and frontend content
+        //         document.querySelectorAll('.nav-tab')[4].classList.add('active');
+        //         document.getElementById('frontend-page').classList.add('active');
+        //     }
+        // }
+
+
+        // ~/code/ltphongssvn/ac215e115groupproject/index.html - switchPage function
         // Switch between pages
         function switchPage(page) {
+            // Special handling for Frontend tab - redirect to external React app
+            if (page === 'frontend') {
+                // Open the React frontend in the same tab
+                // Change to window.open('https://frontend.thanhphongle.net/', '_blank')
+                // if you prefer opening in a new tab
+                // window.location.href = 'https://frontend.thanhphongle.net/';
+                window.open('https://kiwi.thanhphongle.net/', '_blank');
+                return; // Exit the function early since we're navigating away
+            }
+
+            // For all other tabs, use the normal show/hide logic
+            // First, remove 'active' class from all navigation tabs
             document.querySelectorAll('.nav-tab').forEach(tab => {
                 tab.classList.remove('active');
             });
+
+            // Then, remove 'active' class from all page content divs
             document.querySelectorAll('.page-content').forEach(content => {
                 content.classList.remove('active');
             });
-            
+
+            // Now activate the appropriate tab and content based on the page parameter
             if (page === 'checklist') {
+                // Activate first tab (index 0) and checklist content
                 document.querySelectorAll('.nav-tab')[0].classList.add('active');
                 document.getElementById('checklist-page').classList.add('active');
             } else if (page === 'apiflow') {
+                // Activate second tab (index 1) and API flow content
                 document.querySelectorAll('.nav-tab')[1].classList.add('active');
                 document.getElementById('apiflow-page').classList.add('active');
             } else if (page === 'techstack') {
+                // Activate third tab (index 2) and tech stack content
                 document.querySelectorAll('.nav-tab')[2].classList.add('active');
                 document.getElementById('techstack-page').classList.add('active');
             } else if (page === 'team') {
+                // Activate fourth tab (index 3) and team content
                 document.querySelectorAll('.nav-tab')[3].classList.add('active');
                 document.getElementById('team-page').classList.add('active');
             }
         }
-        
-        // Initialize checklist
+
+
+
+
+
+
+
+       // Initialize checklist
         function initializeChecklist() {
             const container = document.getElementById('checklist-container');
             if (!container) return;
@@ -2564,6 +2659,20 @@
                 completedElement.textContent = completedTasks;
             }
             
+            // Update milestone progress indicators
+            Object.entries(checklistData).forEach(([key, milestone]) => {
+                const completedCount = milestone.tasks.filter(t => t.completed).length;
+                const totalCount = milestone.tasks.length;
+                const sectionHeaders = document.querySelectorAll(".section-header");
+                sectionHeaders.forEach(header => {
+                    if (header.textContent.includes(milestone.title)) {
+                        const progressSpan = header.querySelector("span[style*=\"float: right\"]");
+                        if (progressSpan) {
+                            progressSpan.textContent = `${completedCount}/${totalCount} completed`;
+                        }
+                    }
+                });
+            });
             updateTimeTracking();
         }
         
@@ -2652,6 +2761,20 @@
         // Initialize on DOM ready
         document.addEventListener('DOMContentLoaded', function() {
             initializeChecklist();
+            // Update milestone progress indicators
+            Object.entries(checklistData).forEach(([key, milestone]) => {
+                const completedCount = milestone.tasks.filter(t => t.completed).length;
+                const totalCount = milestone.tasks.length;
+                const sectionHeaders = document.querySelectorAll(".section-header");
+                sectionHeaders.forEach(header => {
+                    if (header.textContent.includes(milestone.title)) {
+                        const progressSpan = header.querySelector("span[style*=\"float: right\"]");
+                        if (progressSpan) {
+                            progressSpan.textContent = `${completedCount}/${totalCount} completed`;
+                        }
+                    }
+                });
+            });
             updateTimeTracking();
             
             // Update time every hour
@@ -2665,6 +2788,20 @@
             const msUntilMidnight = tomorrow - now;
             
             setTimeout(() => {
+            // Update milestone progress indicators
+            Object.entries(checklistData).forEach(([key, milestone]) => {
+                const completedCount = milestone.tasks.filter(t => t.completed).length;
+                const totalCount = milestone.tasks.length;
+                const sectionHeaders = document.querySelectorAll(".section-header");
+                sectionHeaders.forEach(header => {
+                    if (header.textContent.includes(milestone.title)) {
+                        const progressSpan = header.querySelector("span[style*=\"float: right\"]");
+                        if (progressSpan) {
+                            progressSpan.textContent = `${completedCount}/${totalCount} completed`;
+                        }
+                    }
+                });
+            });
                 updateTimeTracking();
                 setInterval(updateTimeTracking, 86400000);
             }, msUntilMidnight);
