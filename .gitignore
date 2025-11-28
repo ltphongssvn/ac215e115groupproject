@@ -65,3 +65,4 @@ data/raw/
 .env.*
 !.env.example
 !.env.*.examplebackups/
+.backups/
